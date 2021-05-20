@@ -1,0 +1,1115 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E39F2CD3262EA4EF003FA426 /* Caver_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F2CC9262EA4EF003FA426 /* Caver_swift.framework */; };
+		E39F2CD8262EA4EF003FA426 /* Caver_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* Caver_swiftTests.swift */; };
+		E39F2CDA262EA4EF003FA426 /* Caver_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* Caver_swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E39F2CE6262EAAD3003FA426 /* Caver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CE5262EAAD3003FA426 /* Caver.swift */; };
+		E3A21D3626564CCA006C560D /* ABITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21D3526564CCA006C560D /* ABITests.swift */; };
+		E3A21E08265654A7006C560D /* ENSMultiResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC1265654A7006C560D /* ENSMultiResolver.swift */; };
+		E3A21E09265654A7006C560D /* ENSContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC2265654A7006C560D /* ENSContracts.swift */; };
+		E3A21E0A265654A7006C560D /* ENSResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC3265654A7006C560D /* ENSResponses.swift */; };
+		E3A21E0B265654A7006C560D /* EthereumNameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC4265654A7006C560D /* EthereumNameService.swift */; };
+		E3A21E0C265654A7006C560D /* ABIRawType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC6265654A7006C560D /* ABIRawType.swift */; };
+		E3A21E0D265654A7006C560D /* ABIEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC7265654A7006C560D /* ABIEncoder.swift */; };
+		E3A21E0E265654A7006C560D /* ABIDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC8265654A7006C560D /* ABIDecoder.swift */; };
+		E3A21E0F265654A7006C560D /* ABIRawType+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DCA265654A7006C560D /* ABIRawType+JSON.swift */; };
+		E3A21E10265654A7006C560D /* ABIFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DCC265654A7006C560D /* ABIFunction.swift */; };
+		E3A21E11265654A7006C560D /* ABIDecoder+Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DCD265654A7006C560D /* ABIDecoder+Static.swift */; };
+		E3A21E12265654A7006C560D /* ABITuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DCE265654A7006C560D /* ABITuple.swift */; };
+		E3A21E13265654A7006C560D /* ABIEncoder+Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DCF265654A7006C560D /* ABIEncoder+Static.swift */; };
+		E3A21E14265654A7006C560D /* ABIFunctionEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DD0265654A7006C560D /* ABIFunctionEncoder.swift */; };
+		E3A21E15265654A7006C560D /* ABIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DD1265654A7006C560D /* ABIEvent.swift */; };
+		E3A21E16265654A7006C560D /* ABIRawType+Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DD2265654A7006C560D /* ABIRawType+Static.swift */; };
+		E3A21E17265654A7006C560D /* EthereumClient+Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DD3265654A7006C560D /* EthereumClient+Static.swift */; };
+		E3A21E18265654A7006C560D /* DefaultFunctionEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DD4265654A7006C560D /* DefaultFunctionEncoder.swift */; };
+		E3A21E19265654A7006C560D /* ERC20Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DD6265654A7006C560D /* ERC20Functions.swift */; };
+		E3A21E1A265654A7006C560D /* ERC20Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DD7265654A7006C560D /* ERC20Events.swift */; };
+		E3A21E1B265654A7006C560D /* ERC20.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DD8265654A7006C560D /* ERC20.swift */; };
+		E3A21E1C265654A7006C560D /* ERC20Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DD9265654A7006C560D /* ERC20Responses.swift */; };
+		E3A21E1D265654A7006C560D /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DDB265654A7006C560D /* Address.swift */; };
+		E3A21E1E265654A7006C560D /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DDC265654A7006C560D /* Type.swift */; };
+		E3A21E1F265654A7006C560D /* RLP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DDE265654A7006C560D /* RLP.swift */; };
+		E3A21E20265654A7006C560D /* KeystoreUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DDF265654A7006C560D /* KeystoreUtil.swift */; };
+		E3A21E21265654A7006C560D /* HexUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE0265654A7006C560D /* HexUtil.swift */; };
+		E3A21E22265654A7006C560D /* KeyUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE1265654A7006C560D /* KeyUtil.swift */; };
+		E3A21E23265654A7006C560D /* AesUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE2265654A7006C560D /* AesUtil.swift */; };
+		E3A21E24265654A7006C560D /* KeyDerivation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE3265654A7006C560D /* KeyDerivation.swift */; };
+		E3A21E25265654A7006C560D /* HexExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE5265654A7006C560D /* HexExtensions.swift */; };
+		E3A21E26265654A7006C560D /* String+Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE6265654A7006C560D /* String+Numeric.swift */; };
+		E3A21E27265654A7006C560D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE7265654A7006C560D /* Extensions.swift */; };
+		E3A21E28265654A7006C560D /* Data+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE8265654A7006C560D /* Data+Random.swift */; };
+		E3A21E29265654A7006C560D /* ByteExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE9265654A7006C560D /* ByteExtensions.swift */; };
+		E3A21E2A265654A7006C560D /* KeccakExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DEA265654A7006C560D /* KeccakExtensions.swift */; };
+		E3A21E2B265654A7006C560D /* ABI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DEB265654A7006C560D /* ABI.swift */; };
+		E3A21E2C265654A7006C560D /* TypeDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DEC265654A7006C560D /* TypeDecoder.swift */; };
+		E3A21E2D265654A7006C560D /* ERC165.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DEE265654A7006C560D /* ERC165.swift */; };
+		E3A21E2E265654A7006C560D /* ERC721Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DF0265654A7006C560D /* ERC721Responses.swift */; };
+		E3A21E2F265654A7006C560D /* ERC721.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DF1265654A7006C560D /* ERC721.swift */; };
+		E3A21E30265654A7006C560D /* ERC721Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DF2265654A7006C560D /* ERC721Events.swift */; };
+		E3A21E31265654A7006C560D /* ERC721Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DF3265654A7006C560D /* ERC721Functions.swift */; };
+		E3A21E32265654A7006C560D /* EthereumAccount+SignTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DF5265654A7006C560D /* EthereumAccount+SignTransaction.swift */; };
+		E3A21E33265654A7006C560D /* EthereumAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DF6265654A7006C560D /* EthereumAccount.swift */; };
+		E3A21E34265654A7006C560D /* EthereumKeyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DF7265654A7006C560D /* EthereumKeyStorage.swift */; };
+		E3A21E35265654A7006C560D /* TypedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DF8265654A7006C560D /* TypedData.swift */; };
+		E3A21E36265654A7006C560D /* RecursiveLogCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DFA265654A7006C560D /* RecursiveLogCollector.swift */; };
+		E3A21E37265654A7006C560D /* EthereumTransactionReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DFC265654A7006C560D /* EthereumTransactionReceipt.swift */; };
+		E3A21E38265654A7006C560D /* EthereumAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DFD265654A7006C560D /* EthereumAddress.swift */; };
+		E3A21E39265654A7006C560D /* EthereumBlockInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DFE265654A7006C560D /* EthereumBlockInfo.swift */; };
+		E3A21E3A265654A7006C560D /* EthereumBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DFF265654A7006C560D /* EthereumBlock.swift */; };
+		E3A21E3B265654A7006C560D /* EthereumLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E00265654A7006C560D /* EthereumLog.swift */; };
+		E3A21E3C265654A7006C560D /* EthereumNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E01265654A7006C560D /* EthereumNetwork.swift */; };
+		E3A21E3D265654A7006C560D /* EthereumTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E02265654A7006C560D /* EthereumTransaction.swift */; };
+		E3A21E3E265654A7006C560D /* EthereumClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E03265654A7006C560D /* EthereumClient.swift */; };
+		E3A21E3F265654A7006C560D /* JSONRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E04265654A7006C560D /* JSONRPC.swift */; };
+		E3A21E40265654A7006C560D /* MulticallContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E06265654A7006C560D /* MulticallContract.swift */; };
+		E3A21E41265654A7006C560D /* Multicall.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E07265654A7006C560D /* Multicall.swift */; };
+		E3A21E4D265654B5006C560D /* keccak-tiny.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E45265654B5006C560D /* keccak-tiny.h */; };
+		E3A21E4E265654B5006C560D /* keccak-tiny.c in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E47265654B5006C560D /* keccak-tiny.c */; };
+		E3A21E4F265654B5006C560D /* aes.c in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E49265654B5006C560D /* aes.c */; };
+		E3A21E50265654B5006C560D /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E4B265654B5006C560D /* aes.h */; };
+		E3E023492648B8EF00791E00 /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023482648B8EF00791E00 /* RPC.swift */; };
+		E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234A2648BAE600791E00 /* KeyringContainer.swift */; };
+		E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */; };
+		E3E023502648BCD800791E00 /* Klay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234F2648BCD800791E00 /* Klay.swift */; };
+		E3E023522648BE4200791E00 /* Contract.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023512648BE4200791E00 /* Contract.swift */; };
+		E3E023552648C00D00791E00 /* ContractIOType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023542648C00D00791E00 /* ContractIOType.swift */; };
+		E3E023572648C58E00791E00 /* SendOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023562648C58E00791E00 /* SendOptions.swift */; };
+		E3E0235A2648C92B00791E00 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023592648C92B00791E00 /* Utils.swift */; };
+		E3E0235F2648C98D00791E00 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0235E2648C98D00791E00 /* Errors.swift */; };
+		E3E023672648EFE700791E00 /* ContractMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023662648EFE700791E00 /* ContractMethod.swift */; };
+		E3E023692648F07F00791E00 /* IWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023682648F07F00791E00 /* IWallet.swift */; };
+		E3E023712648F5E900791E00 /* CallObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023702648F5E900791E00 /* CallObject.swift */; };
+		E3E023792649130700791E00 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = E3E0237426490D6200791E00 /* test.json */; };
+		E3E0237B264A059A00791E00 /* ContractEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0237A264A059A00791E00 /* ContractEvent.swift */; };
+		E3E02380264A26F600791E00 /* Quantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0237F264A26F600791E00 /* Quantity.swift */; };
+		E3E02389264CB16500791E00 /* testFunction.json in Resources */ = {isa = PBXBuildFile; fileRef = E3E02388264CB16500791E00 /* testFunction.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E39F2CD4262EA4EF003FA426 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E39F2CC0262EA4EF003FA426 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E39F2CC8262EA4EF003FA426;
+			remoteInfo = "Caver-swift";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		34A9DA233154945736C9257C /* Pods-Caver-swift-Caver-swiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift-Caver-swiftTests.release.xcconfig"; path = "Target Support Files/Pods-Caver-swift-Caver-swiftTests/Pods-Caver-swift-Caver-swiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		3D381A2B37258C6AE53F835B /* Pods-Caver-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift.release.xcconfig"; path = "Target Support Files/Pods-Caver-swift/Pods-Caver-swift.release.xcconfig"; sourceTree = "<group>"; };
+		A2FC8FDA96C529F5682A5624 /* Pods-Caver-swift-Caver-swiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift-Caver-swiftTests.debug.xcconfig"; path = "Target Support Files/Pods-Caver-swift-Caver-swiftTests/Pods-Caver-swift-Caver-swiftTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E39F2CC9262EA4EF003FA426 /* Caver_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Caver_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E39F2CCC262EA4EF003FA426 /* Caver_swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Caver_swift.h; sourceTree = "<group>"; };
+		E39F2CCD262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E39F2CD2262EA4EF003FA426 /* Caver-swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Caver-swiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E39F2CD7262EA4EF003FA426 /* Caver_swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caver_swiftTests.swift; sourceTree = "<group>"; };
+		E39F2CD9262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E39F2CE5262EAAD3003FA426 /* Caver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caver.swift; sourceTree = "<group>"; };
+		E3A21D3526564CCA006C560D /* ABITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABITests.swift; sourceTree = "<group>"; };
+		E3A21DC1265654A7006C560D /* ENSMultiResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSMultiResolver.swift; sourceTree = "<group>"; };
+		E3A21DC2265654A7006C560D /* ENSContracts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSContracts.swift; sourceTree = "<group>"; };
+		E3A21DC3265654A7006C560D /* ENSResponses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSResponses.swift; sourceTree = "<group>"; };
+		E3A21DC4265654A7006C560D /* EthereumNameService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumNameService.swift; sourceTree = "<group>"; };
+		E3A21DC6265654A7006C560D /* ABIRawType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABIRawType.swift; sourceTree = "<group>"; };
+		E3A21DC7265654A7006C560D /* ABIEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABIEncoder.swift; sourceTree = "<group>"; };
+		E3A21DC8265654A7006C560D /* ABIDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABIDecoder.swift; sourceTree = "<group>"; };
+		E3A21DCA265654A7006C560D /* ABIRawType+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ABIRawType+JSON.swift"; sourceTree = "<group>"; };
+		E3A21DCC265654A7006C560D /* ABIFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABIFunction.swift; sourceTree = "<group>"; };
+		E3A21DCD265654A7006C560D /* ABIDecoder+Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ABIDecoder+Static.swift"; sourceTree = "<group>"; };
+		E3A21DCE265654A7006C560D /* ABITuple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABITuple.swift; sourceTree = "<group>"; };
+		E3A21DCF265654A7006C560D /* ABIEncoder+Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ABIEncoder+Static.swift"; sourceTree = "<group>"; };
+		E3A21DD0265654A7006C560D /* ABIFunctionEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABIFunctionEncoder.swift; sourceTree = "<group>"; };
+		E3A21DD1265654A7006C560D /* ABIEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABIEvent.swift; sourceTree = "<group>"; };
+		E3A21DD2265654A7006C560D /* ABIRawType+Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ABIRawType+Static.swift"; sourceTree = "<group>"; };
+		E3A21DD3265654A7006C560D /* EthereumClient+Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EthereumClient+Static.swift"; sourceTree = "<group>"; };
+		E3A21DD4265654A7006C560D /* DefaultFunctionEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultFunctionEncoder.swift; sourceTree = "<group>"; };
+		E3A21DD6265654A7006C560D /* ERC20Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC20Functions.swift; sourceTree = "<group>"; };
+		E3A21DD7265654A7006C560D /* ERC20Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC20Events.swift; sourceTree = "<group>"; };
+		E3A21DD8265654A7006C560D /* ERC20.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC20.swift; sourceTree = "<group>"; };
+		E3A21DD9265654A7006C560D /* ERC20Responses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC20Responses.swift; sourceTree = "<group>"; };
+		E3A21DDB265654A7006C560D /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		E3A21DDC265654A7006C560D /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		E3A21DDE265654A7006C560D /* RLP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLP.swift; sourceTree = "<group>"; };
+		E3A21DDF265654A7006C560D /* KeystoreUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeystoreUtil.swift; sourceTree = "<group>"; };
+		E3A21DE0265654A7006C560D /* HexUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexUtil.swift; sourceTree = "<group>"; };
+		E3A21DE1265654A7006C560D /* KeyUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyUtil.swift; sourceTree = "<group>"; };
+		E3A21DE2265654A7006C560D /* AesUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AesUtil.swift; sourceTree = "<group>"; };
+		E3A21DE3265654A7006C560D /* KeyDerivation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyDerivation.swift; sourceTree = "<group>"; };
+		E3A21DE5265654A7006C560D /* HexExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexExtensions.swift; sourceTree = "<group>"; };
+		E3A21DE6265654A7006C560D /* String+Numeric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Numeric.swift"; sourceTree = "<group>"; };
+		E3A21DE7265654A7006C560D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		E3A21DE8265654A7006C560D /* Data+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Random.swift"; sourceTree = "<group>"; };
+		E3A21DE9265654A7006C560D /* ByteExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ByteExtensions.swift; sourceTree = "<group>"; };
+		E3A21DEA265654A7006C560D /* KeccakExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeccakExtensions.swift; sourceTree = "<group>"; };
+		E3A21DEB265654A7006C560D /* ABI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABI.swift; sourceTree = "<group>"; };
+		E3A21DEC265654A7006C560D /* TypeDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeDecoder.swift; sourceTree = "<group>"; };
+		E3A21DEE265654A7006C560D /* ERC165.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC165.swift; sourceTree = "<group>"; };
+		E3A21DF0265654A7006C560D /* ERC721Responses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC721Responses.swift; sourceTree = "<group>"; };
+		E3A21DF1265654A7006C560D /* ERC721.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC721.swift; sourceTree = "<group>"; };
+		E3A21DF2265654A7006C560D /* ERC721Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC721Events.swift; sourceTree = "<group>"; };
+		E3A21DF3265654A7006C560D /* ERC721Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC721Functions.swift; sourceTree = "<group>"; };
+		E3A21DF5265654A7006C560D /* EthereumAccount+SignTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EthereumAccount+SignTransaction.swift"; sourceTree = "<group>"; };
+		E3A21DF6265654A7006C560D /* EthereumAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumAccount.swift; sourceTree = "<group>"; };
+		E3A21DF7265654A7006C560D /* EthereumKeyStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumKeyStorage.swift; sourceTree = "<group>"; };
+		E3A21DF8265654A7006C560D /* TypedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypedData.swift; sourceTree = "<group>"; };
+		E3A21DFA265654A7006C560D /* RecursiveLogCollector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecursiveLogCollector.swift; sourceTree = "<group>"; };
+		E3A21DFC265654A7006C560D /* EthereumTransactionReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumTransactionReceipt.swift; sourceTree = "<group>"; };
+		E3A21DFD265654A7006C560D /* EthereumAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumAddress.swift; sourceTree = "<group>"; };
+		E3A21DFE265654A7006C560D /* EthereumBlockInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumBlockInfo.swift; sourceTree = "<group>"; };
+		E3A21DFF265654A7006C560D /* EthereumBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumBlock.swift; sourceTree = "<group>"; };
+		E3A21E00265654A7006C560D /* EthereumLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumLog.swift; sourceTree = "<group>"; };
+		E3A21E01265654A7006C560D /* EthereumNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumNetwork.swift; sourceTree = "<group>"; };
+		E3A21E02265654A7006C560D /* EthereumTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumTransaction.swift; sourceTree = "<group>"; };
+		E3A21E03265654A7006C560D /* EthereumClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumClient.swift; sourceTree = "<group>"; };
+		E3A21E04265654A7006C560D /* JSONRPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONRPC.swift; sourceTree = "<group>"; };
+		E3A21E06265654A7006C560D /* MulticallContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticallContract.swift; sourceTree = "<group>"; };
+		E3A21E07265654A7006C560D /* Multicall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multicall.swift; sourceTree = "<group>"; };
+		E3A21E45265654B5006C560D /* keccak-tiny.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "keccak-tiny.h"; sourceTree = "<group>"; };
+		E3A21E46265654B5006C560D /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		E3A21E47265654B5006C560D /* keccak-tiny.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "keccak-tiny.c"; sourceTree = "<group>"; };
+		E3A21E49265654B5006C560D /* aes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aes.c; sourceTree = "<group>"; };
+		E3A21E4B265654B5006C560D /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		E3A21E4C265654B5006C560D /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		E3E023482648B8EF00791E00 /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
+		E3E0234A2648BAE600791E00 /* KeyringContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainer.swift; sourceTree = "<group>"; };
+		E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractKeyring.swift; sourceTree = "<group>"; };
+		E3E0234F2648BCD800791E00 /* Klay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Klay.swift; sourceTree = "<group>"; };
+		E3E023512648BE4200791E00 /* Contract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contract.swift; sourceTree = "<group>"; };
+		E3E023542648C00D00791E00 /* ContractIOType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractIOType.swift; sourceTree = "<group>"; };
+		E3E023562648C58E00791E00 /* SendOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOptions.swift; sourceTree = "<group>"; };
+		E3E023592648C92B00791E00 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		E3E0235E2648C98D00791E00 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		E3E023662648EFE700791E00 /* ContractMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractMethod.swift; sourceTree = "<group>"; };
+		E3E023682648F07F00791E00 /* IWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IWallet.swift; path = "../../../../GitHub/klip-mobile-android/IWallet.swift"; sourceTree = "<group>"; };
+		E3E023702648F5E900791E00 /* CallObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallObject.swift; sourceTree = "<group>"; };
+		E3E0237426490D6200791E00 /* test.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		E3E0237A264A059A00791E00 /* ContractEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractEvent.swift; sourceTree = "<group>"; };
+		E3E0237F264A26F600791E00 /* Quantity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quantity.swift; sourceTree = "<group>"; };
+		E3E02388264CB16500791E00 /* testFunction.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testFunction.json; sourceTree = "<group>"; };
+		F936E705382892FECBCD5C18 /* Pods-Caver-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift.debug.xcconfig"; path = "Target Support Files/Pods-Caver-swift/Pods-Caver-swift.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E39F2CC6262EA4EF003FA426 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E39F2CCF262EA4EF003FA426 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E39F2CD3262EA4EF003FA426 /* Caver_swift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7C211DA2C810D6E71CF0A65B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		809D2C0C6FE1A1276919EE48 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F936E705382892FECBCD5C18 /* Pods-Caver-swift.debug.xcconfig */,
+				3D381A2B37258C6AE53F835B /* Pods-Caver-swift.release.xcconfig */,
+				A2FC8FDA96C529F5682A5624 /* Pods-Caver-swift-Caver-swiftTests.debug.xcconfig */,
+				34A9DA233154945736C9257C /* Pods-Caver-swift-Caver-swiftTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E39F2CBF262EA4EF003FA426 = {
+			isa = PBXGroup;
+			children = (
+				E39F2CCB262EA4EF003FA426 /* Caver-swift */,
+				E39F2CD6262EA4EF003FA426 /* Caver-swiftTests */,
+				E39F2CCA262EA4EF003FA426 /* Products */,
+				809D2C0C6FE1A1276919EE48 /* Pods */,
+				7C211DA2C810D6E71CF0A65B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E39F2CCA262EA4EF003FA426 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E39F2CC9262EA4EF003FA426 /* Caver_swift.framework */,
+				E39F2CD2262EA4EF003FA426 /* Caver-swiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E39F2CCB262EA4EF003FA426 /* Caver-swift */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21E42265654B5006C560D /* lib */,
+				E3A21DBF265654A7006C560D /* abi */,
+				E3E0236E2648F5D600791E00 /* methodes */,
+				E3E023582648C91900791E00 /* utils */,
+				E3E023532648BE4700791E00 /* contract */,
+				E3E0234726452BE600791E00 /* wallet */,
+				E3E023452645190A00791E00 /* rpc */,
+				E39F2CCC262EA4EF003FA426 /* Caver_swift.h */,
+				E39F2CCD262EA4EF003FA426 /* Info.plist */,
+				E39F2CE5262EAAD3003FA426 /* Caver.swift */,
+			);
+			path = "Caver-swift";
+			sourceTree = "<group>";
+		};
+		E39F2CD6262EA4EF003FA426 /* Caver-swiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				E3E0237426490D6200791E00 /* test.json */,
+				E39F2CD7262EA4EF003FA426 /* Caver_swiftTests.swift */,
+				E39F2CD9262EA4EF003FA426 /* Info.plist */,
+				E3E02388264CB16500791E00 /* testFunction.json */,
+				E3A21D3526564CCA006C560D /* ABITests.swift */,
+			);
+			path = "Caver-swiftTests";
+			sourceTree = "<group>";
+		};
+		E3A21DBF265654A7006C560D /* abi */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DEB265654A7006C560D /* ABI.swift */,
+				E3A21DF4265654A7006C560D /* Account */,
+				E3A21DF9265654A7006C560D /* Client */,
+				E3A21DC5265654A7006C560D /* Contract */,
+				E3A21DDA265654A7006C560D /* datatypes */,
+				E3A21DD4265654A7006C560D /* DefaultFunctionEncoder.swift */,
+				E3A21DC0265654A7006C560D /* ENS */,
+				E3A21DD5265654A7006C560D /* ERC20 */,
+				E3A21DED265654A7006C560D /* ERC165 */,
+				E3A21DEF265654A7006C560D /* ERC721 */,
+				E3A21DE4265654A7006C560D /* Extensions */,
+				E3A21E05265654A7006C560D /* Multicall */,
+				E3A21DEC265654A7006C560D /* TypeDecoder.swift */,
+				E3A21DDD265654A7006C560D /* Utils */,
+			);
+			path = abi;
+			sourceTree = "<group>";
+		};
+		E3A21DC0265654A7006C560D /* ENS */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DC1265654A7006C560D /* ENSMultiResolver.swift */,
+				E3A21DC2265654A7006C560D /* ENSContracts.swift */,
+				E3A21DC3265654A7006C560D /* ENSResponses.swift */,
+				E3A21DC4265654A7006C560D /* EthereumNameService.swift */,
+			);
+			path = ENS;
+			sourceTree = "<group>";
+		};
+		E3A21DC5265654A7006C560D /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DC6265654A7006C560D /* ABIRawType.swift */,
+				E3A21DC7265654A7006C560D /* ABIEncoder.swift */,
+				E3A21DC8265654A7006C560D /* ABIDecoder.swift */,
+				E3A21DC9265654A7006C560D /* JSON Definition */,
+				E3A21DCB265654A7006C560D /* Statically Typed */,
+			);
+			path = Contract;
+			sourceTree = "<group>";
+		};
+		E3A21DC9265654A7006C560D /* JSON Definition */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DCA265654A7006C560D /* ABIRawType+JSON.swift */,
+			);
+			path = "JSON Definition";
+			sourceTree = "<group>";
+		};
+		E3A21DCB265654A7006C560D /* Statically Typed */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DCC265654A7006C560D /* ABIFunction.swift */,
+				E3A21DCD265654A7006C560D /* ABIDecoder+Static.swift */,
+				E3A21DCE265654A7006C560D /* ABITuple.swift */,
+				E3A21DCF265654A7006C560D /* ABIEncoder+Static.swift */,
+				E3A21DD0265654A7006C560D /* ABIFunctionEncoder.swift */,
+				E3A21DD1265654A7006C560D /* ABIEvent.swift */,
+				E3A21DD2265654A7006C560D /* ABIRawType+Static.swift */,
+				E3A21DD3265654A7006C560D /* EthereumClient+Static.swift */,
+			);
+			path = "Statically Typed";
+			sourceTree = "<group>";
+		};
+		E3A21DD5265654A7006C560D /* ERC20 */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DD6265654A7006C560D /* ERC20Functions.swift */,
+				E3A21DD7265654A7006C560D /* ERC20Events.swift */,
+				E3A21DD8265654A7006C560D /* ERC20.swift */,
+				E3A21DD9265654A7006C560D /* ERC20Responses.swift */,
+			);
+			path = ERC20;
+			sourceTree = "<group>";
+		};
+		E3A21DDA265654A7006C560D /* datatypes */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DDB265654A7006C560D /* Address.swift */,
+				E3A21DDC265654A7006C560D /* Type.swift */,
+			);
+			path = datatypes;
+			sourceTree = "<group>";
+		};
+		E3A21DDD265654A7006C560D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DDE265654A7006C560D /* RLP.swift */,
+				E3A21DDF265654A7006C560D /* KeystoreUtil.swift */,
+				E3A21DE0265654A7006C560D /* HexUtil.swift */,
+				E3A21DE1265654A7006C560D /* KeyUtil.swift */,
+				E3A21DE2265654A7006C560D /* AesUtil.swift */,
+				E3A21DE3265654A7006C560D /* KeyDerivation.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E3A21DE4265654A7006C560D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DE5265654A7006C560D /* HexExtensions.swift */,
+				E3A21DE6265654A7006C560D /* String+Numeric.swift */,
+				E3A21DE7265654A7006C560D /* Extensions.swift */,
+				E3A21DE8265654A7006C560D /* Data+Random.swift */,
+				E3A21DE9265654A7006C560D /* ByteExtensions.swift */,
+				E3A21DEA265654A7006C560D /* KeccakExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E3A21DED265654A7006C560D /* ERC165 */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DEE265654A7006C560D /* ERC165.swift */,
+			);
+			path = ERC165;
+			sourceTree = "<group>";
+		};
+		E3A21DEF265654A7006C560D /* ERC721 */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DF0265654A7006C560D /* ERC721Responses.swift */,
+				E3A21DF1265654A7006C560D /* ERC721.swift */,
+				E3A21DF2265654A7006C560D /* ERC721Events.swift */,
+				E3A21DF3265654A7006C560D /* ERC721Functions.swift */,
+			);
+			path = ERC721;
+			sourceTree = "<group>";
+		};
+		E3A21DF4265654A7006C560D /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DF5265654A7006C560D /* EthereumAccount+SignTransaction.swift */,
+				E3A21DF6265654A7006C560D /* EthereumAccount.swift */,
+				E3A21DF7265654A7006C560D /* EthereumKeyStorage.swift */,
+				E3A21DF8265654A7006C560D /* TypedData.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		E3A21DF9265654A7006C560D /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DFA265654A7006C560D /* RecursiveLogCollector.swift */,
+				E3A21DFB265654A7006C560D /* Models */,
+				E3A21E03265654A7006C560D /* EthereumClient.swift */,
+				E3A21E04265654A7006C560D /* JSONRPC.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		E3A21DFB265654A7006C560D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DFC265654A7006C560D /* EthereumTransactionReceipt.swift */,
+				E3A21DFD265654A7006C560D /* EthereumAddress.swift */,
+				E3A21DFE265654A7006C560D /* EthereumBlockInfo.swift */,
+				E3A21DFF265654A7006C560D /* EthereumBlock.swift */,
+				E3A21E00265654A7006C560D /* EthereumLog.swift */,
+				E3A21E01265654A7006C560D /* EthereumNetwork.swift */,
+				E3A21E02265654A7006C560D /* EthereumTransaction.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E3A21E05265654A7006C560D /* Multicall */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21E06265654A7006C560D /* MulticallContract.swift */,
+				E3A21E07265654A7006C560D /* Multicall.swift */,
+			);
+			path = Multicall;
+			sourceTree = "<group>";
+		};
+		E3A21E42265654B5006C560D /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21E43265654B5006C560D /* keccak-tiny */,
+				E3A21E48265654B5006C560D /* aes */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		E3A21E43265654B5006C560D /* keccak-tiny */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21E44265654B5006C560D /* include */,
+				E3A21E46265654B5006C560D /* module.map */,
+				E3A21E47265654B5006C560D /* keccak-tiny.c */,
+			);
+			path = "keccak-tiny";
+			sourceTree = "<group>";
+		};
+		E3A21E44265654B5006C560D /* include */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21E45265654B5006C560D /* keccak-tiny.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		E3A21E48265654B5006C560D /* aes */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21E49265654B5006C560D /* aes.c */,
+				E3A21E4A265654B5006C560D /* include */,
+				E3A21E4C265654B5006C560D /* module.map */,
+			);
+			path = aes;
+			sourceTree = "<group>";
+		};
+		E3A21E4A265654B5006C560D /* include */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21E4B265654B5006C560D /* aes.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		E3E023452645190A00791E00 /* rpc */ = {
+			isa = PBXGroup;
+			children = (
+				E3E023482648B8EF00791E00 /* RPC.swift */,
+				E3E0234F2648BCD800791E00 /* Klay.swift */,
+			);
+			path = rpc;
+			sourceTree = "<group>";
+		};
+		E3E0234726452BE600791E00 /* wallet */ = {
+			isa = PBXGroup;
+			children = (
+				E3E0234C2648BB5800791E00 /* keyring */,
+				E3E0234A2648BAE600791E00 /* KeyringContainer.swift */,
+				E3E023682648F07F00791E00 /* IWallet.swift */,
+			);
+			path = wallet;
+			sourceTree = "<group>";
+		};
+		E3E0234C2648BB5800791E00 /* keyring */ = {
+			isa = PBXGroup;
+			children = (
+				E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */,
+			);
+			path = keyring;
+			sourceTree = "<group>";
+		};
+		E3E023532648BE4700791E00 /* contract */ = {
+			isa = PBXGroup;
+			children = (
+				E3E023512648BE4200791E00 /* Contract.swift */,
+				E3E023542648C00D00791E00 /* ContractIOType.swift */,
+				E3E023562648C58E00791E00 /* SendOptions.swift */,
+				E3E023662648EFE700791E00 /* ContractMethod.swift */,
+				E3E0237A264A059A00791E00 /* ContractEvent.swift */,
+			);
+			path = contract;
+			sourceTree = "<group>";
+		};
+		E3E023582648C91900791E00 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				E3E023592648C92B00791E00 /* Utils.swift */,
+				E3E0235E2648C98D00791E00 /* Errors.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		E3E0236E2648F5D600791E00 /* methodes */ = {
+			isa = PBXGroup;
+			children = (
+				E3E0237E264A26E500791E00 /* response */,
+				E3E0236F2648F5E000791E00 /* request */,
+			);
+			path = methodes;
+			sourceTree = "<group>";
+		};
+		E3E0236F2648F5E000791E00 /* request */ = {
+			isa = PBXGroup;
+			children = (
+				E3E023702648F5E900791E00 /* CallObject.swift */,
+			);
+			path = request;
+			sourceTree = "<group>";
+		};
+		E3E0237E264A26E500791E00 /* response */ = {
+			isa = PBXGroup;
+			children = (
+				E3E0237F264A26F600791E00 /* Quantity.swift */,
+			);
+			path = response;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E39F2CC4262EA4EF003FA426 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3A21E50265654B5006C560D /* aes.h in Headers */,
+				E3A21E4D265654B5006C560D /* keccak-tiny.h in Headers */,
+				E39F2CDA262EA4EF003FA426 /* Caver_swift.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E39F2CC8262EA4EF003FA426 /* Caver-swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E39F2CDD262EA4EF003FA426 /* Build configuration list for PBXNativeTarget "Caver-swift" */;
+			buildPhases = (
+				C447278CC0DCC706D99A7C8C /* [CP] Check Pods Manifest.lock */,
+				E39F2CC4262EA4EF003FA426 /* Headers */,
+				E39F2CC5262EA4EF003FA426 /* Sources */,
+				E39F2CC6262EA4EF003FA426 /* Frameworks */,
+				E39F2CC7262EA4EF003FA426 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Caver-swift";
+			productName = "Caver-swift";
+			productReference = E39F2CC9262EA4EF003FA426 /* Caver_swift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E39F2CD1262EA4EF003FA426 /* Caver-swiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E39F2CE0262EA4EF003FA426 /* Build configuration list for PBXNativeTarget "Caver-swiftTests" */;
+			buildPhases = (
+				92254FC202E9CCEFBFA3CD9C /* [CP] Check Pods Manifest.lock */,
+				E39F2CCE262EA4EF003FA426 /* Sources */,
+				E39F2CCF262EA4EF003FA426 /* Frameworks */,
+				E39F2CD0262EA4EF003FA426 /* Resources */,
+				69937B763F0FEFE521E54457 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E39F2CD5262EA4EF003FA426 /* PBXTargetDependency */,
+			);
+			name = "Caver-swiftTests";
+			productName = "Caver-swiftTests";
+			productReference = E39F2CD2262EA4EF003FA426 /* Caver-swiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E39F2CC0262EA4EF003FA426 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					E39F2CC8262EA4EF003FA426 = {
+						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
+					};
+					E39F2CD1262EA4EF003FA426 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
+			};
+			buildConfigurationList = E39F2CC3262EA4EF003FA426 /* Build configuration list for PBXProject "Caver-swift" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E39F2CBF262EA4EF003FA426;
+			productRefGroup = E39F2CCA262EA4EF003FA426 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E39F2CC8262EA4EF003FA426 /* Caver-swift */,
+				E39F2CD1262EA4EF003FA426 /* Caver-swiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E39F2CC7262EA4EF003FA426 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E39F2CD0262EA4EF003FA426 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3E02389264CB16500791E00 /* testFunction.json in Resources */,
+				E3E023792649130700791E00 /* test.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		69937B763F0FEFE521E54457 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Caver-swift-Caver-swiftTests/Pods-Caver-swift-Caver-swiftTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Caver-swift-Caver-swiftTests/Pods-Caver-swift-Caver-swiftTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Caver-swift-Caver-swiftTests/Pods-Caver-swift-Caver-swiftTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92254FC202E9CCEFBFA3CD9C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Caver-swift-Caver-swiftTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C447278CC0DCC706D99A7C8C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Caver-swift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E39F2CC5262EA4EF003FA426 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3A21E26265654A7006C560D /* String+Numeric.swift in Sources */,
+				E3E023552648C00D00791E00 /* ContractIOType.swift in Sources */,
+				E3A21E28265654A7006C560D /* Data+Random.swift in Sources */,
+				E39F2CE6262EAAD3003FA426 /* Caver.swift in Sources */,
+				E3A21E18265654A7006C560D /* DefaultFunctionEncoder.swift in Sources */,
+				E3A21E0D265654A7006C560D /* ABIEncoder.swift in Sources */,
+				E3E023692648F07F00791E00 /* IWallet.swift in Sources */,
+				E3A21E2B265654A7006C560D /* ABI.swift in Sources */,
+				E3A21E1C265654A7006C560D /* ERC20Responses.swift in Sources */,
+				E3A21E1B265654A7006C560D /* ERC20.swift in Sources */,
+				E3A21E35265654A7006C560D /* TypedData.swift in Sources */,
+				E3A21E0C265654A7006C560D /* ABIRawType.swift in Sources */,
+				E3A21E24265654A7006C560D /* KeyDerivation.swift in Sources */,
+				E3A21E14265654A7006C560D /* ABIFunctionEncoder.swift in Sources */,
+				E3A21E3A265654A7006C560D /* EthereumBlock.swift in Sources */,
+				E3A21E11265654A7006C560D /* ABIDecoder+Static.swift in Sources */,
+				E3A21E30265654A7006C560D /* ERC721Events.swift in Sources */,
+				E3A21E3C265654A7006C560D /* EthereumNetwork.swift in Sources */,
+				E3A21E4F265654B5006C560D /* aes.c in Sources */,
+				E3A21E16265654A7006C560D /* ABIRawType+Static.swift in Sources */,
+				E3E0235A2648C92B00791E00 /* Utils.swift in Sources */,
+				E3A21E08265654A7006C560D /* ENSMultiResolver.swift in Sources */,
+				E3A21E1A265654A7006C560D /* ERC20Events.swift in Sources */,
+				E3A21E13265654A7006C560D /* ABIEncoder+Static.swift in Sources */,
+				E3A21E4E265654B5006C560D /* keccak-tiny.c in Sources */,
+				E3A21E0F265654A7006C560D /* ABIRawType+JSON.swift in Sources */,
+				E3A21E23265654A7006C560D /* AesUtil.swift in Sources */,
+				E3A21E19265654A7006C560D /* ERC20Functions.swift in Sources */,
+				E3E023712648F5E900791E00 /* CallObject.swift in Sources */,
+				E3E023672648EFE700791E00 /* ContractMethod.swift in Sources */,
+				E3E023572648C58E00791E00 /* SendOptions.swift in Sources */,
+				E3A21E1F265654A7006C560D /* RLP.swift in Sources */,
+				E3A21E31265654A7006C560D /* ERC721Functions.swift in Sources */,
+				E3A21E37265654A7006C560D /* EthereumTransactionReceipt.swift in Sources */,
+				E3A21E2E265654A7006C560D /* ERC721Responses.swift in Sources */,
+				E3A21E3E265654A7006C560D /* EthereumClient.swift in Sources */,
+				E3A21E1D265654A7006C560D /* Address.swift in Sources */,
+				E3A21E36265654A7006C560D /* RecursiveLogCollector.swift in Sources */,
+				E3A21E15265654A7006C560D /* ABIEvent.swift in Sources */,
+				E3E023502648BCD800791E00 /* Klay.swift in Sources */,
+				E3A21E39265654A7006C560D /* EthereumBlockInfo.swift in Sources */,
+				E3A21E2F265654A7006C560D /* ERC721.swift in Sources */,
+				E3A21E3F265654A7006C560D /* JSONRPC.swift in Sources */,
+				E3A21E41265654A7006C560D /* Multicall.swift in Sources */,
+				E3A21E0A265654A7006C560D /* ENSResponses.swift in Sources */,
+				E3A21E17265654A7006C560D /* EthereumClient+Static.swift in Sources */,
+				E3A21E33265654A7006C560D /* EthereumAccount.swift in Sources */,
+				E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */,
+				E3A21E10265654A7006C560D /* ABIFunction.swift in Sources */,
+				E3A21E09265654A7006C560D /* ENSContracts.swift in Sources */,
+				E3A21E40265654A7006C560D /* MulticallContract.swift in Sources */,
+				E3A21E12265654A7006C560D /* ABITuple.swift in Sources */,
+				E3E02380264A26F600791E00 /* Quantity.swift in Sources */,
+				E3E0235F2648C98D00791E00 /* Errors.swift in Sources */,
+				E3A21E25265654A7006C560D /* HexExtensions.swift in Sources */,
+				E3A21E1E265654A7006C560D /* Type.swift in Sources */,
+				E3A21E20265654A7006C560D /* KeystoreUtil.swift in Sources */,
+				E3A21E2D265654A7006C560D /* ERC165.swift in Sources */,
+				E3E023522648BE4200791E00 /* Contract.swift in Sources */,
+				E3A21E22265654A7006C560D /* KeyUtil.swift in Sources */,
+				E3A21E34265654A7006C560D /* EthereumKeyStorage.swift in Sources */,
+				E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */,
+				E3A21E38265654A7006C560D /* EthereumAddress.swift in Sources */,
+				E3A21E32265654A7006C560D /* EthereumAccount+SignTransaction.swift in Sources */,
+				E3E0237B264A059A00791E00 /* ContractEvent.swift in Sources */,
+				E3A21E3D265654A7006C560D /* EthereumTransaction.swift in Sources */,
+				E3E023492648B8EF00791E00 /* RPC.swift in Sources */,
+				E3A21E27265654A7006C560D /* Extensions.swift in Sources */,
+				E3A21E21265654A7006C560D /* HexUtil.swift in Sources */,
+				E3A21E0B265654A7006C560D /* EthereumNameService.swift in Sources */,
+				E3A21E2C265654A7006C560D /* TypeDecoder.swift in Sources */,
+				E3A21E0E265654A7006C560D /* ABIDecoder.swift in Sources */,
+				E3A21E29265654A7006C560D /* ByteExtensions.swift in Sources */,
+				E3A21E2A265654A7006C560D /* KeccakExtensions.swift in Sources */,
+				E3A21E3B265654A7006C560D /* EthereumLog.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E39F2CCE262EA4EF003FA426 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3A21D3626564CCA006C560D /* ABITests.swift in Sources */,
+				E39F2CD8262EA4EF003FA426 /* Caver_swiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E39F2CD5262EA4EF003FA426 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E39F2CC8262EA4EF003FA426 /* Caver-swift */;
+			targetProxy = E39F2CD4262EA4EF003FA426 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E39F2CDB262EA4EF003FA426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E39F2CDC262EA4EF003FA426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E39F2CDE262EA4EF003FA426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F936E705382892FECBCD5C18 /* Pods-Caver-swift.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = H6HXM54M49;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Caver-swift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.caver;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/Caver-swift/lib/aes/** ${SRCROOT}/Caver-swift/lib/keccak-tiny/**";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E39F2CDF262EA4EF003FA426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D381A2B37258C6AE53F835B /* Pods-Caver-swift.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = H6HXM54M49;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Caver-swift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.caver;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/Caver-swift/lib/aes/** ${SRCROOT}/Caver-swift/lib/keccak-tiny/**";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E39F2CE1262EA4EF003FA426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2FC8FDA96C529F5682A5624 /* Pods-Caver-swift-Caver-swiftTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H6HXM54M49;
+				INFOPLIST_FILE = "Caver-swiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.groundx.Caver-swiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E39F2CE2262EA4EF003FA426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34A9DA233154945736C9257C /* Pods-Caver-swift-Caver-swiftTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H6HXM54M49;
+				INFOPLIST_FILE = "Caver-swiftTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.groundx.Caver-swiftTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E39F2CC3262EA4EF003FA426 /* Build configuration list for PBXProject "Caver-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E39F2CDB262EA4EF003FA426 /* Debug */,
+				E39F2CDC262EA4EF003FA426 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E39F2CDD262EA4EF003FA426 /* Build configuration list for PBXNativeTarget "Caver-swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E39F2CDE262EA4EF003FA426 /* Debug */,
+				E39F2CDF262EA4EF003FA426 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E39F2CE0262EA4EF003FA426 /* Build configuration list for PBXNativeTarget "Caver-swiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E39F2CE1262EA4EF003FA426 /* Debug */,
+				E39F2CE2262EA4EF003FA426 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E39F2CC0262EA4EF003FA426 /* Project object */;
+}
