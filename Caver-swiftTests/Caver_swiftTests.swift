@@ -55,4 +55,8 @@ class Caver_swiftTests: XCTestCase {
             print("no file")
         }
     }
+    
+    func testTest() {
+//        XCTAssertEqual(["string", "tuple(string,string)", "tuple(string,string)"], ABIRawType.splitComponent("tuple(string,tuple(string,string),tuple(string,string))"))
+    }
 }

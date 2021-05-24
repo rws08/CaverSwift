@@ -33,8 +33,8 @@ public class DefaultFunctionEncoder {
         var count = 0
         parameters.forEach {
             let type = $0.rawType
-            if ($0 is ABITuple) {
-                count += Utils.getStaticStructComponentSize($0.value as! ABITuple)
+            if ($0.value is TypeStruct && !type.isDynamic) {
+                count += Utils.getStaticStructComponentSize($0.value as! TypeStruct)
             } else if (type.isArray) {
                 if type.isDynamic {
                     count += 1
@@ -73,6 +73,10 @@ public class DefaultFunctionEncoder {
                 try encodeArrayValuesOffsets(val, &encodedValues)
             }
             try encodeArrayValues(val, type.size, &encodedValues)
+            return .container(values: encodedValues, isDynamic: type.isDynamic, size: nil)
+        case is TypeStruct:
+            let val = value.value as! TypeStruct
+            let encodedValues = try encodeDynamicStructValues(val)
             return .container(values: encodedValues, isDynamic: type.isDynamic, size: nil)
         case is Int:
             return try encodeRaw(String(value.value as! Int), forType: type, padded: !packed)
@@ -183,5 +187,37 @@ public class DefaultFunctionEncoder {
             let encodedDataOffset = try encode(Type(BigInt(offset)))
             encodedValues.append(encodedDataOffset)
         }
+    }
+    
+    private static func encodeDynamicStructValues(_ value: TypeStruct) throws -> [ABIEncoder.EncodedValue] {
+        var dynamicOffset = 0
+        value.subRawType.forEach {
+            if $0.isDynamic {
+                dynamicOffset += 32
+            } else {
+                dynamicOffset += $0.memory
+            }
+        }
+        
+        var offsetsAndStaticValues: [ABIEncoder.EncodedValue] = []
+        var dynamicValues: [ABIEncoder.EncodedValue] = []
+        
+        for (idx, item) in value.values.enumerated() {
+            let subRawType = value.subRawType[idx]
+            if subRawType.isDynamic {
+                offsetsAndStaticValues.append(try encode(Type(BigInt(dynamicOffset))))
+                var type = Type(item)
+                type.rawType = subRawType
+                let encodedValue = try encode(type)
+                dynamicValues.append(encodedValue)
+                dynamicOffset += encodedValue.hexString.drop0xPrefix.count >> 1
+            } else {
+                var type = Type(item)
+                type.rawType = subRawType
+                offsetsAndStaticValues.append(try encode(type))
+            }
+        }
+        offsetsAndStaticValues.append(contentsOf: dynamicValues)
+        return offsetsAndStaticValues
     }
 }

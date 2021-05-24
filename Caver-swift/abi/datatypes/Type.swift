@@ -15,10 +15,14 @@ public struct Type: Any {
     var value: ABIType
     var rawType: ABIRawType
     var typeAsString: String { return String(describing: value) }
+    
     init(_ value: ABIType) {
         if value is TypeArray {
             self.value = value
             self.rawType = (value as! TypeArray).rawType
+        } else if value is TypeStruct {
+            self.value = value
+            self.rawType = (value as! TypeStruct).rawType
         } else {
             self.value = value
             self.rawType = type(of: value).rawType
@@ -62,17 +66,31 @@ extension Address: ABIType {
     }
 }
 
-//extension Array: ABIType {
-//    public static var rawType: ABIRawType { .FixedAddress }
-//    public static var parser: ParserFunction {
-//        return { data in
-//            let first = data.first ?? ""
-//            guard let value = BigUInt(hex: first) else { throw ABIError.invalidValue }
-//            guard value.bitWidth <= 256 else { throw ABIError.invalidValue }
-//            return Int(value)
-//        }
-//    }
-//}
+public struct TypeStruct {
+    public var values: [ABIType]
+    
+    public init(values: [ABIType]) {
+        self.values = values
+    }
+    public var subRawType: [ABIRawType] = []
+    var subParser: ParserFunction = String.parser
+}
+
+extension TypeStruct: ABIType {
+    public static var rawType: ABIRawType {
+        .Tuple([])
+    }
+    
+    public static var parser: ParserFunction {
+        String.parser
+    }
+    
+    public var value: ABIType { self }
+    public var rawType: ABIRawType { .Tuple(self.subRawType) }
+    public var parser: ParserFunction {
+        return self.subParser
+    }
+}
 
 public struct TypeArray {
     public var values: [ABIType]

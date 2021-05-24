@@ -46,7 +46,7 @@ class Utils {
         var count = 0
         switch array.subRawType {
         case .Tuple(_):
-            let item = array.values.first as! ABITuple
+            let item = array.values.first as! TypeStruct
             count += array.values.count * getStaticStructComponentSize(item)
             break
         case .FixedArray(_, _):
@@ -60,12 +60,12 @@ class Utils {
         return count
     }
     
-    public static func getStaticStructComponentSize(_ staticStruct: ABITuple) -> Int {
+    public static func getStaticStructComponentSize(_ staticStruct: TypeStruct) -> Int {
         var count = 0
-        staticStruct.encodableValues.forEach {
+        staticStruct.values.forEach {
             switch type(of: $0).rawType {
             case .Tuple(_):
-                let item = $0 as! ABITuple
+                let item = $0 as! TypeStruct
                 count += getStaticStructComponentSize(item)
                 break
             case .FixedArray(_, _):
@@ -82,9 +82,36 @@ class Utils {
 }
 
 extension StringProtocol {
-    var drop0xPrefix: String { hasPrefix("0x") || hasPrefix("0X") ? String(dropFirst(2)) : self as! String }
+    var drop0xPrefix: String { isHexa ? String(dropFirst(2)) : self as! String }
     var hexaToDecimal: Int { Int(drop0xPrefix, radix: 16) ?? 0 }
     var decimalToHexa: String { .init(Int(self) ?? 0, radix: 16) }
+    var isHexa: Bool { return hasPrefix("0x") || hasPrefix("0X") }
+    var checkHexaLength: Bool { return self.count % 2 == 0 }
+    var addHexaLength: String {
+        if !checkHexaLength {
+            if isHexa { return "0x0" + String(dropFirst(2)) }
+            else { return "0" + self}
+        }
+        return self as! String
+    }
+    
+    subscript(offset: Int) -> Character { self[index(startIndex, offsetBy: offset)] }
+    subscript(range: Range<Int>) -> SubSequence {
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        return self[startIndex..<index(startIndex, offsetBy: range.count)]
+    }
+    subscript(range: ClosedRange<Int>) -> SubSequence {
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        return self[startIndex..<index(startIndex, offsetBy: range.count)]
+    }
+    subscript(range: PartialRangeFrom<Int>) -> SubSequence { self[index(startIndex, offsetBy: range.lowerBound)...] }
+    subscript(range: PartialRangeThrough<Int>) -> SubSequence { self[...index(startIndex, offsetBy: range.upperBound)] }
+    subscript(range: PartialRangeUpTo<Int>) -> SubSequence { self[..<index(startIndex, offsetBy: range.upperBound)] }
+    
+    func startsWith(_ prefix: String, _ i: Int = 0) -> Bool {
+        if self.count <= i+prefix.count { return false }
+        return self[i..<(i+prefix.count)] == prefix
+    }
 }
 
 extension BinaryInteger {

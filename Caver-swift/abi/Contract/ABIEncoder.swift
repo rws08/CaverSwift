@@ -117,7 +117,15 @@ public class ABIEncoder {
         case .DynamicString:
             let bytes = value.web3.bytes
             let len = try encodeRaw(String(bytes.count), forType: ABIRawType.FixedUInt(256)).bytes
-            let pack = (bytes.count - (bytes.count % 32)) / 32 + 1
+            let pack: Int
+            if bytes.count == 0 {
+                pack = 0
+            } else if bytes.count % 32 == 0 {
+                pack = 1
+            }else {
+                pack = (bytes.count - (bytes.count % 32)) / 32 + 1
+            }
+            
             if padded {
                 encoded = len + bytes + [UInt8](repeating: 0x00, count: pack * 32 - bytes.count)
             } else {
@@ -130,7 +138,9 @@ public class ABIEncoder {
             let pack: Int
             if bytes.count == 0 {
                 pack = 0
-            } else {
+            } else if bytes.count % 32 == 0 {
+                pack = 1
+            }else {
                 pack = (bytes.count - (bytes.count % 32)) / 32 + 1
             }
             

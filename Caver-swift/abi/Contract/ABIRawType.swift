@@ -31,6 +31,8 @@ public enum ABIRawType {
 }
 
 extension ABIRawType: RawRepresentable {
+    private static let ARRAY_SUFFIX = "\\[(\\d*)]"
+    
     public init?(rawValue: String) {
         // Specific match
         if rawValue == "uint" {
@@ -53,6 +55,21 @@ extension ABIRawType: RawRepresentable {
             return
         }
         
+        let isTupleArray = rawValue.hasPrefix("tuple") && rawValue.last == "]"
+        if !isTupleArray {
+            // Tuple
+            if ABIRawType.isAtomicTypeString(rawValue) {
+                if rawValue.contains("tuple") {
+                    if let tupleType = ABIRawType.makeStructTypeReference(rawValue) {
+                        self = ABIRawType.Tuple(tupleType)
+                        return
+                    }
+                } else {
+                    
+                }
+            }
+        }
+        
         // Arrays
         let components = rawValue.components(separatedBy: CharacterSet(charactersIn: "[]"))
         if components.count >= 3 {
@@ -71,7 +88,7 @@ extension ABIRawType: RawRepresentable {
                 }
             }
         }
-        
+                
         // Variable sizes
         if rawValue.starts(with: "uint") {
             let num = String(rawValue.filter { "0"..."9" ~= $0 })
@@ -104,7 +121,7 @@ extension ABIRawType: RawRepresentable {
         case .DynamicString: return "string"
         case .FixedArray(let type, let size): return "\(type.rawValue)[\(size)]"
         case .DynamicArray(let type): return "\(type.rawValue)[]"
-        case .Tuple(let types): return "(\(types.map(\.rawValue).joined(separator: ",")))"
+        case .Tuple(let types): return "tuple(\(types.map(\.rawValue).joined(separator: ",")))"
         }
     }
     
@@ -158,10 +175,100 @@ extension ABIRawType: RawRepresentable {
     
     public var memory: Int {
         switch self {
+        case .FixedBytes(let size):
+            if size <= 32 {
+                return 32
+            } else {
+                return (size / MAX_BYTE_LENGTH + 1) * MAX_BYTE_LENGTH
+            }
         case .FixedArray(let type, let size):
             return type.memory * size
+        case .Tuple(let values):
+            var length = 0
+            values.forEach {
+                length += $0.memory
+            }
+            return length
         default:
             return 32
+        }
+    }
+    
+    private static func makeStructTypeReference(_ tupleString: String) -> [ABIRawType]? {
+        var typeReferences: [ABIRawType] = []
+        let components = splitComponent(tupleString)
+        
+        for item in components {
+            if let type = ABIRawType(rawValue: item) {
+                typeReferences.append(type)
+            }
+        }
+        
+        return typeReferences
+    }
+    
+    private static func splitComponent(_ tupleString: String) -> [String] {
+        //set a component string.
+        //tuple(string,tuple(string,string))
+        //string,tuple(string,string)
+        
+        var array: [String] = []
+        var builder = ""
+        
+        let component = tupleString[6..<(tupleString.count-1)]
+        
+        var index = 0
+        for i in 0..<component.count {
+            if i < index { continue }
+            
+            let a = component[i]
+            if a == "t" && component.startsWith("tuple", i) {
+                let endIndex = ABIRawType.findTupleEndIndex(String(component), i)
+                builder += component[i..<endIndex]
+                index = endIndex
+            } else if a == "," {
+                array.append(builder)
+                builder = ""
+            } else {
+                builder += String(a)
+            }
+            
+            if i == component.count - 1 {
+                array.append(builder)
+                builder = ""
+            }
+        }
+        
+        return array
+    }
+    
+    private static func findTupleEndIndex(_ subString: String, _ startIndex: Int) -> Int {
+        var depth = 0
+        var endIndex = 0
+        
+        for i in startIndex..<subString.count {
+            let a = subString[i]
+            if a == "(" {
+                depth += 1
+            } else if a == ")" {
+                depth -= 1
+                if depth == 0 {
+                    endIndex = i
+                    break
+                }
+            }
+        }
+        
+        return endIndex
+    }
+    
+    private static func isAtomicTypeString(_ solidityType: String) -> Bool {
+        let nextSquareBrackets = (try! NSRegularExpression(pattern: "[(d*)]", options: [])).matches(in: solidityType, options: [], range: NSRange(0..<solidityType.utf16.count))
+        if !nextSquareBrackets.isEmpty {
+            return true
+        } else {
+            let isTupleArray = solidityType.hasPrefix("tuple") && solidityType.last == "]"
+            return solidityType.hasPrefix("tuple") && !isTupleArray
         }
     }
 }
