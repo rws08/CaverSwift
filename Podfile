@@ -10,7 +10,6 @@ target 'Caver-swift' do
   pod 'BigInt'
   pod 'GenericJSON'
   pod 'secp256k1.swift'
-  pod 'SwiftyJSON', '~> 4.0'
 
   target 'Caver-swiftTests' do
     # Pods for testing

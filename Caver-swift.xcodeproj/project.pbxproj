@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		660B1112EEFDCBA48092C817 /* Pods_Caver_swift_Caver_swiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF596D388C112CCE8FF62BF7 /* Pods_Caver_swift_Caver_swiftTests.framework */; };
 		E39F2CD3262EA4EF003FA426 /* Caver_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F2CC9262EA4EF003FA426 /* Caver_swift.framework */; };
 		E39F2CD8262EA4EF003FA426 /* Caver_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* Caver_swiftTests.swift */; };
 		E39F2CDA262EA4EF003FA426 /* Caver_swift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* Caver_swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,7 +78,8 @@
 		E3A21E53265B608A006C560D /* FunctionReturnDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */; };
 		E3A21E55265C9AF3006C560D /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E54265C9AF3006C560D /* Bytes.swift */; };
 		E3A21E57265CC247006C560D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E56265CC247006C560D /* Array.swift */; };
-		E3A21E7A265F6540006C560D /* BigNumber in Frameworks */ = {isa = PBXBuildFile; productRef = E3A21E79265F6540006C560D /* BigNumber */; };
+		E3A21E7A265F6540006C560D /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E3A21E79265F6540006C560D /* SwiftPackageProductDependency */; };
+		E3A21E7C265F77FB006C560D /* DelegationContract.json in Resources */ = {isa = PBXBuildFile; fileRef = E3A21E7B265F77FB006C560D /* DelegationContract.json */; };
 		E3E023492648B8EF00791E00 /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023482648B8EF00791E00 /* RPC.swift */; };
 		E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234A2648BAE600791E00 /* KeyringContainer.swift */; };
 		E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */; };
@@ -93,6 +95,7 @@
 		E3E0237B264A059A00791E00 /* ContractEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0237A264A059A00791E00 /* ContractEvent.swift */; };
 		E3E02380264A26F600791E00 /* Quantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0237F264A26F600791E00 /* Quantity.swift */; };
 		E3E02389264CB16500791E00 /* testFunction.json in Resources */ = {isa = PBXBuildFile; fileRef = E3E02388264CB16500791E00 /* testFunction.json */; };
+		F669FAA856BE0B0C544D355F /* Pods_Caver_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F554FEB5BBC2EEE05B6A59 /* Pods_Caver_swift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +112,8 @@
 		34A9DA233154945736C9257C /* Pods-Caver-swift-Caver-swiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift-Caver-swiftTests.release.xcconfig"; path = "Target Support Files/Pods-Caver-swift-Caver-swiftTests/Pods-Caver-swift-Caver-swiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		3D381A2B37258C6AE53F835B /* Pods-Caver-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift.release.xcconfig"; path = "Target Support Files/Pods-Caver-swift/Pods-Caver-swift.release.xcconfig"; sourceTree = "<group>"; };
 		A2FC8FDA96C529F5682A5624 /* Pods-Caver-swift-Caver-swiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift-Caver-swiftTests.debug.xcconfig"; path = "Target Support Files/Pods-Caver-swift-Caver-swiftTests/Pods-Caver-swift-Caver-swiftTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AF596D388C112CCE8FF62BF7 /* Pods_Caver_swift_Caver_swiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Caver_swift_Caver_swiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5F554FEB5BBC2EEE05B6A59 /* Pods_Caver_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Caver_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CC9262EA4EF003FA426 /* Caver_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Caver_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CCC262EA4EF003FA426 /* Caver_swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Caver_swift.h; sourceTree = "<group>"; };
 		E39F2CCD262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -184,6 +189,7 @@
 		E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionReturnDecoder.swift; sourceTree = "<group>"; };
 		E3A21E54265C9AF3006C560D /* Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
 		E3A21E56265CC247006C560D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		E3A21E7B265F77FB006C560D /* DelegationContract.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DelegationContract.json; sourceTree = "<group>"; };
 		E3E023482648B8EF00791E00 /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
 		E3E0234A2648BAE600791E00 /* KeyringContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainer.swift; sourceTree = "<group>"; };
 		E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractKeyring.swift; sourceTree = "<group>"; };
@@ -207,7 +213,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3A21E7A265F6540006C560D /* BigNumber in Frameworks */,
+				E3A21E7A265F6540006C560D /* BuildFile in Frameworks */,
+				F669FAA856BE0B0C544D355F /* Pods_Caver_swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E39F2CD3262EA4EF003FA426 /* Caver_swift.framework in Frameworks */,
+				660B1112EEFDCBA48092C817 /* Pods_Caver_swift_Caver_swiftTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +233,8 @@
 		7C211DA2C810D6E71CF0A65B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C5F554FEB5BBC2EEE05B6A59 /* Pods_Caver_swift.framework */,
+				AF596D388C112CCE8FF62BF7 /* Pods_Caver_swift_Caver_swiftTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -280,6 +290,7 @@
 		E39F2CD6262EA4EF003FA426 /* Caver-swiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				E3A21E7B265F77FB006C560D /* DelegationContract.json */,
 				E39F2CD7262EA4EF003FA426 /* Caver_swiftTests.swift */,
 				E39F2CD9262EA4EF003FA426 /* Info.plist */,
 				E3E02388264CB16500791E00 /* testFunction.json */,
@@ -618,7 +629,7 @@
 			);
 			name = "Caver-swift";
 			packageProductDependencies = (
-				E3A21E79265F6540006C560D /* BigNumber */,
+				E3A21E79265F6540006C560D /* SwiftPackageProductDependency */,
 			);
 			productName = "Caver-swift";
 			productReference = E39F2CC9262EA4EF003FA426 /* Caver_swift.framework */;
@@ -672,7 +683,7 @@
 			);
 			mainGroup = E39F2CBF262EA4EF003FA426;
 			packageReferences = (
-				E3A21E78265F6540006C560D /* XCRemoteSwiftPackageReference "Swift-BigInt" */,
+				E3A21E78265F6540006C560D /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = E39F2CCA262EA4EF003FA426 /* Products */;
 			projectDirPath = "";
@@ -697,6 +708,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3E02389264CB16500791E00 /* testFunction.json in Resources */,
+				E3A21E7C265F77FB006C560D /* DelegationContract.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1128,7 +1140,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E3A21E78265F6540006C560D /* XCRemoteSwiftPackageReference "Swift-BigInt" */ = {
+		E3A21E78265F6540006C560D /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mkrd/Swift-BigInt";
 			requirement = {
@@ -1139,9 +1151,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E3A21E79265F6540006C560D /* BigNumber */ = {
+		E3A21E79265F6540006C560D /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E3A21E78265F6540006C560D /* XCRemoteSwiftPackageReference "Swift-BigInt" */;
+			package = E3A21E78265F6540006C560D /* RemoteSwiftPackageReference */;
 			productName = BigNumber;
 		};
 /* End XCSwiftPackageProductDependency section */

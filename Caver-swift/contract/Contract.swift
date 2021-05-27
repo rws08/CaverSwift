@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftyJSON
+import GenericJSON
 
 class Contract {
     var caver: Caver
@@ -89,12 +89,12 @@ class Contract {
     private func initAbi() throws {
         methods.removeAll()
         let data = abi.data(using: .utf8, allowLossyConversion: false)!
-        let json = try JSON(data: data)
-        try json.array?.forEach {
-            guard let type = $0["type"].string else { return }
-            
+        let json = try JSONDecoder().decode(JSON.self, from: data)
+        try json.arrayValue?.forEach {
+            guard let type = $0["type"]?.stringValue else { return }
             if type == "function" {
-                let newMethod = try JSONDecoder().decode(ContractMethod.self, from: $0.rawData())
+                let encoded = try JSONEncoder().encode($0)
+                let newMethod = try JSONDecoder().decode(ContractMethod.self, from:encoded)
                 newMethod.signature = try ABI.encodeFunctionSignature(newMethod)
                 if let existedMethod = self.methods[newMethod.name] {
                     let isWarning = existedMethod.nextContractMethods.contains {
@@ -109,11 +109,13 @@ class Contract {
                     self.methods[newMethod.name] = newMethod
                 }
             } else if type == "event" {
-                let event = try JSONDecoder().decode(ContractEvent.self, from:$0.rawData())
+                let encoded = try JSONEncoder().encode($0)
+                let event = try JSONDecoder().decode(ContractEvent.self, from:encoded)
                 event.signature = try ABI.encodeEventSignature(event)
                 events[event.name] = event
             } else if type == "constructor" {
-                let method = try JSONDecoder().decode(ContractMethod.self, from: $0.rawData())
+                let encoded = try JSONEncoder().encode($0)
+                let method = try JSONDecoder().decode(ContractMethod.self, from:encoded)
                 self.constructor = method
             }
         }
