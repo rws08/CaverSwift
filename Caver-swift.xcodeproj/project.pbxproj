@@ -80,6 +80,7 @@
 		E3A21E57265CC247006C560D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E56265CC247006C560D /* Array.swift */; };
 		E3A21E7A265F6540006C560D /* BigNumber in Frameworks */ = {isa = PBXBuildFile; productRef = E3A21E79265F6540006C560D /* BigNumber */; };
 		E3A21E82265F8705006C560D /* IWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E81265F8705006C560D /* IWallet.swift */; };
+		E3A21E86265F9321006C560D /* Caver-swift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E3A21E85265F9321006C560D /* Caver-swift.podspec */; };
 		E3E023492648B8EF00791E00 /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023482648B8EF00791E00 /* RPC.swift */; };
 		E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234A2648BAE600791E00 /* KeyringContainer.swift */; };
 		E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */; };
@@ -189,6 +190,7 @@
 		E3A21E54265C9AF3006C560D /* Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
 		E3A21E56265CC247006C560D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		E3A21E81265F8705006C560D /* IWallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWallet.swift; sourceTree = "<group>"; };
+		E3A21E85265F9321006C560D /* Caver-swift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Caver-swift.podspec"; sourceTree = "<group>"; };
 		E3E023482648B8EF00791E00 /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
 		E3E0234A2648BAE600791E00 /* KeyringContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainer.swift; sourceTree = "<group>"; };
 		E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractKeyring.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 		E39F2CBF262EA4EF003FA426 = {
 			isa = PBXGroup;
 			children = (
+				E3A21E85265F9321006C560D /* Caver-swift.podspec */,
 				E39F2CCB262EA4EF003FA426 /* Caver-swift */,
 				E39F2CD6262EA4EF003FA426 /* Caver-swiftTests */,
 				E39F2CCA262EA4EF003FA426 /* Products */,
@@ -697,6 +700,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3A21E86265F9321006C560D /* Caver-swift.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1022,6 +1026,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.caver;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1053,6 +1058,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.caver;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
