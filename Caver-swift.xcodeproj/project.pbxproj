@@ -78,8 +78,7 @@
 		E3A21E53265B608A006C560D /* FunctionReturnDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */; };
 		E3A21E55265C9AF3006C560D /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E54265C9AF3006C560D /* Bytes.swift */; };
 		E3A21E57265CC247006C560D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E56265CC247006C560D /* Array.swift */; };
-		E3A21E7A265F6540006C560D /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E3A21E79265F6540006C560D /* SwiftPackageProductDependency */; };
-		E3A21E7C265F77FB006C560D /* DelegationContract.json in Resources */ = {isa = PBXBuildFile; fileRef = E3A21E7B265F77FB006C560D /* DelegationContract.json */; };
+		E3A21E7A265F6540006C560D /* BigNumber in Frameworks */ = {isa = PBXBuildFile; productRef = E3A21E79265F6540006C560D /* BigNumber */; };
 		E3E023492648B8EF00791E00 /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023482648B8EF00791E00 /* RPC.swift */; };
 		E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234A2648BAE600791E00 /* KeyringContainer.swift */; };
 		E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */; };
@@ -189,7 +188,6 @@
 		E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionReturnDecoder.swift; sourceTree = "<group>"; };
 		E3A21E54265C9AF3006C560D /* Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
 		E3A21E56265CC247006C560D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		E3A21E7B265F77FB006C560D /* DelegationContract.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DelegationContract.json; sourceTree = "<group>"; };
 		E3E023482648B8EF00791E00 /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
 		E3E0234A2648BAE600791E00 /* KeyringContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainer.swift; sourceTree = "<group>"; };
 		E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractKeyring.swift; sourceTree = "<group>"; };
@@ -213,7 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3A21E7A265F6540006C560D /* BuildFile in Frameworks */,
+				E3A21E7A265F6540006C560D /* BigNumber in Frameworks */,
 				F669FAA856BE0B0C544D355F /* Pods_Caver_swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,7 +288,6 @@
 		E39F2CD6262EA4EF003FA426 /* Caver-swiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				E3A21E7B265F77FB006C560D /* DelegationContract.json */,
 				E39F2CD7262EA4EF003FA426 /* Caver_swiftTests.swift */,
 				E39F2CD9262EA4EF003FA426 /* Info.plist */,
 				E3E02388264CB16500791E00 /* testFunction.json */,
@@ -629,7 +626,7 @@
 			);
 			name = "Caver-swift";
 			packageProductDependencies = (
-				E3A21E79265F6540006C560D /* SwiftPackageProductDependency */,
+				E3A21E79265F6540006C560D /* BigNumber */,
 			);
 			productName = "Caver-swift";
 			productReference = E39F2CC9262EA4EF003FA426 /* Caver_swift.framework */;
@@ -683,7 +680,7 @@
 			);
 			mainGroup = E39F2CBF262EA4EF003FA426;
 			packageReferences = (
-				E3A21E78265F6540006C560D /* RemoteSwiftPackageReference */,
+				E3A21E78265F6540006C560D /* XCRemoteSwiftPackageReference "Swift-BigInt" */,
 			);
 			productRefGroup = E39F2CCA262EA4EF003FA426 /* Products */;
 			projectDirPath = "";
@@ -708,7 +705,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3E02389264CB16500791E00 /* testFunction.json in Resources */,
-				E3A21E7C265F77FB006C560D /* DelegationContract.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1140,7 +1136,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E3A21E78265F6540006C560D /* RemoteSwiftPackageReference */ = {
+		E3A21E78265F6540006C560D /* XCRemoteSwiftPackageReference "Swift-BigInt" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mkrd/Swift-BigInt";
 			requirement = {
@@ -1151,9 +1147,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E3A21E79265F6540006C560D /* SwiftPackageProductDependency */ = {
+		E3A21E79265F6540006C560D /* BigNumber */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E3A21E78265F6540006C560D /* RemoteSwiftPackageReference */;
+			package = E3A21E78265F6540006C560D /* XCRemoteSwiftPackageReference "Swift-BigInt" */;
 			productName = BigNumber;
 		};
 /* End XCSwiftPackageProductDependency section */
