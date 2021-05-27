@@ -79,6 +79,7 @@
 		E3A21E55265C9AF3006C560D /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E54265C9AF3006C560D /* Bytes.swift */; };
 		E3A21E57265CC247006C560D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E56265CC247006C560D /* Array.swift */; };
 		E3A21E7A265F6540006C560D /* BigNumber in Frameworks */ = {isa = PBXBuildFile; productRef = E3A21E79265F6540006C560D /* BigNumber */; };
+		E3A21E82265F8705006C560D /* IWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E81265F8705006C560D /* IWallet.swift */; };
 		E3E023492648B8EF00791E00 /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023482648B8EF00791E00 /* RPC.swift */; };
 		E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234A2648BAE600791E00 /* KeyringContainer.swift */; };
 		E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */; };
@@ -89,7 +90,6 @@
 		E3E0235A2648C92B00791E00 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023592648C92B00791E00 /* Utils.swift */; };
 		E3E0235F2648C98D00791E00 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0235E2648C98D00791E00 /* Errors.swift */; };
 		E3E023672648EFE700791E00 /* ContractMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023662648EFE700791E00 /* ContractMethod.swift */; };
-		E3E023692648F07F00791E00 /* IWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023682648F07F00791E00 /* IWallet.swift */; };
 		E3E023712648F5E900791E00 /* CallObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023702648F5E900791E00 /* CallObject.swift */; };
 		E3E0237B264A059A00791E00 /* ContractEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0237A264A059A00791E00 /* ContractEvent.swift */; };
 		E3E02380264A26F600791E00 /* Quantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0237F264A26F600791E00 /* Quantity.swift */; };
@@ -188,6 +188,7 @@
 		E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionReturnDecoder.swift; sourceTree = "<group>"; };
 		E3A21E54265C9AF3006C560D /* Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
 		E3A21E56265CC247006C560D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		E3A21E81265F8705006C560D /* IWallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWallet.swift; sourceTree = "<group>"; };
 		E3E023482648B8EF00791E00 /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
 		E3E0234A2648BAE600791E00 /* KeyringContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainer.swift; sourceTree = "<group>"; };
 		E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractKeyring.swift; sourceTree = "<group>"; };
@@ -198,7 +199,6 @@
 		E3E023592648C92B00791E00 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		E3E0235E2648C98D00791E00 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		E3E023662648EFE700791E00 /* ContractMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractMethod.swift; sourceTree = "<group>"; };
-		E3E023682648F07F00791E00 /* IWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IWallet.swift; path = "../../../../GitHub/klip-mobile-android/IWallet.swift"; sourceTree = "<group>"; };
 		E3E023702648F5E900791E00 /* CallObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallObject.swift; sourceTree = "<group>"; };
 		E3E0237A264A059A00791E00 /* ContractEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractEvent.swift; sourceTree = "<group>"; };
 		E3E0237F264A26F600791E00 /* Quantity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quantity.swift; sourceTree = "<group>"; };
@@ -535,7 +535,7 @@
 			children = (
 				E3E0234C2648BB5800791E00 /* keyring */,
 				E3E0234A2648BAE600791E00 /* KeyringContainer.swift */,
-				E3E023682648F07F00791E00 /* IWallet.swift */,
+				E3A21E81265F8705006C560D /* IWallet.swift */,
 			);
 			path = wallet;
 			sourceTree = "<group>";
@@ -785,9 +785,9 @@
 				E39F2CE6262EAAD3003FA426 /* Caver.swift in Sources */,
 				E3A21E18265654A7006C560D /* DefaultFunctionEncoder.swift in Sources */,
 				E3A21E0D265654A7006C560D /* ABIEncoder.swift in Sources */,
-				E3E023692648F07F00791E00 /* IWallet.swift in Sources */,
 				E3A21E2B265654A7006C560D /* ABI.swift in Sources */,
 				E3A21E1C265654A7006C560D /* ERC20Responses.swift in Sources */,
+				E3A21E82265F8705006C560D /* IWallet.swift in Sources */,
 				E3A21E57265CC247006C560D /* Array.swift in Sources */,
 				E3A21E1B265654A7006C560D /* ERC20.swift in Sources */,
 				E3A21E35265654A7006C560D /* TypedData.swift in Sources */,
