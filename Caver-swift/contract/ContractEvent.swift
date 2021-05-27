@@ -21,7 +21,7 @@ class ContractEvent: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try container.decode(String.self, forKey: .type)
         self.name = try container.decode(String.self, forKey: .name)
-        self.inputs = try container.decode([ContractIOType].self, forKey: .inputs)
+        self.inputs = (try? container.decode([ContractIOType].self, forKey: .inputs)) ?? []
     }
     
     func encode(to encoder: Encoder) throws {

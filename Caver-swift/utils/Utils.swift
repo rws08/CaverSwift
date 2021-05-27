@@ -7,6 +7,7 @@
 
 import Foundation
 import BigInt
+import BigNumber
 
 class Utils {
     private static let baseAddrPattern = "^(0x)?[0-9a-f]{40}$"
@@ -122,6 +123,8 @@ extension StringProtocol {
 extension BinaryInteger {
     var binary: String { .init(self, radix: 2) }
     var hexa: String { .init(self, radix: 16).matchEven }
+    var decimal: String { .init(self, radix: 10) }
+    var double: BDouble { BDouble(self.decimal) ?? BDouble.zero }
 }
 
 func WARNING(filename: String = #file, line: Int = #line, funcname: String = #function, message:Any...) {

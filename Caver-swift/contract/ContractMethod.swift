@@ -28,7 +28,7 @@ class ContractMethod: Codable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try container.decode(String.self, forKey: .type)
-        self.name = try container.decode(String.self, forKey: .name)
+        self.name = (try? container.decode(String.self, forKey: .name)) ?? ""
         self.inputs = (try? container.decode([ContractIOType].self, forKey: .inputs)) ?? []
         self.outputs = (try? container.decode([ContractIOType].self, forKey: .outputs)) ?? []
         self.contractAddress = (try? container.decode(String.self, forKey: .contractAddress)) ?? ""
@@ -79,7 +79,7 @@ class ContractMethod: Codable {
         callObject.to = method.contractAddress
         try caver?.rpc.klay.call(callObject, completion: { error, response in
             if error == nil {
-                completion(nil)
+                completion(ABI.decodeParameters(method, response!))
             } else {
 //                let result = ABI.decodeParameters()
             }

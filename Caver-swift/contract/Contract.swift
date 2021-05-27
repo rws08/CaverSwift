@@ -77,6 +77,15 @@ class Contract {
         return event
     }
     
+    func call(_ methodName: String, _ methodArguments:[Any], completion: @escaping(([Type]?) -> Void)) {
+        call(CallObject.init(), methodName, methodArguments, completion: completion)
+    }
+    
+    func call(_ callObject: CallObject, _ methodName: String, _ methodArguments:[Any], completion: @escaping(([Type]?) -> Void)) {
+        guard let contractMethod = try? getMethod(methodName) else { return }
+        try? contractMethod.call(methodArguments, callObject, completion: completion)
+    }
+    
     private func initAbi() throws {
         methods.removeAll()
         let data = abi.data(using: .utf8, allowLossyConversion: false)!

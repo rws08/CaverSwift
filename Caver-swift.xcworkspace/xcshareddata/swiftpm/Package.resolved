@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "BigNumber",
+        "repositoryURL": "https://github.com/mkrd/Swift-BigInt",
+        "state": {
+          "branch": null,
+          "revision": "9454066da1ed55fb976bda252b7060dbd659e61a",
+          "version": "2.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

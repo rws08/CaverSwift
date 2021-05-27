@@ -111,6 +111,16 @@ class ABI {
         return retString.replacingOccurrences(of: ABI.TUPLE, with: "")
     }
     
+    static func decodeParameters(_ method: ContractMethod, _ encoded: String) -> [Type] {
+        var params: [Type] = []
+        try? method.outputs.forEach {
+            let type = try TypeDecoder.makeTypeReference($0.getTypeAsString())
+            params.append(type)
+        }
+        try? FunctionReturnDecoder.decode(encoded, &params)
+        return params
+    }
+    
     static func decodeParameter(_ solidityType: String, _ encoded: String) throws -> Type? {
         return try decodeParameters([solidityType], encoded).first
     }
