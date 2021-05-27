@@ -74,6 +74,9 @@
 		E3A21E4E265654B5006C560D /* keccak-tiny.c in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E47265654B5006C560D /* keccak-tiny.c */; };
 		E3A21E4F265654B5006C560D /* aes.c in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E49265654B5006C560D /* aes.c */; };
 		E3A21E50265654B5006C560D /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E4B265654B5006C560D /* aes.h */; };
+		E3A21E53265B608A006C560D /* FunctionReturnDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */; };
+		E3A21E55265C9AF3006C560D /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E54265C9AF3006C560D /* Bytes.swift */; };
+		E3A21E57265CC247006C560D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E56265CC247006C560D /* Array.swift */; };
 		E3E023492648B8EF00791E00 /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023482648B8EF00791E00 /* RPC.swift */; };
 		E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234A2648BAE600791E00 /* KeyringContainer.swift */; };
 		E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */; };
@@ -178,6 +181,9 @@
 		E3A21E49265654B5006C560D /* aes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aes.c; sourceTree = "<group>"; };
 		E3A21E4B265654B5006C560D /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
 		E3A21E4C265654B5006C560D /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionReturnDecoder.swift; sourceTree = "<group>"; };
+		E3A21E54265C9AF3006C560D /* Bytes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bytes.swift; sourceTree = "<group>"; };
+		E3A21E56265CC247006C560D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		E3E023482648B8EF00791E00 /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
 		E3E0234A2648BAE600791E00 /* KeyringContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainer.swift; sourceTree = "<group>"; };
 		E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractKeyring.swift; sourceTree = "<group>"; };
@@ -292,6 +298,7 @@
 				E3A21DC5265654A7006C560D /* Contract */,
 				E3A21DDA265654A7006C560D /* datatypes */,
 				E3A21DD4265654A7006C560D /* DefaultFunctionEncoder.swift */,
+				E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */,
 				E3A21DC0265654A7006C560D /* ENS */,
 				E3A21DD5265654A7006C560D /* ERC20 */,
 				E3A21DED265654A7006C560D /* ERC165 */,
@@ -366,6 +373,8 @@
 			children = (
 				E3A21DDB265654A7006C560D /* Address.swift */,
 				E3A21DDC265654A7006C560D /* Type.swift */,
+				E3A21E54265C9AF3006C560D /* Bytes.swift */,
+				E3A21E56265CC247006C560D /* Array.swift */,
 			);
 			path = datatypes;
 			sourceTree = "<group>";
@@ -767,11 +776,14 @@
 				E3E023692648F07F00791E00 /* IWallet.swift in Sources */,
 				E3A21E2B265654A7006C560D /* ABI.swift in Sources */,
 				E3A21E1C265654A7006C560D /* ERC20Responses.swift in Sources */,
+				E3A21E57265CC247006C560D /* Array.swift in Sources */,
 				E3A21E1B265654A7006C560D /* ERC20.swift in Sources */,
 				E3A21E35265654A7006C560D /* TypedData.swift in Sources */,
 				E3A21E0C265654A7006C560D /* ABIRawType.swift in Sources */,
 				E3A21E24265654A7006C560D /* KeyDerivation.swift in Sources */,
+				E3A21E55265C9AF3006C560D /* Bytes.swift in Sources */,
 				E3A21E14265654A7006C560D /* ABIFunctionEncoder.swift in Sources */,
+				E3A21E53265B608A006C560D /* FunctionReturnDecoder.swift in Sources */,
 				E3A21E3A265654A7006C560D /* EthereumBlock.swift in Sources */,
 				E3A21E11265654A7006C560D /* ABIDecoder+Static.swift in Sources */,
 				E3A21E30265654A7006C560D /* ERC721Events.swift in Sources */,

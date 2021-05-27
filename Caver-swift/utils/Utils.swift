@@ -86,11 +86,16 @@ extension StringProtocol {
     var hexaToDecimal: Int { Int(drop0xPrefix, radix: 16) ?? 0 }
     var decimalToHexa: String { .init(Int(self) ?? 0, radix: 16) }
     var isHexa: Bool { return hasPrefix("0x") || hasPrefix("0X") }
-    var checkHexaLength: Bool { return self.count % 2 == 0 }
-    var addHexaLength: String {
+    var checkHexaLength: Bool { return self[0] == "-" ? (self.count - 1) % 2 == 0 : self.count % 2 == 0 }
+    var matchEven: String {
         if !checkHexaLength {
-            if isHexa { return "0x0" + String(dropFirst(2)) }
-            else { return "0" + self}
+            if (self[0] == "-") {
+                if isHexa { return "0x0" + String(dropFirst(2)) }
+                else { return "-0" + self[1..<count]}
+            } else {
+                if isHexa { return "0x0" + String(dropFirst(2)) }
+                else { return "0" + self}
+            }
         }
         return self as! String
     }
@@ -116,7 +121,7 @@ extension StringProtocol {
 
 extension BinaryInteger {
     var binary: String { .init(self, radix: 2) }
-    var hexa: String { .init(self, radix: 16) }
+    var hexa: String { .init(self, radix: 16).matchEven }
 }
 
 func WARNING(filename: String = #file, line: Int = #line, funcname: String = #function, message:Any...) {

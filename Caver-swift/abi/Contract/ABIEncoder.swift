@@ -36,9 +36,9 @@ public class ABIEncoder {
             switch self {
             case .value(_, _, let staticLength):
                 return staticLength
-            case .container(let values, let isDynamic, let size):
+            case .container(let values, let isDynamic, _):
                 if isDynamic {
-                    return 32
+                    return MAX_BYTE_LENGTH
                 } else {
                     return values.map(\.staticLength).reduce(0, +)
                 }
@@ -62,7 +62,7 @@ public class ABIEncoder {
         let encoded: [UInt8] = try encodeRaw(value, forType: type, padded: padded, size: size)
         return .value(bytes: encoded,
                       isDynamic: type.isDynamic,
-                      staticLength: type.isDynamic ? 32 : 32 * size)
+                      staticLength: type.isDynamic ? MAX_BYTE_LENGTH : MAX_BYTE_LENGTH * size)
     }
     
     private static func encodeRaw(_ value: String,
@@ -78,11 +78,11 @@ public class ABIEncoder {
                 throw ABIError.invalidValue
             }
             let bytes = int.web3.bytes // should be <= 32 bytes
-            guard bytes.count <= 32, bytesSize <= 32 else {
+            guard bytes.count <= MAX_BYTE_LENGTH, bytesSize <= MAX_BYTE_LENGTH else {
                 throw ABIError.invalidValue
             }
             if padded {
-                encoded = [UInt8](repeating: 0x00, count: 32 - bytes.count) + bytes
+                encoded = [UInt8](repeating: 0x00, count: MAX_BYTE_LENGTH - bytes.count) + bytes
             } else {
                 encoded = [UInt8](repeating: 0x00, count: bytesSize - bytes.count) + bytes
             }
@@ -92,14 +92,14 @@ public class ABIEncoder {
             }
             
             let bytes = int.web3.bytes // should be <= 32 bytes
-            guard bytes.count <= 32 else {
+            guard bytes.count <= MAX_BYTE_LENGTH else {
                 throw ABIError.invalidValue
             }
             
             if int < 0 {
-                encoded = [UInt8](repeating: 0xff, count: 32 - bytes.count) + bytes
+                encoded = [UInt8](repeating: 0xff, count: MAX_BYTE_LENGTH - bytes.count) + bytes
             } else {
-                encoded = [UInt8](repeating: 0, count: 32 - bytes.count) + bytes
+                encoded = [UInt8](repeating: 0, count: MAX_BYTE_LENGTH - bytes.count) + bytes
             }
             
             if !padded {
@@ -110,7 +110,7 @@ public class ABIEncoder {
         case .FixedAddress:
             guard let bytes = value.web3.bytesFromHex else { throw ABIError.invalidValue } // Must be 20 bytes
             if padded  {
-                encoded = [UInt8](repeating: 0x00, count: 32 - bytes.count) + bytes
+                encoded = [UInt8](repeating: 0x00, count: MAX_BYTE_LENGTH - bytes.count) + bytes
             } else {
                 encoded = bytes
             }
@@ -120,14 +120,14 @@ public class ABIEncoder {
             let pack: Int
             if bytes.count == 0 {
                 pack = 0
-            } else if bytes.count % 32 == 0 {
+            } else if bytes.count % MAX_BYTE_LENGTH == 0 {
                 pack = 1
             }else {
-                pack = (bytes.count - (bytes.count % 32)) / 32 + 1
+                pack = (bytes.count - (bytes.count % MAX_BYTE_LENGTH)) / MAX_BYTE_LENGTH + 1
             }
             
             if padded {
-                encoded = len + bytes + [UInt8](repeating: 0x00, count: pack * 32 - bytes.count)
+                encoded = len + bytes + [UInt8](repeating: 0x00, count: pack * MAX_BYTE_LENGTH - bytes.count)
             } else {
                 encoded = bytes
             }
@@ -138,14 +138,14 @@ public class ABIEncoder {
             let pack: Int
             if bytes.count == 0 {
                 pack = 0
-            } else if bytes.count % 32 == 0 {
+            } else if bytes.count % MAX_BYTE_LENGTH == 0 {
                 pack = 1
             }else {
-                pack = (bytes.count - (bytes.count % 32)) / 32 + 1
+                pack = (bytes.count - (bytes.count % MAX_BYTE_LENGTH)) / MAX_BYTE_LENGTH + 1
             }
             
             if padded {
-                encoded = len + bytes + [UInt8](repeating: 0x00, count: pack * 32 - bytes.count)
+                encoded = len + bytes + [UInt8](repeating: 0x00, count: pack * MAX_BYTE_LENGTH - bytes.count)
             } else {
                 encoded = bytes
             }
@@ -153,7 +153,7 @@ public class ABIEncoder {
             // Bytes are hex encoded
             guard let bytes = value.web3.bytesFromHex else { throw ABIError.invalidValue }
             if padded {
-                encoded = bytes + [UInt8](repeating: 0x00, count: 32 - bytes.count)
+                encoded = bytes + [UInt8](repeating: 0x00, count: MAX_BYTE_LENGTH - bytes.count)
             } else {
                 encoded = bytes
             }
@@ -177,10 +177,10 @@ public class ABIEncoder {
             if bytes.count == 0 {
                 pack = 0
             } else {
-                pack = (bytes.count - (bytes.count % 32)) / 32 + 1
+                pack = (bytes.count - (bytes.count % MAX_BYTE_LENGTH)) / MAX_BYTE_LENGTH + 1
             }
             
-            encoded = len + bytes + [UInt8](repeating: 0x00, count: pack * 32 - bytes.count)
+            encoded = len + bytes + [UInt8](repeating: 0x00, count: pack * MAX_BYTE_LENGTH - bytes.count)
         case .Tuple:
             throw ABIError.notCurrentlySupported
         case .FixedArray:

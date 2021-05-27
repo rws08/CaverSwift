@@ -176,21 +176,28 @@ extension ABIRawType: RawRepresentable {
     public var memory: Int {
         switch self {
         case .FixedBytes(let size):
-            if size <= 32 {
-                return 32
+            if size <= MAX_BYTE_LENGTH {
+                return MAX_BYTE_LENGTH
             } else {
                 return (size / MAX_BYTE_LENGTH + 1) * MAX_BYTE_LENGTH
             }
         case .FixedArray(let type, let size):
+            if type.isDynamic {
+                return MAX_BYTE_LENGTH
+            }
             return type.memory * size
         case .Tuple(let values):
-            var length = 0
-            values.forEach {
-                length += $0.memory
+            if self.isDynamic {
+                return MAX_BYTE_LENGTH
+            } else {
+                var length = 0
+                values.forEach {
+                    length += $0.memory
+                }
+                return length
             }
-            return length
         default:
-            return 32
+            return MAX_BYTE_LENGTH
         }
     }
     

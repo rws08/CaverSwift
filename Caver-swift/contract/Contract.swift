@@ -70,6 +70,13 @@ class Contract {
         return method
     }
     
+    func getEvent(_ eventName: String) throws -> ContractEvent {
+        guard let event = events[eventName] else {
+            throw CaverError.NoSuchMethodException("\(eventName) method is not exist.")
+        }
+        return event
+    }
+    
     private func initAbi() throws {
         methods.removeAll()
         let data = abi.data(using: .utf8, allowLossyConversion: false)!

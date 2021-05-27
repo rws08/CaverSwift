@@ -66,7 +66,11 @@ public extension Web3Extensions where Base == String {
     var noHexPrefix: String {
         if base.hasPrefix("0x") {
             let index = base.index(base.startIndex, offsetBy: 2)
-            return String(base[index...])
+            if base.count % 2 == 0 {
+                return String(base[index...])
+            } else {
+                return String("0" + base[index...])
+            }
         }
         return base
     }

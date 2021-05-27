@@ -55,10 +55,10 @@ public class DefaultFunctionEncoder {
         switch value.value {
         case is Address:
             let val = value.value as! Address
-            let encoded: [UInt8] = try encodeRaw(val.val, forType: type, padded: !packed, size: 1)
+            let encoded: [UInt8] = try encodeRaw(val.val.hexa, forType: type, padded: !packed, size: 1)
             return .value(bytes: encoded,
                               isDynamic: false,
-                              staticLength: 32)
+                              staticLength: MAX_BYTE_LENGTH)
         case is TypeArray:
             let val = value.value as! TypeArray
             var encodedValues: [ABIEncoder.EncodedValue] = []
@@ -98,7 +98,7 @@ public class DefaultFunctionEncoder {
         let encoded: [UInt8] = try encodeRaw(value, forType: type, padded: padded, size: size)
         return .value(bytes: encoded,
                       isDynamic: type.isDynamic,
-                      staticLength: type.isDynamic ? 32 : 32 * size)
+                      staticLength: type.isDynamic ? MAX_BYTE_LENGTH : MAX_BYTE_LENGTH * size)
     }
     
     private static func encodeRaw(_ value: String,
@@ -113,12 +113,12 @@ public class DefaultFunctionEncoder {
             guard let int = value.web3.isNumeric ? BigUInt(value) : BigUInt(hex: value) else {
                 throw ABIError.invalidValue
             }
-            let bytes = int.web3.bytes // should be <= 32 bytes
-            guard bytes.count <= 32, bytesSize <= 32 else {
+            let bytes = int.web3.bytes // should be <= MAX_BYTE_LENGTH bytes
+            guard bytes.count <= MAX_BYTE_LENGTH, bytesSize <= MAX_BYTE_LENGTH else {
                 throw ABIError.invalidValue
             }
             if padded {
-                encoded = [UInt8](repeating: 0x00, count: 32 - bytes.count) + bytes
+                encoded = [UInt8](repeating: 0x00, count: MAX_BYTE_LENGTH - bytes.count) + bytes
             } else {
                 encoded = [UInt8](repeating: 0x00, count: bytesSize - bytes.count) + bytes
             }
@@ -127,15 +127,15 @@ public class DefaultFunctionEncoder {
                 throw ABIError.invalidType
             }
             
-            let bytes = int.web3.bytes // should be <= 32 bytes
-            guard bytes.count <= 32 else {
+            let bytes = int.web3.bytes // should be <= MAX_BYTE_LENGTH bytes
+            guard bytes.count <= MAX_BYTE_LENGTH else {
                 throw ABIError.invalidValue
             }
             
             if int < 0 {
-                encoded = [UInt8](repeating: 0xff, count: 32 - bytes.count) + bytes
+                encoded = [UInt8](repeating: 0xff, count: MAX_BYTE_LENGTH - bytes.count) + bytes
             } else {
-                encoded = [UInt8](repeating: 0, count: 32 - bytes.count) + bytes
+                encoded = [UInt8](repeating: 0, count: MAX_BYTE_LENGTH - bytes.count) + bytes
             }
             
             if !padded {
@@ -144,7 +144,7 @@ public class DefaultFunctionEncoder {
         case .FixedAddress:
             guard let bytes = value.web3.bytesFromHex else { throw CaverError.invalidValue } // Must be 20 bytes
             if padded  {
-                encoded = [UInt8](repeating: 0x00, count: 32 - bytes.count) + bytes
+                encoded = [UInt8](repeating: 0x00, count: MAX_BYTE_LENGTH - bytes.count) + bytes
             } else {
                 encoded = bytes
             }
@@ -156,8 +156,7 @@ public class DefaultFunctionEncoder {
     
     private static func encodeArrayValues(_ value: TypeArray, _ size: Int?, _ encodedValues: inout [ABIEncoder.EncodedValue]) throws {
         try value.values.forEach {
-            var item = Type($0)
-            item.rawType = value.subRawType
+            let item = Type($0, value.subRawType)
             encodedValues.append(try encode(item))
         }
     }
@@ -172,8 +171,7 @@ public class DefaultFunctionEncoder {
     private static func encodeStructsArraysOffsets(_ value: TypeArray, _ encodedValues: inout [ABIEncoder.EncodedValue]) throws {
         var offset = value.values.count
         let tailsEncoding = try value.values.map { v -> String in
-            var item = Type(v)
-            item.rawType = value.subRawType
+            let item = Type(v, value.subRawType)
             return try encode(item).hexString.drop0xPrefix
         }
         
@@ -193,7 +191,7 @@ public class DefaultFunctionEncoder {
         var dynamicOffset = 0
         value.subRawType.forEach {
             if $0.isDynamic {
-                dynamicOffset += 32
+                dynamicOffset += MAX_BYTE_LENGTH
             } else {
                 dynamicOffset += $0.memory
             }
@@ -206,14 +204,12 @@ public class DefaultFunctionEncoder {
             let subRawType = value.subRawType[idx]
             if subRawType.isDynamic {
                 offsetsAndStaticValues.append(try encode(Type(BigInt(dynamicOffset))))
-                var type = Type(item)
-                type.rawType = subRawType
+                let type = Type(item, subRawType)
                 let encodedValue = try encode(type)
                 dynamicValues.append(encodedValue)
                 dynamicOffset += encodedValue.hexString.drop0xPrefix.count >> 1
             } else {
-                var type = Type(item)
-                type.rawType = subRawType
+                let type = Type(item, subRawType)
                 offsetsAndStaticValues.append(try encode(type))
             }
         }

@@ -48,12 +48,7 @@ class ABI {
     static func encodeParameters(_ params: [Type]) throws -> String {
         return try DefaultFunctionEncoder.encodeParameters(params)
     }
-    
-    static func decodeParameters(_ solTypeList: [String], _ params: [Any]) throws -> [Type] {
         
-        return []
-    }
-    
     static func encodeParameter(_ solidityType: String, _ param: Any) throws -> String {
         let type = try TypeDecoder.instantiateType(solidityType, param)
                 
@@ -116,36 +111,17 @@ class ABI {
         return retString.replacingOccurrences(of: ABI.TUPLE, with: "")
     }
     
-    private func getLength(_ parameters: [Type]) -> Int {
-        var count = 0
-        parameters.forEach {
-            let type = $0.rawType
-            
-            switch (type, $0) {
-            case (_, is ABITuple):
-                count += getStaticStructComponentSize($0 as! ABITuple)
-            break
-            case (.FixedArray(_, _), _):
-                count += getStaticArrayElementSize($0)
-            break
-            case (.DynamicArray(_), _):
-            break
-            default: break
-            }
-        }
-        return count
+    static func decodeParameter(_ solidityType: String, _ encoded: String) throws -> Type? {
+        return try decodeParameters([solidityType], encoded).first
     }
     
-    public func getStaticStructComponentSize(_ staticStruct: ABITuple) -> Int {
-        var count = 0
-        staticStruct.encodableValues.forEach {
-            $0
+    static func decodeParameters(_ solidityTypeList: [String], _ encoded: String) throws -> [Type] {
+        var params: [Type] = []
+        try solidityTypeList.forEach {
+            let type = try TypeDecoder.makeTypeReference($0)
+            params.append(type)
         }
-        return count
-    }
-    
-    public func getStaticArrayElementSize(_ staticArray: Type) -> Int {
-        var count = 0
-        return count
+        try FunctionReturnDecoder.decode(encoded, &params)
+        return params
     }
 }
