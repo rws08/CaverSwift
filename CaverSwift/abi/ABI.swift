@@ -8,7 +8,7 @@
 import Foundation
 import BigInt
 
-class ABI {
+public class ABI {
     private static let TUPLE = "tuple"
     
     static func encodeFunctionCall(_ method: ContractMethod, _ params: [Any]) throws -> String {

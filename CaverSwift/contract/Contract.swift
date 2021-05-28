@@ -8,7 +8,7 @@
 import Foundation
 import GenericJSON
 
-class Contract {
+public class Contract {
     var caver: Caver
     var abi: String
     var contractAddress: String? = nil

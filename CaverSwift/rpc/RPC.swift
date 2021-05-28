@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RPC {
+public class RPC {
     private var session: URLSession
     private var url: URL
     

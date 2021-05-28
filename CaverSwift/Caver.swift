@@ -7,12 +7,12 @@
 
 import Foundation
 
-class Caver {
+public class Caver {
     public static var DEFAULT_URL = "http://localhost:8551";
     
-    public var rpc: RPC
+    var rpc: RPC
     
-    public var wallet: KeyringContainer
+    var wallet: KeyringContainer
     
     convenience init(_ url: String = DEFAULT_URL) {
         self.init(URLSession(configuration: URLSession.shared.configuration), URL.init(string: url)!)

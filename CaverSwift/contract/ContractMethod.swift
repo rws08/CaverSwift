@@ -9,7 +9,7 @@ import Foundation
 import BigInt
 import OSLog
 
-class ContractMethod: Codable {
+public class ContractMethod: Codable {
     var caver: Caver? = nil
     var type: String
     var name: String
@@ -25,7 +25,7 @@ class ContractMethod: Codable {
         case type, name, inputs, outputs, signature, contractAddress
     }
     
-    required init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try container.decode(String.self, forKey: .type)
         self.name = (try? container.decode(String.self, forKey: .name)) ?? ""
@@ -34,7 +34,7 @@ class ContractMethod: Codable {
         self.contractAddress = (try? container.decode(String.self, forKey: .contractAddress)) ?? ""
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .type)
         try container.encode(name, forKey: .name)

@@ -22,21 +22,17 @@ public enum EthereumKeyStorageError: Error {
 public class EthereumKeyLocalStorage: EthereumKeyStorageProtocol {
     public init() {}
     
-    private var localPath: String? {
+    private var localPath: URL? {
         if let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
-            return url.appendingPathComponent("EthereumKey").path
+            return url.appendingPathComponent("EthereumKey")
         }
         return nil
     }
     
     public func storePrivateKey(key: Data) throws -> Void {
-        guard let localPath = self.localPath else {
-            throw EthereumKeyStorageError.failedToSave
-        }
-        
-        let success = NSKeyedArchiver.archiveRootObject(key, toFile: localPath)
-        
-        if !success {
+        guard let localPath = self.localPath,
+              let archiver = try? NSKeyedArchiver.archivedData(withRootObject: key, requiringSecureCoding: false),
+              let _ = try? archiver.write(to: localPath) else {
             throw EthereumKeyStorageError.failedToSave
         }
     }
@@ -46,7 +42,7 @@ public class EthereumKeyLocalStorage: EthereumKeyStorageProtocol {
             throw EthereumKeyStorageError.failedToLoad
         }
         
-        guard let data = NSKeyedUnarchiver.unarchiveObject(withFile: localPath) as? Data else {
+        guard let data = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(Data(contentsOf: localPath)) as? Data else {
             throw EthereumKeyStorageError.failedToLoad
         }
 

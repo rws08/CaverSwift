@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ContractIOType: Codable {
+public class ContractIOType: Codable {
     var name: String
     var type: String
     var indexed: Bool
@@ -18,7 +18,7 @@ class ContractIOType: Codable {
         case type, name, indexed, components
     }
     
-    required init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try container.decode(String.self, forKey: .type)
         self.name = try container.decode(String.self, forKey: .name)

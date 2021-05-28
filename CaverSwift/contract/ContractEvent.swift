@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ContractEvent: Codable {
+public class ContractEvent: Codable {
     var type: String
     var name: String
     var inputs: [ContractIOType] = []
@@ -17,14 +17,14 @@ class ContractEvent: Codable {
         case type, name, inputs, signature
     }
     
-    required init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try container.decode(String.self, forKey: .type)
         self.name = try container.decode(String.self, forKey: .name)
         self.inputs = (try? container.decode([ContractIOType].self, forKey: .inputs)) ?? []
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(type, forKey: .type)
         try container.encode(name, forKey: .name)

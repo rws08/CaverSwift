@@ -71,10 +71,10 @@
 		E3A21E3F265654A7006C560D /* JSONRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E04265654A7006C560D /* JSONRPC.swift */; };
 		E3A21E40265654A7006C560D /* MulticallContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E06265654A7006C560D /* MulticallContract.swift */; };
 		E3A21E41265654A7006C560D /* Multicall.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E07265654A7006C560D /* Multicall.swift */; };
-		E3A21E4D265654B5006C560D /* keccak-tiny.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E45265654B5006C560D /* keccak-tiny.h */; };
+		E3A21E4D265654B5006C560D /* keccak-tiny.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E45265654B5006C560D /* keccak-tiny.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3A21E4E265654B5006C560D /* keccak-tiny.c in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E47265654B5006C560D /* keccak-tiny.c */; };
 		E3A21E4F265654B5006C560D /* aes.c in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E49265654B5006C560D /* aes.c */; };
-		E3A21E50265654B5006C560D /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E4B265654B5006C560D /* aes.h */; };
+		E3A21E50265654B5006C560D /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E4B265654B5006C560D /* aes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3A21E53265B608A006C560D /* FunctionReturnDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */; };
 		E3A21E55265C9AF3006C560D /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E54265C9AF3006C560D /* Bytes.swift */; };
 		E3A21E57265CC247006C560D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E56265CC247006C560D /* Array.swift */; };

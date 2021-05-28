@@ -8,7 +8,7 @@
 import Foundation
 import BigInt
 
-class Utils {
+public class Utils {
     private static let baseAddrPattern = "^(0x)?[0-9a-f]{40}$"
     private static let lowerCasePattern = "^(0x|0X)?[0-9a-f]{40}$"
     private static let upperCasePattern = "^(0x|0X)?[0-9A-F]{40}$"

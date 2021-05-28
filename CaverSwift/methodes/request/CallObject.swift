@@ -8,7 +8,7 @@
 import Foundation
 import BigInt
 
-class CallObject {
+public class CallObject {
     var from: String?
     var to: String?
     var gasLimit: BigInt?

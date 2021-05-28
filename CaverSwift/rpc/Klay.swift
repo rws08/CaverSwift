@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Klay {
+public class Klay {
     var session: URLSession
     var url: URL
     
