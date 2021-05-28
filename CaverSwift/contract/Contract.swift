@@ -18,7 +18,7 @@ public class Contract {
     var defaultSendOptions: SendOptions?
     var wallet: IWallet?
     
-    init(_ caver: Caver, _ abi: String, _ contractAddress: String? = nil) throws {
+    public init(_ caver: Caver, _ abi: String, _ contractAddress: String? = nil) throws {
         self.abi = abi
         self.caver = caver
         self.contractAddress = contractAddress

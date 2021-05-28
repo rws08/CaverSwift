@@ -16,7 +16,7 @@ public class CallObject {
     var value: BigInt?
     var data: String?
     
-    init(_ from: String? = nil, _ to: String? = nil, _ gasLimit: BigInt? = nil, _ gasPrice: BigInt? = nil, _ value: BigInt? = nil, _ data: String? = nil) {
+    public init(_ from: String? = nil, _ to: String? = nil, _ gasLimit: BigInt? = nil, _ gasPrice: BigInt? = nil, _ value: BigInt? = nil, _ data: String? = nil) {
         self.from = from
         self.to = to
         self.gasLimit = gasLimit

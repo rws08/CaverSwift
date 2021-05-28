@@ -13,7 +13,7 @@ public class RPC {
     
     public var klay: Klay
     
-    init(_ web3jService: URLSession, _ url: URL) {
+    public init(_ web3jService: URLSession, _ url: URL) {
         self.session = web3jService
         self.url = url
         klay = Klay(web3jService, url)

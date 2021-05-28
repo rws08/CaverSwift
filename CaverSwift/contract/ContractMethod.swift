@@ -44,7 +44,7 @@ public class ContractMethod: Codable {
         try container.encode(contractAddress, forKey: .contractAddress)
     }
     
-    init(_ caver: Caver, _ type: String, _ name: String,
+    public init(_ caver: Caver, _ type: String, _ name: String,
          _ inputs: Array<ContractIOType>, _ outputs: Array<ContractIOType>,
          _ signature: String, _ contractAddress: String) {
         self.caver = caver

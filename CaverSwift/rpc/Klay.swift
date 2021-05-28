@@ -11,7 +11,7 @@ public class Klay {
     var session: URLSession
     var url: URL
     
-    init(_ web3jService: URLSession, _ url: URL) {
+    public init(_ web3jService: URLSession, _ url: URL) {
         self.session = web3jService
         self.url = url
     }

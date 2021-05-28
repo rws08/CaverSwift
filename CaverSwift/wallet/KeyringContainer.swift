@@ -7,10 +7,10 @@
 
 import Foundation
 
-class KeyringContainer: IWallet {
+public class KeyringContainer: IWallet {
     var addressKeyringMap = [String:AbstractKeyring].self
     
-    init() {
+    public init() {
         
     }
 }

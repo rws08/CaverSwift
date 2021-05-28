@@ -8,7 +8,7 @@
 import Foundation
 import BigInt
 
-class TypeDecoder {
+public class TypeDecoder {
     static func makeTypeReference(_ solidityType: String) throws -> Type {
         guard let abiType = ABIRawType(rawValue: solidityType) else {
             throw CaverError.UnsupportedOperationException("Unsupported TypeReference: \(solidityType)")

@@ -13,19 +13,19 @@ public class SendOptions {
     var gas: String?
     var value = "0x0"
     
-    init(_ from: String? = nil, _ gas: String? = nil, _ value: String = "0x0") {
+    public init(_ from: String? = nil, _ gas: String? = nil, _ value: String = "0x0") {
         try? setFrom(from)
         try? setGas(gas)
         try? setValue(value)
     }
     
-    init(_ from: String? = nil, _ gas: BigInt, _ value: BigInt) {
+    public init(_ from: String? = nil, _ gas: BigInt, _ value: BigInt) {
         try? setFrom(from)
         try? setGas(gas)
         setValue(value)
     }
     
-    convenience init(_ from: String? = nil, _ gas: BigInt) {
+    public convenience init(_ from: String? = nil, _ gas: BigInt) {
         self.init(from, gas, BigInt.zero)
     }
     

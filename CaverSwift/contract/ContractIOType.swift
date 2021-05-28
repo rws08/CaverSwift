@@ -26,7 +26,7 @@ public class ContractIOType: Codable {
         self.components = (try? container.decode([ContractIOType].self, forKey: .components)) ?? []
     }
     
-    init(name: String, type: String, indexed: Bool) {
+    public init(name: String, type: String, indexed: Bool) {
         self.name = name
         self.type = type
         self.indexed = indexed

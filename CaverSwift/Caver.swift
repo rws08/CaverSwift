@@ -14,11 +14,12 @@ public class Caver {
     
     var wallet: KeyringContainer
     
-    convenience init(_ url: String = DEFAULT_URL) {
-        self.init(URLSession(configuration: URLSession.shared.configuration), URL.init(string: url)!)
+    public init(_ url: String = DEFAULT_URL) {
+        rpc = RPC(URLSession(configuration: URLSession.shared.configuration), URL.init(string: url)!)
+        wallet = KeyringContainer()
     }
     
-    init(_ urlSession: URLSession, _ url: URL) {
+    public init(_ urlSession: URLSession, _ url: URL) {
         rpc = RPC(urlSession, url)
         wallet = KeyringContainer()
     }

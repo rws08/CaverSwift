@@ -32,7 +32,7 @@ public class ContractEvent: Codable {
         try container.encode(signature, forKey: .signature)
     }
     
-    init(_ type: String, _ name: String,
+    public init(_ type: String, _ name: String,
          _ inputs: Array<ContractIOType>,
          _ signature: String) {
         self.type = type

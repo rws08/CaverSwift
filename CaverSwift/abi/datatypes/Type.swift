@@ -45,7 +45,7 @@ public class Type: Any, Equatable {
     var typeName: String { return String(describing: type(of: self)).lowercased() }
     var size: Int { Int(self.typeName.filter { "0"..."9" ~= $0 }) ?? 0 }
     
-    init(_ value: ABIType, _ rawType: ABIRawType? = nil) {
+    public init(_ value: ABIType, _ rawType: ABIRawType? = nil) {
         if value is TypeArray {
             self.value = value
             guard let rawType = rawType else {

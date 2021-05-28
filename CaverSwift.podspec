@@ -2,9 +2,7 @@ Pod::Spec.new do |s|
   s.name             = 'CaverSwift'
   s.version          = '0.0.1'
   s.summary          = 'CaverSwift'
- 
-  s.description      = 'CaverSwift desc'
- 
+  s.description      = 'CaverSwift desc' 
   s.homepage         = 'https://github.com/rws08/CaverSwift'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = ''
