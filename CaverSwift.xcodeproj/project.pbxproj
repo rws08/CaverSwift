@@ -80,7 +80,7 @@
 		E3A21E57265CC247006C560D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E56265CC247006C560D /* Array.swift */; };
 		E3A21E82265F8705006C560D /* IWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E81265F8705006C560D /* IWallet.swift */; };
 		E3A21E86265F9321006C560D /* CaverSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E3A21E85265F9321006C560D /* CaverSwift.podspec */; };
-		E3A21E8826607458006C560D /* Swift-Big-Number-Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E8726607458006C560D /* Swift-Big-Number-Core.swift */; };
+		E3A21E8826607458006C560D /* SwiftBigNumberCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E8726607458006C560D /* SwiftBigNumberCore.swift */; };
 		E3E023492648B8EF00791E00 /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023482648B8EF00791E00 /* RPC.swift */; };
 		E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234A2648BAE600791E00 /* KeyringContainer.swift */; };
 		E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */; };
@@ -192,7 +192,7 @@
 		E3A21E56265CC247006C560D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		E3A21E81265F8705006C560D /* IWallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWallet.swift; sourceTree = "<group>"; };
 		E3A21E85265F9321006C560D /* CaverSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CaverSwift.podspec; sourceTree = "<group>"; };
-		E3A21E8726607458006C560D /* Swift-Big-Number-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift-Big-Number-Core.swift"; sourceTree = "<group>"; };
+		E3A21E8726607458006C560D /* SwiftBigNumberCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftBigNumberCore.swift; sourceTree = "<group>"; };
 		E3E023482648B8EF00791E00 /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
 		E3E0234A2648BAE600791E00 /* KeyringContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainer.swift; sourceTree = "<group>"; };
 		E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractKeyring.swift; sourceTree = "<group>"; };
@@ -482,7 +482,7 @@
 		E3A21E42265654B5006C560D /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				E3A21E8726607458006C560D /* Swift-Big-Number-Core.swift */,
+				E3A21E8726607458006C560D /* SwiftBigNumberCore.swift */,
 				E3A21E43265654B5006C560D /* keccak-tiny */,
 				E3A21E48265654B5006C560D /* aes */,
 			);
@@ -801,7 +801,7 @@
 				E3A21E53265B608A006C560D /* FunctionReturnDecoder.swift in Sources */,
 				E3A21E3A265654A7006C560D /* EthereumBlock.swift in Sources */,
 				E3A21E11265654A7006C560D /* ABIDecoder+Static.swift in Sources */,
-				E3A21E8826607458006C560D /* Swift-Big-Number-Core.swift in Sources */,
+				E3A21E8826607458006C560D /* SwiftBigNumberCore.swift in Sources */,
 				E3A21E30265654A7006C560D /* ERC721Events.swift in Sources */,
 				E3A21E3C265654A7006C560D /* EthereumNetwork.swift in Sources */,
 				E3A21E4F265654B5006C560D /* aes.c in Sources */,
@@ -936,7 +936,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -994,7 +994,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1020,7 +1020,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CaverSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1052,7 +1052,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CaverSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
