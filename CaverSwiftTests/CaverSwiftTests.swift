@@ -9,7 +9,6 @@ import XCTest
 @testable import CaverSwift
 @testable import GenericJSON
 @testable import BigInt
-@testable import BigNumber
 
 class CaverSwiftTests: XCTestCase {
 

@@ -7,7 +7,6 @@
 
 import Foundation
 import BigInt
-import BigNumber
 
 class Utils {
     private static let baseAddrPattern = "^(0x)?[0-9a-f]{40}$"

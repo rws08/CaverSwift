@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -78,9 +78,9 @@
 		E3A21E53265B608A006C560D /* FunctionReturnDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */; };
 		E3A21E55265C9AF3006C560D /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E54265C9AF3006C560D /* Bytes.swift */; };
 		E3A21E57265CC247006C560D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E56265CC247006C560D /* Array.swift */; };
-		E3A21E7A265F6540006C560D /* BigNumber in Frameworks */ = {isa = PBXBuildFile; productRef = E3A21E79265F6540006C560D /* BigNumber */; };
 		E3A21E82265F8705006C560D /* IWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E81265F8705006C560D /* IWallet.swift */; };
 		E3A21E86265F9321006C560D /* CaverSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E3A21E85265F9321006C560D /* CaverSwift.podspec */; };
+		E3A21E8826607458006C560D /* Swift-Big-Number-Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E8726607458006C560D /* Swift-Big-Number-Core.swift */; };
 		E3E023492648B8EF00791E00 /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023482648B8EF00791E00 /* RPC.swift */; };
 		E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234A2648BAE600791E00 /* KeyringContainer.swift */; };
 		E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */; };
@@ -111,12 +111,9 @@
 /* Begin PBXFileReference section */
 		03C98921D402494EF21C75B1 /* Pods-CaverSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift.debug.xcconfig"; path = "Target Support Files/Pods-CaverSwift/Pods-CaverSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		2D84C37158AEDF8F503ABA07 /* Pods-CaverSwift-CaverSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift-CaverSwiftTests.debug.xcconfig"; path = "Target Support Files/Pods-CaverSwift-CaverSwiftTests/Pods-CaverSwift-CaverSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
-		34A9DA233154945736C9257C /* Pods-Caver-swift-Caver-swiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift-Caver-swiftTests.release.xcconfig"; path = "Target Support Files/Pods-Caver-swift-Caver-swiftTests/Pods-Caver-swift-Caver-swiftTests.release.xcconfig"; sourceTree = "<group>"; };
-		3D381A2B37258C6AE53F835B /* Pods-Caver-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift.release.xcconfig"; path = "Target Support Files/Pods-Caver-swift/Pods-Caver-swift.release.xcconfig"; sourceTree = "<group>"; };
 		462BA56D0418EBB7FC5EB2C4 /* Pods_CaverSwift_CaverSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaverSwift_CaverSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		631563655308D9DE35E0434B /* Pods-CaverSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift/Pods-CaverSwift.release.xcconfig"; sourceTree = "<group>"; };
 		9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2FC8FDA96C529F5682A5624 /* Pods-Caver-swift-Caver-swiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift-Caver-swiftTests.debug.xcconfig"; path = "Target Support Files/Pods-Caver-swift-Caver-swiftTests/Pods-Caver-swift-Caver-swiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D117BAAE088D8DB011A1C1A5 /* Pods-CaverSwift-CaverSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift-CaverSwiftTests/Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CCC262EA4EF003FA426 /* CaverSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaverSwift.h; sourceTree = "<group>"; };
@@ -195,6 +192,7 @@
 		E3A21E56265CC247006C560D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		E3A21E81265F8705006C560D /* IWallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWallet.swift; sourceTree = "<group>"; };
 		E3A21E85265F9321006C560D /* CaverSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CaverSwift.podspec; sourceTree = "<group>"; };
+		E3A21E8726607458006C560D /* Swift-Big-Number-Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift-Big-Number-Core.swift"; sourceTree = "<group>"; };
 		E3E023482648B8EF00791E00 /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
 		E3E0234A2648BAE600791E00 /* KeyringContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainer.swift; sourceTree = "<group>"; };
 		E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractKeyring.swift; sourceTree = "<group>"; };
@@ -209,7 +207,6 @@
 		E3E0237A264A059A00791E00 /* ContractEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractEvent.swift; sourceTree = "<group>"; };
 		E3E0237F264A26F600791E00 /* Quantity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quantity.swift; sourceTree = "<group>"; };
 		E3E02388264CB16500791E00 /* testFunction.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testFunction.json; sourceTree = "<group>"; };
-		F936E705382892FECBCD5C18 /* Pods-Caver-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caver-swift.debug.xcconfig"; path = "Target Support Files/Pods-Caver-swift/Pods-Caver-swift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +214,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3A21E7A265F6540006C560D /* BigNumber in Frameworks */,
 				7AFFF8073AD1370A6A8E5500 /* Pods_CaverSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,10 +242,6 @@
 		809D2C0C6FE1A1276919EE48 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F936E705382892FECBCD5C18 /* Pods-Caver-swift.debug.xcconfig */,
-				3D381A2B37258C6AE53F835B /* Pods-Caver-swift.release.xcconfig */,
-				A2FC8FDA96C529F5682A5624 /* Pods-Caver-swift-Caver-swiftTests.debug.xcconfig */,
-				34A9DA233154945736C9257C /* Pods-Caver-swift-Caver-swiftTests.release.xcconfig */,
 				03C98921D402494EF21C75B1 /* Pods-CaverSwift.debug.xcconfig */,
 				631563655308D9DE35E0434B /* Pods-CaverSwift.release.xcconfig */,
 				2D84C37158AEDF8F503ABA07 /* Pods-CaverSwift-CaverSwiftTests.debug.xcconfig */,
@@ -490,6 +482,7 @@
 		E3A21E42265654B5006C560D /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				E3A21E8726607458006C560D /* Swift-Big-Number-Core.swift */,
 				E3A21E43265654B5006C560D /* keccak-tiny */,
 				E3A21E48265654B5006C560D /* aes */,
 			);
@@ -637,7 +630,6 @@
 			);
 			name = CaverSwift;
 			packageProductDependencies = (
-				E3A21E79265F6540006C560D /* BigNumber */,
 			);
 			productName = "Caver-swift";
 			productReference = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */;
@@ -691,7 +683,6 @@
 			);
 			mainGroup = E39F2CBF262EA4EF003FA426;
 			packageReferences = (
-				E3A21E78265F6540006C560D /* XCRemoteSwiftPackageReference "Swift-BigInt" */,
 			);
 			productRefGroup = E39F2CCA262EA4EF003FA426 /* Products */;
 			projectDirPath = "";
@@ -810,6 +801,7 @@
 				E3A21E53265B608A006C560D /* FunctionReturnDecoder.swift in Sources */,
 				E3A21E3A265654A7006C560D /* EthereumBlock.swift in Sources */,
 				E3A21E11265654A7006C560D /* ABIDecoder+Static.swift in Sources */,
+				E3A21E8826607458006C560D /* Swift-Big-Number-Core.swift in Sources */,
 				E3A21E30265654A7006C560D /* ERC721Events.swift in Sources */,
 				E3A21E3C265654A7006C560D /* EthereumNetwork.swift in Sources */,
 				E3A21E4F265654B5006C560D /* aes.c in Sources */,
@@ -1148,25 +1140,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		E3A21E78265F6540006C560D /* XCRemoteSwiftPackageReference "Swift-BigInt" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mkrd/Swift-BigInt";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		E3A21E79265F6540006C560D /* BigNumber */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E3A21E78265F6540006C560D /* XCRemoteSwiftPackageReference "Swift-BigInt" */;
-			productName = BigNumber;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E39F2CC0262EA4EF003FA426 /* Project object */;
 }
