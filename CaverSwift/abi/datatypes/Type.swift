@@ -39,7 +39,7 @@ public class Type: Any, Equatable {
         return ret
     }
     
-    var value: ABIType
+    public var value: ABIType
     var rawType: ABIRawType
     static var typeName: String { return String(describing: self).lowercased() }
     var typeName: String { return String(describing: type(of: self)).lowercased() }
