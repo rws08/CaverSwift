@@ -63,25 +63,25 @@ public class Contract {
         }
     }
     
-    func getMethod(_ methodName: String) throws -> ContractMethod {
+    public func getMethod(_ methodName: String) throws -> ContractMethod {
         guard let method = methods[methodName] else {
             throw CaverError.NoSuchMethodException("\(methodName) method is not exist.")
         }
         return method
     }
     
-    func getEvent(_ eventName: String) throws -> ContractEvent {
+    public func getEvent(_ eventName: String) throws -> ContractEvent {
         guard let event = events[eventName] else {
             throw CaverError.NoSuchMethodException("\(eventName) method is not exist.")
         }
         return event
     }
     
-    func call(_ methodName: String, _ methodArguments:[Any], completion: @escaping(([Type]?) -> Void)) {
+    public func call(_ methodName: String, _ methodArguments:[Any], completion: @escaping(([Type]?) -> Void)) {
         call(CallObject.init(), methodName, methodArguments, completion: completion)
     }
     
-    func call(_ callObject: CallObject, _ methodName: String, _ methodArguments:[Any], completion: @escaping(([Type]?) -> Void)) {
+    public func call(_ callObject: CallObject, _ methodName: String, _ methodArguments:[Any], completion: @escaping(([Type]?) -> Void)) {
         guard let contractMethod = try? getMethod(methodName) else { return }
         try? contractMethod.call(methodArguments, callObject, completion: completion)
     }
