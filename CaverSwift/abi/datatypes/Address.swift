@@ -16,6 +16,12 @@ public struct Address: Codable, Hashable {
         self.val = BigUInt(hexValue.drop0xPrefix, radix: 16) ?? Address.zero.val
     }
     
+    public var toValue: String {
+        get {
+            self.val.hexa
+        }
+    }
+    
     public static func == (lhs: Address, rhs: Address) -> Bool {
         return lhs.val == rhs.val
     }
