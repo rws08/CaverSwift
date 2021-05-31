@@ -18,7 +18,7 @@ public struct Address: Codable, Hashable {
     
     public var toValue: String {
         get {
-            self.val.hexa
+            "0x\(self.val.hexa)"
         }
     }
     
