@@ -82,11 +82,11 @@ public class Utils {
 }
 
 extension StringProtocol {
-    var drop0xPrefix: String { isHexa ? String(dropFirst(2)) : self as! String }
-    var hexaToDecimal: Int { Int(drop0xPrefix, radix: 16) ?? 0 }
-    var decimalToHexa: String { .init(Int(self) ?? 0, radix: 16) }
-    var isHexa: Bool { return hasPrefix("0x") || hasPrefix("0X") }
-    var checkHexaLength: Bool { return self[0] == "-" ? (self.count - 1) % 2 == 0 : self.count % 2 == 0 }
+    public var drop0xPrefix: String { isHexa ? String(dropFirst(2)) : self as! String }
+    public var hexaToDecimal: Int { Int(drop0xPrefix, radix: 16) ?? 0 }
+    public var decimalToHexa: String { .init(Int(self) ?? 0, radix: 16) }
+    public var isHexa: Bool { return hasPrefix("0x") || hasPrefix("0X") }
+    public var checkHexaLength: Bool { return self[0] == "-" ? (self.count - 1) % 2 == 0 : self.count % 2 == 0 }
     var matchEven: String {
         if !checkHexaLength {
             if (self[0] == "-") {
@@ -120,10 +120,10 @@ extension StringProtocol {
 }
 
 extension BinaryInteger {
-    var binary: String { .init(self, radix: 2) }
-    var hexa: String { .init(self, radix: 16).matchEven }
-    var decimal: String { .init(self, radix: 10) }
-    var double: BDouble { BDouble(self.decimal) ?? BDouble.zero }
+    public var binary: String { .init(self, radix: 2) }
+    public var hexa: String { .init(self, radix: 16).matchEven }
+    public var decimal: String { .init(self, radix: 10) }
+    public var double: BDouble { BDouble(self.decimal) ?? BDouble.zero }
 }
 
 func WARNING(filename: String = #file, line: Int = #line, funcname: String = #function, message:Any...) {
