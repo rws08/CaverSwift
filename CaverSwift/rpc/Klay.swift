@@ -34,12 +34,8 @@ public class Klay {
     }
     
     public func getBalance(_ address: String, completion: @escaping((CaverError?, String?) -> Void)) {
-        struct CallParams: Encodable {
-            let address: String
-            let block: String
-        }
-        let params = CallParams(address: address, block: EthereumBlock.Latest.stringValue)
-        EthereumRPC.execute(session: session, url: url, method: "klay_getBalance", params: params, receive: String.self) { (error, response) in
+        EthereumRPC.execute(session: session, url: url, method: "klay_getBalance",
+                            params: [["address": address], ["block":EthereumBlock.Latest.stringValue]], receive: String.self) { (error, response) in
             if let resDataString = response as? String {
                 return completion(nil, resDataString)
             } else if let error = error {
