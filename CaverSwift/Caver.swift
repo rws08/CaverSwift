@@ -10,9 +10,9 @@ import Foundation
 public class Caver {
     public static var DEFAULT_URL = "http://localhost:8551";
     
-    var rpc: RPC
+    public var rpc: RPC
     
-    var wallet: KeyringContainer
+    public var wallet: KeyringContainer
     
     public init(_ url: String = DEFAULT_URL) {
         rpc = RPC(URLSession(configuration: URLSession.shared.configuration), URL.init(string: url)!)

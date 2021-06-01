@@ -16,6 +16,23 @@ public class Klay {
         self.url = url
     }
     
+    public func getBlockNumber(completion: @escaping((CaverError?, String?) -> Void)) {
+        struct CallParams: Encodable {
+            func encode(to encoder: Encoder) throws {
+            }
+        }
+        let params = CallParams()
+        EthereumRPC.execute(session: session, url: url, method: "klay_blockNumber", params: params, receive: String.self) { (error, response) in
+            if let resDataString = response as? String {
+                return completion(nil, resDataString)
+            } else if let error = error {
+                return completion(CaverError.IOException(error.localizedDescription), nil)
+            } else {
+                return completion(CaverError.unexpectedReturnValue, nil)
+            }
+        }
+    }
+    
     func call(_ callObject: CallObject, _ blockNumber: EthereumBlock = .Latest, completion: @escaping((CaverError?, String?) -> Void)) throws {
         guard let to = callObject.to,
               let data = callObject.data else {
