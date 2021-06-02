@@ -9,7 +9,7 @@ import Foundation
 import BigInt
 
 public class Quantity: Decodable {
-    var val = BigInt.zero
+    public var val = BigInt.zero
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let val = try container.decode(String.self)
