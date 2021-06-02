@@ -81,6 +81,36 @@ public class Utils {
     }
 }
 
+public struct KlayUnit {
+    public static let peb = KlayUnit("peb", 0)
+    public static let kpeb = KlayUnit("kpeb", 3)
+    public static let Mpeb = KlayUnit("Mpeb", 6)
+    public static let Gpeb = KlayUnit("Gpeb", 9)
+    public static let ston = KlayUnit("ston", 9)
+    public static let uKLAY = KlayUnit("uKLAY", 12)
+    public static let mKLAY = KlayUnit("mKLAY", 15)
+    public static let KLAY = KlayUnit("KLAY", 18)
+    public static let kKLAY = KlayUnit("kKLAY", 21)
+    public static let MKLAY = KlayUnit("MKLAY", 24)
+    public static let GKLAY = KlayUnit("GKLAY", 27)
+    public static let TKLAY = KlayUnit("TKLAY", 30)
+    
+    private var unit: String
+    private var pebFactor: BDouble
+    init(_ unit: String, _ pebFactor: Int) {
+        self.unit = unit
+        self.pebFactor = pow(BDouble(10), pebFactor)
+    }
+    
+    public func getPebFactor() -> BDouble {
+        return pebFactor
+    }
+    
+    public func string() -> String {
+        return unit
+    }
+}
+
 extension StringProtocol {
     public var drop0xPrefix: String { isHexa ? String(dropFirst(2)) : self as! String }
     public var hexaToDecimal: Int { Int(drop0xPrefix, radix: 16) ?? 0 }
