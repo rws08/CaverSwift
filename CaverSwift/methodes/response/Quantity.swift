@@ -8,14 +8,11 @@
 import Foundation
 import BigInt
 
-class Quantity: ABIResponse {
-    required init?(values: [ABIDecoder.DecodedValue]) throws {
-        
-    }
-    
-    static var types: [ABIType.Type] = [BigUInt.self, ABIArray<String>.self]
-    
-    func getValue() {
-        
+public class Quantity: Decodable {
+    var val = BigInt.zero
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let val = try container.decode(String.self)
+        self.val = BigInt(val.drop0xPrefix, radix: 16) ?? BigInt.zero        
     }
 }

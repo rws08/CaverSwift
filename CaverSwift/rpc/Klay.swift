@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import BigInt
 
 public class Klay {
     var session: URLSession
@@ -33,10 +34,10 @@ public class Klay {
         }
     }
     
-    public func getBalance(_ address: String, completion: @escaping((CaverError?, String?) -> Void)) {
+    public func getBalance(_ address: String, completion: @escaping((CaverError?, Quantity?) -> Void)) {
         EthereumRPC.execute(session: session, url: url, method: "klay_getBalance",
-                            params: [["address": address], ["block":EthereumBlock.Latest.stringValue]], receive: String.self) { (error, response) in
-            if let resDataString = response as? String {
+                            params: [address, EthereumBlock.Latest.stringValue], receive: Quantity.self) { (error, response) in
+            if let resDataString = response as? Quantity {
                 return completion(nil, resDataString)
             } else if let error = error {
                 return completion(CaverError.IOException(error.localizedDescription), nil)

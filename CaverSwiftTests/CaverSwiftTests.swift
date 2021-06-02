@@ -21,9 +21,9 @@ class CaverSwiftTests: XCTestCase {
     }
 
     func testExample() throws {
-//        let expectation = XCTestExpectation(description: "Some description")
-//
-//        let caver = Caver("https://kaikas.cypress.klaytn.net:8651")
+        let expectation = XCTestExpectation(description: "Some description")
+
+        let caver = Caver("https://api.baobab.klaytn.net:8651")
 //        do {
 //            if let file  = Bundle(for: type(of: self)).url(forResource: "DelegationContract", withExtension: "json"){
 //                let data  = try Data(contentsOf: file)
@@ -43,8 +43,14 @@ class CaverSwiftTests: XCTestCase {
 //        } catch {
 //            print(error.localizedDescription)
 //        }
-//
-//        let result = XCTWaiter.wait(for: [expectation], timeout: 2.0)
-//        XCTAssertEqual(result, .completed)
+
+        caver.rpc.klay.getBalance("0x5330bF6E777aD4DFf04200Db46D9EBF042949ECf") { _, result in
+            guard let result = result else { return }
+            
+            print(result.val.decimal)
+        }
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 2.0)
+        XCTAssertEqual(result, .completed)
     }
 }
