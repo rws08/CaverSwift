@@ -54,7 +54,7 @@ public class RPC {
                     let resultObjects = result.map{ return $0.result }
                     return completion(nil, resultObjects)
                 } else if let errorResult = try? JSONDecoder().decode(JSONRPCErrorResult.self, from: data) {
-                    print("Ethereum response error: \(errorResult.error)")
+                    print("Caver response error: \(errorResult.error)")
                     return completion(JSONRPCError.executionError(errorResult), nil)
                 } else if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode > 299 {
                     return completion(JSONRPCError.requestRejected(data), nil)
