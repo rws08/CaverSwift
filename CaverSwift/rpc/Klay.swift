@@ -9,11 +9,11 @@ import Foundation
 import BigInt
 
 public class Klay {
-    var session: URLSession
+    var rpc: RPC
     var url: URL
     
-    public init(_ web3jService: URLSession, _ url: URL) {
-        self.session = web3jService
+    public init(_ rpc: RPC, _ url: URL) {
+        self.rpc = rpc
         self.url = url
     }
     
@@ -23,7 +23,7 @@ public class Klay {
             }
         }
         let params = CallParams()
-        EthereumRPC.execute(session: session, url: url, method: "klay_blockNumber", params: params, receive: String.self) { (error, response) in
+        rpc.execute(url: url, method: "klay_blockNumber", params: params, receive: String.self) { (error, response) in
             if let resDataString = response as? String {
                 return completion(nil, resDataString)
             } else if let error = error {
@@ -35,7 +35,7 @@ public class Klay {
     }
     
     public func getBalance(_ address: String, completion: @escaping((CaverError?, Quantity?) -> Void)) {
-        EthereumRPC.execute(session: session, url: url, method: "klay_getBalance",
+        rpc.execute(url: url, method: "klay_getBalance",
                             params: [address, EthereumBlock.Latest.stringValue], receive: Quantity.self) { (error, response) in
             if let resDataString = response as? Quantity {
                 return completion(nil, resDataString)
@@ -54,7 +54,7 @@ public class Klay {
         }
         
         let params = CallParams(from: callObject.from, to: to, data: data, block: blockNumber.stringValue)
-        EthereumRPC.execute(session: session, url: url, method: "klay_call", params: params, receive: String.self) { (error, response) in
+        rpc.execute(url: url, method: "klay_call", params: params, receive: String.self) { (error, response) in
             if let resDataString = response as? String {
                 return completion(nil, resDataString)
             } else if let error = error {
