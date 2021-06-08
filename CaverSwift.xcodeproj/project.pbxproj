@@ -71,10 +71,10 @@
 		E3A21E3F265654A7006C560D /* JSONRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E04265654A7006C560D /* JSONRPC.swift */; };
 		E3A21E40265654A7006C560D /* MulticallContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E06265654A7006C560D /* MulticallContract.swift */; };
 		E3A21E41265654A7006C560D /* Multicall.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E07265654A7006C560D /* Multicall.swift */; };
-		E3A21E4D265654B5006C560D /* keccak-tiny.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E45265654B5006C560D /* keccak-tiny.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3A21E4D265654B5006C560D /* keccak-tiny.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E45265654B5006C560D /* keccak-tiny.h */; };
 		E3A21E4E265654B5006C560D /* keccak-tiny.c in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E47265654B5006C560D /* keccak-tiny.c */; };
 		E3A21E4F265654B5006C560D /* aes.c in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E49265654B5006C560D /* aes.c */; };
-		E3A21E50265654B5006C560D /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E4B265654B5006C560D /* aes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3A21E50265654B5006C560D /* aes.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A21E4B265654B5006C560D /* aes.h */; };
 		E3A21E53265B608A006C560D /* FunctionReturnDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */; };
 		E3A21E55265C9AF3006C560D /* Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E54265C9AF3006C560D /* Bytes.swift */; };
 		E3A21E57265CC247006C560D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E56265CC247006C560D /* Array.swift */; };
@@ -274,16 +274,16 @@
 		E39F2CCB262EA4EF003FA426 /* CaverSwift */ = {
 			isa = PBXGroup;
 			children = (
-				E3A21E42265654B5006C560D /* lib */,
-				E3A21DBF265654A7006C560D /* abi */,
-				E3E0236E2648F5D600791E00 /* methodes */,
-				E3E023582648C91900791E00 /* utils */,
-				E3E023532648BE4700791E00 /* contract */,
-				E3E0234726452BE600791E00 /* wallet */,
-				E3E023452645190A00791E00 /* rpc */,
 				E39F2CCC262EA4EF003FA426 /* CaverSwift.h */,
 				E39F2CCD262EA4EF003FA426 /* Info.plist */,
 				E39F2CE5262EAAD3003FA426 /* Caver.swift */,
+				E3A21DBF265654A7006C560D /* abi */,
+				E3E023532648BE4700791E00 /* contract */,
+				E3A21E42265654B5006C560D /* lib */,
+				E3E0236E2648F5D600791E00 /* methodes */,
+				E3E023452645190A00791E00 /* rpc */,
+				E3E023582648C91900791E00 /* utils */,
+				E3E0234726452BE600791E00 /* wallet */,
 			);
 			path = CaverSwift;
 			sourceTree = "<group>";
@@ -303,19 +303,19 @@
 			isa = PBXGroup;
 			children = (
 				E3A21DEB265654A7006C560D /* ABI.swift */,
+				E3A21DD4265654A7006C560D /* DefaultFunctionEncoder.swift */,
+				E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */,
+				E3A21DEC265654A7006C560D /* TypeDecoder.swift */,
 				E3A21DF4265654A7006C560D /* Account */,
 				E3A21DF9265654A7006C560D /* Client */,
 				E3A21DC5265654A7006C560D /* Contract */,
 				E3A21DDA265654A7006C560D /* datatypes */,
-				E3A21DD4265654A7006C560D /* DefaultFunctionEncoder.swift */,
-				E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */,
 				E3A21DC0265654A7006C560D /* ENS */,
 				E3A21DD5265654A7006C560D /* ERC20 */,
 				E3A21DED265654A7006C560D /* ERC165 */,
 				E3A21DEF265654A7006C560D /* ERC721 */,
 				E3A21DE4265654A7006C560D /* Extensions */,
 				E3A21E05265654A7006C560D /* Multicall */,
-				E3A21DEC265654A7006C560D /* TypeDecoder.swift */,
 				E3A21DDD265654A7006C560D /* Utils */,
 			);
 			path = abi;
@@ -537,9 +537,9 @@
 		E3E0234726452BE600791E00 /* wallet */ = {
 			isa = PBXGroup;
 			children = (
-				E3E0234C2648BB5800791E00 /* keyring */,
-				E3E0234A2648BAE600791E00 /* KeyringContainer.swift */,
 				E3A21E81265F8705006C560D /* IWallet.swift */,
+				E3E0234A2648BAE600791E00 /* KeyringContainer.swift */,
+				E3E0234C2648BB5800791E00 /* keyring */,
 			);
 			path = wallet;
 			sourceTree = "<group>";
@@ -556,10 +556,10 @@
 			isa = PBXGroup;
 			children = (
 				E3E023512648BE4200791E00 /* Contract.swift */,
-				E3E023542648C00D00791E00 /* ContractIOType.swift */,
-				E3E023562648C58E00791E00 /* SendOptions.swift */,
-				E3E023662648EFE700791E00 /* ContractMethod.swift */,
 				E3E0237A264A059A00791E00 /* ContractEvent.swift */,
+				E3E023542648C00D00791E00 /* ContractIOType.swift */,
+				E3E023662648EFE700791E00 /* ContractMethod.swift */,
+				E3E023562648C58E00791E00 /* SendOptions.swift */,
 			);
 			path = contract;
 			sourceTree = "<group>";
@@ -576,8 +576,8 @@
 		E3E0236E2648F5D600791E00 /* methodes */ = {
 			isa = PBXGroup;
 			children = (
-				E3E0237E264A26E500791E00 /* response */,
 				E3E0236F2648F5E000791E00 /* request */,
+				E3E0237E264A26E500791E00 /* response */,
 			);
 			path = methodes;
 			sourceTree = "<group>";
@@ -605,9 +605,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */,
 				E3A21E50265654B5006C560D /* aes.h in Headers */,
 				E3A21E4D265654B5006C560D /* keccak-tiny.h in Headers */,
-				E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
