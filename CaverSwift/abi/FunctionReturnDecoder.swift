@@ -10,7 +10,7 @@ import BigInt
 
 public class FunctionReturnDecoder {
     static func decode(_ rawInput: String, _ outputParameters: inout [Type]) throws {
-        if rawInput.drop0xPrefix.isEmpty {
+        if rawInput.cleanHexPrefix.isEmpty {
             return
         }
         

@@ -9,6 +9,8 @@ import Foundation
 import BigInt
 
 public class Utils {
+    public static let LENGTH_PRIVATE_KEY_STRING = 64;
+    
     private static let baseAddrPattern = "^(0x)?[0-9a-f]{40}$"
     private static let lowerCasePattern = "^(0x|0X)?[0-9a-f]{40}$"
     private static let upperCasePattern = "^(0x|0X)?[0-9A-F]{40}$"
@@ -38,8 +40,23 @@ public class Utils {
         return true
     }
     
+    public static func isHex(_ input: String) -> Bool {
+        let pattern = try! NSRegularExpression(pattern: "^(-0x|0x)?[0-9A-Fa-f]*$", options: [])
+        let range = NSRange(0..<input.utf16.count)
+        return !pattern.matches(in: input, options: [], range: range).isEmpty;
+    }
+    
     public static func checkAddressChecksum(address: String) -> Bool {
-        return address.hexaToDecimal != 0
+        let address = address.replacingOccurrences(of: "0X", with: "0x")        
+        return KeyUtil.toChecksumAddress(address) == address.addHexPrefix
+    }
+    
+    public static func isValidPrivateKey(_ privateKey: String) -> Bool {
+        let noHexPrefixKey = privateKey.cleanHexPrefix
+        if noHexPrefixKey.count != LENGTH_PRIVATE_KEY_STRING && isHex(privateKey) {
+            return false
+        }
+        return true
     }
     
     public static func getStaticArrayElementSize(_ array: TypeArray) -> Int {
@@ -79,6 +96,11 @@ public class Utils {
         }
         return count
     }
+    
+    public static func isValidPublicKey(_ publicKey: String) -> Bool {
+        
+        return true
+    }
 }
 
 public struct KlayUnit {
@@ -112,8 +134,9 @@ public struct KlayUnit {
 }
 
 extension StringProtocol {
-    public var drop0xPrefix: String { isHexa ? String(dropFirst(2)) : self as! String }
-    public var hexaToDecimal: Int { Int(drop0xPrefix, radix: 16) ?? 0 }
+    public var cleanHexPrefix: String { isHexa ? String(dropFirst(2)) : self as! String }
+    public var addHexPrefix: String { isHexa ? self as! String : "0x\(self)"}
+    public var hexaToDecimal: Int { Int(cleanHexPrefix, radix: 16) ?? 0 }
     public var decimalToHexa: String { .init(Int(self) ?? 0, radix: 16) }
     public var isHexa: Bool { return hasPrefix("0x") || hasPrefix("0X") }
     public var checkHexaLength: Bool { return self[0] == "-" ? (self.count - 1) % 2 == 0 : self.count % 2 == 0 }

@@ -23,4 +23,5 @@ public enum CaverError: Error {
     case invalidValue
     case invalidType
     case notCurrentlySupported
+    case RuntimeException(String)
 }

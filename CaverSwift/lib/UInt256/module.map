@@ -1,0 +1,4 @@
+module UInt256 [system][extern_c] {
+    header "UInt256.h"
+    export *
+}

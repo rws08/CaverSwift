@@ -7,6 +7,6 @@
 
 import Foundation
 
-class AbstractKeyring {
+open class AbstractKeyring {
     
 }

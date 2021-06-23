@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7AFFF8073AD1370A6A8E5500 /* Pods_CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */; };
+		E319162A26832A62004291DC /* Secp256k1BasePointDoublings.plist in Resources */ = {isa = PBXBuildFile; fileRef = E319162926832A62004291DC /* Secp256k1BasePointDoublings.plist */; };
 		E39F2CD3262EA4EF003FA426 /* CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */; };
 		E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */; };
 		E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* CaverSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -81,6 +82,34 @@
 		E3A21E82265F8705006C560D /* IWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E81265F8705006C560D /* IWallet.swift */; };
 		E3A21E86265F9321006C560D /* CaverSwift.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E3A21E85265F9321006C560D /* CaverSwift.podspec */; };
 		E3A21E8826607458006C560D /* SwiftBigNumberCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E8726607458006C560D /* SwiftBigNumberCore.swift */; };
+		E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */; };
+		E3A5C8BA2682AED7002A0A2D /* IAccountKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8B92682AED7002A0A2D /* IAccountKey.swift */; };
+		E3A5C8BC2682AF29002A0A2D /* AccountKeyFail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8BB2682AF29002A0A2D /* AccountKeyFail.swift */; };
+		E3A5C8BE2682F23B002A0A2D /* AccountKeyLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8BD2682F23B002A0A2D /* AccountKeyLegacy.swift */; };
+		E3A5C8C02682F2CC002A0A2D /* AccountKeyPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8BF2682F2CC002A0A2D /* AccountKeyPublic.swift */; };
+		E3A5C8C22682F4A2002A0A2D /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */; };
+		E3A5C8C42683079E002A0A2D /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8C32683079E002A0A2D /* PrivateKey.swift */; };
+		E3A5C8CB268311ED002A0A2D /* ECPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8C6268311ED002A0A2D /* ECPoint.swift */; };
+		E3A5C8CC268311ED002A0A2D /* ECurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8C7268311ED002A0A2D /* ECurve.swift */; };
+		E3A5C8CD268311ED002A0A2D /* FiniteField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8C8268311ED002A0A2D /* FiniteField.swift */; };
+		E3A5C8CE268311ED002A0A2D /* FiniteFieldInteger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8C9268311ED002A0A2D /* FiniteFieldInteger.swift */; };
+		E3A5C8CF268311ED002A0A2D /* ECDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8CA268311ED002A0A2D /* ECDomain.swift */; };
+		E3A5C8E226831792002A0A2D /* UInt256+ForwardIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8D326831792002A0A2D /* UInt256+ForwardIndex.swift */; };
+		E3A5C8E326831792002A0A2D /* UInt256+IntegerLiteralConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8D426831792002A0A2D /* UInt256+IntegerLiteralConvertible.swift */; };
+		E3A5C8E426831792002A0A2D /* UInt256.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8D526831792002A0A2D /* UInt256.swift */; };
+		E3A5C8E526831792002A0A2D /* UInt256+Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8D626831792002A0A2D /* UInt256+Sequence.swift */; };
+		E3A5C8E626831792002A0A2D /* UInt256+Printable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8D726831792002A0A2D /* UInt256+Printable.swift */; };
+		E3A5C8E726831792002A0A2D /* UInt256+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8D826831792002A0A2D /* UInt256+Hashable.swift */; };
+		E3A5C8E826831792002A0A2D /* UInt32+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8D926831792002A0A2D /* UInt32+Additions.swift */; };
+		E3A5C8E926831792002A0A2D /* UInt256+ArrayBound.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8DA26831792002A0A2D /* UInt256+ArrayBound.swift */; };
+		E3A5C8EA26831792002A0A2D /* UInt256+IntegerArithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8DB26831792002A0A2D /* UInt256+IntegerArithmetic.swift */; };
+		E3A5C8EB26831792002A0A2D /* UInt256+BitwiseOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8DC26831792002A0A2D /* UInt256+BitwiseOperations.swift */; };
+		E3A5C8EC26831792002A0A2D /* UInt256+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8DD26831792002A0A2D /* UInt256+Comparable.swift */; };
+		E3A5C8ED26831792002A0A2D /* UInt256+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8DE26831792002A0A2D /* UInt256+Equatable.swift */; };
+		E3A5C8EE26831792002A0A2D /* UInt256+IntegerArithmetic.c in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8DF26831792002A0A2D /* UInt256+IntegerArithmetic.c */; };
+		E3A5C8EF26831792002A0A2D /* UInt256+RandomAccessIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8E026831792002A0A2D /* UInt256+RandomAccessIndex.swift */; };
+		E3A5C8F026831792002A0A2D /* BaseConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8E126831792002A0A2D /* BaseConverter.swift */; };
+		E3A5C8F2268320FB002A0A2D /* UInt256.h in Headers */ = {isa = PBXBuildFile; fileRef = E3A5C8F1268320FB002A0A2D /* UInt256.h */; };
 		E3E023492648B8EF00791E00 /* RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023482648B8EF00791E00 /* RPC.swift */; };
 		E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234A2648BAE600791E00 /* KeyringContainer.swift */; };
 		E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */; };
@@ -115,6 +144,7 @@
 		631563655308D9DE35E0434B /* Pods-CaverSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift/Pods-CaverSwift.release.xcconfig"; sourceTree = "<group>"; };
 		9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D117BAAE088D8DB011A1C1A5 /* Pods-CaverSwift-CaverSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift-CaverSwiftTests/Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		E319162926832A62004291DC /* Secp256k1BasePointDoublings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secp256k1BasePointDoublings.plist; sourceTree = "<group>"; };
 		E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CCC262EA4EF003FA426 /* CaverSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaverSwift.h; sourceTree = "<group>"; };
 		E39F2CCD262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -193,6 +223,35 @@
 		E3A21E81265F8705006C560D /* IWallet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWallet.swift; sourceTree = "<group>"; };
 		E3A21E85265F9321006C560D /* CaverSwift.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CaverSwift.podspec; sourceTree = "<group>"; };
 		E3A21E8726607458006C560D /* SwiftBigNumberCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftBigNumberCore.swift; sourceTree = "<group>"; };
+		E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKeyTest.swift; sourceTree = "<group>"; };
+		E3A5C8B92682AED7002A0A2D /* IAccountKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAccountKey.swift; sourceTree = "<group>"; };
+		E3A5C8BB2682AF29002A0A2D /* AccountKeyFail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKeyFail.swift; sourceTree = "<group>"; };
+		E3A5C8BD2682F23B002A0A2D /* AccountKeyLegacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKeyLegacy.swift; sourceTree = "<group>"; };
+		E3A5C8BF2682F2CC002A0A2D /* AccountKeyPublic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKeyPublic.swift; sourceTree = "<group>"; };
+		E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTest.swift; sourceTree = "<group>"; };
+		E3A5C8C32683079E002A0A2D /* PrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKey.swift; sourceTree = "<group>"; };
+		E3A5C8C6268311ED002A0A2D /* ECPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ECPoint.swift; sourceTree = "<group>"; };
+		E3A5C8C7268311ED002A0A2D /* ECurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ECurve.swift; sourceTree = "<group>"; };
+		E3A5C8C8268311ED002A0A2D /* FiniteField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiniteField.swift; sourceTree = "<group>"; };
+		E3A5C8C9268311ED002A0A2D /* FiniteFieldInteger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiniteFieldInteger.swift; sourceTree = "<group>"; };
+		E3A5C8CA268311ED002A0A2D /* ECDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ECDomain.swift; sourceTree = "<group>"; };
+		E3A5C8D326831792002A0A2D /* UInt256+ForwardIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+ForwardIndex.swift"; sourceTree = "<group>"; };
+		E3A5C8D426831792002A0A2D /* UInt256+IntegerLiteralConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+IntegerLiteralConvertible.swift"; sourceTree = "<group>"; };
+		E3A5C8D526831792002A0A2D /* UInt256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UInt256.swift; sourceTree = "<group>"; };
+		E3A5C8D626831792002A0A2D /* UInt256+Sequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+Sequence.swift"; sourceTree = "<group>"; };
+		E3A5C8D726831792002A0A2D /* UInt256+Printable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+Printable.swift"; sourceTree = "<group>"; };
+		E3A5C8D826831792002A0A2D /* UInt256+Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+Hashable.swift"; sourceTree = "<group>"; };
+		E3A5C8D926831792002A0A2D /* UInt32+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt32+Additions.swift"; sourceTree = "<group>"; };
+		E3A5C8DA26831792002A0A2D /* UInt256+ArrayBound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+ArrayBound.swift"; sourceTree = "<group>"; };
+		E3A5C8DB26831792002A0A2D /* UInt256+IntegerArithmetic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+IntegerArithmetic.swift"; sourceTree = "<group>"; };
+		E3A5C8DC26831792002A0A2D /* UInt256+BitwiseOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+BitwiseOperations.swift"; sourceTree = "<group>"; };
+		E3A5C8DD26831792002A0A2D /* UInt256+Comparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+Comparable.swift"; sourceTree = "<group>"; };
+		E3A5C8DE26831792002A0A2D /* UInt256+Equatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+Equatable.swift"; sourceTree = "<group>"; };
+		E3A5C8DF26831792002A0A2D /* UInt256+IntegerArithmetic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "UInt256+IntegerArithmetic.c"; sourceTree = "<group>"; };
+		E3A5C8E026831792002A0A2D /* UInt256+RandomAccessIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UInt256+RandomAccessIndex.swift"; sourceTree = "<group>"; };
+		E3A5C8E126831792002A0A2D /* BaseConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseConverter.swift; sourceTree = "<group>"; };
+		E3A5C8F1268320FB002A0A2D /* UInt256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UInt256.h; sourceTree = "<group>"; };
+		E3A5C8F32683210B002A0A2D /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
 		E3E023482648B8EF00791E00 /* RPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPC.swift; sourceTree = "<group>"; };
 		E3E0234A2648BAE600791E00 /* KeyringContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainer.swift; sourceTree = "<group>"; };
 		E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractKeyring.swift; sourceTree = "<group>"; };
@@ -274,6 +333,7 @@
 		E39F2CCB262EA4EF003FA426 /* CaverSwift */ = {
 			isa = PBXGroup;
 			children = (
+				E3A5C8B82682AEC6002A0A2D /* account */,
 				E39F2CCC262EA4EF003FA426 /* CaverSwift.h */,
 				E39F2CCD262EA4EF003FA426 /* Info.plist */,
 				E39F2CE5262EAAD3003FA426 /* Caver.swift */,
@@ -295,6 +355,8 @@
 				E39F2CD9262EA4EF003FA426 /* Info.plist */,
 				E3E02388264CB16500791E00 /* testFunction.json */,
 				E3A21D3526564CCA006C560D /* ABITests.swift */,
+				E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */,
+				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -482,6 +544,8 @@
 		E3A21E42265654B5006C560D /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				E3A5C8D226831792002A0A2D /* UInt256 */,
+				E3A5C8C5268311D1002A0A2D /* ECurve */,
 				E3A21E8726607458006C560D /* SwiftBigNumberCore.swift */,
 				E3A21E43265654B5006C560D /* keccak-tiny */,
 				E3A21E48265654B5006C560D /* aes */,
@@ -525,6 +589,54 @@
 			path = include;
 			sourceTree = "<group>";
 		};
+		E3A5C8B82682AEC6002A0A2D /* account */ = {
+			isa = PBXGroup;
+			children = (
+				E3A5C8B92682AED7002A0A2D /* IAccountKey.swift */,
+				E3A5C8BB2682AF29002A0A2D /* AccountKeyFail.swift */,
+				E3A5C8BD2682F23B002A0A2D /* AccountKeyLegacy.swift */,
+				E3A5C8BF2682F2CC002A0A2D /* AccountKeyPublic.swift */,
+			);
+			path = account;
+			sourceTree = "<group>";
+		};
+		E3A5C8C5268311D1002A0A2D /* ECurve */ = {
+			isa = PBXGroup;
+			children = (
+				E319162926832A62004291DC /* Secp256k1BasePointDoublings.plist */,
+				E3A5C8CA268311ED002A0A2D /* ECDomain.swift */,
+				E3A5C8C6268311ED002A0A2D /* ECPoint.swift */,
+				E3A5C8C7268311ED002A0A2D /* ECurve.swift */,
+				E3A5C8C8268311ED002A0A2D /* FiniteField.swift */,
+				E3A5C8C9268311ED002A0A2D /* FiniteFieldInteger.swift */,
+			);
+			path = ECurve;
+			sourceTree = "<group>";
+		};
+		E3A5C8D226831792002A0A2D /* UInt256 */ = {
+			isa = PBXGroup;
+			children = (
+				E3A5C8DF26831792002A0A2D /* UInt256+IntegerArithmetic.c */,
+				E3A5C8F1268320FB002A0A2D /* UInt256.h */,
+				E3A5C8F32683210B002A0A2D /* module.map */,
+				E3A5C8E126831792002A0A2D /* BaseConverter.swift */,
+				E3A5C8D926831792002A0A2D /* UInt32+Additions.swift */,
+				E3A5C8D526831792002A0A2D /* UInt256.swift */,
+				E3A5C8DA26831792002A0A2D /* UInt256+ArrayBound.swift */,
+				E3A5C8DC26831792002A0A2D /* UInt256+BitwiseOperations.swift */,
+				E3A5C8DD26831792002A0A2D /* UInt256+Comparable.swift */,
+				E3A5C8DE26831792002A0A2D /* UInt256+Equatable.swift */,
+				E3A5C8D326831792002A0A2D /* UInt256+ForwardIndex.swift */,
+				E3A5C8D826831792002A0A2D /* UInt256+Hashable.swift */,
+				E3A5C8DB26831792002A0A2D /* UInt256+IntegerArithmetic.swift */,
+				E3A5C8D426831792002A0A2D /* UInt256+IntegerLiteralConvertible.swift */,
+				E3A5C8D726831792002A0A2D /* UInt256+Printable.swift */,
+				E3A5C8E026831792002A0A2D /* UInt256+RandomAccessIndex.swift */,
+				E3A5C8D626831792002A0A2D /* UInt256+Sequence.swift */,
+			);
+			path = UInt256;
+			sourceTree = "<group>";
+		};
 		E3E023452645190A00791E00 /* rpc */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,6 +660,7 @@
 			isa = PBXGroup;
 			children = (
 				E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */,
+				E3A5C8C32683079E002A0A2D /* PrivateKey.swift */,
 			);
 			path = keyring;
 			sourceTree = "<group>";
@@ -605,6 +718,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3A5C8F2268320FB002A0A2D /* UInt256.h in Headers */,
 				E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */,
 				E3A21E50265654B5006C560D /* aes.h in Headers */,
 				E3A21E4D265654B5006C560D /* keccak-tiny.h in Headers */,
@@ -700,6 +814,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3A21E86265F9321006C560D /* CaverSwift.podspec in Resources */,
+				E319162A26832A62004291DC /* Secp256k1BasePointDoublings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,7 +897,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3A5C8E826831792002A0A2D /* UInt32+Additions.swift in Sources */,
 				E3A21E26265654A7006C560D /* String+Numeric.swift in Sources */,
+				E3A5C8E626831792002A0A2D /* UInt256+Printable.swift in Sources */,
 				E3E023552648C00D00791E00 /* ContractIOType.swift in Sources */,
 				E3A21E28265654A7006C560D /* Data+Random.swift in Sources */,
 				E39F2CE6262EAAD3003FA426 /* Caver.swift in Sources */,
@@ -794,6 +911,8 @@
 				E3A21E57265CC247006C560D /* Array.swift in Sources */,
 				E3A21E1B265654A7006C560D /* ERC20.swift in Sources */,
 				E3A21E35265654A7006C560D /* TypedData.swift in Sources */,
+				E3A5C8CD268311ED002A0A2D /* FiniteField.swift in Sources */,
+				E3A5C8E926831792002A0A2D /* UInt256+ArrayBound.swift in Sources */,
 				E3A21E0C265654A7006C560D /* ABIRawType.swift in Sources */,
 				E3A21E24265654A7006C560D /* KeyDerivation.swift in Sources */,
 				E3A21E55265C9AF3006C560D /* Bytes.swift in Sources */,
@@ -807,23 +926,36 @@
 				E3A21E4F265654B5006C560D /* aes.c in Sources */,
 				E3A21E16265654A7006C560D /* ABIRawType+Static.swift in Sources */,
 				E3E0235A2648C92B00791E00 /* Utils.swift in Sources */,
+				E3A5C8EC26831792002A0A2D /* UInt256+Comparable.swift in Sources */,
 				E3A21E08265654A7006C560D /* ENSMultiResolver.swift in Sources */,
 				E3A21E1A265654A7006C560D /* ERC20Events.swift in Sources */,
+				E3A5C8E326831792002A0A2D /* UInt256+IntegerLiteralConvertible.swift in Sources */,
+				E3A5C8CE268311ED002A0A2D /* FiniteFieldInteger.swift in Sources */,
+				E3A5C8EF26831792002A0A2D /* UInt256+RandomAccessIndex.swift in Sources */,
+				E3A5C8ED26831792002A0A2D /* UInt256+Equatable.swift in Sources */,
 				E3A21E13265654A7006C560D /* ABIEncoder+Static.swift in Sources */,
 				E3A21E4E265654B5006C560D /* keccak-tiny.c in Sources */,
 				E3A21E0F265654A7006C560D /* ABIRawType+JSON.swift in Sources */,
+				E3A5C8EA26831792002A0A2D /* UInt256+IntegerArithmetic.swift in Sources */,
 				E3A21E23265654A7006C560D /* AesUtil.swift in Sources */,
 				E3A21E19265654A7006C560D /* ERC20Functions.swift in Sources */,
+				E3A5C8CF268311ED002A0A2D /* ECDomain.swift in Sources */,
 				E3E023712648F5E900791E00 /* CallObject.swift in Sources */,
+				E3A5C8CC268311ED002A0A2D /* ECurve.swift in Sources */,
 				E3E023672648EFE700791E00 /* ContractMethod.swift in Sources */,
 				E3E023572648C58E00791E00 /* SendOptions.swift in Sources */,
 				E3A21E1F265654A7006C560D /* RLP.swift in Sources */,
 				E3A21E31265654A7006C560D /* ERC721Functions.swift in Sources */,
+				E3A5C8F026831792002A0A2D /* BaseConverter.swift in Sources */,
+				E3A5C8C02682F2CC002A0A2D /* AccountKeyPublic.swift in Sources */,
 				E3A21E37265654A7006C560D /* EthereumTransactionReceipt.swift in Sources */,
 				E3A21E2E265654A7006C560D /* ERC721Responses.swift in Sources */,
+				E3A5C8E726831792002A0A2D /* UInt256+Hashable.swift in Sources */,
 				E3A21E3E265654A7006C560D /* EthereumClient.swift in Sources */,
 				E3A21E1D265654A7006C560D /* Address.swift in Sources */,
+				E3A5C8E226831792002A0A2D /* UInt256+ForwardIndex.swift in Sources */,
 				E3A21E36265654A7006C560D /* RecursiveLogCollector.swift in Sources */,
+				E3A5C8E526831792002A0A2D /* UInt256+Sequence.swift in Sources */,
 				E3A21E15265654A7006C560D /* ABIEvent.swift in Sources */,
 				E3E023502648BCD800791E00 /* Klay.swift in Sources */,
 				E3A21E39265654A7006C560D /* EthereumBlockInfo.swift in Sources */,
@@ -837,12 +969,18 @@
 				E3A21E10265654A7006C560D /* ABIFunction.swift in Sources */,
 				E3A21E09265654A7006C560D /* ENSContracts.swift in Sources */,
 				E3A21E40265654A7006C560D /* MulticallContract.swift in Sources */,
+				E3A5C8EB26831792002A0A2D /* UInt256+BitwiseOperations.swift in Sources */,
 				E3A21E12265654A7006C560D /* ABITuple.swift in Sources */,
 				E3E02380264A26F600791E00 /* Quantity.swift in Sources */,
 				E3E0235F2648C98D00791E00 /* Errors.swift in Sources */,
+				E3A5C8EE26831792002A0A2D /* UInt256+IntegerArithmetic.c in Sources */,
+				E3A5C8E426831792002A0A2D /* UInt256.swift in Sources */,
+				E3A5C8BE2682F23B002A0A2D /* AccountKeyLegacy.swift in Sources */,
+				E3A5C8CB268311ED002A0A2D /* ECPoint.swift in Sources */,
 				E3A21E25265654A7006C560D /* HexExtensions.swift in Sources */,
 				E3A21E1E265654A7006C560D /* Type.swift in Sources */,
 				E3A21E20265654A7006C560D /* KeystoreUtil.swift in Sources */,
+				E3A5C8BC2682AF29002A0A2D /* AccountKeyFail.swift in Sources */,
 				E3A21E2D265654A7006C560D /* ERC165.swift in Sources */,
 				E3E023522648BE4200791E00 /* Contract.swift in Sources */,
 				E3A21E22265654A7006C560D /* KeyUtil.swift in Sources */,
@@ -857,10 +995,12 @@
 				E3A21E21265654A7006C560D /* HexUtil.swift in Sources */,
 				E3A21E0B265654A7006C560D /* EthereumNameService.swift in Sources */,
 				E3A21E2C265654A7006C560D /* TypeDecoder.swift in Sources */,
+				E3A5C8BA2682AED7002A0A2D /* IAccountKey.swift in Sources */,
 				E3A21E0E265654A7006C560D /* ABIDecoder.swift in Sources */,
 				E3A21E29265654A7006C560D /* ByteExtensions.swift in Sources */,
 				E3A21E2A265654A7006C560D /* KeccakExtensions.swift in Sources */,
 				E3A21E3B265654A7006C560D /* EthereumLog.swift in Sources */,
+				E3A5C8C42683079E002A0A2D /* PrivateKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -870,6 +1010,8 @@
 			files = (
 				E3A21D3626564CCA006C560D /* ABITests.swift in Sources */,
 				E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */,
+				E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */,
+				E3A5C8C22682F4A2002A0A2D /* UtilsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1031,7 +1173,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CaverSwift/lib/aes/** ${SRCROOT}/CaverSwift/lib/keccak-tiny/**";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CaverSwift/lib/aes/** ${SRCROOT}/CaverSwift/lib/keccak-tiny/** ${SRCROOT}/CaverSwift/lib/UInt256/**";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1063,7 +1205,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CaverSwift/lib/aes/** ${SRCROOT}/CaverSwift/lib/keccak-tiny/**";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CaverSwift/lib/aes/** ${SRCROOT}/CaverSwift/lib/keccak-tiny/** ${SRCROOT}/CaverSwift/lib/UInt256/**";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

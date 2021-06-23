@@ -105,4 +105,24 @@ class KeyUtil {
         
         return signature
     }
+    
+    static func toChecksumAddress(_ address: String) -> String {
+        let lowercaseAddress = address.cleanHexPrefix.lowercased()
+        let addressHash = lowercaseAddress.web3.sha3String.cleanHexPrefix
+        
+        var result = "0x"
+        
+        var i = 0
+        lowercaseAddress.forEach { char in
+            if Int(String(addressHash[i]), radix: 16) ?? 0 >= 8 {
+                result.append(String(char).uppercased())
+            } else {
+                result.append(String(char))
+            }
+            
+            i += 1
+        }
+        
+        return result
+    }
 }

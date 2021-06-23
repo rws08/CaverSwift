@@ -13,6 +13,6 @@ public class Quantity: Decodable {
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let val = try container.decode(String.self)
-        self.val = BigInt(val.drop0xPrefix, radix: 16) ?? BigInt.zero        
+        self.val = BigInt(val.cleanHexPrefix, radix: 16) ?? BigInt.zero        
     }
 }

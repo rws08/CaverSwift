@@ -17,11 +17,11 @@ public class DefaultFunctionEncoder {
             let encodedValue = try encode($0)
             if ($0.rawType.isDynamic) {
                 let encodedDataOffset = try encode(Type(BigInt(dynamicDataOffset)))
-                result += encodedDataOffset.hexString.drop0xPrefix
-                dynamicData += encodedValue.hexString.drop0xPrefix
-                dynamicDataOffset += encodedValue.hexString.drop0xPrefix.count >> 1
+                result += encodedDataOffset.hexString.cleanHexPrefix
+                dynamicData += encodedValue.hexString.cleanHexPrefix
+                dynamicDataOffset += encodedValue.hexString.cleanHexPrefix.count >> 1
             } else {
-                result += encodedValue.hexString.drop0xPrefix
+                result += encodedValue.hexString.cleanHexPrefix
             }
         }
         result += dynamicData
@@ -261,7 +261,7 @@ public class DefaultFunctionEncoder {
         var offset = value.values.count
         let tailsEncoding = try value.values.map { v -> String in
             let item = Type(v, value.subRawType)
-            return try encode(item).hexString.drop0xPrefix
+            return try encode(item).hexString.cleanHexPrefix
         }
         
         for (idx, _) in value.values.enumerated() {
@@ -296,7 +296,7 @@ public class DefaultFunctionEncoder {
                 let type = Type(item, subRawType)
                 let encodedValue = try encode(type)
                 dynamicValues.append(encodedValue)
-                dynamicOffset += encodedValue.hexString.drop0xPrefix.count >> 1
+                dynamicOffset += encodedValue.hexString.cleanHexPrefix.count >> 1
             } else {
                 let type = Type(item, subRawType)
                 offsetsAndStaticValues.append(try encode(type))

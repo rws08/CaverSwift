@@ -13,7 +13,7 @@ public struct Address: Codable, Hashable {
     public static let zero = Address("0x0000000000000000000000000000000000000000")
     
     public init(_ hexValue: String) {
-        self.val = BigUInt(hexValue.drop0xPrefix, radix: 16) ?? Address.zero.val
+        self.val = BigUInt(hexValue.cleanHexPrefix, radix: 16) ?? Address.zero.val
     }
     
     public var toValue: String {

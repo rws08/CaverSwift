@@ -20,6 +20,10 @@ public extension Web3Extensions where Base == Data {
         keccak_256(result, 32, input, base.count)
         return Data(bytes: result, count: 32)
     }
+    
+    var sha3: Data {
+        return keccak256
+    }
 }
 
 public extension Web3Extensions where Base == String {
@@ -31,5 +35,9 @@ public extension Web3Extensions where Base == String {
     var keccak256fromHex: Data {
         let data = base.web3.hexData!
         return data.web3.keccak256
+    }
+    
+    var sha3String: String {
+        return String(bytes: keccak256.web3.bytes).web3.withHexPrefix
     }
 }
