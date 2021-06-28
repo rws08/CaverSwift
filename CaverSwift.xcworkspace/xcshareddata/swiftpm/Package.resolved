@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ASN1",
+        "repositoryURL": "https://github.com/leif-ibsen/ASN1",
+        "state": {
+          "branch": null,
+          "revision": "53e0b34a34f882386e09d10d6d00bb7e969e307f",
+          "version": "1.2.1"
+        }
+      },
+      {
+        "package": "BigInt",
+        "repositoryURL": "https://github.com/leif-ibsen/BigInt",
+        "state": {
+          "branch": null,
+          "revision": "56a12cb278293d8e6bec91df6a1e5265e294d6ce",
+          "version": "1.2.5"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

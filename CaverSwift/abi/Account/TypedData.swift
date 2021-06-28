@@ -39,14 +39,14 @@ extension TypedData: CustomStringConvertible {
 }
 
 extension TypedData {
-    public var typeHash: Data { encodeType(primaryType: primaryType).web3.keccak256 }
+    public var typeHash: Data { encodeType(primaryType: primaryType).keccak256 }
 
     // Whole data blob hash to sign
     public func signableHash() throws -> Data {
         var data = Data([0x19, 0x01])
-        data.append(try encodeData(data: domain, type: "EIP712Domain").web3.keccak256)
-        data.append(try encodeData(data: message, type: primaryType).web3.keccak256)
-        return data.web3.keccak256
+        data.append(try encodeData(data: domain, type: "EIP712Domain").keccak256)
+        data.append(try encodeData(data: message, type: primaryType).keccak256)
+        return data.keccak256
     }
 
     /// Type encoding as per EIP712
@@ -63,7 +63,7 @@ extension TypedData {
 
     /// Object encoding as per EIP712
     public func encodeData(data: JSON, type: String) throws -> Data {
-        var encoded = try ABIEncoder.encode(encodeType(primaryType: type).web3.keccak256, staticSize: 32).bytes
+        var encoded = try ABIEncoder.encode(encodeType(primaryType: type).keccak256, staticSize: 32).bytes
         
         guard let valueTypes = types[type] else {
             throw ABIError.invalidType
@@ -74,7 +74,7 @@ extension TypedData {
                 guard let json = data[variable.name] else {
                     throw ABIError.invalidValue
                 }
-                return try encodeData(data: json, type: variable.type).web3.keccak256.web3.bytes
+                return try encodeData(data: json, type: variable.type).keccak256.bytes
             } else if let json = data[variable.name] {
                 return try parseAtomicType(json, type: variable.type)
             } else {
@@ -108,12 +108,12 @@ extension TypedData {
         
         switch abiType {
         case .DynamicString:
-            guard let value = data.stringValue?.web3.keccak256 else {
+            guard let value = data.stringValue?.keccak256 else {
                 throw ABIError.invalidValue
             }
             return try ABIEncoder.encodeRaw(value, forType: .FixedBytes(32)).bytes
         case .DynamicBytes:
-            guard let value = data.stringValue.flatMap(Data.init(hex:))?.web3.keccak256 else {
+            guard let value = data.stringValue.flatMap(Data.init(hex:))?.keccak256 else {
                 throw ABIError.invalidValue
             }
             return try ABIEncoder.encodeRaw(value, forType: .FixedBytes(32)).bytes
@@ -142,7 +142,7 @@ extension TypedData {
             }
             
             let encoded = try value.flatMap { try parseAtomicType($0, type: nested.rawValue) }
-            return Data(encoded).web3.keccak256.web3.bytes
+            return Data(encoded).keccak256.bytes
         case .FixedArray(let nested, let count):
             guard let value = data.arrayValue else {
                 throw ABIError.invalidValue
@@ -153,7 +153,7 @@ extension TypedData {
             }
             
             let encoded = try value.flatMap { try parseAtomicType($0, type: nested.rawValue) }
-            return Data(encoded).web3.keccak256.web3.bytes
+            return Data(encoded).keccak256.bytes
         case .Tuple:
             throw ABIError.invalidValue
         }

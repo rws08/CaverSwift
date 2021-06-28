@@ -61,9 +61,9 @@ class KeyUtil {
     }
     
     static func generateAddress(from publicKey: Data) -> EthereumAddress {
-        let hash = publicKey.web3.keccak256
+        let hash = publicKey.keccak256
         let address = hash.subdata(in: 12..<hash.count)
-        return EthereumAddress(address.web3.hexString)
+        return EthereumAddress(address.hexString)
     }
     
     static func sign(message: Data, with privateKey: Data, hashing: Bool) throws -> Data {
@@ -76,7 +76,7 @@ class KeyUtil {
             secp256k1_context_destroy(ctx)
         }
 
-        let msg = ((hashing ? message.web3.keccak256 : message) as NSData).bytes.assumingMemoryBound(to: UInt8.self)
+        let msg = ((hashing ? message.keccak256 : message) as NSData).bytes.assumingMemoryBound(to: UInt8.self)
         let privateKeyPtr = (privateKey as NSData).bytes.assumingMemoryBound(to: UInt8.self)
         let signaturePtr = UnsafeMutablePointer<secp256k1_ecdsa_recoverable_signature>.allocate(capacity: 1)
         defer {
@@ -108,7 +108,7 @@ class KeyUtil {
     
     static func toChecksumAddress(_ address: String) -> String {
         let lowercaseAddress = address.cleanHexPrefix.lowercased()
-        let addressHash = lowercaseAddress.web3.sha3String.cleanHexPrefix
+        let addressHash = lowercaseAddress.sha3String.cleanHexPrefix
         
         var result = "0x"
         

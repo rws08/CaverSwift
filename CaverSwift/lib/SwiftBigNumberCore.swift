@@ -162,7 +162,7 @@ infix operator ** : ExponentiationPrecedence
 ///		(12 * 2^(2*64)) +
 ///		... +
 ///		(ln * 2^(n*64))
-public struct BInt:
+public struct BInt_Old:
 	SignedNumeric, // Implies Numeric, Equatable, ExpressibleByIntegerLiteral
 	BinaryInteger, // Implies Hashable, CustomStringConvertible, Strideable, Comparable
 	ExpressibleByFloatLiteral,
@@ -202,7 +202,7 @@ public struct BInt:
 	public typealias Words = [UInt]
 
 	// Required by the protocol "BinaryInteger".
-	public var words: BInt.Words
+	public var words: BInt_Old.Words
 	{
 		return self.limbs.map{ UInt($0) }
 	}
@@ -527,11 +527,11 @@ public struct BInt:
 
 
 	///	Returns -1 if this value is negative and 1 if it’s positive; otherwise, 0.
-	public func signum() -> BInt
+	public func signum() -> BInt_Old
 	{
-		if self.isZero() { return BInt(0) }
-		else if self.isPositive() { return BInt(1) }
-		else { return BInt(-1) }
+		if self.isZero() { return BInt_Old(0) }
+		else if self.isPositive() { return BInt_Old(1) }
+		else { return BInt_Old(-1) }
 	}
 
 	func isPositive() -> Bool { return !self.sign }
@@ -562,28 +562,28 @@ public struct BInt:
 	//
 	//
 
-	public static func <<<T: BinaryInteger>(lhs: BInt, rhs: T) -> BInt
+	public static func <<<T: BinaryInteger>(lhs: BInt_Old, rhs: T) -> BInt_Old
 	{
 		if rhs < 0 { return lhs >> rhs }
 
 		let limbs = lhs.limbs.shiftingUp(Int(rhs))
 		let sign = lhs.isNegative() && !limbs.equalTo(0)
 
-		return BInt(sign: sign, limbs: limbs)
+		return BInt_Old(sign: sign, limbs: limbs)
 	}
 
-	public static func <<=<T: BinaryInteger>(lhs: inout BInt, rhs: T)
+	public static func <<=<T: BinaryInteger>(lhs: inout BInt_Old, rhs: T)
 	{
 		lhs.limbs.shiftUp(Int(rhs))
 	}
 
-	public static func >><T: BinaryInteger>(lhs: BInt, rhs: T) -> BInt
+	public static func >><T: BinaryInteger>(lhs: BInt_Old, rhs: T) -> BInt_Old
 	{
 		if rhs < 0 { return lhs << rhs }
-		return BInt(sign: lhs.sign, limbs: lhs.limbs.shiftingDown(Int(rhs)))
+		return BInt_Old(sign: lhs.sign, limbs: lhs.limbs.shiftingDown(Int(rhs)))
 	}
 
-	public static func >>=<T: BinaryInteger>(lhs: inout BInt, rhs: T)
+	public static func >>=<T: BinaryInteger>(lhs: inout BInt_Old, rhs: T)
 	{
 		lhs.limbs.shiftDown(Int(rhs))
 	}
@@ -599,7 +599,7 @@ public struct BInt:
 	//
 
 	///	Returns the result of performing a bitwise AND operation on the two given values.
-	public static func &(lhs: BInt, rhs: BInt) -> BInt
+	public static func &(lhs: BInt_Old, rhs: BInt_Old) -> BInt_Old
 	{
 		var res: Limbs = [0]
 
@@ -609,7 +609,7 @@ public struct BInt:
 			res.setBit(at: i, to: newBit)
 		}
 
-		return BInt(sign: lhs.sign && rhs.sign, limbs: res)
+		return BInt_Old(sign: lhs.sign && rhs.sign, limbs: res)
 	}
 
 	//	static func &(lhs: Int, rhs: BInt) -> BInt
@@ -617,7 +617,7 @@ public struct BInt:
 
 	///	Stores the result of performing a bitwise AND operation on the two given values in the
 	///	left-hand-side variable.
-	public static func &=(lhs: inout BInt, rhs: BInt)
+	public static func &=(lhs: inout BInt_Old, rhs: BInt_Old)
 	{
 		let res = lhs & rhs
 		lhs = res
@@ -636,7 +636,7 @@ public struct BInt:
 	//
 	//
 
-	public static func |(lhs: BInt, rhs: BInt) -> BInt
+	public static func |(lhs: BInt_Old, rhs: BInt_Old) -> BInt_Old
 	{
 		var res: Limbs = [0]
 
@@ -646,13 +646,13 @@ public struct BInt:
 			res.setBit(at: i, to: newBit)
 		}
 
-		return BInt(sign: lhs.sign || rhs.sign, limbs: res)
+		return BInt_Old(sign: lhs.sign || rhs.sign, limbs: res)
 	}
 
 	//	static func |(lhs: Int, rhs: BInt) -> BInt
 	//	static func |(lhs: BInt, rhs: Int) -> BInt
 	//
-	public static func |=(lhs: inout BInt, rhs: BInt)
+	public static func |=(lhs: inout BInt_Old, rhs: BInt_Old)
 	{
 		let res = lhs | rhs
 		lhs = res
@@ -670,7 +670,7 @@ public struct BInt:
 	//
 	//
 
-	public static func ^(lhs: BInt, rhs: BInt) -> BInt
+	public static func ^(lhs: BInt_Old, rhs: BInt_Old) -> BInt_Old
 	{
 		var res: Limbs = [0]
 
@@ -680,10 +680,10 @@ public struct BInt:
 			res.setBit(at: i, to: newBit)
 		}
 
-		return BInt(sign: lhs.sign != rhs.sign, limbs: res)
+		return BInt_Old(sign: lhs.sign != rhs.sign, limbs: res)
 	}
 
-	public static func ^=(lhs: inout BInt, rhs: BInt)
+	public static func ^=(lhs: inout BInt_Old, rhs: BInt_Old)
 	{
 		let res = lhs ^ rhs
 		lhs = res
@@ -699,7 +699,7 @@ public struct BInt:
 	//
 	//
 
-	public prefix static func ~(x: BInt) -> BInt
+	public prefix static func ~(x: BInt_Old) -> BInt_Old
 	{
 		var res = x.limbs
 		for i in 0..<(res.bitWidth)
@@ -709,7 +709,7 @@ public struct BInt:
 
 		while res.last! == 0 && res.count > 1 { res.removeLast() }
 
-		return BInt(sign: !x.sign, limbs: res)
+		return BInt_Old(sign: !x.sign, limbs: res)
 	}
 
 	//
@@ -722,13 +722,13 @@ public struct BInt:
 	//
 	//
 
-	public prefix static func +(x: BInt) -> BInt
+	public prefix static func +(x: BInt_Old) -> BInt_Old
 	{
 		return x
 	}
 
 	// Required by protocol Numeric
-	public static func +=(lhs: inout BInt, rhs: BInt)
+	public static func +=(lhs: inout BInt_Old, rhs: BInt_Old)
 	{
 		if lhs.sign == rhs.sign
 		{
@@ -744,18 +744,18 @@ public struct BInt:
 	}
 
 	// Required by protocol Numeric
-	public static func +(lhs: BInt, rhs: BInt) -> BInt
+	public static func +(lhs: BInt_Old, rhs: BInt_Old) -> BInt_Old
 	{
 		var lhs = lhs
 		lhs += rhs
 		return lhs
 	}
 
-	public static func +(lhs:  Int, rhs: BInt) -> BInt { return BInt(lhs) + rhs }
-	public static func +(lhs: BInt, rhs:  Int) -> BInt { return lhs + BInt(rhs) }
+	public static func +(lhs:  Int, rhs: BInt_Old) -> BInt_Old { return BInt_Old(lhs) + rhs }
+	public static func +(lhs: BInt_Old, rhs:  Int) -> BInt_Old { return lhs + BInt_Old(rhs) }
 
-	public static func +=(lhs: inout  Int, rhs: BInt) { lhs += (BInt(lhs) + rhs).asInt()! }
-	public static func +=(lhs: inout BInt, rhs:  Int) { lhs +=  BInt(rhs)                 }
+	public static func +=(lhs: inout  Int, rhs: BInt_Old) { lhs += (BInt_Old(lhs) + rhs).asInt()! }
+	public static func +=(lhs: inout BInt_Old, rhs:  Int) { lhs +=  BInt_Old(rhs)                 }
 
 	//
 	//
@@ -774,7 +774,7 @@ public struct BInt:
 	}
 
 	// Required by protocol SignedNumeric
-	public static prefix func -(n: BInt) -> BInt
+	public static prefix func -(n: BInt_Old) -> BInt_Old
 	{
 		var n = n
 		n.negate()
@@ -792,18 +792,18 @@ public struct BInt:
 	//
 
 	// Required by protocol Numeric
-	public static func -(lhs: BInt, rhs: BInt) -> BInt
+	public static func -(lhs: BInt_Old, rhs: BInt_Old) -> BInt_Old
 	{
 		return lhs + -rhs
 	}
 
-	public static func -(lhs:  Int, rhs: BInt) -> BInt { return BInt(lhs) - rhs }
-	public static func -(lhs: BInt, rhs:  Int) -> BInt { return lhs - BInt(rhs) }
+	public static func -(lhs:  Int, rhs: BInt_Old) -> BInt_Old { return BInt_Old(lhs) - rhs }
+	public static func -(lhs: BInt_Old, rhs:  Int) -> BInt_Old { return lhs - BInt_Old(rhs) }
 
 	// Required by protocol Numeric
-	public static func -=(lhs: inout BInt, rhs: BInt) { lhs += -rhs                        }
-	public static func -=(lhs: inout  Int, rhs: BInt)  { lhs  = (BInt(lhs) - rhs).asInt()! }
-	public static func -=(lhs: inout BInt, rhs:  Int)  { lhs -= BInt(rhs)                  }
+	public static func -=(lhs: inout BInt_Old, rhs: BInt_Old) { lhs += -rhs                        }
+	public static func -=(lhs: inout  Int, rhs: BInt_Old)  { lhs  = (BInt_Old(lhs) - rhs).asInt()! }
+	public static func -=(lhs: inout BInt_Old, rhs:  Int)  { lhs -= BInt_Old(rhs)                  }
 
 	//
 	//
@@ -816,19 +816,19 @@ public struct BInt:
 	//
 
 	// Required by protocol Numeric
-	public static func *(lhs: BInt, rhs: BInt) -> BInt
+	public static func *(lhs: BInt_Old, rhs: BInt_Old) -> BInt_Old
 	{
 		let sign = !(lhs.sign == rhs.sign || lhs.isZero() || rhs.isZero())
-		return BInt(sign: sign, limbs: lhs.limbs.multiplyingBy(rhs.limbs))
+		return BInt_Old(sign: sign, limbs: lhs.limbs.multiplyingBy(rhs.limbs))
 	}
 
-	public static func *(lhs: Int, rhs: BInt) -> BInt { return BInt(lhs) * rhs }
-	public static func *(lhs: BInt, rhs: Int) -> BInt { return lhs * BInt(rhs) }
+	public static func *(lhs: Int, rhs: BInt_Old) -> BInt_Old { return BInt_Old(lhs) * rhs }
+	public static func *(lhs: BInt_Old, rhs: Int) -> BInt_Old { return lhs * BInt_Old(rhs) }
 
 	// Required by protocol SignedNumeric
-	public static func *=(lhs: inout BInt, rhs: BInt) { lhs = lhs * rhs                  }
-	public static func *=(lhs: inout  Int, rhs: BInt) { lhs = (BInt(lhs) * rhs).asInt()! }
-	public static func *=(lhs: inout BInt, rhs:  Int) { lhs = lhs * BInt(rhs)            }
+	public static func *=(lhs: inout BInt_Old, rhs: BInt_Old) { lhs = lhs * rhs                  }
+	public static func *=(lhs: inout  Int, rhs: BInt_Old) { lhs = (BInt_Old(lhs) * rhs).asInt()! }
+	public static func *=(lhs: inout BInt_Old, rhs:  Int) { lhs = lhs * BInt_Old(rhs)            }
 
 	//
 	//
@@ -840,21 +840,21 @@ public struct BInt:
 	//
 	//
 
-	public static func **(lhs: BInt, rhs: Int) -> BInt
+	public static func **(lhs: BInt_Old, rhs: Int) -> BInt_Old
 	{
 		precondition(rhs >= 0, "BInts can't be exponentiated with exponents < 0")
-		return BInt(sign: lhs.sign && (rhs % 2 != 0), limbs: lhs.limbs.exponentiating(rhs))
+		return BInt_Old(sign: lhs.sign && (rhs % 2 != 0), limbs: lhs.limbs.exponentiating(rhs))
 	}
 
-	public func factorial() -> BInt
+	public func factorial() -> BInt_Old
 	{
 		precondition(!self.sign, "Can't calculate the factorial of an negative number")
 
 		if(self.isZero()) {
-			return BInt(1)
+			return BInt_Old(1)
 		}
 		
-		return BInt(limbs: Limbs.recursiveMul(0, Limb(self.asInt()!)))
+		return BInt_Old(limbs: Limbs.recursiveMul(0, Limb(self.asInt()!)))
 	}
 
 	//
@@ -868,25 +868,25 @@ public struct BInt:
 	//
 
 	///	Returns the quotient and remainder of this value divided by the given value.
-	public func quotientAndRemainder(dividingBy rhs: BInt) -> (quotient: BInt, remainder: BInt)
+	public func quotientAndRemainder(dividingBy rhs: BInt_Old) -> (quotient: BInt_Old, remainder: BInt_Old)
 	{
 		let limbRes = self.limbs.divMod(rhs.limbs)
-		return (BInt(limbs: limbRes.quotient), BInt(limbs: limbRes.remainder))
+		return (BInt_Old(limbs: limbRes.quotient), BInt_Old(limbs: limbRes.remainder))
 	}
 
-	public static func /(lhs: BInt, rhs:BInt) -> BInt
+	public static func /(lhs: BInt_Old, rhs:BInt_Old) -> BInt_Old
 	{
 		let limbs = lhs.limbs.divMod(rhs.limbs).quotient
 		let sign = (lhs.sign != rhs.sign) && !limbs.equalTo(0)
 
-		return BInt(sign: sign, limbs: limbs)
+		return BInt_Old(sign: sign, limbs: limbs)
 	}
 
-	static func /(lhs:  Int, rhs: BInt) -> BInt { return BInt(lhs) / rhs }
-	static func /(lhs: BInt, rhs:  Int) -> BInt { return lhs / BInt(rhs) }
+	static func /(lhs:  Int, rhs: BInt_Old) -> BInt_Old { return BInt_Old(lhs) / rhs }
+	static func /(lhs: BInt_Old, rhs:  Int) -> BInt_Old { return lhs / BInt_Old(rhs) }
 
-	public static func /=(lhs: inout BInt, rhs: BInt) { lhs = lhs / rhs       }
-	static func /=(lhs: inout BInt, rhs:  Int) { lhs = lhs / BInt(rhs) }
+	public static func /=(lhs: inout BInt_Old, rhs: BInt_Old) { lhs = lhs / rhs       }
+	static func /=(lhs: inout BInt_Old, rhs:  Int) { lhs = lhs / BInt_Old(rhs) }
 
 	//
 	//
@@ -898,19 +898,19 @@ public struct BInt:
 	//
 	//
 
-	public static func %(lhs: BInt, rhs: BInt) -> BInt
+	public static func %(lhs: BInt_Old, rhs: BInt_Old) -> BInt_Old
 	{
 		let limbs = lhs.limbs.divMod(rhs.limbs).remainder
 		let sign = lhs.sign && !limbs.equalTo(0)
 
-		return BInt(sign: sign, limbs: limbs)
+		return BInt_Old(sign: sign, limbs: limbs)
 	}
 
-	static func %(lhs:  Int, rhs: BInt) -> BInt { return BInt(lhs) % rhs  }
-	static func %(lhs: BInt, rhs:  Int) -> BInt { return lhs  % BInt(rhs) }
+	static func %(lhs:  Int, rhs: BInt_Old) -> BInt_Old { return BInt_Old(lhs) % rhs  }
+	static func %(lhs: BInt_Old, rhs:  Int) -> BInt_Old { return lhs  % BInt_Old(rhs) }
 
-	public static func %=(lhs: inout BInt, rhs: BInt)  { lhs = lhs % rhs       }
-	static func %=(lhs: inout BInt, rhs:  Int)  { lhs = lhs % BInt(rhs) }
+	public static func %=(lhs: inout BInt_Old, rhs: BInt_Old)  { lhs = lhs % rhs       }
+	static func %=(lhs: inout BInt_Old, rhs:  Int)  { lhs = lhs % BInt_Old(rhs) }
 
 	//
 	//
@@ -923,36 +923,36 @@ public struct BInt:
 	//
 
 	// Required by protocol Equatable
-	public static func ==(lhs: BInt, rhs: BInt) -> Bool
+	public static func ==(lhs: BInt_Old, rhs: BInt_Old) -> Bool
 	{
 		if lhs.sign != rhs.sign { return false }
 		return lhs.limbs == rhs.limbs
 	}
 
-	static func ==<T: BinaryInteger>(lhs: BInt, rhs: T) -> Bool
+	static func ==<T: BinaryInteger>(lhs: BInt_Old, rhs: T) -> Bool
 	{
 		if lhs.limbs.count != 1 { return false }
 		return lhs.limbs[0] == rhs
 	}
 
-	static func ==<T: BinaryInteger>(lhs:  T, rhs: BInt) -> Bool { return rhs == lhs }
+	static func ==<T: BinaryInteger>(lhs:  T, rhs: BInt_Old) -> Bool { return rhs == lhs }
 
-	static func !=(lhs: BInt, rhs: BInt) -> Bool
+	static func !=(lhs: BInt_Old, rhs: BInt_Old) -> Bool
 	{
 		if lhs.sign != rhs.sign { return true }
 		return lhs.limbs != rhs.limbs
 	}
 
-	static func !=<T: BinaryInteger>(lhs: BInt, rhs: T) -> Bool
+	static func !=<T: BinaryInteger>(lhs: BInt_Old, rhs: T) -> Bool
 	{
 		if lhs.limbs.count != 1 { return true }
 		return lhs.limbs[0] != rhs
 	}
 
-	static func !=<T: BinaryInteger>(lhs: T, rhs: BInt) -> Bool { return rhs != lhs }
+	static func !=<T: BinaryInteger>(lhs: T, rhs: BInt_Old) -> Bool { return rhs != lhs }
 
 	// Required by protocol Comparable
-	public static func <(lhs: BInt, rhs: BInt) -> Bool
+	public static func <(lhs: BInt_Old, rhs: BInt_Old) -> Bool
 	{
 		if lhs.sign != rhs.sign { return lhs.sign }
 
@@ -960,7 +960,7 @@ public struct BInt:
 		return lhs.limbs.lessThan(rhs.limbs)
 	}
 
-	static func <<T: BinaryInteger>(lhs: BInt, rhs: T) -> Bool
+	static func <<T: BinaryInteger>(lhs: BInt_Old, rhs: T) -> Bool
 	{
 		if lhs.sign != (rhs < 0) { return lhs.sign }
 
@@ -977,23 +977,23 @@ public struct BInt:
 
 	}
 
-	static func <(lhs:  Int, rhs: BInt) -> Bool { return BInt(lhs) < rhs }
-	static func <(lhs: BInt, rhs:  Int) -> Bool { return lhs < BInt(rhs) }
+	static func <(lhs:  Int, rhs: BInt_Old) -> Bool { return BInt_Old(lhs) < rhs }
+	static func <(lhs: BInt_Old, rhs:  Int) -> Bool { return lhs < BInt_Old(rhs) }
 
 	// Required by protocol Comparable
-	public static func >(lhs: BInt, rhs: BInt) -> Bool { return rhs < lhs       }
-	static func >(lhs:  Int, rhs: BInt) -> Bool { return BInt(lhs) > rhs }
-	static func >(lhs: BInt, rhs:  Int) -> Bool { return lhs > BInt(rhs) }
+	public static func >(lhs: BInt_Old, rhs: BInt_Old) -> Bool { return rhs < lhs       }
+	static func >(lhs:  Int, rhs: BInt_Old) -> Bool { return BInt_Old(lhs) > rhs }
+	static func >(lhs: BInt_Old, rhs:  Int) -> Bool { return lhs > BInt_Old(rhs) }
 
 	// Required by protocol Comparable
-	public static func <=(lhs: BInt, rhs: BInt) -> Bool { return !(rhs < lhs)       }
-	static func <=(lhs:  Int, rhs: BInt) -> Bool { return !(rhs < BInt(lhs)) }
-	static func <=(lhs: BInt, rhs:  Int) -> Bool { return !(BInt(rhs) < lhs) }
+	public static func <=(lhs: BInt_Old, rhs: BInt_Old) -> Bool { return !(rhs < lhs)       }
+	static func <=(lhs:  Int, rhs: BInt_Old) -> Bool { return !(rhs < BInt_Old(lhs)) }
+	static func <=(lhs: BInt_Old, rhs:  Int) -> Bool { return !(BInt_Old(rhs) < lhs) }
 
 	// Required by protocol Comparable
-	public static func >=(lhs: BInt, rhs: BInt) -> Bool { return !(lhs < rhs)       }
-	static func >=(lhs:  Int, rhs: BInt) -> Bool { return !(BInt(lhs) < rhs) }
-	static func >=(lhs: BInt, rhs:  Int) -> Bool { return !(lhs < BInt(rhs)) }
+	public static func >=(lhs: BInt_Old, rhs: BInt_Old) -> Bool { return !(lhs < rhs)       }
+	static func >=(lhs:  Int, rhs: BInt_Old) -> Bool { return !(BInt_Old(lhs) < rhs) }
+	static func >=(lhs: BInt_Old, rhs:  Int) -> Bool { return !(lhs < BInt_Old(rhs)) }
 }
 
 //
@@ -1809,9 +1809,9 @@ fileprivate extension Array where Element == Limb
 		return recursiveMul(n, m).multiplyingBy(recursiveMul(m, k))
 	}
 
-	func factorial(_ base: Int) -> BInt
+	func factorial(_ base: Int) -> BInt_Old
 	{
-		return BInt(limbs: Limbs.recursiveMul(0, Limb(base)))
+		return BInt_Old(limbs: Limbs.recursiveMul(0, Limb(base)))
 	}
 
 	//
@@ -2002,17 +2002,17 @@ internal class BIntMath
 		return a.shiftingUp(k)
 	}
 
-	public static func gcd(_ a: BInt, _ b: BInt) -> BInt
+	public static func gcd(_ a: BInt_Old, _ b: BInt_Old) -> BInt_Old
 	{
 		let limbRes = steinGcd(a.limbs, b.limbs)
-		return BInt(sign: a.sign && !limbRes.equalTo(0), limbs: limbRes)
+		return BInt_Old(sign: a.sign && !limbRes.equalTo(0), limbs: limbRes)
 	}
 
 	/// Do not use this, extremely slow. Only for testing purposes.
-	public static func gcdEuclid(_ a: BInt, _ b: BInt) -> BInt
+	public static func gcdEuclid(_ a: BInt_Old, _ b: BInt_Old) -> BInt_Old
 	{
 		let limbRes = euclid(a.limbs, b.limbs)
-		return BInt(sign: a.sign && !limbRes.equalTo(0), limbs: limbRes)
+		return BInt_Old(sign: a.sign && !limbRes.equalTo(0), limbs: limbRes)
 	}
 
 	fileprivate static func lcmPositive(_ a: Limbs, _ b: Limbs) -> Limbs
@@ -2020,12 +2020,12 @@ internal class BIntMath
 		return a.divMod(steinGcd(a, b)).quotient.multiplyingBy(b)
 	}
 
-	static func lcm(_ a:BInt, _ b:BInt) -> BInt
+	static func lcm(_ a:BInt_Old, _ b:BInt_Old) -> BInt_Old
 	{
-		return BInt(limbs: lcmPositive(a.limbs, b.limbs))
+		return BInt_Old(limbs: lcmPositive(a.limbs, b.limbs))
 	}
 
-	static func fib(_ n:Int) -> BInt
+	static func fib(_ n:Int) -> BInt_Old
 	{
 		var a: Limbs = [0], b: Limbs = [1], t: Limbs
 
@@ -2036,39 +2036,39 @@ internal class BIntMath
 			a = t
 		}
 
-		return BInt(limbs: b)
+		return BInt_Old(limbs: b)
 	}
 
 	///	Order matters, repetition not allowed.
-	static func permutations(_ n: Int, _ k: Int) -> BInt
+	static func permutations(_ n: Int, _ k: Int) -> BInt_Old
 	{
 		// n! / (n-k)!
-		return BInt(n).factorial() / BInt(n - k).factorial()
+		return BInt_Old(n).factorial() / BInt_Old(n - k).factorial()
 	}
 
 	///	Order matters, repetition allowed.
-	static func permutationsWithRepitition(_ n: Int, _ k: Int) -> BInt
+	static func permutationsWithRepitition(_ n: Int, _ k: Int) -> BInt_Old
 	{
 		// n ** k
-		return BInt(n) ** k
+		return BInt_Old(n) ** k
 
 	}
 
 	///	Order does not matter, repetition not allowed.
-	static func combinations(_ n: Int, _ k: Int) -> BInt
+	static func combinations(_ n: Int, _ k: Int) -> BInt_Old
 	{
 		// (n + k - 1)! / (k! * (n - 1)!)
-		return BInt(n + k - 1).factorial() / (BInt(k).factorial() * BInt(n - 1).factorial())
+		return BInt_Old(n + k - 1).factorial() / (BInt_Old(k).factorial() * BInt_Old(n - 1).factorial())
 	}
 
 	///	Order does not matter, repetition allowed.
-	static func combinationsWithRepitition(_ n: Int, _ k: Int) -> BInt
+	static func combinationsWithRepitition(_ n: Int, _ k: Int) -> BInt_Old
 	{
 		// n! / (k! * (n - k)!)
-		return BInt(n).factorial() / (BInt(k).factorial() * BInt(n - k).factorial())
+		return BInt_Old(n).factorial() / (BInt_Old(k).factorial() * BInt_Old(n - k).factorial())
 	}
 
-	static func randomBInt(bits n: Int) -> BInt
+	static func randomBInt(bits n: Int) -> BInt_Old
 	{
 		let limbs = n >> 6
 		let singleBits = n % 64
@@ -2102,11 +2102,11 @@ internal class BIntMath
 			if last != 0 { res.append(last) }
 		}
 
-		return BInt(limbs: res)
+		return BInt_Old(limbs: res)
 	}
 	let random = randomBInt
 
-	func isPrime(_ n: BInt) -> Bool
+	func isPrime(_ n: BInt_Old) -> Bool
 	{
 		if n <= 3 { return n > 1 }
 
@@ -2132,12 +2132,12 @@ internal class BIntMath
 	///   - p: power
 	///   - m: modulus
 	/// - Returns: pow(b, p) % m
-	static func mod_exp(_ b: BInt, _ p: BInt, _ m: BInt) -> BInt {
+	static func mod_exp(_ b: BInt_Old, _ p: BInt_Old, _ m: BInt_Old) -> BInt_Old {
 		precondition(m != 0, "modulus needs to be non-zero")
 		precondition(p >= 0, "exponent needs to be non-negative")
 		var base = b % m
 		var exponent = p
-		var result = BInt(1)
+		var result = BInt_Old(1)
 		while exponent > 0 {
 			if exponent.limbs[0] % 2 != 0 {
 				result = result * base % m
@@ -2155,7 +2155,7 @@ internal class BIntMath
 	///   - a: left hand side of the module operation
 	///   - m: modulus
 	/// - Returns: r := a % b such that 0 <= r < abs(m)
-	static func nnmod(_ a: BInt, _ m: BInt) -> BInt {
+	static func nnmod(_ a: BInt_Old, _ m: BInt_Old) -> BInt_Old {
 		let r = a % m
 		guard r.isNegative() else { return r }
 		let p = m.isNegative() ? r - m : r + m
@@ -2169,7 +2169,7 @@ internal class BIntMath
 	///   - b: right hand side of the modulo addition
 	///   - m: modulus
 	/// - Returns: nnmod(a + b, m)
-	static func mod_add(_ a: BInt, _ b: BInt, _ m: BInt) -> BInt {
+	static func mod_add(_ a: BInt_Old, _ b: BInt_Old, _ m: BInt_Old) -> BInt_Old {
 		return nnmod(a + b, m)
 	}
 }
@@ -2224,12 +2224,12 @@ public struct BDouble:
 
 	public init?<T>(exactly source: T) where T : BinaryInteger
 	{
-		let i = BInt(source)
+		let i = BInt_Old(source)
 		self.init(i)
 	}
 	
-	 public init(_ src: BInt) {
-		self.init(src, over: BInt(1))
+	 public init(_ src: BInt_Old) {
+		self.init(src, over: BInt_Old(1))
 	}
 
 	/**
@@ -2255,7 +2255,7 @@ public struct BDouble:
 		self.minimize()
 	}
 
-	public init(_ numerator: BInt, over denominator: BInt)
+	public init(_ numerator: BInt_Old, over denominator: BInt_Old)
 	{
 		self.init(
 			sign:			numerator.sign != denominator.sign,
@@ -2275,8 +2275,8 @@ public struct BDouble:
 
 	public init?(_ numerator: String, over denominator: String)
 	{
-		if let n = BInt(numerator) {
-			if let d = BInt(denominator) {
+		if let n = BInt_Old(numerator) {
+			if let d = BInt_Old(denominator) {
 				self.init(n, over: d)
 				return
 			}
@@ -2286,7 +2286,7 @@ public struct BDouble:
 
 	public init?(_ nStr: String)
 	{
-		if let bi = BInt(nStr) {
+		if let bi = BInt_Old(nStr) {
 			self.init(bi, over: 1)
 		} else {
             if let exp = nStr.firstIndex(of: "e")?.utf16Offset(in: nStr)
@@ -2530,7 +2530,7 @@ public struct BDouble:
 
         let multiplier = [10].exponentiating(currentPrecision)
         let limbs = self.numerator.multiplyingBy(multiplier).divMod(self.denominator).quotient
-        var res = BInt(limbs: limbs).description
+        var res = BInt_Old(limbs: limbs).description
         
         if currentPrecision <= res.count
         {
@@ -2640,28 +2640,28 @@ public struct BDouble:
 	 * If the right side of the decimal is greater than 0.5 then it will round up (ceil),
 	 * otherwise round down (floor) to the nearest BInt
 	 */
-	public func rounded() -> BInt
+	public func rounded() -> BInt_Old
 	{
 		if self.isZero() {
-			return BInt(0)
+			return BInt_Old(0)
 		}
 		let digits = 3
 		let multiplier = [10].exponentiating(digits)
 
 		let rawRes = abs(self).numerator.multiplyingBy(multiplier).divMod(self.denominator).quotient
 
-		let res = BInt(limbs: rawRes).description
+		let res = BInt_Old(limbs: rawRes).description
 
 		let offset = res.count - digits
 		let rhs = Double("0." + res.suffix(res.count - offset))!
 		let lhs = res.prefix(offset)
-		var retVal = BInt(String(lhs))!
+		var retVal = BInt_Old(String(lhs))!
 		
 		if self.isNegative()
 		{
 			retVal = -retVal
 			if rhs > 0.5 {
-				retVal = retVal - BInt(1)
+				retVal = retVal - BInt_Old(1)
 			}
 		} else {
 			if rhs > 0.5
@@ -2680,7 +2680,7 @@ public struct BDouble:
 	 */
 	public func nthroot(_ root: Int) -> BDouble
 	{
-		return self ** BDouble(BInt(1), over: BInt(root))
+		return self ** BDouble(BInt_Old(1), over: BInt_Old(root))
 	}
 	
 	/**
@@ -2690,7 +2690,7 @@ public struct BDouble:
 	 */
 	public func squareRoot() -> BDouble
 	{
-		return self ** BDouble(BInt(1), over: BInt(2))
+		return self ** BDouble(BInt_Old(1), over: BInt_Old(2))
 	}
 
 	//
@@ -2710,7 +2710,7 @@ public struct BDouble:
 		let bc = rhs.numerator.multiplyingBy(lhs.denominator)
 		let bd = lhs.denominator.multiplyingBy(rhs.denominator)
 
-		let resNumerator = BInt(sign: lhs.sign, limbs: ad) + BInt(sign: rhs.sign, limbs: bc)
+		let resNumerator = BInt_Old(sign: lhs.sign, limbs: ad) + BInt_Old(sign: rhs.sign, limbs: bc)
 
 		return BDouble(
 			sign: resNumerator.sign && !resNumerator.limbs.equalTo(0),
@@ -2721,8 +2721,8 @@ public struct BDouble:
 
 	public static func +(lhs: BDouble, rhs: Double) -> BDouble { return lhs + BDouble(rhs) }
 	public static func +(lhs: Double, rhs: BDouble) -> BDouble { return BDouble(lhs) + rhs }
-	public static func +(lhs: BDouble, rhs: BInt) -> BDouble { return lhs + BDouble(rhs) }
-	public static func +(lhs: BInt, rhs: BDouble) -> BDouble { return BDouble(lhs) + rhs }
+	public static func +(lhs: BDouble, rhs: BInt_Old) -> BDouble { return lhs + BDouble(rhs) }
+	public static func +(lhs: BInt_Old, rhs: BDouble) -> BDouble { return BDouble(lhs) + rhs }
 	
 	public static func +=(lhs: inout BDouble, rhs: BDouble) {
 		let res = lhs + rhs
@@ -2776,7 +2776,7 @@ public struct BDouble:
 	}
 	public static func -(lhs: BDouble, rhs: Double) -> BDouble { return lhs - BDouble(rhs) }
 	public static func -(lhs: Double, rhs: BDouble) -> BDouble { return BDouble(lhs) - rhs }
-	public static func -(lhs: BDouble, rhs: BInt) -> BDouble { return lhs - BDouble(rhs) }
+	public static func -(lhs: BDouble, rhs: BInt_Old) -> BDouble { return lhs - BDouble(rhs) }
 	public static func -=(lhs: inout BDouble, rhs: BDouble) {
 		let res = lhs - rhs
 		lhs = res
@@ -2807,8 +2807,8 @@ public struct BDouble:
 	}
 	public static func *(lhs: BDouble, rhs: Double) -> BDouble { return lhs * BDouble(rhs) }
 	public static func *(lhs: Double, rhs: BDouble) -> BDouble { return BDouble(lhs) * rhs }
-	public static func *(lhs: BDouble, rhs: BInt) -> BDouble { return lhs * BDouble(rhs) }
-	public static func *(lhs: BInt, rhs: BDouble) -> BDouble { return BDouble(lhs) * rhs }
+	public static func *(lhs: BDouble, rhs: BInt_Old) -> BDouble { return lhs * BDouble(rhs) }
+	public static func *(lhs: BInt_Old, rhs: BDouble) -> BDouble { return BDouble(lhs) * rhs }
 
 	public static func *=(lhs: inout BDouble, rhs: BDouble) {
 		let res = lhs * rhs
@@ -2845,7 +2845,7 @@ public struct BDouble:
 		return base * (base ** (exponent - 1))
 	}
 	
-	public static func **(_ base: BDouble, _ exponent: BInt) -> BDouble
+	public static func **(_ base: BDouble, _ exponent: BInt_Old) -> BDouble
 	{
 		if exponent == 0
 		{
@@ -2871,25 +2871,25 @@ public struct BDouble:
 		var count = base.precision
 		
 		// something over 1
-		if BInt(limbs: exponent.denominator) == 1 {
-			return base**BInt(sign: exponent.sign, limbs: exponent.numerator)
+		if BInt_Old(limbs: exponent.denominator) == 1 {
+			return base**BInt_Old(sign: exponent.sign, limbs: exponent.numerator)
 		}
 		
-		if BInt(limbs: exponent.numerator) != 1 {
-			return (base ** BInt(sign: exponent.sign, limbs: exponent.numerator)) ** BDouble(sign: false, numerator: BDouble(1).numerator, denominator: exponent.denominator)
+		if BInt_Old(limbs: exponent.numerator) != 1 {
+			return (base ** BInt_Old(sign: exponent.sign, limbs: exponent.numerator)) ** BDouble(sign: false, numerator: BDouble(1).numerator, denominator: exponent.denominator)
 		}
 		
 		// we have 1/something
 		
 		var previous  = BDouble(1)
 		var ans = previous
-		let exp = BInt(sign: exponent.sign, limbs: exponent.denominator)
+		let exp = BInt_Old(sign: exponent.sign, limbs: exponent.denominator)
 		let prec = BDouble(0.1) ** (abs(base.precision) + 1)
 		
 		while(true) {
 			previous = ans
 			
-			let rlhs = BDouble(BInt(1), over:exp)
+			let rlhs = BDouble(BInt_Old(1), over:exp)
 			let rrhs = ((exp-1)*ans + (base / pow(ans, exp-1)))
 			ans = rlhs * rrhs
 
@@ -2925,7 +2925,7 @@ public struct BDouble:
 		return res
 	}
 	public static func /(lhs: BDouble, rhs: Double) -> BDouble { return lhs / BDouble(rhs) }
-	public static func /(lhs: BDouble, rhs: BInt) -> BDouble { return lhs / BDouble(rhs) }
+	public static func /(lhs: BDouble, rhs: BInt_Old) -> BDouble { return lhs / BDouble(rhs) }
 	public static func /(lhs: Double, rhs: BDouble) -> BDouble { return BDouble(lhs) / rhs }
 	
 	public static func %(lhs: BDouble, rhs:BDouble) -> BDouble { return mod(lhs, rhs) }
@@ -3037,11 +3037,11 @@ public func abs(_ x: BDouble) -> BDouble
 /**
  * round to largest BInt value not greater than base
  */
-public func floor(_ base: BDouble) -> BInt
+public func floor(_ base: BDouble) -> BInt_Old
 {
 	if base.isZero()
 	{
-		return BInt(0)
+		return BInt_Old(0)
 	}
 	
 	let digits = 3
@@ -3049,17 +3049,17 @@ public func floor(_ base: BDouble) -> BInt
 
 	let rawRes = abs(base).numerator.multiplyingBy(multiplier).divMod(base.denominator).quotient
 
-	let res = BInt(limbs: rawRes).description
+	let res = BInt_Old(limbs: rawRes).description
 	
 	let offset = res.count - digits
 	let lhs = res.prefix(offset).description
 	let rhs = Double("0." + res.suffix(res.count - offset))!
 	
-	var ans = BInt(String(lhs))!
+	var ans = BInt_Old(String(lhs))!
 	if base.isNegative() {
 		ans = -ans
 		if rhs > 0.0 {
-			ans = ans - BInt(1)
+			ans = ans - BInt_Old(1)
 		}
 	}
 
@@ -3069,24 +3069,24 @@ public func floor(_ base: BDouble) -> BInt
 /**
  * round to smallest BInt value not less than base
  */
-public func ceil(_ base: BDouble) -> BInt
+public func ceil(_ base: BDouble) -> BInt_Old
 {
 	if base.isZero()
 	{
-		return BInt(0)
+		return BInt_Old(0)
 	}
 	let digits = 3
 	let multiplier = [10].exponentiating(digits)
 
 	let rawRes = abs(base).numerator.multiplyingBy(multiplier).divMod(base.denominator).quotient
 
-	let res = BInt(limbs: rawRes).description
+	let res = BInt_Old(limbs: rawRes).description
 
 	let offset = res.count - digits
 	let rhs = Double("0." + res.suffix(res.count - offset))!
 	let lhs = res.prefix(offset)
 	
-	var retVal = BInt(String(lhs))!
+	var retVal = BInt_Old(String(lhs))!
 	
 	if base.isNegative()
 	{
@@ -3113,7 +3113,7 @@ public func pow(_ base : BDouble, _ exp : Int) -> BDouble {
  * Returns a BDouble number raised to a given power.
  * - warning: This may take a while
  */
-public func pow(_ base : BDouble, _ exp : BInt) -> BDouble {
+public func pow(_ base : BDouble, _ exp : BInt_Old) -> BDouble {
 	return base**exp
 }
 

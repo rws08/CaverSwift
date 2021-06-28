@@ -31,7 +31,7 @@ public struct RLP {
     }
     
     static func encodeString(_ string: String) -> Data? {
-        if let hexData = string.web3.hexData {
+        if let hexData = string.hexData {
             return encodeData(hexData)
         }
         

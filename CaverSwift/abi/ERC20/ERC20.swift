@@ -70,7 +70,7 @@ public class ERC20 {
         }
         
         self.client.getEvents(addresses: nil,
-                              topics: [ sig, nil, String(hexFromBytes: result)],
+                              topics: [ sig, nil, String(bytes: result)],
                               fromBlock: fromBlock,
                               toBlock: toBlock,
                               eventTypes: [ERC20Events.Transfer.self]) { (error, events, unprocessedLogs) in
@@ -95,7 +95,7 @@ public class ERC20 {
         }
         
         self.client.getEvents(addresses: nil,
-                              topics: [ sig, String(hexFromBytes: result), nil ],
+                              topics: [ sig, String(bytes: result), nil ],
                               fromBlock: fromBlock,
                               toBlock: toBlock,
                               eventTypes: [ERC20Events.Transfer.self]) { (error, events, unprocessedLogs) in

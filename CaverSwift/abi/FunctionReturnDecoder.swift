@@ -15,7 +15,7 @@ public class FunctionReturnDecoder {
         }
         
         var offset = 0
-        guard let bytes = rawInput.web3.bytesFromHex else { throw ABIError.invalidValue }
+        guard let bytes = rawInput.bytesFromHex else { throw ABIError.invalidValue }
         for (idx, item) in outputParameters.enumerated() {
             let decoded = try FunctionReturnDecoder.decode(bytes, forType: item, offset: offset)
             
@@ -43,7 +43,7 @@ public class FunctionReturnDecoder {
             guard let result = try decode(data, forType: Type(type.value, .FixedUInt(typeABI.size)), offset: offset) as? BigUInt else {
                 throw ABIError.invalidValue
             }
-            return Address(result.web3.hexString)
+            return Address(result.hexString)
         case .DynamicString:
             guard let result = try decode(data, forType: Type(type.value, .DynamicBytes), offset: offset) as? Data else {
                 throw ABIError.invalidValue

@@ -19,7 +19,7 @@ extension ENSContracts {
                 }
 
                 let idx = data.index(data.endIndex, offsetBy: -40)
-                self.value = EthereumAddress(String(data[idx...]).web3.withHexPrefix)
+                self.value = EthereumAddress(String(data[idx...]).withHexPrefix)
 
                 guard self.value != .zero else {
                     throw EthereumNameServiceError.ensUnknown

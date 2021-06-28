@@ -40,7 +40,7 @@ public class ERC721: ERC165 {
         }
         
         client.getEvents(addresses: nil,
-                         topics: [ sig, nil, String(hexFromBytes: result)],
+                         topics: [ sig, nil, String(bytes: result)],
                          fromBlock: fromBlock,
                          toBlock: toBlock,
                          eventTypes: [ERC721Events.Transfer.self]) { (error, events, unprocessedLogs) in

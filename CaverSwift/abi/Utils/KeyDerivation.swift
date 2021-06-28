@@ -80,7 +80,7 @@ class KeyDerivator {
     private func pbkdf2(hash :CCPBKDFAlgorithm, password: String, salt: Data, keyByteCount: Int, rounds: Int) -> Data? {
         guard let passwordData = password.data(using:String.Encoding.utf8) else { return nil }
         var derivedKeyData = [UInt8](repeating: 0, count: keyByteCount)
-        var saltData = salt.web3.bytes
+        var saltData = salt.bytes
         let derivationStatus = CCKeyDerivationPBKDF(
             CCPBKDFAlgorithm(kCCPBKDF2),
             password,

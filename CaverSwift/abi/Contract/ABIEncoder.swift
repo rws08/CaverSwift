@@ -45,14 +45,14 @@ public class ABIEncoder {
             }
         }
         
-        public var hexString: String { String(hexFromBytes: bytes) }
+        public var hexString: String { String(bytes: bytes) }
     }
     
     static func encodeRaw(_ value: Data,
                           forType type: ABIRawType,
                           padded: Bool = true,
                           size: Int = 1) throws -> EncodedValue {
-        return try encodeRaw(value.web3.hexString, forType: type, padded: padded, size: size)
+        return try encodeRaw(value.hexString, forType: type, padded: padded, size: size)
     }
     
     static func encodeRaw(_ value: String,
@@ -74,10 +74,10 @@ public class ABIEncoder {
         switch type {
         case .FixedUInt(let typeSize):
             let bytesSize = typeSize / 8
-            guard let int = value.web3.isNumeric ? BigUInt(value) : BigUInt(hex: value) else {
+            guard let int = value.isNumeric ? BigUInt(value) : BigUInt(hex: value) else {
                 throw ABIError.invalidValue
             }
-            let bytes = int.web3.bytes // should be <= 32 bytes
+            let bytes = int.bytes // should be <= 32 bytes
             guard bytes.count <= MAX_BYTE_LENGTH, bytesSize <= MAX_BYTE_LENGTH else {
                 throw ABIError.invalidValue
             }
@@ -87,11 +87,11 @@ public class ABIEncoder {
                 encoded = [UInt8](repeating: 0x00, count: bytesSize - bytes.count) + bytes
             }
         case .FixedInt(_):
-            guard let int = value.web3.isNumeric ? BigInt(value) : BigInt(hex: value) else {
+            guard let int = value.isNumeric ? BigInt(value) : BigInt(hex: value) else {
                 throw ABIError.invalidType
             }
             
-            let bytes = int.web3.bytes // should be <= 32 bytes
+            let bytes = int.bytes // should be <= 32 bytes
             guard bytes.count <= MAX_BYTE_LENGTH else {
                 throw ABIError.invalidValue
             }
@@ -108,14 +108,14 @@ public class ABIEncoder {
         case .FixedBool:
             encoded = try encodeRaw(value == "true" ? "1":"0", forType: ABIRawType.FixedUInt(8), padded: padded)
         case .FixedAddress:
-            guard let bytes = value.web3.bytesFromHex else { throw ABIError.invalidValue } // Must be 20 bytes
+            guard let bytes = value.bytesFromHex else { throw ABIError.invalidValue } // Must be 20 bytes
             if padded  {
                 encoded = [UInt8](repeating: 0x00, count: MAX_BYTE_LENGTH - bytes.count) + bytes
             } else {
                 encoded = bytes
             }
         case .DynamicString:
-            let bytes = value.web3.bytes
+            let bytes = value.bytes
             let len = try encodeRaw(String(bytes.count), forType: ABIRawType.FixedUInt(256)).bytes
             let pack: Int
             if bytes.count == 0 {
@@ -133,7 +133,7 @@ public class ABIEncoder {
             }
         case .DynamicBytes:
             // Bytes are hex encoded
-            guard let bytes = value.web3.bytesFromHex else { throw ABIError.invalidValue }
+            guard let bytes = value.bytesFromHex else { throw ABIError.invalidValue }
             let len = try encodeRaw(String(bytes.count), forType: ABIRawType.FixedUInt(256)).bytes
             let pack: Int
             if bytes.count == 0 {
@@ -151,7 +151,7 @@ public class ABIEncoder {
             }
         case .FixedBytes(_):
             // Bytes are hex encoded
-            guard let bytes = value.web3.bytesFromHex else { throw ABIError.invalidValue }
+            guard let bytes = value.bytesFromHex else { throw ABIError.invalidValue }
             if padded {
                 encoded = bytes + [UInt8](repeating: 0x00, count: MAX_BYTE_LENGTH - bytes.count)
             } else {
@@ -159,7 +159,7 @@ public class ABIEncoder {
             }
         case .DynamicArray(let type):
             let unitSize = type.size * 2
-            let stringValue = value.web3.noHexPrefix
+            let stringValue = value.noHexPrefix
             let size = stringValue.count / unitSize
             
             let padUnits = type.isPaddedInDynamic

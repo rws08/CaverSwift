@@ -62,7 +62,7 @@ extension Multicall {
     public typealias Output = Result<String, CallError>
 
     public struct Response: ABIResponse {
-        static let multicallFailedError = "MULTICALL_FAIL".web3.keccak256.web3.hexString
+        static let multicallFailedError = "MULTICALL_FAIL".keccak256.hexString
 
         public static var types: [ABIType.Type] = [BigUInt.self, ABIArray<String>.self]
 

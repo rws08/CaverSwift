@@ -37,7 +37,7 @@ public class EthereumAccount: EthereumAccountProtocol {
     private let publicKeyData: Data
     
     public lazy var publicKey: String = {
-        return self.publicKeyData.web3.hexString
+        return self.publicKeyData.hexString
     }()
     
     public lazy var address: EthereumAddress = {
@@ -97,7 +97,7 @@ public class EthereumAccount: EthereumAccountProtocol {
     }
     
     public func sign(hash: String) throws -> Data {
-        if let data = hash.web3.hexData {
+        if let data = hash.hexData {
             return try KeyUtil.sign(message: data, with: self.privateKeyData, hashing: false)
         } else {
             throw EthereumAccountError.signError
@@ -122,7 +122,7 @@ public class EthereumAccount: EthereumAccountProtocol {
             throw EthereumAccountError.signError
         }
         data.append(message)
-        let hash = data.web3.keccak256
+        let hash = data.keccak256
         
         guard var signed = try? self.sign(message: hash) else {
             throw EthereumAccountError.signError
@@ -140,7 +140,7 @@ public class EthereumAccount: EthereumAccountProtocol {
         }
         
         signed.append(last)
-        return signed.web3.hexString
+        return signed.hexString
     }
     
     public func signMessage(message: TypedData) throws -> String {
@@ -162,6 +162,6 @@ public class EthereumAccount: EthereumAccountProtocol {
         }
         
         signed.append(last)
-        return signed.web3.hexString
+        return signed.hexString
     }
 }

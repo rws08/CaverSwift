@@ -35,9 +35,9 @@ extension ABIEncoder {
             return try ABIEncoder.encodeRaw(String(value), forType: type, padded: !packed)
         case let data as Data:
             if let staticSize = staticSize {
-                return try ABIEncoder.encodeRaw(String(bytes: data.web3.bytes), forType: .FixedBytes(staticSize), padded: !packed)
+                return try ABIEncoder.encodeRaw(String(bytes: data.bytes), forType: .FixedBytes(staticSize), padded: !packed)
             } else {
-                return try ABIEncoder.encodeRaw(String(bytes: data.web3.bytes), forType: type, padded: !packed)
+                return try ABIEncoder.encodeRaw(String(bytes: data.bytes), forType: type, padded: !packed)
             }
         
         case let value as ABITuple:

@@ -12,7 +12,7 @@ open class AccountKeyLegacy: IAccountKey {
     private static let TYPE = "0x01"
     
     public static func decode(_ rlpEncodedKey: String) throws -> AccountKeyLegacy {
-        return try decode(rlpEncodedKey.web3.hexData ?? Data())
+        return try decode(rlpEncodedKey.hexData ?? Data())
     }
     
     public static func decode(_ rlpEncodedKey: Data) throws -> AccountKeyLegacy {
@@ -27,7 +27,7 @@ open class AccountKeyLegacy: IAccountKey {
     }
     
     public func getRLPEncoding() -> String {
-        return AccountKeyLegacy.RLP.web3.hexString
+        return AccountKeyLegacy.RLP.hexString
     }
     
     

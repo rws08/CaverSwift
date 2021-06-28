@@ -91,11 +91,11 @@ public enum ENSContracts {
                     let nameHash: String
                     switch self {
                     case .address(let address):
-                        nameHash = ENSContracts.nameHash(name: address.value.web3.noHexPrefix + ".addr.reverse")
+                        nameHash = ENSContracts.nameHash(name: address.value.noHexPrefix + ".addr.reverse")
                     case .name(let ens):
                         nameHash = ENSContracts.nameHash(name: ens)
                     }
-                    return nameHash.web3.hexData ?? Data()
+                    return nameHash.hexData ?? Data()
                 }
 
                 var name: String? {
@@ -187,9 +187,9 @@ public enum ENSContracts {
         var node = Data.init(count: 32)
         let labels = name.components(separatedBy: ".")
         for label in labels.reversed() {
-            node.append(label.web3.keccak256)
-            node = node.web3.keccak256
+            node.append(label.keccak256)
+            node = node.keccak256
         }
-        return node.web3.hexString
+        return node.hexString
     }
 }

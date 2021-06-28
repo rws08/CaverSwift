@@ -32,7 +32,7 @@ public class ABI {
     
     static func encodeFunctionSignature(_ functionName: String) throws -> String {
         guard let data = functionName.data(using: .utf8) else { throw CaverError.invalidSignature }
-        let signature = String(bytes: data.web3.keccak256.web3.bytes)
+        let signature = String(bytes: data.keccak256.bytes)
         return String(signature[..<signature.index(signature.startIndex, offsetBy: 10)])
     }
     
@@ -96,7 +96,7 @@ public class ABI {
     
     static func encodeEventSignature(_ eventName: String) throws -> String {
         guard let data = eventName.data(using: .utf8) else { throw CaverError.invalidSignature }
-        let signature = String(bytes: data.web3.keccak256.web3.bytes)
+        let signature = String(bytes: data.keccak256.bytes)
         return signature
     }
     

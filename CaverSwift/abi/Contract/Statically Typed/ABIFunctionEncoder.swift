@@ -14,8 +14,8 @@ extension ABIFunction {
         let encoder = ABIFunctionEncoder(Self.name)
         try encode(to: encoder)
         let rawTypes = encoder.types
-        let methodId = String(hexFromBytes: try ABIFunctionEncoder.methodId(name: Self.name, types: rawTypes))
-        var raw = data.web3.hexString
+        let methodId = String(bytes: try ABIFunctionEncoder.methodId(name: Self.name, types: rawTypes))
+        var raw = data.hexString
         
         guard raw.hasPrefix(methodId) else {
             throw ABIError.invalidSignature
@@ -85,7 +85,7 @@ public class ABIFunctionEncoder {
         let typeNames = types.map { $0.rawValue }
         let signature = name + "(" + typeNames.joined(separator: ",") + ")"
         guard let data = signature.data(using: .utf8) else { throw ABIError.invalidSignature }
-        return data.web3.keccak256.web3.bytes
+        return data.keccak256.bytes
     }
     
     static func signature(name: String, types: [ABIType.Type]) throws -> [UInt8] {

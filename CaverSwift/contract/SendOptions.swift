@@ -48,7 +48,7 @@ public class SendOptions {
     }
     
     public func setGas(_ gas: BigInt) throws {
-        self.gas = String(bytes: gas.web3.bytes)
+        self.gas = String(bytes: gas.bytes)
     }
     
     public func setValue(_ value: String?) throws {
@@ -63,7 +63,7 @@ public class SendOptions {
     }
     
     public func setValue(_ value: BigInt) {
-        let gas = String(bytes: value.web3.bytes)
+        let gas = String(bytes: value.bytes)
         try? self.setValue(gas)
     }
 }

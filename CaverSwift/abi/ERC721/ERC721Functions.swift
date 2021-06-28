@@ -11,7 +11,7 @@ import BigInt
 
 public enum ERC721Functions {
     public static var interfaceId: Data {
-        return "0x80ac58cd".web3.hexData!
+        return "0x80ac58cd".hexData!
     }
     
     public struct balanceOf: ABIFunction {
@@ -175,9 +175,9 @@ public enum ERC721Functions {
 
 public enum ERC721MetadataFunctions {
     public static var interfaceId: Data {
-        return "name()".web3.keccak256.web3.bytes4 ^
-            "symbol()".web3.keccak256.web3.bytes4 ^
-            "tokenURI(uint256)".web3.keccak256.web3.bytes4
+        return "name()".keccak256.bytes4 ^
+            "symbol()".keccak256.bytes4 ^
+            "tokenURI(uint256)".keccak256.bytes4
     }
     
     public struct name: ABIFunction {
@@ -249,9 +249,9 @@ public enum ERC721MetadataFunctions {
 
 public enum ERC721EnumerableFunctions {
     public static var interfaceId: Data {
-        return "totalSupply()".web3.keccak256.web3.bytes4 ^
-            "tokenByIndex(uint256)".web3.keccak256.web3.bytes4 ^
-            "tokenOfOwnerByIndex(address,uint256)".web3.keccak256.web3.bytes4
+        return "totalSupply()".keccak256.bytes4 ^
+            "tokenByIndex(uint256)".keccak256.bytes4 ^
+            "tokenOfOwnerByIndex(address,uint256)".keccak256.bytes4
     }
 
     public struct totalSupply: ABIFunction {

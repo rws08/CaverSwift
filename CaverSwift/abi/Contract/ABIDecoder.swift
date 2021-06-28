@@ -25,7 +25,7 @@ public class ABIDecoder {
             if data == "0x" && type.isArray {
                 result.append([])
             } else {
-                guard let bytes = data.web3.bytesFromHex else { throw ABIError.invalidValue }
+                guard let bytes = data.bytesFromHex else { throw ABIError.invalidValue }
                 let decoded = try decode(bytes, forType: type, offset: offset)
                 result.append(decoded)
             }
@@ -55,7 +55,7 @@ public class ABIDecoder {
             guard let offsetHex = (try decode(data, forType: ABIRawType.FixedUInt(256), offset: offset)).first, let newOffset = Int(hex: offsetHex) else {
                 throw ABIError.invalidValue
             }
-            guard let sizeHex = (try decode(data, forType: ABIRawType.FixedUInt(256), offset: newOffset)).first, let bint = BigInt(hex: sizeHex.web3.noHexPrefix) else {
+            guard let sizeHex = (try decode(data, forType: ABIRawType.FixedUInt(256), offset: newOffset)).first, let bint = BigInt(hex: sizeHex.noHexPrefix) else {
                 throw ABIError.invalidValue
             }
             let size = Int(bint)
@@ -66,7 +66,7 @@ public class ABIDecoder {
             let upperRange = newOffset + 32 + size - 1
             guard lowerRange <= upperRange else { throw ABIError.invalidValue }
             guard data.count > upperRange else { throw ABIError.invalidValue }
-            let hex = String(hexFromBytes: Array(data[lowerRange...upperRange]))
+            let hex = String(bytes: Array(data[lowerRange...upperRange]))
             return [hex]
         case .FixedInt(_):
             guard data.count > 0 else {
@@ -77,7 +77,7 @@ public class ABIDecoder {
             guard data.count > endIndex else { throw ABIError.invalidValue }
             let buf = Data( Array(data[startIndex...endIndex]))
             let bint = BigInt(twosComplement: buf)
-            return [String(hexFromBytes: bint.web3.bytes)]
+            return [String(bytes: bint.bytes)]
         case .FixedUInt(_):
             guard data.count > 0 else {
                 return [""]
@@ -85,7 +85,7 @@ public class ABIDecoder {
             let startIndex = offset + 32 - type.size
             let endIndex = offset + 31
             guard data.count > endIndex else { throw ABIError.invalidValue }
-            let hex = String(hexFromBytes: Array(data[startIndex...endIndex])) // Do not use BInt because address is treated as uint160 and BInt is based on 64 bits (160/64 = 2.5)
+            let hex = String(bytes: Array(data[startIndex...endIndex])) // Do not use BInt because address is treated as uint160 and BInt is based on 64 bits (160/64 = 2.5)
             return [hex]
         case .FixedBytes(let size):
             guard data.count > 0 else {
@@ -94,7 +94,7 @@ public class ABIDecoder {
             let startIndex = offset
             let endIndex = offset + size - 1
             guard data.count > endIndex else { throw ABIError.invalidValue }
-            let hex = String(hexFromBytes: Array(data[startIndex...endIndex]))
+            let hex = String(bytes: Array(data[startIndex...endIndex]))
             return [hex]
         case .FixedArray(let arrayType, _):
             var result: [String] = []

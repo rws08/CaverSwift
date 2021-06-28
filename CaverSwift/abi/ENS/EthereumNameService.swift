@@ -39,11 +39,11 @@ public class EthereumNameService: EthereumNameServiceProtocol {
             return completion(EthereumNameServiceError.noNetwork, nil)
         }
         
-        let ensReverse = address.value.web3.noHexPrefix + ".addr.reverse"
+        let ensReverse = address.value.noHexPrefix + ".addr.reverse"
         let nameHash = Self.nameHash(name: ensReverse)
         
         let function = ENSContracts.ENSRegistryFunctions.resolver(contract: registryAddress,
-                                                                  _node: nameHash.web3.hexData ?? Data())
+                                                                  _node: nameHash.hexData ?? Data())
         guard let registryTransaction = try? function.transaction() else {
             completion(EthereumNameServiceError.invalidInput, nil)
             return
@@ -59,10 +59,10 @@ public class EthereumNameService: EthereumNameServiceProtocol {
             }
             
             let idx = resolverData.index(resolverData.endIndex, offsetBy: -40)
-            let resolverAddress = EthereumAddress(String(resolverData[idx...]).web3.withHexPrefix)
+            let resolverAddress = EthereumAddress(String(resolverData[idx...]).withHexPrefix)
             
             let function = ENSContracts.ENSResolverFunctions.name(contract: resolverAddress,
-                                                                  _node: nameHash.web3.hexData ?? Data())
+                                                                  _node: nameHash.hexData ?? Data())
             guard let addressTransaction = try? function.transaction() else {
                 completion(EthereumNameServiceError.invalidInput, nil)
                 return
@@ -91,7 +91,7 @@ public class EthereumNameService: EthereumNameServiceProtocol {
         }
         let nameHash = Self.nameHash(name: ens)
         let function = ENSContracts.ENSRegistryFunctions.resolver(contract: registryAddress,
-                                                                  _node: nameHash.web3.hexData ?? Data())
+                                                                  _node: nameHash.hexData ?? Data())
         
         guard let registryTransaction = try? function.transaction() else {
             completion(EthereumNameServiceError.invalidInput, nil)
@@ -108,9 +108,9 @@ public class EthereumNameService: EthereumNameServiceProtocol {
             }
             
             let idx = resolverData.index(resolverData.endIndex, offsetBy: -40)
-            let resolverAddress = EthereumAddress(String(resolverData[idx...]).web3.withHexPrefix)
+            let resolverAddress = EthereumAddress(String(resolverData[idx...]).withHexPrefix)
             
-            let function = ENSContracts.ENSResolverFunctions.addr(contract: resolverAddress, _node: nameHash.web3.hexData ?? Data())
+            let function = ENSContracts.ENSResolverFunctions.addr(contract: resolverAddress, _node: nameHash.hexData ?? Data())
             guard let addressTransaction = try? function.transaction() else {
                 completion(EthereumNameServiceError.invalidInput, nil)
                 return
@@ -134,10 +134,10 @@ public class EthereumNameService: EthereumNameServiceProtocol {
         var node = Data.init(count: 32)
         let labels = name.components(separatedBy: ".")
         for label in labels.reversed() {
-            node.append(label.web3.keccak256)
-            node = node.web3.keccak256
+            node.append(label.keccak256)
+            node = node.keccak256
         }
-        return node.web3.hexString
+        return node.hexString
     }
 
 }

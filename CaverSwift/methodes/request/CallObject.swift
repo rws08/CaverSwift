@@ -42,6 +42,6 @@ public class CallObject {
             return nil
         }
         
-        return RLP.encode(value)?.web3.hexString
+        return RLP.encode(value)?.hexString
     }
 }

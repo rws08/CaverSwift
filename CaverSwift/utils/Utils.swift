@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import secp256k1
+import SwiftECC
 import BigInt
 
 public class Utils {
-    public static let LENGTH_PRIVATE_KEY_STRING = 64;
+    public static let LENGTH_PRIVATE_KEY_STRING = 64
     
     private static let baseAddrPattern = "^(0x)?[0-9a-f]{40}$"
     private static let lowerCasePattern = "^(0x|0X)?[0-9a-f]{40}$"
@@ -43,7 +45,7 @@ public class Utils {
     public static func isHex(_ input: String) -> Bool {
         let pattern = try! NSRegularExpression(pattern: "^(-0x|0x)?[0-9A-Fa-f]*$", options: [])
         let range = NSRange(0..<input.utf16.count)
-        return !pattern.matches(in: input, options: [], range: range).isEmpty;
+        return !pattern.matches(in: input, options: [], range: range).isEmpty
     }
     
     public static func checkAddressChecksum(address: String) -> Bool {
@@ -53,10 +55,22 @@ public class Utils {
     
     public static func isValidPrivateKey(_ privateKey: String) -> Bool {
         let noHexPrefixKey = privateKey.cleanHexPrefix
-        if noHexPrefixKey.count != LENGTH_PRIVATE_KEY_STRING && isHex(privateKey) {
+        if noHexPrefixKey.count != LENGTH_PRIVATE_KEY_STRING || !isHex(privateKey) {
             return false
         }
-        return true
+        
+        return Sign.isValidPrivateKey(noHexPrefixKey)
+    }
+    
+    public static func generateRandomBytes(_ size: Int) -> Data {
+        var data = [UInt8](repeating: 0, count: size)
+        let result = SecRandomCopyBytes(kSecRandomDefault,
+                               data.count,
+                               &data)
+        if result == errSecSuccess {
+            return Data(data)
+        }
+        return Data()
     }
     
     public static func getStaticArrayElementSize(_ array: TypeArray) -> Int {
@@ -101,6 +115,79 @@ public class Utils {
         
         return true
     }
+    
+    public static func compressPublicKey(_ publicKey: String) -> String {
+//        if  {
+//
+//        }
+        
+        return publicKey
+    }
+    
+    public static func isCompressedPublicKey(_ key: String) throws -> Bool {
+        let noPrefixKey = key.cleanHexPrefix;
+
+        if(noPrefixKey.count == 66 && (noPrefixKey.startsWith("02") || noPrefixKey.startsWith("03"))) {
+            guard let isVeryfy = try? isVeryfyPublicKey(noPrefixKey) else {
+                return false
+            }
+            if(!isVeryfy) {
+                throw CaverError.RuntimeException("Invalid public key.")
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    public static func isUncompressedPublicKey(_ key: String) throws -> Bool {
+        var noPrefixKey = key.cleanHexPrefix;
+
+        if(noPrefixKey.count == 130 && noPrefixKey.startsWith("04")) {
+            noPrefixKey = String(noPrefixKey[2..<noPrefixKey.count])
+        }
+
+        if(noPrefixKey.count == 128) {
+            let x = String(noPrefixKey[0..<64])
+            let y = String(noPrefixKey[64..<noPrefixKey.count])
+
+//            if(!validateXYPoint(x, y)) {
+//                throw CaverError.RuntimeException("Invalid public key.")
+//            }
+            return true;
+        }
+        return false;
+    }
+    
+    private static func isVeryfyPublicKey(_ key: String) throws -> Bool {
+        let domain = Domain.instance(curve: .EC256k1)
+        let publicKey = try ECPublicKey(der: SwiftECC.Bytes(key.utf8))
+        
+        let privateKey = try ECPrivateKey(der: SwiftECC.Bytes(key.utf8))
+        print(privateKey.description)
+//        domain.encodePoint(domain.multiplyG(privateKey.s))
+        
+        
+        guard let ctx = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY)) else {
+            print("Failed to generate a public key: invalid context.")
+            throw KeyUtilError.invalidContext
+        }
+        
+        defer {
+            secp256k1_context_destroy(ctx)
+        }
+        
+        let inputKey = NSData(data: key.data(using: .utf8)!).bytes.assumingMemoryBound(to: UInt8.self)
+        let publicKeyPtr = UnsafeMutablePointer<secp256k1_pubkey>.allocate(capacity: 1)
+        defer {
+            inputKey.deallocate()
+            publicKeyPtr.deallocate()
+        }
+
+        let publicKeyLength = 65
+        let result = secp256k1_ec_pubkey_parse(ctx, publicKeyPtr, inputKey, publicKeyLength)
+        
+        return result == 0 ? false : true
+    }
 }
 
 public struct KlayUnit {
@@ -131,52 +218,6 @@ public struct KlayUnit {
     public func string() -> String {
         return unit
     }
-}
-
-extension StringProtocol {
-    public var cleanHexPrefix: String { isHexa ? String(dropFirst(2)) : self as! String }
-    public var addHexPrefix: String { isHexa ? self as! String : "0x\(self)"}
-    public var hexaToDecimal: Int { Int(cleanHexPrefix, radix: 16) ?? 0 }
-    public var decimalToHexa: String { .init(Int(self) ?? 0, radix: 16) }
-    public var isHexa: Bool { return hasPrefix("0x") || hasPrefix("0X") }
-    public var checkHexaLength: Bool { return self[0] == "-" ? (self.count - 1) % 2 == 0 : self.count % 2 == 0 }
-    var matchEven: String {
-        if !checkHexaLength {
-            if (self[0] == "-") {
-                if isHexa { return "0x0" + String(dropFirst(2)) }
-                else { return "-0" + self[1..<count]}
-            } else {
-                if isHexa { return "0x0" + String(dropFirst(2)) }
-                else { return "0" + self}
-            }
-        }
-        return self as! String
-    }
-    
-    subscript(offset: Int) -> Character { self[index(startIndex, offsetBy: offset)] }
-    subscript(range: Range<Int>) -> SubSequence {
-        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
-        return self[startIndex..<index(startIndex, offsetBy: range.count)]
-    }
-    subscript(range: ClosedRange<Int>) -> SubSequence {
-        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
-        return self[startIndex..<index(startIndex, offsetBy: range.count)]
-    }
-    subscript(range: PartialRangeFrom<Int>) -> SubSequence { self[index(startIndex, offsetBy: range.lowerBound)...] }
-    subscript(range: PartialRangeThrough<Int>) -> SubSequence { self[...index(startIndex, offsetBy: range.upperBound)] }
-    subscript(range: PartialRangeUpTo<Int>) -> SubSequence { self[..<index(startIndex, offsetBy: range.upperBound)] }
-    
-    func startsWith(_ prefix: String, _ i: Int = 0) -> Bool {
-        if self.count <= i+prefix.count { return false }
-        return self[i..<(i+prefix.count)] == prefix
-    }
-}
-
-extension BinaryInteger {
-    public var binary: String { .init(self, radix: 2) }
-    public var hexa: String { .init(self, radix: 16).matchEven }
-    public var decimal: String { .init(self, radix: 10) }
-    public var double: BDouble { BDouble(self.decimal) ?? BDouble.zero }
 }
 
 func WARNING(filename: String = #file, line: Int = #line, funcname: String = #function, message:Any...) {

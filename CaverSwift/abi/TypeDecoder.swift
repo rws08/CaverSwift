@@ -88,7 +88,7 @@ public class TypeDecoder {
             switch abiType {
             case .DynamicBytes, .FixedBytes(_):
                 if let paramStr = param as? String {
-                    param = paramStr.web3.hexData ?? Data()
+                    param = paramStr.hexData ?? Data()
                 } else if let paramInt = param as? BigInt {
                     param = Data.init(hex: paramInt.hexa) ?? Data()
                 }
