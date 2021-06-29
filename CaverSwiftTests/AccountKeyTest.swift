@@ -75,10 +75,10 @@ class AccountKeyLegacyTest: XCTestCase {
 
 class AccountKeyPublicTest: XCTestCase {
     func testDecodeWithString() throws {
-        let expectedAccountKey = "0xc10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9803a1898f45b2770eda7abce70e8503b5e82b748ec0ce557ac9f4f4796965e4e"
-        let actualEncodedKey = "0x02a102c10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9"
-
-        let accountKeyFail = try? AccountKeyLegacy.decode(actualEncodedKey)
-        XCTAssertTrue(accountKeyFail != nil)
+//        let expectedAccountKey = "0xc10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9803a1898f45b2770eda7abce70e8503b5e82b748ec0ce557ac9f4f4796965e4e"
+//        let actualEncodedKey = "0x02a102c10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9"
+//
+//        let accountKeyFail = try? AccountKeyLegacy.decode(actualEncodedKey)
+//        XCTAssertTrue(accountKeyFail != nil)
     }
 }

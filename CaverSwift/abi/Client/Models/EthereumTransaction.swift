@@ -46,7 +46,7 @@ public struct EthereumTransaction: EthereumTransactionProtocol, Equatable, Codab
         self.chainId = chainId
         self.gas = nil
         self.blockNumber = nil
-        let txArray: [Any?] = [self.nonce, self.gasPrice, self.gasLimit, self.to.value.noHexPrefix, self.value, self.data, self.chainId, 0, 0]
+        let txArray: [Any?] = [self.nonce, self.gasPrice, self.gasLimit, self.to.value.cleanHexPrefix, self.value, self.data, self.chainId, 0, 0]
         self.hash = RLP.encode(txArray)
     }
     
@@ -75,7 +75,7 @@ public struct EthereumTransaction: EthereumTransactionProtocol, Equatable, Codab
     }
     
     public var raw: Data? {
-        let txArray: [Any?] = [self.nonce, self.gasPrice, self.gasLimit, self.to.value.noHexPrefix, self.value, self.data, self.chainId, 0, 0]
+        let txArray: [Any?] = [self.nonce, self.gasPrice, self.gasLimit, self.to.value.cleanHexPrefix, self.value, self.data, self.chainId, 0, 0]
 
         return RLP.encode(txArray)
     }
@@ -146,7 +146,7 @@ struct SignedTransaction {
     }
     
     var raw: Data? {
-        let txArray: [Any?] = [transaction.nonce, transaction.gasPrice, transaction.gasLimit, transaction.to.value.noHexPrefix, transaction.value, transaction.data, self.v, self.r, self.s]
+        let txArray: [Any?] = [transaction.nonce, transaction.gasPrice, transaction.gasLimit, transaction.to.value.cleanHexPrefix, transaction.value, transaction.data, self.v, self.r, self.s]
 
         return RLP.encode(txArray)
     }

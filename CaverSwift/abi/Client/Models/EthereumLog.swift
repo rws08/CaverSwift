@@ -68,10 +68,10 @@ extension EthereumLog: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.removed, forKey: .removed)
         if let bytes = self.logIndex?.bytes {
-            try? container.encode(String(bytes: bytes).withHexPrefix, forKey: .logIndex)
+            try? container.encode(String(bytes: bytes).addHexPrefix, forKey: .logIndex)
         }
         if let bytes = self.transactionIndex?.bytes {
-            try? container.encode(String(bytes: bytes).withHexPrefix, forKey: .transactionIndex)
+            try? container.encode(String(bytes: bytes).addHexPrefix, forKey: .transactionIndex)
         }
         try? container.encode(self.transactionHash, forKey: .transactionHash)
         try? container.encode(self.blockHash, forKey: .blockHash)

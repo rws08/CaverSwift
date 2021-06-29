@@ -61,11 +61,11 @@ class KeystoreUtil: KeystoreUtilProtocol {
         // create keystore
         let crypto = KeystoreFileCrypto(
             cipher: "aes-128-ctr",
-            cipherparams: KeystoreFileCryptoCipherParams(iv: iv.hexString.noHexPrefix),
-            ciphertext: ciphertext.hexString.noHexPrefix,
+            cipherparams: KeystoreFileCryptoCipherParams(iv: iv.hexString.cleanHexPrefix),
+            ciphertext: ciphertext.hexString.cleanHexPrefix,
             kdf: keyDerivator.algorithm.function(),
-            kdfparams: KeystoreFileCryptoKdfParams(c: self.dkround, dklen: self.dklen, prf: keyDerivator.algorithm.hash(), salt: salt.hexString.noHexPrefix),
-            mac: mac.hexString.noHexPrefix)
+            kdfparams: KeystoreFileCryptoKdfParams(c: self.dkround, dklen: self.dklen, prf: keyDerivator.algorithm.hash(), salt: salt.hexString.cleanHexPrefix),
+            mac: mac.hexString.cleanHexPrefix)
         
         let keystore = KeystoreFile(crypto: crypto, address: address, version: 3)
         
@@ -102,7 +102,7 @@ class KeystoreUtil: KeystoreUtilProtocol {
         let macKey = derivedKey.subdata(in: 16..<32)
         let concat = macKey + ciphertext
         let mac = concat.keccak256
-        guard mac.hexString.noHexPrefix == keystore.crypto.mac else {
+        guard mac.hexString.cleanHexPrefix == keystore.crypto.mac else {
             throw KeystoreUtilError.corruptedKeystore
         }
         

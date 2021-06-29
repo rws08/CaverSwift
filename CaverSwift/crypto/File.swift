@@ -7,62 +7,34 @@
 
 import Foundation
 import secp256k1
+import BigInt
 
 open class Sign {
+    static let DOMAIN = Domain.instance(curve: .EC256k1)
+    
     public static func isValidPrivateKey(_ privateKey: String) -> Bool {
-        guard let ctx = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY)) else {
-            print("Failed to generate a public key: invalid context.")
-            return false
-        }
-        
-        defer {
-            secp256k1_context_destroy(ctx)
-        }
-        
-        let privateKeyPtr = NSData(data: privateKey.data(using: .utf8)!).bytes.assumingMemoryBound(to: UInt8.self)
-        
-        guard secp256k1_ec_seckey_verify(ctx, privateKeyPtr) == 1 else {
-            print("Failed to generate a public key: private key is not valid.")
-            return false
-        }
-        return true
+        guard let s = BInt(privateKey.cleanHexPrefix, radix: 16),
+              let privKey = try? ECPrivateKey(domain: DOMAIN, s: s) else { return false }
+        return publicPointFromPrivate(privKey).isValid
     }
     
-    public static func publicKeyFromPrivate(_ privateKey: Data) throws -> Data {
-        guard let ctx = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY)) else {
-            print("Failed to generate a public key: invalid context.")
-            throw KeyUtilError.invalidContext
-        }
+    public static func publicKeyFromPrivate(_ privateKey: String) -> String {
+        guard let s = BInt(privateKey.cleanHexPrefix, radix: 16),
+              let privKey = try? ECPrivateKey(domain: DOMAIN, s: s),
+              let publicKey = try? DOMAIN.encodePoint(publicPointFromPrivate(privKey)) else { return "" }
         
-        defer {
-            secp256k1_context_destroy(ctx)
-        }
-        
-        
-        let privateKeyPtr = (privateKey as NSData).bytes.assumingMemoryBound(to: UInt8.self)
-        guard secp256k1_ec_seckey_verify(ctx, privateKeyPtr) == 1 else {
-            print("Failed to generate a public key: private key is not valid.")
-            throw KeyUtilError.privateKeyInvalid
-        }
-        
-        let publicKeyPtr = UnsafeMutablePointer<secp256k1_pubkey>.allocate(capacity: 1)
-        defer {
-            publicKeyPtr.deallocate()
-        }
-        guard secp256k1_ec_pubkey_create(ctx, publicKeyPtr, privateKeyPtr) == 1 else {
-            print("Failed to generate a public key: public key could not be created.")
-            throw KeyUtilError.unknownError
-        }
-        
-        var publicKeyLength = 65
-        let outputPtr = UnsafeMutablePointer<UInt8>.allocate(capacity: publicKeyLength)
-        defer {
-            outputPtr.deallocate()
-        }
-        secp256k1_ec_pubkey_serialize(ctx, outputPtr, &publicKeyLength, publicKeyPtr, UInt32(SECP256K1_EC_UNCOMPRESSED))
-        
-        let publicKey = Data(bytes: outputPtr, count: publicKeyLength).subdata(in: 1..<publicKeyLength)
-        
-        return publicKey
+        return String(bytes: publicKey)
     }
+    
+    public static func publicPointFromPrivate(_ privateKey: ECPrivateKey) -> Point {
+        var privKey = privateKey.s
+        if privateKey.s.bitWidth > DOMAIN.order.bitWidth {
+            privKey = privKey.mod(DOMAIN.order)
+        }
+        
+        var point = DOMAIN.multiplyG(privKey)
+        point.isValid = DOMAIN.contains(point)
+        return point
+    }
+    
 }

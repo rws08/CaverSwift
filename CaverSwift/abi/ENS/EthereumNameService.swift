@@ -39,7 +39,7 @@ public class EthereumNameService: EthereumNameServiceProtocol {
             return completion(EthereumNameServiceError.noNetwork, nil)
         }
         
-        let ensReverse = address.value.noHexPrefix + ".addr.reverse"
+        let ensReverse = address.value.cleanHexPrefix + ".addr.reverse"
         let nameHash = Self.nameHash(name: ensReverse)
         
         let function = ENSContracts.ENSRegistryFunctions.resolver(contract: registryAddress,
@@ -59,7 +59,7 @@ public class EthereumNameService: EthereumNameServiceProtocol {
             }
             
             let idx = resolverData.index(resolverData.endIndex, offsetBy: -40)
-            let resolverAddress = EthereumAddress(String(resolverData[idx...]).withHexPrefix)
+            let resolverAddress = EthereumAddress(String(resolverData[idx...]).addHexPrefix)
             
             let function = ENSContracts.ENSResolverFunctions.name(contract: resolverAddress,
                                                                   _node: nameHash.hexData ?? Data())
@@ -108,7 +108,7 @@ public class EthereumNameService: EthereumNameServiceProtocol {
             }
             
             let idx = resolverData.index(resolverData.endIndex, offsetBy: -40)
-            let resolverAddress = EthereumAddress(String(resolverData[idx...]).withHexPrefix)
+            let resolverAddress = EthereumAddress(String(resolverData[idx...]).addHexPrefix)
             
             let function = ENSContracts.ENSResolverFunctions.addr(contract: resolverAddress, _node: nameHash.hexData ?? Data())
             guard let addressTransaction = try? function.transaction() else {

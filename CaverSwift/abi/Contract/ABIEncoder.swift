@@ -115,7 +115,7 @@ public class ABIEncoder {
                 encoded = bytes
             }
         case .DynamicString:
-            let bytes = value.bytes
+            let bytes = [UInt8](value.utf8)
             let len = try encodeRaw(String(bytes.count), forType: ABIRawType.FixedUInt(256)).bytes
             let pack: Int
             if bytes.count == 0 {
@@ -159,7 +159,7 @@ public class ABIEncoder {
             }
         case .DynamicArray(let type):
             let unitSize = type.size * 2
-            let stringValue = value.noHexPrefix
+            let stringValue = value.cleanHexPrefix
             let size = stringValue.count / unitSize
             
             let padUnits = type.isPaddedInDynamic

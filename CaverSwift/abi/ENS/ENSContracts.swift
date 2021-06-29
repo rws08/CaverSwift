@@ -91,7 +91,7 @@ public enum ENSContracts {
                     let nameHash: String
                     switch self {
                     case .address(let address):
-                        nameHash = ENSContracts.nameHash(name: address.value.noHexPrefix + ".addr.reverse")
+                        nameHash = ENSContracts.nameHash(name: address.value.cleanHexPrefix + ".addr.reverse")
                     case .name(let ens):
                         nameHash = ENSContracts.nameHash(name: ens)
                     }

@@ -19,8 +19,8 @@ open class SingleKeyring: AbstractKeyring {
         return nil
     }
     
-    public func getPublicKey(_ compressed: Bool) -> String {
-        return key.getPublicKey(compressed)
+    public func getPublicKey(_ compressed: Bool = false) throws -> String {
+        return try key.getPublicKey(compressed)
     }
     
     public func getKeyByRole(_ role: Int) throws -> PrivateKey {
@@ -28,5 +28,9 @@ open class SingleKeyring: AbstractKeyring {
             throw CaverError.IllegalAccessException("Invalid role index : \(role)")
         }
         return key
+    }
+    
+    public func getKlaytnWalletKey() -> String {
+        return "\(key.privateKey)0x00\(address)"
     }
 }

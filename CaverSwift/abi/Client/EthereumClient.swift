@@ -138,7 +138,7 @@ public class EthereumClient: EthereumClientProtocol {
     
     public func eth_getBalance(address: EthereumAddress, block: EthereumBlock, completion: @escaping ((EthereumClientError?, BigUInt?) -> Void)) {
         EthereumRPC.execute(session: session, url: url, method: "eth_getBalance", params: [address.value, block.stringValue], receive: String.self) { (error, response) in
-            if let resString = response as? String, let balanceInt = BigUInt(hex: resString.noHexPrefix) {
+            if let resString = response as? String, let balanceInt = BigUInt(hex: resString.cleanHexPrefix) {
                 completion(nil, balanceInt)
             } else {
                 completion(EthereumClientError.unexpectedReturnValue, nil)

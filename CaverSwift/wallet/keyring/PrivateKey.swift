@@ -34,21 +34,27 @@ open class PrivateKey {
         
         var innerHex = Data(random)
         innerHex.append(entropyArr)
-        innerHex = innerHex.sha3
+        innerHex = innerHex.keccak256
         var middleHex = Utils.generateRandomBytes(32)
         middleHex.append(innerHex)
         middleHex.append(Utils.generateRandomBytes(32))
         
-        let outerHex = middleHex.sha3.hexString
+        let outerHex = middleHex.keccak256.hexString
         
         return try! PrivateKey(outerHex)
     }
     
-    public func getPublicKey(_ compressed: Bool) -> String {
-        guard let publicKey = try? Sign.publicKeyFromPrivate(privateKey.cleanHexPrefix.data(using: .utf8)!) else { return "" }
+    public func getPublicKey(_ compressed: Bool) throws -> String {
+        let publicKey = Sign.publicKeyFromPrivate(privateKey)
+        if compressed {
+            return try Utils.compressPublicKey(publicKey)
+        }
         
-        
-        
-        return ""
+        return publicKey
+    }
+    
+    public func getDerivedAddress() -> String {
+        let publicKey = Sign.publicKeyFromPrivate(privateKey)
+        return Utils.getAddress(publicKey).addHexPrefix
     }
 }

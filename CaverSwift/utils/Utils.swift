@@ -12,11 +12,19 @@ import BigInt
 
 public class Utils {
     public static let LENGTH_PRIVATE_KEY_STRING = 64
-    
+    public static let LENGTH_KLAYTN_WALLET_KEY_STRING = 110
+    static let DOMAIN = Domain.instance(curve: .EC256k1)
+        
     private static let baseAddrPattern = "^(0x)?[0-9a-f]{40}$"
     private static let lowerCasePattern = "^(0x|0X)?[0-9a-f]{40}$"
     private static let upperCasePattern = "^(0x|0X)?[0-9A-F]{40}$"
 
+    public static func getAddress(_ publicKey: String) -> String {
+        guard let hash = publicKey.hexData?.keccak256 else { return "" }
+        let address = hash.subdata(in: 12..<hash.count)
+        return address.hexString
+    }
+    
     public static func isAddress(_ address: String) -> Bool {
         let baseAddrCase = try! NSRegularExpression(pattern: Utils.baseAddrPattern, options: [.caseInsensitive])
         let lowerCase = try! NSRegularExpression(pattern: Utils.lowerCasePattern, options: [])
@@ -60,6 +68,29 @@ public class Utils {
         }
         
         return Sign.isValidPrivateKey(noHexPrefixKey)
+    }
+    
+    public static func isKlaytnWalletKey(_ key: String) -> Bool {
+        let cleanPrefixKey = key.cleanHexPrefix
+        if cleanPrefixKey.count != LENGTH_KLAYTN_WALLET_KEY_STRING {
+            return false
+        }
+        
+        let arr = cleanPrefixKey.components(separatedBy: "0x")
+        if arr.count < 3 {
+            return false
+        }
+        if arr[1] != "00" {
+            return false
+        }
+        if !Utils.isAddress(arr[2]) {
+            return false
+        }
+        if !Utils.isValidPrivateKey(arr[0]) {
+            return false
+        }
+        
+        return true
     }
     
     public static func generateRandomBytes(_ size: Int) -> Data {
@@ -111,17 +142,81 @@ public class Utils {
         return count
     }
     
-    public static func isValidPublicKey(_ publicKey: String) -> Bool {
-        
-        return true
+    public static func getECPoint(_ key: String) throws -> Point {
+        var key = key
+        if try isUncompressedPublicKey(key) {
+            key = try compressPublicKey(key)
+        }
+        guard let bytes = key.bytesFromHex else { throw CaverError.invalidValue }
+        return try DOMAIN.decodePoint(bytes)
     }
     
-    public static func compressPublicKey(_ publicKey: String) -> String {
-//        if  {
-//
-//        }
+    public static func getECPoint(_ x: String, _ y: String) -> Point {
+        return Point(BInt(x, radix: 16) ?? BInt.ZERO, BInt(y, radix: 16) ?? BInt.ZERO)
+    }
+    
+    public static func validateXYPoint(_ compressedPubKey: String) -> Bool {
+        guard var point = try? getECPoint(compressedPubKey) else { return false }
+        point.isValid = DOMAIN.contains(point)
+        return point.isValid
+    }
+    
+    public static func validateXYPoint(_ x: String, _ y: String) -> Bool {
+        var point = getECPoint(x, y)
+        point.isValid = DOMAIN.contains(point)
+        return point.isValid
+    }
+    
+    public static func isValidPublicKey(_ publicKey: String) -> Bool {
+        var noPrefixPubKey = publicKey.cleanHexPrefix
+        if noPrefixPubKey.count == 130 && noPrefixPubKey.startsWith("04") {
+            noPrefixPubKey = String(noPrefixPubKey.dropFirst(2))
+        }
         
-        return publicKey
+        if noPrefixPubKey.count != 66 && noPrefixPubKey.count != 128 {
+            return false
+        }
+        
+        // Compressed Format
+        if noPrefixPubKey.count == 66 {
+            if(!noPrefixPubKey.startsWith("02") && !noPrefixPubKey.startsWith("03")) {
+                return false
+            }
+            return validateXYPoint(publicKey)
+        } else { // Uncompressed Format
+            let x = String(noPrefixPubKey[0..<64])
+            let y = String(noPrefixPubKey[64..<noPrefixPubKey.count])
+
+            return validateXYPoint(x, y)
+        }
+    }
+    
+    public static func decompressPublicKey(_ publicKey: String) throws -> String {
+        if try isUncompressedPublicKey(publicKey) {
+            return publicKey
+        }
+        
+        guard let point = try? getECPoint(publicKey),
+              let decompressPublicKey = try? DOMAIN.encodePoint(point) else { return "" }
+        
+        return String(bytes: decompressPublicKey)
+    }
+    
+    public static func compressPublicKey(_ publicKey: String) throws -> String {
+        if try isCompressedPublicKey(publicKey) {
+            return publicKey
+        }
+        
+        var noPrefixKey = publicKey.cleanHexPrefix
+        if noPrefixKey.count == 130 && noPrefixKey.startsWith("04") {
+            noPrefixKey = String(noPrefixKey.dropFirst(2))
+        }
+        
+        guard let publicKeyBN = BInt(noPrefixKey, radix: 16) else { return "" }
+        let publicKeyX = String(noPrefixKey[0..<64])
+        let pubKeyYPrefix = publicKeyBN.testBit(0) ? "03" : "02"
+        
+        return pubKeyYPrefix + publicKeyX
     }
     
     public static func isCompressedPublicKey(_ key: String) throws -> Bool {
@@ -150,43 +245,19 @@ public class Utils {
             let x = String(noPrefixKey[0..<64])
             let y = String(noPrefixKey[64..<noPrefixKey.count])
 
-//            if(!validateXYPoint(x, y)) {
-//                throw CaverError.RuntimeException("Invalid public key.")
-//            }
+            if(!validateXYPoint(x, y)) {
+                throw CaverError.RuntimeException("Invalid public key.")
+            }
             return true;
         }
         return false;
     }
     
     private static func isVeryfyPublicKey(_ key: String) throws -> Bool {
-        let domain = Domain.instance(curve: .EC256k1)
-        let publicKey = try ECPublicKey(der: SwiftECC.Bytes(key.utf8))
+        guard let bytes = key.bytesFromHex,
+              let point = try? DOMAIN.decodePoint(bytes) else { throw CaverError.invalidValue }
         
-        let privateKey = try ECPrivateKey(der: SwiftECC.Bytes(key.utf8))
-        print(privateKey.description)
-//        domain.encodePoint(domain.multiplyG(privateKey.s))
-        
-        
-        guard let ctx = secp256k1_context_create(UInt32(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY)) else {
-            print("Failed to generate a public key: invalid context.")
-            throw KeyUtilError.invalidContext
-        }
-        
-        defer {
-            secp256k1_context_destroy(ctx)
-        }
-        
-        let inputKey = NSData(data: key.data(using: .utf8)!).bytes.assumingMemoryBound(to: UInt8.self)
-        let publicKeyPtr = UnsafeMutablePointer<secp256k1_pubkey>.allocate(capacity: 1)
-        defer {
-            inputKey.deallocate()
-            publicKeyPtr.deallocate()
-        }
-
-        let publicKeyLength = 65
-        let result = secp256k1_ec_pubkey_parse(ctx, publicKeyPtr, inputKey, publicKeyLength)
-        
-        return result == 0 ? false : true
+        return DOMAIN.contains(point)
     }
 }
 

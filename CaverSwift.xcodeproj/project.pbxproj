@@ -430,18 +430,18 @@
 		E38FA0D82689A6CB00F532D0 /* SwiftECC */ = {
 			isa = PBXGroup;
 			children = (
-				E38FA0D92689A6CB00F532D0 /* RP.swift */,
-				E38FA0DA2689A6CB00F532D0 /* Curve.swift */,
-				E38FA0DB2689A6CB00F532D0 /* ECPublicKey.swift */,
+				E38FA1052689A6CB00F532D0 /* Base64.swift */,
 				E38FA0DC2689A6CB00F532D0 /* Cipher */,
-				E38FA0E92689A6CB00F532D0 /* Exception.swift */,
-				E38FA0EA2689A6CB00F532D0 /* Signature.swift */,
-				E38FA0EB2689A6CB00F532D0 /* ECPrivateKey.swift */,
-				E38FA0EC2689A6CB00F532D0 /* Point.swift */,
+				E38FA0DA2689A6CB00F532D0 /* Curve.swift */,
 				E38FA0ED2689A6CB00F532D0 /* Domain.swift */,
 				E38FA0EE2689A6CB00F532D0 /* Domain2 */,
 				E38FA0F72689A6CB00F532D0 /* DomainP */,
-				E38FA1052689A6CB00F532D0 /* Base64.swift */,
+				E38FA0EB2689A6CB00F532D0 /* ECPrivateKey.swift */,
+				E38FA0DB2689A6CB00F532D0 /* ECPublicKey.swift */,
+				E38FA0E92689A6CB00F532D0 /* Exception.swift */,
+				E38FA0EC2689A6CB00F532D0 /* Point.swift */,
+				E38FA0D92689A6CB00F532D0 /* RP.swift */,
+				E38FA0EA2689A6CB00F532D0 /* Signature.swift */,
 			);
 			path = SwiftECC;
 			sourceTree = "<group>";

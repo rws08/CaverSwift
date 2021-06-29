@@ -55,7 +55,7 @@ public class ABIDecoder {
             guard let offsetHex = (try decode(data, forType: ABIRawType.FixedUInt(256), offset: offset)).first, let newOffset = Int(hex: offsetHex) else {
                 throw ABIError.invalidValue
             }
-            guard let sizeHex = (try decode(data, forType: ABIRawType.FixedUInt(256), offset: newOffset)).first, let bint = BigInt(hex: sizeHex.noHexPrefix) else {
+            guard let sizeHex = (try decode(data, forType: ABIRawType.FixedUInt(256), offset: newOffset)).first, let bint = BigInt(hex: sizeHex.cleanHexPrefix) else {
                 throw ABIError.invalidValue
             }
             let size = Int(bint)

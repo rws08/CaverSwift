@@ -12,25 +12,55 @@ import BigInt
 import keccaktiny
 
 extension StringProtocol {
-    public var cleanHexPrefix: String { isHexa ? String(dropFirst(2)) : self as! String }
-    public var addHexPrefix: String { isHexa ? self as! String : "0x\(self)"}
-    public var hexaToDecimal: Int { Int(cleanHexPrefix, radix: 16) ?? 0 }
-    public var decimalToHexa: String { .init(Int(self) ?? 0, radix: 16) }
-    public var isHexa: Bool { return hasPrefix("0x") || hasPrefix("0X") }
-    public var checkHexaLength: Bool { return self[0] == "-" ? (self.count - 1) % 2 == 0 : self.count % 2 == 0 }
-    var matchEven: String {
-        if !checkHexaLength {
-            if (self[0] == "-") {
-                if isHexa { return "0x0" + String(dropFirst(2)) }
-                else { return "-0" + self[1..<count]}
+    public var cleanHexPrefix: String {
+        if isHexa {
+            if isHexaPlus {
+                let clean = String(dropFirst(2))
+                if clean.count % 2 == 0 { //"0x0100"
+                    return clean
+                } else { //"0x100"
+                    return "0\(clean)"
+                }
             } else {
-                if isHexa { return "0x0" + String(dropFirst(2)) }
-                else { return "0" + self}
+                let clean = String(dropFirst(3))
+                if clean.count % 2 == 0 { //"-0x0100"
+                    return "-\(clean)"
+                } else { //"-0x100"
+                    return "-0\(clean)"
+                }
+            }
+        } else {
+            if isMinus {
+                let clean = String(dropFirst(1))
+                if clean.count % 2 == 0 { //"-0100"
+                    return "-\(clean)"
+                } else { //"-100"
+                    return "-0\(clean)"
+                }
+            } else {
+                if self.count % 2 == 0 { //"0100"
+                    return "\(self)"
+                } else { //"100"
+                    return "0\(self)"
+                }
             }
         }
-        return self as! String
     }
-    
+    public var addHexPrefix: String {
+        let clean = cleanHexPrefix
+        if clean.isMinus {
+            return "-0x\(clean)"
+        } else {
+            return "0x\(clean)"
+        }
+    }
+    public var hexaToDecimal: Int { Int(cleanHexPrefix, radix: 16) ?? 0 }
+    public var decimalToHexa: String { .init(Int(self) ?? 0, radix: 16) }
+    public var isHexa: Bool { return isHexaPlus || isHexaMinus}
+    public var isHexaPlus: Bool { return hasPrefix("0x") || hasPrefix("0X") }
+    public var isHexaMinus: Bool { return hasPrefix("-0x") || hasPrefix("-0X") }
+    public var isMinus: Bool { return self[0] == "-" }
+
     subscript(offset: Int) -> Character { self[index(startIndex, offsetBy: offset)] }
     subscript(range: Range<Int>) -> SubSequence {
         let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
@@ -52,14 +82,14 @@ extension StringProtocol {
 
 extension BinaryInteger {
     public var binary: String { .init(self, radix: 2) }
-    public var hexa: String { .init(self, radix: 16).matchEven }
+    public var hexa: String { .init(self, radix: 16).addHexPrefix }
     public var decimal: String { .init(self, radix: 10) }
     public var double: BDouble { BDouble(self.decimal) ?? BDouble.zero }
 }
 
 public extension BigUInt {
     init?(hex: String) {
-        self.init(hex.noHexPrefix.lowercased(), radix: 16)
+        self.init(hex.cleanHexPrefix.lowercased(), radix: 16)
     }
     
     var bytes: [UInt8] {
@@ -82,7 +112,7 @@ public extension BigUInt {
 
 public extension BigInt {
     init?(hex: String) {
-        self.init(hex.noHexPrefix.lowercased(), radix: 16)
+        self.init(hex.cleanHexPrefix.lowercased(), radix: 16)
     }
     
     init(twosComplement data: Data) {
@@ -120,7 +150,7 @@ public extension BigInt {
 
 public extension Int {
     init?(hex: String) {
-        self.init(hex.noHexPrefix, radix: 16)
+        self.init(hex.cleanHexPrefix, radix: 16)
     }
     
     var hexString: String {
@@ -130,7 +160,7 @@ public extension Int {
 
 public extension Data {
     init?(hex: String) {
-        if let byteArray = try? HexUtil.byteArray(fromHex: hex.noHexPrefix) {
+        if let byteArray = try? HexUtil.byteArray(fromHex: hex.cleanHexPrefix) {
             self.init(bytes: byteArray, count: byteArray.count)
         } else {
             return nil
@@ -188,10 +218,6 @@ public extension Data {
         keccak_256(result, 32, input, self.count)
         return Data(bytes: result, count: 32)
     }
-    
-    var sha3: Data {
-        return keccak256
-    }
 }
 
 public extension String {
@@ -199,27 +225,8 @@ public extension String {
         self.init("0x" + bytes.map { String(format: "%02hhx", $0) }.joined())
     }
     
-    var noHexPrefix: String {
-        if self.hasPrefix("0x") {
-            let index = self.index(self.startIndex, offsetBy: 2)
-            if self.count % 2 == 0 {
-                return String(self[index...])
-            } else {
-                return String("0" + self[index...])
-            }
-        }
-        return self
-    }
-    
-    var withHexPrefix: String {
-        if !self.hasPrefix("0x") {
-            return "0x" + self
-        }
-        return self
-    }
-    
     var stringValue: String {
-        if let byteArray = try? HexUtil.byteArray(fromHex: self.noHexPrefix), let str = String(bytes: byteArray, encoding: .utf8) {
+        if let byteArray = try? HexUtil.byteArray(fromHex: self.cleanHexPrefix), let str = String(bytes: byteArray, encoding: .utf8) {
             return str
         }
         
@@ -227,26 +234,21 @@ public extension String {
     }
     
     var hexData: Data? {
-        let noHexPrefix = self.noHexPrefix
+        let noHexPrefix = self.cleanHexPrefix
         if let bytes = try? HexUtil.byteArray(fromHex: noHexPrefix) {
-            return Data( bytes)
+            return Data(bytes)
         }
         
         return nil
     }
     
-    var bytes: [UInt8] {
-        return [UInt8](self.utf8)
-    }
-    
     var bytesFromHex: [UInt8]? {
-        let hex = self.noHexPrefix
-        do {
-            let byteArray = try HexUtil.byteArray(fromHex: hex)
-            return byteArray
-        } catch {
-            return nil
+        let noHexPrefix = self.cleanHexPrefix
+        if let bytes = try? HexUtil.byteArray(fromHex: noHexPrefix) {
+            return bytes
         }
+        
+        return nil
     }
     
     var isNumeric: Bool {
@@ -272,6 +274,6 @@ public extension String {
     }
     
     var sha3String: String {
-        return String(bytes: keccak256.bytes).withHexPrefix
+        return String(bytes: keccak256.bytes).addHexPrefix
     }
 }
