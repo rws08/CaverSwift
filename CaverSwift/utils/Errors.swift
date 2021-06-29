@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum CaverError: Error {
+public enum CaverError: Error, Equatable {
     case ArgumentException(String)
     case NumberFormatException(String)
     case IOException(String)

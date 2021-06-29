@@ -8,15 +8,15 @@
 import Foundation
 
 open class KeyringFactory {
-    public static func generate() throws -> SingleKeyring {
-        return try KeyringFactory.generate("")
+    public static func generate() -> SingleKeyring? {
+        return KeyringFactory.generate("")
     }
     
-    public static func generate(_ entropy: String) throws -> SingleKeyring {
+    public static func generate(_ entropy: String) -> SingleKeyring? {
         let privateKey = PrivateKey.generate(entropy)
         let address = privateKey.getDerivedAddress()
         
-        return try createWithSingleKey(address, privateKey.privateKey)
+        return try? createWithSingleKey(address, privateKey.privateKey)
     }
     
     public static func createWithSingleKey(_ address: String, _ key: String) throws -> SingleKeyring {

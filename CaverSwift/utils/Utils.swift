@@ -56,6 +56,69 @@ public class Utils {
         return !pattern.matches(in: input, options: [], range: range).isEmpty
     }
     
+    public static func isHexStrict(_ input: String) -> Bool {
+        let pattern = try! NSRegularExpression(pattern: "^(-)?0x[0-9A-Fa-f]*$", options: [])
+        let range = NSRange(0..<input.utf16.count)
+        return !pattern.matches(in: input, options: [], range: range).isEmpty
+    }
+    
+    public static func addHexPrefix(_ input: String) -> String {
+        return input.addHexPrefix
+    }
+    
+    public static func stripHexPrefix(_ input: String) -> String {
+        return input.cleanHexPrefix
+    }
+    
+    public static func convertToPeb(_ num: String, _ unit: String) -> String {
+        return convertToPeb(BigInt(num), KlayUnit.fromString(unit))
+    }
+    
+    public static func convertToPeb(_ num: BigInt, _ unit: String) -> String {
+        return convertToPeb(num, KlayUnit.fromString(unit))
+    }
+    
+    public static func convertToPeb(_ num: String, _ unit: KlayUnit) -> String {
+        return convertToPeb(BigInt(num), unit)
+    }
+    
+    public static func convertToPeb(_ num: BigInt?, _ unit: KlayUnit) -> String {
+        guard let num = num,
+              let num = BDouble(num.decimal) else { return "" }
+        
+        return (num * unit.getPebFactor()).rounded().description
+    }
+    
+    public static func convertFromPeb(_ num: String, _ unit: String) -> String {
+        return convertFromPeb(BigInt(num), KlayUnit.fromString(unit))
+    }
+    
+    public static func convertFromPeb(_ num: BigInt, _ unit: String) -> String {
+        return convertFromPeb(num, KlayUnit.fromString(unit))
+    }
+    
+    public static func convertFromPeb(_ num: String, _ unit: KlayUnit) -> String {
+        return convertFromPeb(BigInt(num), unit)
+    }
+    
+    public static func convertFromPeb(_ num: BigInt?, _ unit: KlayUnit) -> String {
+        guard let num = num,
+              let num = BDouble(num.decimal) else { return "" }
+        
+        return (num / unit.getPebFactor()).rounded().description
+    }
+    
+    public static func isEmptySig(_ signatureData: SignatureData) -> Bool {
+        return SignatureData.getEmptySignature() == signatureData
+    }
+    
+    public static func isEmptySig(_ signatureDataList: [SignatureData]) -> Bool {
+        let emptySig = SignatureData.getEmptySignature()
+        return signatureDataList.filter {
+            $0 != emptySig
+        }.isEmpty
+    }
+    
     public static func checkAddressChecksum(address: String) -> Bool {
         let address = address.replacingOccurrences(of: "0X", with: "0x")        
         return KeyUtil.toChecksumAddress(address) == address.addHexPrefix
@@ -253,6 +316,26 @@ public class Utils {
         return false;
     }
     
+    public static func hashMessage(_ message: String) -> String {
+        let preamble = "\\x19Klaytn Signed Message:\\n"
+        let klaytnMessage = "\(preamble)\(message.count)\(message)"
+        return klaytnMessage.sha3String
+    }
+    
+    public static func parseKlaytnWalletKey(_ key: String) throws -> [String] {
+        if !isKlaytnWalletKey(key) {
+            throw CaverError.IllegalAccessException("Invalid Klaytn wallet key.")
+        }
+        
+        //0x{private key}0x{type}0x{address in hex}
+        //[0] = privateKey
+        //[1] = type - must be "00"
+        //[2] = address
+        let cleanPrefixKey = key.cleanHexPrefix
+        let arr = cleanPrefixKey.components(separatedBy: "0x").map { $0.addHexPrefix }
+        return arr
+    }
+    
     private static func isVeryfyPublicKey(_ key: String) throws -> Bool {
         guard let bytes = key.bytesFromHex,
               let point = try? DOMAIN.decodePoint(bytes) else { throw CaverError.invalidValue }
@@ -288,6 +371,24 @@ public struct KlayUnit {
     
     public func string() -> String {
         return unit
+    }
+    
+    public static func fromString(_ unitName: String) -> KlayUnit {
+        switch unitName {
+        case KlayUnit.peb.unit: return .peb
+        case KlayUnit.kpeb.unit: return .kpeb
+        case KlayUnit.Mpeb.unit: return .Mpeb
+        case KlayUnit.Gpeb.unit: return .Gpeb
+        case KlayUnit.ston.unit: return .ston
+        case KlayUnit.uKLAY.unit: return .uKLAY
+        case KlayUnit.mKLAY.unit: return .mKLAY
+        case KlayUnit.KLAY.unit: return .KLAY
+        case KlayUnit.kKLAY.unit: return .kKLAY
+        case KlayUnit.MKLAY.unit: return .MKLAY
+        case KlayUnit.GKLAY.unit: return .GKLAY
+        case KlayUnit.TKLAY.unit: return .TKLAY
+        default: return .KLAY
+        }
     }
 }
 

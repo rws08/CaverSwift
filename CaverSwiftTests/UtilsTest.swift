@@ -69,7 +69,7 @@ class isValidPrivateKeyTest: XCTestCase {
 
 class isKlaytnWalletKeyTest: XCTestCase {
     func testValidWalletKey() throws {
-        guard let walletKey = try? KeyringFactory.generate().getKlaytnWalletKey() else { return }
+        guard let walletKey = KeyringFactory.generate()?.getKlaytnWalletKey() else { return }
         XCTAssertTrue(Utils.isKlaytnWalletKey(walletKey))
     }
     
@@ -88,7 +88,7 @@ class isKlaytnWalletKeyTest: XCTestCase {
 
 class isValidPublicKeyTest: XCTestCase {
     func testUncompressedKey() throws {
-        guard let key = try? KeyringFactory.generate().getPublicKey() else { return }
+        guard let key = try? KeyringFactory.generate()?.getPublicKey() else { return }
         XCTAssertTrue(Utils.isValidPublicKey(key))
     }
     
@@ -98,7 +98,7 @@ class isValidPublicKeyTest: XCTestCase {
     }
     
     func testCompressedKey() throws {
-        guard let key = try? KeyringFactory.generate().getPublicKey(),
+        guard let key = try? KeyringFactory.generate()?.getPublicKey(),
               let key = try? Utils.compressPublicKey(key) else { return }
         
         XCTAssertTrue(Utils.isValidPublicKey(key))
@@ -154,6 +154,7 @@ class compressPublicKeyTest: XCTestCase {
         
         XCTAssertTrue(Utils.isValidPublicKey(compressed))
     }
+    
     func testAlreadyCompressedKey() throws {
         guard let expectedCompressed = try? PrivateKey.generate().getPublicKey(true),
               let actualCompressed = try? Utils.compressPublicKey(expectedCompressed) else { return }
@@ -161,11 +162,636 @@ class compressPublicKeyTest: XCTestCase {
         XCTAssertTrue(Utils.isValidPublicKey(actualCompressed))
         XCTAssertEqual(expectedCompressed, actualCompressed)
     }
+    
     func testAlreadyCompressedKeyWithTag() throws {
         let key = "0x04019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"
         guard let expected = try? Utils.compressPublicKey("019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"),
               let compressed = try? Utils.compressPublicKey(key) else { return }
         
         XCTAssertEqual(expected, compressed)
+    }
+}
+
+class hashMessageTest: XCTestCase {
+    func testHashMessage() throws {
+        let data = "0xdeadbeaf"
+        XCTAssertEqual(66, Utils.hashMessage(data).count)
+    }
+}
+
+class parseKlaytnWalletKeyTest: XCTestCase {
+    func testParseKlaytnWalletKey() throws {
+        let keyring = KeyringFactory.generate()
+        guard let walletKey = keyring?.getKlaytnWalletKey(),
+              let parsedData = try? Utils.parseKlaytnWalletKey(walletKey) else {return}
+        
+        XCTAssertEqual(keyring?.key.privateKey, parsedData[0])
+        XCTAssertEqual("0x00", parsedData[1])
+        XCTAssertEqual(keyring?.address, parsedData[2])
+    }
+    
+    func testInvalidKlaytnWalletKey_invalidType() throws {
+        let invalid = "0x63526af77dc34846a0909e5486f972c4a07074f0c94a2b9577675a6433098481"
+        XCTAssertThrowsError(try Utils.parseKlaytnWalletKey(invalid)) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalAccessException("Invalid Klaytn wallet key."))
+        }
+    }
+    
+    func testInvalidKlaytnWalletKey_invalidPrivateKey() throws {
+        let invalid = "0x63526af77dc34846a0909e5486f972c4a07074f0c94a2b9577675a64330984"
+        XCTAssertThrowsError(try Utils.parseKlaytnWalletKey(invalid)) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalAccessException("Invalid Klaytn wallet key."))
+        }
+    }
+    
+    func testInvalidKlaytnWalletKey_invalidAddress() throws {
+        let invalid = "0x63526af77dc34846a0909e5486f972c4a07074f0c94a2b9577675a6433098481"
+        XCTAssertThrowsError(try Utils.parseKlaytnWalletKey(invalid)) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalAccessException("Invalid Klaytn wallet key."))
+        }
+    }
+}
+
+class isHexTest: XCTestCase {
+    func testValidHex() throws {
+        let hex = ["0x1234",
+                   "ffff",
+                   "0xaaaa",
+                   "34567"]
+        for item in hex {
+            XCTAssertTrue(Utils.isHex(item), "fail : \(item)")
+        }
+    }
+    
+    func testInvalidHex() throws {
+        let invalidHex = "0xkkkkk"
+        XCTAssertFalse(Utils.isHex(invalidHex))
+    }
+}
+
+class isHexStrictTest: XCTestCase {
+    func testValidHex() throws {
+        let hex = ["0x1234",
+                   "0xaaaa",
+                   "0xffff"]
+        for item in hex {
+            XCTAssertTrue(Utils.isHexStrict(item), "fail : \(item)")
+        }
+    }
+    
+    func testInvalidHex() throws {
+        let hex = ["0xKKKKKKK",
+                   "1234"]
+        for item in hex {
+            XCTAssertFalse(Utils.isHexStrict(item), "fail : \(item)")
+        }
+    }
+}
+
+class addHexPrefixTest: XCTestCase {
+    func testAddHexPrefix() throws {
+        let hex = "1234"
+        let expected = "0x1234"
+
+        XCTAssertEqual(expected, Utils.addHexPrefix(hex))
+    }
+    
+    func testAlreadyPrefixed() throws {
+        let hex = "0x1234"
+        
+        XCTAssertEqual(hex, Utils.addHexPrefix(hex))
+    }
+}
+
+class stripHexPrefixTest: XCTestCase {
+    func testStripHexPrefix() throws {
+        let hex = "0x1234"
+        let expected = "1234"
+
+        XCTAssertEqual(expected, Utils.stripHexPrefix(hex))
+    }
+    
+    func testAlreadyStriped() throws {
+        let hex = "1234"
+        
+        XCTAssertEqual(hex, Utils.stripHexPrefix(hex))
+    }
+}
+
+class convertToPebTest: XCTestCase {
+    func testFrom_peb() throws {
+        let expected = "1"
+        var converted = Utils.convertToPeb(BigInt(1), "peb")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "peb")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_peb_enum() throws {
+        let expected = "1"
+        var converted = Utils.convertToPeb(BigInt(1), .peb)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .peb)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_kpeb() throws {
+        let expected = "1000"
+        var converted = Utils.convertToPeb(BigInt(1), "kpeb")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "kpeb")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_kpeb_enum() throws {
+        let expected = "1000"
+        var converted = Utils.convertToPeb(BigInt(1), .kpeb)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .kpeb)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_Mpeb() throws {
+        let expected = "1000000"
+        var converted = Utils.convertToPeb(BigInt(1), "Mpeb")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "Mpeb")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_Mpeb_enum() throws {
+        let expected = "1000000"
+        var converted = Utils.convertToPeb(BigInt(1), .Mpeb)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .Mpeb)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_Gpeb() throws {
+        let expected = "1000000000"
+        var converted = Utils.convertToPeb(BigInt(1), "Gpeb")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "Gpeb")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_Gpeb_enum() throws {
+        let expected = "1000000000"
+        var converted = Utils.convertToPeb(BigInt(1), .Gpeb)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .Gpeb)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_ston() throws {
+        let expected = "1000000000"
+        var converted = Utils.convertToPeb(BigInt(1), "ston")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "ston")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_ston_enum() throws {
+        let expected = "1000000000"
+        var converted = Utils.convertToPeb(BigInt(1), .ston)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .ston)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_uKLAY() throws {
+        let expected = "1000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), "uKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "uKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_uKLAY_enum() throws {
+        let expected = "1000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), .uKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .uKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_mKLAY() throws {
+        let expected = "1000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), "mKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "mKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_mKLAY_enum() throws {
+        let expected = "1000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), .mKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .mKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_KLAY() throws {
+        let expected = "1000000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), "KLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "KLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_KLAY_enum() throws {
+        let expected = "1000000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), .KLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .KLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_kKLAY() throws {
+        let expected = "1000000000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), "kKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "kKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_kKLAY_enum() throws {
+        let expected = "1000000000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), .kKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .kKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_MKLAY() throws {
+        let expected = "1000000000000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), "MKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "MKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_MKLAY_enum() throws {
+        let expected = "1000000000000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), .MKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .MKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_GKLAY() throws {
+        let expected = "1000000000000000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), "GKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "GKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_GKLAY_enum() throws {
+        let expected = "1000000000000000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), .GKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .GKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_TKLAY() throws {
+        let expected = "1000000000000000000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), "TKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", "TKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testFrom_TKLAY_enum() throws {
+        let expected = "1000000000000000000000000000000"
+        var converted = Utils.convertToPeb(BigInt(1), .TKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertToPeb("1", .TKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+}
+
+class convertFromPebTest: XCTestCase {
+    func testTo_peb() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = amount
+        var converted = Utils.convertFromPeb(amount, "peb")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "peb")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_peb_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = amount
+        var converted = Utils.convertFromPeb(amount, .peb)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .peb)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_kpeb() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000000000000000"
+        var converted = Utils.convertFromPeb(amount, "kpeb")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "kpeb")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_kpeb_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000000000000000"
+        var converted = Utils.convertFromPeb(amount, .kpeb)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .kpeb)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_Mpeb() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000000000000"
+        var converted = Utils.convertFromPeb(amount, "Mpeb")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "Mpeb")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_Mpeb_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000000000000"
+        var converted = Utils.convertFromPeb(amount, .Mpeb)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .Mpeb)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_Gpeb() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000000000"
+        var converted = Utils.convertFromPeb(amount, "Gpeb")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "Gpeb")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_Gpeb_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000000000"
+        var converted = Utils.convertFromPeb(amount, .Gpeb)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .Gpeb)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_ston() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000000000"
+        var converted = Utils.convertFromPeb(amount, "ston")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "ston")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_ston_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000000000"
+        var converted = Utils.convertFromPeb(amount, .ston)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .ston)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_uKLAY() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000000"
+        var converted = Utils.convertFromPeb(amount, "uKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "uKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_uKLAY_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000000"
+        var converted = Utils.convertFromPeb(amount, .uKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .uKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_mKLAY() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000"
+        var converted = Utils.convertFromPeb(amount, "mKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "mKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_mKLAY_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000000"
+        var converted = Utils.convertFromPeb(amount, .mKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .mKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_KLAY() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000"
+        var converted = Utils.convertFromPeb(amount, "KLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "KLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_KLAY_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000000"
+        var converted = Utils.convertFromPeb(amount, .KLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .KLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_kKLAY() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000"
+        var converted = Utils.convertFromPeb(amount, "kKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "kKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_kKLAY_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000000"
+        var converted = Utils.convertFromPeb(amount, .kKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .kKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_MKLAY() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000"
+        var converted = Utils.convertFromPeb(amount, "MKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "MKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_MKLAY_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1000"
+        var converted = Utils.convertFromPeb(amount, .MKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .MKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_GKLAY() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1"
+        var converted = Utils.convertFromPeb(amount, "GKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "GKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_GKLAY_enum() throws {
+        let amount = "1000000000000000000000000000"
+        let expected = "1"
+        var converted = Utils.convertFromPeb(amount, .GKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .GKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_TKLAY() throws {
+        let amount = "1000000000000000000000000000000"
+        let expected = "1"
+        var converted = Utils.convertFromPeb(amount, "TKLAY")
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, "TKLAY")
+        XCTAssertEqual(expected, converted)
+    }
+    
+    func testTo_TKLAY_enum() throws {
+        let amount = "1000000000000000000000000000000"
+        let expected = "1"
+        var converted = Utils.convertFromPeb(amount, .TKLAY)
+        XCTAssertEqual(expected, converted)
+        
+        converted = Utils.convertFromPeb(BigInt(amount)!, .TKLAY)
+        XCTAssertEqual(expected, converted)
+    }
+}
+
+class isNumberTest: XCTestCase {
+    func testValidHexNumber() throws {
+        let valid = ["0x1234",
+                     "1234",
+                     "aaaaaaa",
+                     "0xaaaaaa"]
+        for item in valid {
+            XCTAssertTrue(Utils.isNumber(item), "fail : \(item)")
+        }
+    }
+    
+    func testInvalidHexNumber() throws {
+        let invalid = ["kkkkkkkkkk",
+                       "0x1234k"]
+        for item in invalid {
+            XCTAssertFalse(Utils.isNumber(item), "fail : \(item)")
+        }
+    }
+}
+
+class isEmptySigTest: XCTestCase {
+    func testValidEmptySig() throws {
+        let emptySig = SignatureData("0x01", "0x", "0x")
+        XCTAssertTrue(Utils.isEmptySig(emptySig))
+    }
+    
+    func testValidEmptySigList() throws {
+        let emptySigArr = [SignatureData("0x01", "0x", "0x"),
+                           SignatureData("0x01", "0x", "0x")]
+        XCTAssertTrue(Utils.isEmptySig(emptySigArr))
+    }
+    
+    func testNotEmptySigData() throws {
+        let signatureData = SignatureData("0x25",
+                                        "0xb2a5a15550ec298dc7dddde3774429ed75f864c82caeb5ee24399649ad731be9",
+                                        "0x29da1014d16f2011b3307f7bbe1035b6e699a4204fc416c763def6cefd976567")
+        XCTAssertFalse(Utils.isEmptySig(signatureData))
+    }
+    
+    func testNotEmptySigDataList() throws {
+        let signatureDataArr = [SignatureData("0x25",
+                                         "0xb2a5a15550ec298dc7dddde3774429ed75f864c82caeb5ee24399649ad731be9",
+                                         "0x29da1014d16f2011b3307f7bbe1035b6e699a4204fc416c763def6cefd976567"),
+                           SignatureData("0x25",
+                                         "0xb2a5a15550ec298dc7dddde3774429ed75f864c82caeb5ee24399649ad731be9",
+                                         "0x29da1014d16f2011b3307f7bbe1035b6e699a4204fc416c763def6cefd976567")]
+        XCTAssertFalse(Utils.isEmptySig(signatureDataArr))
+    }
+}
+
+class generateRandomBytesTest: XCTestCase {
+    func testGenerateRandomBytes() throws {
+        let arr = Utils.generateRandomBytes(32)
+        
+        XCTAssertEqual(32, arr.count)
     }
 }
