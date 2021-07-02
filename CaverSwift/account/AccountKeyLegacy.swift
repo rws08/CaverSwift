@@ -9,26 +9,24 @@ import Foundation
 
 open class AccountKeyLegacy: IAccountKey {
     private static let RLP = Data([0x01, 0xc0])
-    private static let TYPE = "0x01"
+    static let TYPE = "0x01"
     
     public static func decode(_ rlpEncodedKey: String) throws -> AccountKeyLegacy {
-        return try decode(rlpEncodedKey.hexData ?? Data())
+        guard let bytes = rlpEncodedKey.hexData else {
+            throw CaverError.IllegalAccessException("Invalid RLP-encoded key")
+        }
+        return try decode(bytes)
     }
     
     public static func decode(_ rlpEncodedKey: Data) throws -> AccountKeyLegacy {
-        if rlpEncodedKey != RLP {
+        if rlpEncodedKey.bytes != RLP.bytes {
             throw CaverError.RuntimeException("Invalid RLP-encoded account key String")
         }
+        
         return AccountKeyLegacy()
-    }
-    
-    public func getType() -> String {
-        return AccountKeyLegacy.TYPE
     }
     
     public func getRLPEncoding() -> String {
         return AccountKeyLegacy.RLP.hexString
     }
-    
-    
 }

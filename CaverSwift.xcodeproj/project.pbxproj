@@ -75,6 +75,12 @@
 		E38FA12E2689A6CB00F532D0 /* EC384.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA1042689A6CB00F532D0 /* EC384.swift */; };
 		E38FA12F2689A6CB00F532D0 /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA1052689A6CB00F532D0 /* Base64.swift */; };
 		E38FA1312689A99D00F532D0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA1302689A99D00F532D0 /* Extensions.swift */; };
+		E390DAAE268C60FC00D05479 /* WeightedMultiSigOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAAD268C60FC00D05479 /* WeightedMultiSigOptions.swift */; };
+		E390DAB0268C68AF00D05479 /* AccountKeyWeightedMultiSig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAAF268C68AF00D05479 /* AccountKeyWeightedMultiSig.swift */; };
+		E390DAB2268C68DD00D05479 /* WeightedPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB1268C68DD00D05479 /* WeightedPublicKey.swift */; };
+		E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB3268D94BE00D05479 /* RlpTest.swift */; };
+		E390DAB6268DAE3000D05479 /* AccountKeyDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB5268DAE3000D05479 /* AccountKeyDecoder.swift */; };
+		E390DAB8268DAFC500D05479 /* AccountKeyNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB7268DAFC500D05479 /* AccountKeyNil.swift */; };
 		E39F2CD3262EA4EF003FA426 /* CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */; };
 		E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */; };
 		E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* CaverSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -103,7 +109,7 @@
 		E3A21E1C265654A7006C560D /* ERC20Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DD9265654A7006C560D /* ERC20Responses.swift */; };
 		E3A21E1D265654A7006C560D /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DDB265654A7006C560D /* Address.swift */; };
 		E3A21E1E265654A7006C560D /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DDC265654A7006C560D /* Type.swift */; };
-		E3A21E1F265654A7006C560D /* RLP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DDE265654A7006C560D /* RLP.swift */; };
+		E3A21E1F265654A7006C560D /* Rlp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DDE265654A7006C560D /* Rlp.swift */; };
 		E3A21E20265654A7006C560D /* KeystoreUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DDF265654A7006C560D /* KeystoreUtil.swift */; };
 		E3A21E21265654A7006C560D /* HexUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE0265654A7006C560D /* HexUtil.swift */; };
 		E3A21E22265654A7006C560D /* KeyUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DE1265654A7006C560D /* KeyUtil.swift */; };
@@ -254,6 +260,12 @@
 		E38FA1042689A6CB00F532D0 /* EC384.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EC384.swift; sourceTree = "<group>"; };
 		E38FA1052689A6CB00F532D0 /* Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base64.swift; sourceTree = "<group>"; };
 		E38FA1302689A99D00F532D0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		E390DAAD268C60FC00D05479 /* WeightedMultiSigOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedMultiSigOptions.swift; sourceTree = "<group>"; };
+		E390DAAF268C68AF00D05479 /* AccountKeyWeightedMultiSig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKeyWeightedMultiSig.swift; sourceTree = "<group>"; };
+		E390DAB1268C68DD00D05479 /* WeightedPublicKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedPublicKey.swift; sourceTree = "<group>"; };
+		E390DAB3268D94BE00D05479 /* RlpTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RlpTest.swift; sourceTree = "<group>"; };
+		E390DAB5268DAE3000D05479 /* AccountKeyDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKeyDecoder.swift; sourceTree = "<group>"; };
+		E390DAB7268DAFC500D05479 /* AccountKeyNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKeyNil.swift; sourceTree = "<group>"; };
 		E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CCC262EA4EF003FA426 /* CaverSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaverSwift.h; sourceTree = "<group>"; };
 		E39F2CCD262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -285,7 +297,7 @@
 		E3A21DD9265654A7006C560D /* ERC20Responses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERC20Responses.swift; sourceTree = "<group>"; };
 		E3A21DDB265654A7006C560D /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		E3A21DDC265654A7006C560D /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
-		E3A21DDE265654A7006C560D /* RLP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLP.swift; sourceTree = "<group>"; };
+		E3A21DDE265654A7006C560D /* Rlp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rlp.swift; sourceTree = "<group>"; };
 		E3A21DDF265654A7006C560D /* KeystoreUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeystoreUtil.swift; sourceTree = "<group>"; };
 		E3A21DE0265654A7006C560D /* HexUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexUtil.swift; sourceTree = "<group>"; };
 		E3A21DE1265654A7006C560D /* KeyUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyUtil.swift; sourceTree = "<group>"; };
@@ -500,6 +512,14 @@
 			path = DomainP;
 			sourceTree = "<group>";
 		};
+		E39E3D20268BF88B00E3C094 /* Rlp */ = {
+			isa = PBXGroup;
+			children = (
+				E3A21DDE265654A7006C560D /* Rlp.swift */,
+			);
+			path = Rlp;
+			sourceTree = "<group>";
+		};
 		E39F2CBF262EA4EF003FA426 = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +569,7 @@
 				E3A21D3526564CCA006C560D /* ABITests.swift */,
 				E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
+				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -556,6 +577,7 @@
 		E3A21DBF265654A7006C560D /* abi */ = {
 			isa = PBXGroup;
 			children = (
+				E39E3D20268BF88B00E3C094 /* Rlp */,
 				E3A21DEB265654A7006C560D /* ABI.swift */,
 				E3A21DD4265654A7006C560D /* DefaultFunctionEncoder.swift */,
 				E3A21E52265B608A006C560D /* FunctionReturnDecoder.swift */,
@@ -645,7 +667,6 @@
 		E3A21DDD265654A7006C560D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				E3A21DDE265654A7006C560D /* RLP.swift */,
 				E3A21DDF265654A7006C560D /* KeystoreUtil.swift */,
 				E3A21DE0265654A7006C560D /* HexUtil.swift */,
 				E3A21DE1265654A7006C560D /* KeyUtil.swift */,
@@ -770,11 +791,16 @@
 		E3A5C8B82682AEC6002A0A2D /* account */ = {
 			isa = PBXGroup;
 			children = (
-				E3A5C8B92682AED7002A0A2D /* IAccountKey.swift */,
+				E390DAB5268DAE3000D05479 /* AccountKeyDecoder.swift */,
 				E3A5C8BB2682AF29002A0A2D /* AccountKeyFail.swift */,
 				E3A5C8BD2682F23B002A0A2D /* AccountKeyLegacy.swift */,
+				E390DAB7268DAFC500D05479 /* AccountKeyNil.swift */,
 				E3A5C8BF2682F2CC002A0A2D /* AccountKeyPublic.swift */,
 				E3B8E6B4268593D90069A223 /* AccountKeyRoleBased.swift */,
+				E390DAAF268C68AF00D05479 /* AccountKeyWeightedMultiSig.swift */,
+				E3A5C8B92682AED7002A0A2D /* IAccountKey.swift */,
+				E390DAAD268C60FC00D05479 /* WeightedMultiSigOptions.swift */,
+				E390DAB1268C68DD00D05479 /* WeightedPublicKey.swift */,
 			);
 			path = account;
 			sourceTree = "<group>";
@@ -1094,6 +1120,7 @@
 				E38FA12A2689A6CB00F532D0 /* BP320.swift in Sources */,
 				E38FA1222689A6CB00F532D0 /* BP192.swift in Sources */,
 				E38FA1122689A6CB00F532D0 /* SHA2.swift in Sources */,
+				E390DAB6268DAE3000D05479 /* AccountKeyDecoder.swift in Sources */,
 				E38FA11F2689A6CB00F532D0 /* EC409.swift in Sources */,
 				E3A21E11265654A7006C560D /* ABIDecoder+Static.swift in Sources */,
 				E3A21E8826607458006C560D /* SwiftBigNumberCore.swift in Sources */,
@@ -1111,6 +1138,7 @@
 				E3A21E1A265654A7006C560D /* ERC20Events.swift in Sources */,
 				E3A21E13265654A7006C560D /* ABIEncoder+Static.swift in Sources */,
 				E38FA1162689A6CB00F532D0 /* Signature.swift in Sources */,
+				E390DAAE268C60FC00D05479 /* WeightedMultiSigOptions.swift in Sources */,
 				E3A21E4E265654B5006C560D /* keccak-tiny.c in Sources */,
 				E38FA11C2689A6CB00F532D0 /* EC233.swift in Sources */,
 				E3B8E6AD2685782B0069A223 /* KeyringFactory.swift in Sources */,
@@ -1123,7 +1151,7 @@
 				E3E023672648EFE700791E00 /* ContractMethod.swift in Sources */,
 				E3E023572648C58E00791E00 /* SendOptions.swift in Sources */,
 				E38FA1292689A6CB00F532D0 /* BP512.swift in Sources */,
-				E3A21E1F265654A7006C560D /* RLP.swift in Sources */,
+				E3A21E1F265654A7006C560D /* Rlp.swift in Sources */,
 				E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */,
 				E38FA0BF26896B6800F532D0 /* Strideable.swift in Sources */,
 				E3A21E31265654A7006C560D /* ERC721Functions.swift in Sources */,
@@ -1143,7 +1171,9 @@
 				E3A21E1D265654A7006C560D /* Address.swift in Sources */,
 				E3B8E6B5268593D90069A223 /* AccountKeyRoleBased.swift in Sources */,
 				E38FA1192689A6CB00F532D0 /* Domain.swift in Sources */,
+				E390DAB8268DAFC500D05479 /* AccountKeyNil.swift in Sources */,
 				E3A21E36265654A7006C560D /* RecursiveLogCollector.swift in Sources */,
+				E390DAB2268C68DD00D05479 /* WeightedPublicKey.swift in Sources */,
 				E3A21E15265654A7006C560D /* ABIEvent.swift in Sources */,
 				E38FA0C326896B6800F532D0 /* Comparable.swift in Sources */,
 				E3E023502648BCD800791E00 /* Klay.swift in Sources */,
@@ -1160,6 +1190,7 @@
 				E3B8E6B12685903F0069A223 /* SignatureData.swift in Sources */,
 				E38FA12D2689A6CB00F532D0 /* BP384.swift in Sources */,
 				E3A21E10265654A7006C560D /* ABIFunction.swift in Sources */,
+				E390DAB0268C68AF00D05479 /* AccountKeyWeightedMultiSig.swift in Sources */,
 				E3A21E09265654A7006C560D /* ENSContracts.swift in Sources */,
 				E3B8E6B826859C270069A223 /* File.swift in Sources */,
 				E3A21E40265654A7006C560D /* MulticallContract.swift in Sources */,
@@ -1213,6 +1244,7 @@
 				E3A21D3626564CCA006C560D /* ABITests.swift in Sources */,
 				E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */,
 				E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */,
+				E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */,
 				E3A5C8C22682F4A2002A0A2D /* UtilsTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

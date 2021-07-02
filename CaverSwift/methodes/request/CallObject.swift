@@ -42,6 +42,6 @@ public class CallObject {
             return nil
         }
         
-        return RLP.encode(value)?.hexString
+        return Rlp.encode(value)?.hexString
     }
 }

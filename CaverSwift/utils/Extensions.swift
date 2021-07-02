@@ -59,7 +59,7 @@ extension StringProtocol {
     public var isHexa: Bool { return isHexaPlus || isHexaMinus}
     public var isHexaPlus: Bool { return hasPrefix("0x") || hasPrefix("0X") }
     public var isHexaMinus: Bool { return hasPrefix("-0x") || hasPrefix("-0X") }
-    public var isMinus: Bool { return self[0] == "-" }
+    public var isMinus: Bool { return self.count > 0 && self[0] == "-" }
 
     subscript(offset: Int) -> Character { self[index(startIndex, offsetBy: offset)] }
     subscript(range: Range<Int>) -> SubSequence {
@@ -168,7 +168,7 @@ public extension Data {
     }
     
     var hexString: String {
-        let bytes = Array<UInt8>(self)
+        let bytes = [UInt8](self)
         return "0x" + bytes.map { String(format: "%02hhx", $0) }.joined()
     }
     
@@ -226,7 +226,8 @@ public extension String {
     }
     
     var stringValue: String {
-        if let byteArray = try? HexUtil.byteArray(fromHex: self.cleanHexPrefix), let str = String(bytes: byteArray, encoding: .utf8) {
+        if let byteArray = try? HexUtil.byteArray(fromHex: self.cleanHexPrefix),
+           let str = String(bytes: byteArray, encoding: .utf8) {
             return str
         }
         
@@ -275,5 +276,31 @@ public extension String {
     
     var sha3String: String {
         return String(bytes: keccak256.bytes).addHexPrefix
+    }
+}
+
+extension UInt8 {
+    var int: Int? {
+        return Int(hex: Data([self]).hexString)
+    }
+}
+
+extension ArraySlice where Element == UInt8 {
+    var int: Int? {
+        return Int(hex: Data(self).hexString)
+    }
+    
+    var string: String {
+        return Data(self).hexString.cleanHexPrefix
+    }
+}
+
+extension Array where Element == UInt8 {
+    var int: Int? {
+        return Int(hex: Data(self).hexString)
+    }
+    
+    var string: String {
+        return Data(self).hexString.cleanHexPrefix
     }
 }

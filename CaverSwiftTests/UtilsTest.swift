@@ -7,7 +7,6 @@
 
 import XCTest
 @testable import CaverSwift
-@testable import BigInt
 @testable import ASN1
 
 class isAddressTest: XCTestCase {
@@ -132,6 +131,7 @@ class decompressPublicKeyTest: XCTestCase {
         
         XCTAssertTrue(Utils.isValidPublicKey(uncompressed))
     }
+    
     func testAlreadyDecompressedKey() throws {
         guard let expectedUncompressed = try? PrivateKey.generate().getPublicKey(false),
               let actualUncompressed = try? Utils.decompressPublicKey(expectedUncompressed) else { return }
@@ -139,6 +139,7 @@ class decompressPublicKeyTest: XCTestCase {
         XCTAssertTrue(Utils.isValidPublicKey(actualUncompressed))
         XCTAssertEqual(expectedUncompressed, actualUncompressed)
     }
+    
     func testAlreadyDecompressedKeyWithTag() throws {
         let expected = "0x04019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"
         guard let uncompressed = try? Utils.decompressPublicKey(expected) else { return }

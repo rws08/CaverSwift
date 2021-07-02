@@ -262,7 +262,8 @@ public class Utils {
         guard let point = try? getECPoint(publicKey),
               let decompressPublicKey = try? DOMAIN.encodePoint(point) else { return "" }
         
-        return String(bytes: decompressPublicKey)
+        // remove tag(04)
+        return String(bytes: Array(decompressPublicKey.dropFirst(1)))
     }
     
     public static func compressPublicKey(_ publicKey: String) throws -> String {

@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol IAccountKey {
-    func getRLPEncoding() -> String
+    func getRLPEncoding() throws -> String
 }

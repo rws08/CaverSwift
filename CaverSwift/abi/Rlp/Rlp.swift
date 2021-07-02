@@ -1,5 +1,5 @@
 //
-//  RLP.swift
+//  Rlp.swift
 //  web3swift
 //
 //  Created by Julien Niset on 29/06/2017.
@@ -9,8 +9,13 @@
 import Foundation
 import BigInt
 
-public struct RLP {
-
+public struct Rlp {
+    public static var OFFSET_SHORT_STRING: UInt8 = 0x80
+    public static var OFFSET_LONG_STRING: UInt8 = 0xb7
+    public static var OFFSET_SHORT_LIST: UInt8 = 0xc0
+    public static var OFFSET_LONG_LIST: UInt8 = 0xf7
+    
+    // MARK: - Encode
     public static func encode(_ item: Any) -> Data? {
         switch item {
         case let int as Int:
@@ -62,12 +67,12 @@ public struct RLP {
         let lastIndex = data.count - 1
         let firstIndex = data.firstIndex(where: {$0 != 0x00}) ?? lastIndex
         if lastIndex == -1 {
-            return Data( [0x80])
+            return Data( [OFFSET_SHORT_STRING])
         }
         let subdata = data.subdata(in: firstIndex..<lastIndex+1)
         
         if subdata.count == 1 && subdata[0] == 0x00 {
-            return Data( [0x80])
+            return Data( [OFFSET_SHORT_STRING])
         }
         
         return encodeData(data.subdata(in: firstIndex..<lastIndex+1))
@@ -78,7 +83,7 @@ public struct RLP {
             return data // single byte, no header
         }
         
-        var encoded = encodeHeader(size: UInt64(data.count), smallTag: 0x80, largeTag: 0xb7)
+        var encoded = encodeHeader(size: UInt64(data.count), smallTag: OFFSET_SHORT_STRING, largeTag: OFFSET_LONG_STRING)
         encoded.append(data)
         return encoded
     }
@@ -98,7 +103,7 @@ public struct RLP {
             
         }
         
-        var encoded = encodeHeader(size: UInt64(encodedData.count), smallTag: 0xc0, largeTag: 0xf7)
+        var encoded = encodeHeader(size: UInt64(encodedData.count), smallTag: OFFSET_SHORT_LIST, largeTag: OFFSET_LONG_LIST)
         encoded.append(encodedData)
         return encoded
     }
@@ -129,4 +134,69 @@ public struct RLP {
         return Data( bytes.reversed())
     }
     
+    // MARK: - Decode
+    public static func decode(_ encodedInput: Data) -> Any {
+        return decode(encodedInput.bytes)
+    }
+    
+    public static func decode(_ hexEncodedInput: [UInt8]) -> Any {
+        var rlpList: [Any] = []
+        traverse(hexEncodedInput, 0, hexEncodedInput.count, &rlpList)
+        if rlpList.count == 1 {
+            return rlpList[0]
+        }
+        return rlpList
+    }
+    
+    public static func traverse(_ data: [UInt8], _ startPos: Int, _ endPos: Int, _ rlpList : inout [Any]) {
+        if data.isEmpty {
+            return
+        }
+        var startPos = startPos
+        while startPos < endPos {
+            let prefix = data[startPos] & 0xff
+            
+            if prefix < OFFSET_SHORT_STRING {
+                rlpList.append(String(prefix).cleanHexPrefix)
+                startPos += 1
+            } else if prefix < OFFSET_LONG_STRING {
+                let strLen = (prefix - OFFSET_SHORT_STRING).int ?? 1
+                let start = (startPos + 1)
+                rlpList.append(data[start..<(start+strLen)].string)
+                startPos += 1 + strLen
+            } else if prefix < OFFSET_SHORT_LIST {
+                let lenOfStrLen = (prefix - OFFSET_LONG_STRING).int ?? 1
+                var start = (startPos + 1)
+                let dda = Array(data[start..<(start+lenOfStrLen)])
+                let strLen = bigEndian(dda)
+                start = (startPos + lenOfStrLen + 1)
+                rlpList.append(data[start..<(start+strLen)].string)
+                startPos += 1 + strLen + lenOfStrLen
+            } else if prefix < OFFSET_LONG_LIST {
+                let listLen = (prefix - OFFSET_SHORT_LIST).int ?? 1
+                var rlpListSub: [Any] = []
+                traverse(data, startPos + 1, startPos + listLen + 1, &rlpListSub)
+                rlpList.append(rlpListSub)
+                startPos += 1 + listLen
+            } else {
+                let lenOfListLen = (prefix - OFFSET_LONG_LIST).int ?? 1
+                let start = (startPos + 1)
+                let dda = Array(data[start..<(start+lenOfListLen)])
+                let listLen = bigEndian(dda)
+                var rlpListSub: [Any] = []
+                traverse(data, startPos + lenOfListLen + 1, startPos + lenOfListLen  + listLen + 1, &rlpListSub)
+                rlpList.append(rlpListSub)
+                startPos += 1 + listLen + lenOfListLen
+            }
+        }
+    }
+
+    private static func bigEndian(_ data: [UInt8]) -> Int {
+        var val = 0
+        data.forEach {
+            val <<= 8
+            val += $0.int ?? 0
+        }
+        return val
+    }
 }

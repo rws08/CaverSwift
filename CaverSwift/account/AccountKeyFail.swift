@@ -9,7 +9,7 @@ import Foundation
 
 open class AccountKeyFail: IAccountKey {
     private static let RLP = Data([0x03, 0xc0])
-    private static let TYPE = "0x03"
+    static let TYPE = "0x03"
     
     public static func decode(_ rlpEncodedKey: String) throws -> AccountKeyFail {
         return try decode(rlpEncodedKey.hexData ?? Data())
@@ -22,13 +22,7 @@ open class AccountKeyFail: IAccountKey {
         return AccountKeyFail()
     }
     
-    public func getType() -> String {
-        return AccountKeyFail.TYPE
-    }
-    
     public func getRLPEncoding() -> String {
         return AccountKeyFail.RLP.hexString
     }
-    
-    
 }
