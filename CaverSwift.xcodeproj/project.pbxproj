@@ -81,6 +81,8 @@
 		E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB3268D94BE00D05479 /* RlpTest.swift */; };
 		E390DAB6268DAE3000D05479 /* AccountKeyDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB5268DAE3000D05479 /* AccountKeyDecoder.swift */; };
 		E390DAB8268DAFC500D05479 /* AccountKeyNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB7268DAFC500D05479 /* AccountKeyNil.swift */; };
+		E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3917529268ECFFB006BB332 /* AccountTest.swift */; };
+		E391752C268ED56C006BB332 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391752B268ED56C006BB332 /* Account.swift */; };
 		E39F2CD3262EA4EF003FA426 /* CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */; };
 		E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */; };
 		E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* CaverSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -266,6 +268,8 @@
 		E390DAB3268D94BE00D05479 /* RlpTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RlpTest.swift; sourceTree = "<group>"; };
 		E390DAB5268DAE3000D05479 /* AccountKeyDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKeyDecoder.swift; sourceTree = "<group>"; };
 		E390DAB7268DAFC500D05479 /* AccountKeyNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKeyNil.swift; sourceTree = "<group>"; };
+		E3917529268ECFFB006BB332 /* AccountTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTest.swift; sourceTree = "<group>"; };
+		E391752B268ED56C006BB332 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CCC262EA4EF003FA426 /* CaverSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaverSwift.h; sourceTree = "<group>"; };
 		E39F2CCD262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -563,13 +567,14 @@
 		E39F2CD6262EA4EF003FA426 /* CaverSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */,
-				E39F2CD9262EA4EF003FA426 /* Info.plist */,
-				E3E02388264CB16500791E00 /* testFunction.json */,
 				E3A21D3526564CCA006C560D /* ABITests.swift */,
 				E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */,
-				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
+				E3917529268ECFFB006BB332 /* AccountTest.swift */,
+				E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */,
+				E39F2CD9262EA4EF003FA426 /* Info.plist */,
 				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
+				E3E02388264CB16500791E00 /* testFunction.json */,
+				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -791,6 +796,7 @@
 		E3A5C8B82682AEC6002A0A2D /* account */ = {
 			isa = PBXGroup;
 			children = (
+				E391752B268ED56C006BB332 /* Account.swift */,
 				E390DAB5268DAE3000D05479 /* AccountKeyDecoder.swift */,
 				E3A5C8BB2682AF29002A0A2D /* AccountKeyFail.swift */,
 				E3A5C8BD2682F23B002A0A2D /* AccountKeyLegacy.swift */,
@@ -1125,6 +1131,7 @@
 				E3A21E11265654A7006C560D /* ABIDecoder+Static.swift in Sources */,
 				E3A21E8826607458006C560D /* SwiftBigNumberCore.swift in Sources */,
 				E38FA10A2689A6CB00F532D0 /* CBCCipher.swift in Sources */,
+				E391752C268ED56C006BB332 /* Account.swift in Sources */,
 				E38FA1082689A6CB00F532D0 /* ECPublicKey.swift in Sources */,
 				E3A21E30265654A7006C560D /* ERC721Events.swift in Sources */,
 				E3A21E3C265654A7006C560D /* EthereumNetwork.swift in Sources */,
@@ -1242,6 +1249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3A21D3626564CCA006C560D /* ABITests.swift in Sources */,
+				E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */,
 				E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */,
 				E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */,
 				E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */,
