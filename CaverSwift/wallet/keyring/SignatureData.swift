@@ -8,14 +8,20 @@
 import Foundation
 
 open class SignatureData: Equatable {
-    var v: String = ""
-    var r: String = ""
-    var s: String = ""
+    var v = ""
+    var r = ""
+    var s = ""
     
     init(_ v: String, _ r: String, _ s: String) {
         self.v = v
         self.r = r
         self.s = s
+    }
+    
+    init(_ v: [UInt8], _ r: [UInt8], _ s: [UInt8]) {
+        self.v = Data(v).hexString
+        self.r = Data(r).hexString
+        self.s = Data(s).hexString
     }
     
     public static func getEmptySignature() -> SignatureData {
@@ -24,7 +30,7 @@ open class SignatureData: Equatable {
     
     public func makeEIP155Signature(_ chainId: Int) throws {
         if v.isEmpty || v == "0x" {
-            throw CaverError.IllegalAccessException("V value must be set.")
+            throw CaverError.IllegalArgumentException("V value must be set.")
         }
                 
         guard var v = BigInt(v, radix: 16) else { return }

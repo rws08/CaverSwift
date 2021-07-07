@@ -194,21 +194,21 @@ class parseKlaytnWalletKeyTest: XCTestCase {
     func testInvalidKlaytnWalletKey_invalidType() throws {
         let invalid = "0x63526af77dc34846a0909e5486f972c4a07074f0c94a2b9577675a6433098481"
         XCTAssertThrowsError(try Utils.parseKlaytnWalletKey(invalid)) {
-            XCTAssertEqual($0 as? CaverError, CaverError.IllegalAccessException("Invalid Klaytn wallet key."))
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid Klaytn wallet key."))
         }
     }
     
     func testInvalidKlaytnWalletKey_invalidPrivateKey() throws {
         let invalid = "0x63526af77dc34846a0909e5486f972c4a07074f0c94a2b9577675a64330984"
         XCTAssertThrowsError(try Utils.parseKlaytnWalletKey(invalid)) {
-            XCTAssertEqual($0 as? CaverError, CaverError.IllegalAccessException("Invalid Klaytn wallet key."))
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid Klaytn wallet key."))
         }
     }
     
     func testInvalidKlaytnWalletKey_invalidAddress() throws {
         let invalid = "0x63526af77dc34846a0909e5486f972c4a07074f0c94a2b9577675a6433098481"
         XCTAssertThrowsError(try Utils.parseKlaytnWalletKey(invalid)) {
-            XCTAssertEqual($0 as? CaverError, CaverError.IllegalAccessException("Invalid Klaytn wallet key."))
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid Klaytn wallet key."))
         }
     }
 }

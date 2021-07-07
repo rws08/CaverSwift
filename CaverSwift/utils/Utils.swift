@@ -7,7 +7,6 @@
 
 import Foundation
 import secp256k1
-import SwiftECC
 import BigInt
 
 public class Utils {
@@ -20,7 +19,12 @@ public class Utils {
     private static let upperCasePattern = "^(0x|0X)?[0-9A-F]{40}$"
 
     public static func getAddress(_ publicKey: String) -> String {
-        guard let hash = publicKey.hexData?.keccak256 else { return "" }
+        guard let hash = publicKey.hexData else { return "" }
+        return getAddress(hash)
+    }
+
+    public static func getAddress(_ publicKey: Data) -> String {
+        let hash = publicKey.keccak256        
         let address = hash.subdata(in: 12..<hash.count)
         return address.hexString
     }
@@ -325,7 +329,7 @@ public class Utils {
     
     public static func parseKlaytnWalletKey(_ key: String) throws -> [String] {
         if !isKlaytnWalletKey(key) {
-            throw CaverError.IllegalAccessException("Invalid Klaytn wallet key.")
+            throw CaverError.IllegalArgumentException("Invalid Klaytn wallet key.")
         }
         
         //0x{private key}0x{type}0x{address in hex}
@@ -335,6 +339,39 @@ public class Utils {
         let cleanPrefixKey = key.cleanHexPrefix
         let arr = cleanPrefixKey.components(separatedBy: "0x").map { $0.addHexPrefix }
         return arr
+    }
+    
+    public static func recover(_ message: String, _ signatureData: SignatureData) throws -> String {
+        return try recover(message, signatureData, false)
+    }
+    
+    public static func recover(_ message: String, _ signatureData: SignatureData, _ isPrefixed: Bool) throws -> String {
+        var messageHash = message
+        if !isPrefixed {
+            messageHash = Utils.hashMessage(message)
+        }
+        
+        guard let r = signatureData.r.bytesFromHex,
+              let s = signatureData.s.bytesFromHex
+        else { throw CaverError.ArgumentException("r, s must be not nil") }
+        
+        if r.count != 32 {
+            throw CaverError.ArgumentException("r must be 32 bytes")
+        }
+        if s.count != 32 {
+            throw CaverError.ArgumentException("s must be 32 bytes")
+        }
+        
+        let header = signatureData.v.hexaToDecimal & 0xFF
+        if  header < 27 || header > 34 {
+            throw CaverError.SignatureException("Header byte out of range: \(header)")
+        }
+        
+        let sig = Data(r + s)
+        let recId = Int32(header - 27)
+        guard let key = Sign.recoverFromSignature(messageHash.hexData!, sig, recId)
+        else { throw CaverError.ArgumentException("Could not recover public key from signature") }
+        return Utils.getAddress(key).addHexPrefix
     }
     
     private static func isVeryfyPublicKey(_ key: String) throws -> Bool {

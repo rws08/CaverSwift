@@ -26,4 +26,5 @@ public enum CaverError: Error, Equatable {
     case RuntimeException(String)
     case IllegalArgumentException(String)
     case NullPointerException(String)
+    case SignatureException(String)
 }

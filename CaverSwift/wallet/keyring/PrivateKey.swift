@@ -14,7 +14,7 @@ open class PrivateKey {
     
     public init(_ privateKey: String) throws {
         if !Utils.isValidPrivateKey(privateKey) {
-            throw CaverError.IllegalAccessException("Invalid private key")
+            throw CaverError.IllegalArgumentException("Invalid private key.")
         }
         self.privateKey = privateKey.addHexPrefix
     }
@@ -29,7 +29,7 @@ open class PrivateKey {
         if entropy.isEmpty {
             entropyArr = Utils.generateRandomBytes(32)
         } else {
-            entropyArr = entropy.hexData!
+            entropyArr = entropy.data(using: .utf8)!
         }
         
         var innerHex = Data(random)
@@ -42,6 +42,17 @@ open class PrivateKey {
         let outerHex = middleHex.keccak256.hexString
         
         return try! PrivateKey(outerHex)
+    }
+    
+    public func sign(_ signHash: String, _ chainId: Int) throws -> SignatureData {
+        let signatureData = try Sign.signMessage(signHash.bytesFromHex!, privateKey, false)
+        try signatureData.makeEIP155Signature(chainId)
+        return signatureData
+    }
+    
+    public func signMessage(_ messageHash: String) throws -> SignatureData {
+        let signatureData = try Sign.signMessage(messageHash.bytesFromHex!, privateKey, false)
+        return signatureData
     }
     
     public func getPublicKey(_ compressed: Bool) throws -> String {

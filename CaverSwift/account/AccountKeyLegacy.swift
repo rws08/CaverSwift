@@ -13,7 +13,7 @@ open class AccountKeyLegacy: IAccountKey {
     
     public static func decode(_ rlpEncodedKey: String) throws -> AccountKeyLegacy {
         guard let bytes = rlpEncodedKey.hexData else {
-            throw CaverError.IllegalAccessException("Invalid RLP-encoded key")
+            throw CaverError.IllegalArgumentException("Invalid RLP-encoded key")
         }
         return try decode(bytes)
     }
