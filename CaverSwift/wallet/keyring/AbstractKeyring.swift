@@ -22,6 +22,22 @@ open class AbstractKeyring {
     
     func signMessage(_ message: String, _ role: Int, _ index: Int) throws -> MessageSigned? { return nil }
     
+    func encrypt(_ password: String) throws -> KeyStore? { return nil }
+    
+    func encrypt(_ password: String, _ options: KeyStoreOption) throws -> KeyStore? { return nil }
+    
+    func encryptV3(_ password: String, _ options: KeyStoreOption) throws -> KeyStore? {
+        throw CaverError.RuntimeException("Not supported for this class. Use 'encrypt()' function")
+    }
+    
+    func encryptV3(_ password: String) throws -> KeyStore? {
+        throw CaverError.RuntimeException("Not supported for this class. Use 'encrypt()' function")
+    }
+    
+    func getKlaytnWalletKey() throws -> String {
+        throw CaverError.RuntimeException("Not supported for this class.")
+    }
+    
     func copy() -> AbstractKeyring { return AbstractKeyring("") }
     
     var isDecoupled: Bool {

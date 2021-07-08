@@ -40,6 +40,38 @@ open class SingleKeyring: AbstractKeyring {
         return MessageSigned(messageHash, [signatureData], message)
     }
     
+    override func encrypt(_ password: String) throws -> KeyStore? {
+        return try encrypt(password, KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME))
+    }
+    
+    override func encrypt(_ password: String, _ options: KeyStoreOption) throws -> KeyStore? {
+        let crypto = try KeyStore.Crypto.createCrypto([key], password, options)
+        
+        let keyStore = KeyStore()
+        keyStore.address = address
+        keyStore.version = KeyStore.KEY_STORE_VERSION_V4
+        keyStore.id = UUID().uuidString
+        keyStore.keyring = crypto
+        
+        return keyStore
+    }
+    
+    override func encryptV3(_ password: String) throws -> KeyStore? {
+        return try encryptV3(password, KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME))
+    }
+    
+    override func encryptV3(_ password: String, _ options: KeyStoreOption) throws -> KeyStore? {
+        let crypto = try KeyStore.Crypto.createCrypto([key], password, options)
+        
+        let keyStore = KeyStore()
+        keyStore.address = address
+        keyStore.version = KeyStore.KEY_STORE_VERSION_V3
+        keyStore.id = UUID().uuidString
+        keyStore.crypto = crypto[0]
+        
+        return keyStore
+    }
+    
     public func getPublicKey(_ compressed: Bool = false) throws -> String {
         return try key.getPublicKey(compressed)
     }
@@ -51,7 +83,7 @@ open class SingleKeyring: AbstractKeyring {
         return key
     }
     
-    public func getKlaytnWalletKey() -> String {
+    override func getKlaytnWalletKey() -> String {
         return "\(key.privateKey)0x00\(address)"
     }
     
@@ -63,5 +95,9 @@ open class SingleKeyring: AbstractKeyring {
         get{
             self.address.lowercased() != self.key.getDerivedAddress().lowercased()
         }
+    }
+    
+    public func toAccount() throws -> Account {
+        return Account.createWithAccountKeyPublic(address, try key.getPublicKey())
     }
 }

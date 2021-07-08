@@ -78,7 +78,7 @@ class AccountKeyPublicTest: XCTestCase {
         let expectedAccountKey = "0xc10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9803a1898f45b2770eda7abce70e8503b5e82b748ec0ce557ac9f4f4796965e4e"
         let actualEncodedKey = "0x02a102c10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9"
 
-        guard let accountKeyPublic = try? AccountKeyPublic.decode(actualEncodedKey) else { return }
+        guard let accountKeyPublic = try? AccountKeyPublic.decode(actualEncodedKey) else { XCTAssert(true); return }
         XCTAssertEqual(expectedAccountKey, accountKeyPublic.publicKey)
     }
     
@@ -87,7 +87,7 @@ class AccountKeyPublicTest: XCTestCase {
         let actualEncodedKey = "0x02a102c10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9"
 
         guard let actualEncodedKeyArr = actualEncodedKey.bytesFromHex,
-              let accountKeyPublic = try? AccountKeyPublic.decode(actualEncodedKeyArr) else { return }
+              let accountKeyPublic = try? AccountKeyPublic.decode(actualEncodedKeyArr) else { XCTAssert(true); return }
         XCTAssertEqual(expectedAccountKey, accountKeyPublic.publicKey)
     }
     
@@ -100,7 +100,7 @@ class AccountKeyPublicTest: XCTestCase {
     }
     
     func testDecodeWithByteArray_throwException() throws {
-        guard let invalidEncodedValue = "0x03a102c10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9".bytesFromHex else { return }
+        guard let invalidEncodedValue = "0x03a102c10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9".bytesFromHex else { XCTAssert(true); return }
 
         XCTAssertThrowsError(try AccountKeyPublic.decode(invalidEncodedValue)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid RLP-encoded AccountKeyPublic Tag"))
@@ -114,7 +114,7 @@ class AccountKeyPublicTest: XCTestCase {
         let x = String(noPrefixPubKey[0..<64])
         let y = String(noPrefixPubKey[64..<noPrefixPubKey.count])
 
-        guard let accountKeyPublic = try? AccountKeyPublic.fromXYPoint(x, y) else { return }
+        guard let accountKeyPublic = try? AccountKeyPublic.fromXYPoint(x, y) else { XCTAssert(true); return }
         XCTAssertEqual(publicKey, accountKeyPublic.publicKey)
     }
     
@@ -169,7 +169,7 @@ class AccountKeyWeightedMultiSigTest: XCTestCase {
         //check WeightedPublicKey
         zip(expectedPublicKey, zip(expectedOptions.weights, actualAccount.weightedPublicKeys)).forEach {
             XCTAssertEqual($1.0, $1.1.weight)
-            guard let publicKey = try? Utils.decompressPublicKey($1.1.publicKey) else { return }
+            guard let publicKey = try? Utils.decompressPublicKey($1.1.publicKey) else { XCTAssert(true); return }
             XCTAssertEqual($0, publicKey)
         }
     }
@@ -179,7 +179,7 @@ class AccountKeyWeightedMultiSigTest: XCTestCase {
             "0xc10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9803a1898f45b2770eda7abce70e8503b5e82b748ec0ce557ac9f4f4796965e4e",
             "0x1769a9196f523c419be50c26419ebbec34d3d6aa8b59da834212f13dbec9a9c12a4d0eeb91d7bd5d592653d43dd0593cfe24cb20a5dbef05832932e7c7191bf6"]
         
-        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1)]) else { return }
+        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1)]) else { XCTAssert(true); return }
         let encodedKey = "0x04f84b02f848e301a102c10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9e301a1021769a9196f523c419be50c26419ebbec34d3d6aa8b59da834212f13dbec9a9c1"
         
         let multiSig = try AccountKeyWeightedMultiSig.decode(encodedKey)
@@ -192,7 +192,7 @@ class AccountKeyWeightedMultiSigTest: XCTestCase {
             "0xc10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9803a1898f45b2770eda7abce70e8503b5e82b748ec0ce557ac9f4f4796965e4e",
             "0x1769a9196f523c419be50c26419ebbec34d3d6aa8b59da834212f13dbec9a9c12a4d0eeb91d7bd5d592653d43dd0593cfe24cb20a5dbef05832932e7c7191bf6"]
         
-        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1)]) else { return }
+        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1)]) else { XCTAssert(true); return }
         let encodedKey = "0x04f84b02f848e301a102c10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9e301a1021769a9196f523c419be50c26419ebbec34d3d6aa8b59da834212f13dbec9a9c1".bytesFromHex
         
         let multiSig = try AccountKeyWeightedMultiSig.decode(encodedKey!)
@@ -221,7 +221,7 @@ class AccountKeyWeightedMultiSigTest: XCTestCase {
             "0xc10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9803a1898f45b2770eda7abce70e8503b5e82b748ec0ce557ac9f4f4796965e4e",
             "0x1769a9196f523c419be50c26419ebbec34d3d6aa8b59da834212f13dbec9a9c12a4d0eeb91d7bd5d592653d43dd0593cfe24cb20a5dbef05832932e7c7191bf6"]
         
-        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1)]) else { return }
+        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1)]) else { XCTAssert(true); return }
         
         let multiSig = try AccountKeyWeightedMultiSig.fromPublicKeysAndOptions(expectedAccountKey, expectedOption)
         
@@ -234,7 +234,7 @@ class AccountKeyWeightedMultiSigTest: XCTestCase {
             "0xc10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9803a1898f45b2770eda7abce70e8503b5e82b748ec0ce557ac9f4f4796965e4e",
             "0x1769a9196f523c419be50c26419ebbec34d3d6aa8b59da834212f13dbec9a9c12a4d0eeb91d7bd5d592653d43dd0593cfe24cb20a5dbef05832932e7c7191bf6"]
         
-        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1)]) else { return }
+        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1)]) else { XCTAssert(true); return }
         
         let multiSig = try AccountKeyWeightedMultiSig.fromPublicKeysAndOptions(publicKey, expectedOption)
 
@@ -266,7 +266,7 @@ class AccountKeyWeightedMultiSigTest: XCTestCase {
             "0xd31970913271bb571db505418414ae15e97337b944ef1bef84a0e5d20c2ece7f27a39deb8f449edea7cecf8f3588a51974f31d676a8b200fb61175149fff9b74",
             "0x68ad36b538afe09997af82bb92d056404feb93816b5ec6a5199bc1d6bb15358fa3cfb84ac7cab3275e973be6699cd19c61ba8c470fee97a9998bd0684cf44355"]
         
-        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1), BigInt(1)]) else { return }
+        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1), BigInt(1)]) else { XCTAssert(true); return }
         
         XCTAssertThrowsError(try AccountKeyWeightedMultiSig.fromPublicKeysAndOptions(publicKey, expectedOption)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("The count of public keys is not equal to the length of weight array."))
@@ -288,7 +288,7 @@ class AccountKeyWeightedMultiSigTest: XCTestCase {
             "0xd31970913271bb571db505418414ae15e97337b944ef1bef84a0e5d20c2ece7f27a39deb8f449edea7cecf8f3588a51974f31d676a8b200fb61175149fff9b74",
             "0x68ad36b538afe09997af82bb92d056404feb93816b5ec6a5199bc1d6bb15358fa3cfb84ac7cab3275e973be6699cd19c61ba8c470fee97a9998bd0684cf44355"]
         
-        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1), BigInt(1)]) else { return }
+        guard let expectedOption = try? WeightedMultiSigOptions(BigInt(2), [BigInt(1), BigInt(1), BigInt(1)]) else { XCTAssert(true); return }
         
         XCTAssertThrowsError(try AccountKeyWeightedMultiSig.fromPublicKeysAndOptions(publicKey, expectedOption)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("It exceeds maximum public key count."))
@@ -300,7 +300,7 @@ class AccountKeyRoleBasedTest: XCTestCase {
     func checkValid(_ expectedPublicKeyArr: [[String]], _ expectedOptionsList: [WeightedMultiSigOptions], _ actualRoleBasedKey: AccountKeyRoleBased) throws {
         let actualKeys = actualRoleBasedKey.accountKeys
         for i in [0..<AccountKeyRoleBased.ROLE_GROUP_COUNT] {
-            guard let i = i.first else { return }
+            guard let i = i.first else { XCTAssert(true); return }
             let key = actualKeys[i]
             if key is AccountKeyPublic {
                 try checkAccountKeyPublic(expectedPublicKeyArr[i], expectedOptionsList[i], key as! AccountKeyPublic)
@@ -374,7 +374,7 @@ class AccountKeyRoleBasedTest: XCTestCase {
     
     func testDecodeByteArray() throws {
         let encodedData = "0x05f8c4a302a1036250dad4985bc22c8b9b84d1a05624c4daa0e83c8ae8fb35702d9024a8c14a71b84e04f84b02f848e301a102c10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9e301a1021769a9196f523c419be50c26419ebbec34d3d6aa8b59da834212f13dbec9a9c1b84e04f84b01f848e301a103e7615d056e770b3262e5b39a4823c3124989924ed4dcfab13f10b252701540d4e301a1036f21d60c16200d99e6777422470b3122b65850d5135a5a4b41344a5607a1446d"
-        guard let encodedArr = encodedData.bytesFromHex else { return }
+        guard let encodedArr = encodedData.bytesFromHex else { XCTAssert(true); return }
         let expectedPublicKeyArr = [
                 //expectedTransactionKey
                 ["0x6250dad4985bc22c8b9b84d1a05624c4daa0e83c8ae8fb35702d9024a8c14a7117bc107912634970e82bc5450d28d6d1dcfa03f7d759d06b6be5ba96efd9eb95"],

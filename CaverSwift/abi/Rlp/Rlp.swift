@@ -100,7 +100,6 @@ public struct Rlp {
             } else if let emptyPlaceholder = encodeString("") {
                 encodedData.append(emptyPlaceholder)
             }*/
-            
         }
         
         var encoded = encodeHeader(size: UInt64(encodedData.count), smallTag: OFFSET_SHORT_LIST, largeTag: OFFSET_LONG_LIST)

@@ -47,6 +47,28 @@ open class MultipleKeyring: AbstractKeyring {
         return MessageSigned(messageHash, [signatureData], message)
     }
     
+    override func encrypt(_ password: String) throws -> KeyStore? {
+        return try encrypt(password, KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME))
+    }
+    
+    override func encrypt(_ password: String, _ options: KeyStoreOption) throws -> KeyStore? {
+        let crypto = try KeyStore.Crypto.createCrypto(keys, password, options)
+        
+        let keyStore = KeyStore()
+        keyStore.address = address
+        keyStore.version = KeyStore.KEY_STORE_VERSION_V4
+        keyStore.id = UUID().uuidString
+        keyStore.keyring = crypto
+        
+        return keyStore
+    }
+    
+    public func getPublicKey(_ compressed: Bool = false) throws -> [String] {
+        return try keys.map {
+            try $0.getPublicKey(compressed)
+        }
+    }
+    
     public func getKeyByRole(_ role: Int) throws -> [PrivateKey] {
         if role < 0 || role >= AccountKeyRoleBased.ROLE_GROUP_COUNT {
             throw CaverError.IllegalArgumentException("Invalid role index : \(role)")
@@ -57,5 +79,13 @@ open class MultipleKeyring: AbstractKeyring {
     
     override func copy() -> AbstractKeyring {
         return MultipleKeyring(address, keys)
+    }
+    
+    public func toAccount() throws -> Account {
+        return try toAccount(WeightedMultiSigOptions.getDefaultOptionsForWeightedMultiSig(try getPublicKey()))
+    }
+    
+    public func toAccount(_ options: WeightedMultiSigOptions) throws -> Account {
+        return try Account.createWithAccountKeyWeightedMultiSig(address, try getPublicKey(), options)
     }
 }
