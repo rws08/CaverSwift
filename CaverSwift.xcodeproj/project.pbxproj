@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7AFFF8073AD1370A6A8E5500 /* Pods_CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */; };
+		E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */; };
+		E36D83782698020400D4D5B2 /* AbstractTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83772698020400D4D5B2 /* AbstractTransaction.swift */; };
 		E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */; };
 		E36EEA102693DCEE00C1B599 /* MultipleKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA0F2693DCEE00C1B599 /* MultipleKeyring.swift */; };
 		E36EEA122693FEC900C1B599 /* RoleBasedKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA112693FEC900C1B599 /* RoleBasedKeyring.swift */; };
@@ -213,6 +215,8 @@
 		631563655308D9DE35E0434B /* Pods-CaverSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift/Pods-CaverSwift.release.xcconfig"; sourceTree = "<group>"; };
 		9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D117BAAE088D8DB011A1C1A5 /* Pods-CaverSwift-CaverSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift-CaverSwiftTests/Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainerTest.swift; sourceTree = "<group>"; };
+		E36D83772698020400D4D5B2 /* AbstractTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractTransaction.swift; sourceTree = "<group>"; };
 		E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringTest.swift; sourceTree = "<group>"; };
 		E36EEA0F2693DCEE00C1B599 /* MultipleKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleKeyring.swift; sourceTree = "<group>"; };
 		E36EEA112693FEC900C1B599 /* RoleBasedKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleBasedKeyring.swift; sourceTree = "<group>"; };
@@ -453,6 +457,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E36D8376269801F100D4D5B2 /* transaction */ = {
+			isa = PBXGroup;
+			children = (
+				E36D83772698020400D4D5B2 /* AbstractTransaction.swift */,
+			);
+			path = transaction;
+			sourceTree = "<group>";
+		};
 		E36EEA1A2696A39A00C1B599 /* libscrypt */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,6 +632,7 @@
 		E39F2CCB262EA4EF003FA426 /* CaverSwift */ = {
 			isa = PBXGroup;
 			children = (
+				E36D8376269801F100D4D5B2 /* transaction */,
 				E3B8E6B626859C110069A223 /* crypto */,
 				E3A5C8B82682AEC6002A0A2D /* account */,
 				E39F2CCC262EA4EF003FA426 /* CaverSwift.h */,
@@ -648,6 +661,7 @@
 				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
 				E3E02388264CB16500791E00 /* testFunction.json */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
+				E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -1313,6 +1327,7 @@
 				E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */,
 				E3A21E38265654A7006C560D /* EthereumAddress.swift in Sources */,
 				E38FA1142689A6CB00F532D0 /* DeterministicK.swift in Sources */,
+				E36D83782698020400D4D5B2 /* AbstractTransaction.swift in Sources */,
 				E38FA0C126896B6800F532D0 /* Data Conversion.swift in Sources */,
 				E38FA0CC26896B6800F532D0 /* Floating Point Conversion.swift in Sources */,
 				E38FA0C626896B6800F532D0 /* Division.swift in Sources */,
@@ -1342,6 +1357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3A21D3626564CCA006C560D /* ABITests.swift in Sources */,
+				E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */,
 				E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */,
 				E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */,
 				E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */,
