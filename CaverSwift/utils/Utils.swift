@@ -12,6 +12,7 @@ import BigInt
 public class Utils {
     public static let LENGTH_PRIVATE_KEY_STRING = 64
     public static let LENGTH_KLAYTN_WALLET_KEY_STRING = 110
+    public static let DEFAULT_ZERO_ADDRESS = "0x0000000000000000000000000000000000000000"
     static let DOMAIN = Domain.instance(curve: .EC256k1)
         
     private static let baseAddrPattern = "^(0x)?[0-9a-f]{40}$"

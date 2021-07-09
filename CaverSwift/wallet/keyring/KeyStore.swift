@@ -45,7 +45,10 @@ open class KeyStore: Decodable, Encodable {
             do {
                 self.keyring = try values.decode([Crypto].self, forKey: .keyring)
             } catch {
-                print(error.localizedDescription)
+                if self.crypto == nil {
+                    print(error.localizedDescription)
+                    throw CaverError.IllegalArgumentException("Invalid key store format: 'crypto' and 'keyring' cannot be defined together.")
+                }
             }
         }
     }
@@ -170,7 +173,7 @@ open class KeyStore: Decodable, Encodable {
                 let cipherText = try performCipherOperation(ENCRYPT_MODE, encryptKey, iv, Data(privateKeyBytes))
                 let mac = generateMac(derivedKey, cipherText)
                 
-                var crypto = Crypto()
+                let crypto = Crypto()
                 crypto.cipher = CIPHER_METHOD
                 crypto.ciphertext = cipherText.string.cleanHexPrefix
                 crypto.cipherparams = option.cipherParams
