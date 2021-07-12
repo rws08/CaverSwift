@@ -25,17 +25,17 @@ open class LegacyTransaction: AbstractTransaction {
             return try LegacyTransaction(self)
         }
         
-        public func setValue (_ value: String) -> Self {
+        public func setValue(_ value: String) -> Self {
             self.value = value
             return self
         }
         
-        public func setInput (_ input: String) -> Self {
+        public func setInput(_ input: String) -> Self {
             self.input = input
             return self
         }
         
-        public func setTo (_ to: String) -> Self {
+        public func setTo(_ to: String) -> Self {
             self.to = to
             return self
         }

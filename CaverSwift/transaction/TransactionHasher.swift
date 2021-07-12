@@ -13,8 +13,8 @@ open class TransactionHasher {
         return rlpEncoded.sha3String
     }
     
-//    public static func getHashForFeePayerSignature(_ transaction: AbstractFeeDelegatedTransaction) throws -> String {
-//        let rlpEncoded = try transaction.getRLPEncodingForFeePayerSignature()
-//        return rlpEncoded.sha3String
-//    }
+    public static func getHashForFeePayerSignature(_ transaction: AbstractFeeDelegatedTransaction) throws -> String {
+        let rlpEncoded = try transaction.getRLPEncodingForFeePayerSignature()
+        return rlpEncoded.sha3String
+    }
 }

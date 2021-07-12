@@ -31,53 +31,53 @@ open class AbstractTransaction {
             self.type = type
         }
         
-        public func setFrom (_ from: String) -> Self {
+        public func setFrom(_ from: String) -> Self {
             self.from = from
             return self
         }
         
-        public func setNonce (_ nonce: String) -> Self {
+        public func setNonce(_ nonce: String) -> Self {
             self.nonce = nonce
             return self
         }
         
-        public func setNonce (_ nonce: BigInt) -> Self {
+        public func setNonce(_ nonce: BigInt) -> Self {
             return setNonce(nonce.hexa)
         }
         
-        public func setGas (_ gas: String) -> Self {
+        public func setGas(_ gas: String) -> Self {
             self.gas = gas
             return self
         }
         
-        public func setGas (_ gas: BigInt) -> Self {
+        public func setGas(_ gas: BigInt) -> Self {
             return setGas(gas.hexa)
         }
         
-        public func setGasPrice (_ gasPrice: String) -> Self {
+        public func setGasPrice(_ gasPrice: String) -> Self {
             self.gasPrice = gasPrice
             return self
         }
         
-        public func setGasPrice (_ gasPrice: BigInt) -> Self {
+        public func setGasPrice(_ gasPrice: BigInt) -> Self {
             return setGasPrice(gasPrice.hexa)
         }
         
-        public func setChainId (_ chainId: String) -> Self {
+        public func setChainId(_ chainId: String) -> Self {
             self.chainId = chainId
             return self
         }
         
-        public func setChainId (_ chainId: BigInt) -> Self {
+        public func setChainId(_ chainId: BigInt) -> Self {
             return setChainId(chainId.hexa)
         }
         
-        public func setSignatures (_ signatures: [SignatureData]) -> Self {
+        public func setSignatures(_ signatures: [SignatureData]) -> Self {
             self.signatures.append(contentsOf: signatures)
             return self
         }
         
-        public func setSignatures (_ sign: SignatureData?) -> Self {
+        public func setSignatures(_ sign: SignatureData?) -> Self {
             guard let sign = sign else {
                 self.signatures.append(SignatureData.getEmptySignature())
                 return self
@@ -87,7 +87,7 @@ open class AbstractTransaction {
             return self
         }
         
-        public func setKlaytnCall (_ klaytnCall: Klay) -> Self {
+        public func setKlaytnCall(_ klaytnCall: Klay) -> Self {
             self.klaytnCall = klaytnCall
             return self
         }

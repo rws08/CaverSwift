@@ -20,7 +20,7 @@ open class AccountUpdate: AbstractTransaction {
             return try AccountUpdate(self)
         }
         
-        public func setAccount (_ account: Account) -> Self {
+        public func setAccount(_ account: Account) -> Self {
             self.account = account
             return self
         }
@@ -31,8 +31,8 @@ open class AccountUpdate: AbstractTransaction {
         try setAccount(builder.account)
     }
     
-    init(_ klaytnCall: Klay?, _ type: String, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData] = [], _ account: Account) throws {
-        try super.init(klaytnCall, type, from, nonce, gas, gasPrice, chainId, signatures)
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData] = [], _ account: Account) throws {
+        try super.init(klaytnCall, TransactionType.TxTypeAccountUpdate.string, from, nonce, gas, gasPrice, chainId, signatures)
         try setAccount(account)
     }    
     
@@ -67,6 +67,61 @@ open class AccountUpdate: AbstractTransaction {
             .build()
         
         return accountUpdate
+    }
+    
+    public override func getRLPEncoding() throws -> String {
+        guard let account = account else { throw CaverError.invalidValue }
+        
+        try validateOptionalValues(false)
+        
+        let signatureRLPList = signatures.map {
+            $0.toRlpList()
+        }
+        
+        let rlpTypeList: [Any] = [
+            nonce,
+            gasPrice,
+            gas,
+            from,
+            try account.getRLPEncodingAccountKey(),
+            signatureRLPList
+        ]
+        
+        guard let encoded = Rlp.encode(rlpTypeList),
+              var type = TransactionType.TxTypeAccountUpdate.string.hexData else { throw CaverError.invalidValue }
+        type.append(encoded)
+        let encodedStr = type.hexString
+        return encodedStr
+    }
+    
+    public override func getCommonRLPEncodingForSignature() throws -> String {
+        guard let account = account else { throw CaverError.invalidValue }
+        
+        try validateOptionalValues(false)
+        
+        let type = TransactionType.TxTypeAccountUpdate.string
+        
+        let rlpTypeList: [Any] = [
+            type,
+            nonce,
+            gasPrice,
+            gas,
+            from,
+            try account.getRLPEncodingAccountKey()
+        ]
+
+        guard let encoded = Rlp.encode(rlpTypeList) else { throw CaverError.invalidValue }
+        let encodedStr = encoded.hexString
+        return encodedStr
+    }
+
+    public override func compareTxField(_ txObj: AbstractTransaction, _ checkSig: Bool) -> Bool {
+        if !super.compareTxField(txObj, checkSig) { return false }
+        guard let txObj = txObj as? AccountUpdate else { return false }
+        if account?.address.lowercased() != txObj.account?.address.lowercased() { return false }
+        if (try? account?.getRLPEncodingAccountKey()) != (try? txObj.account?.getRLPEncodingAccountKey()) { return false }
+        
+        return true
     }
     
     public func setAccount(_ account: Account?) throws {
