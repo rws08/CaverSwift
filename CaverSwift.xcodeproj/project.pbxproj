@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7AFFF8073AD1370A6A8E5500 /* Pods_CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */; };
+		E363D38A269BBE0E0077F6D2 /* AccountUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D389269BBE0E0077F6D2 /* AccountUpdate.swift */; };
+		E363D38D269C063F0077F6D2 /* LegacyTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */; };
 		E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */; };
 		E36D83782698020400D4D5B2 /* AbstractTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83772698020400D4D5B2 /* AbstractTransaction.swift */; };
 		E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */; };
@@ -220,6 +222,8 @@
 		631563655308D9DE35E0434B /* Pods-CaverSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift/Pods-CaverSwift.release.xcconfig"; sourceTree = "<group>"; };
 		9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D117BAAE088D8DB011A1C1A5 /* Pods-CaverSwift-CaverSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift-CaverSwiftTests/Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		E363D389269BBE0E0077F6D2 /* AccountUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUpdate.swift; sourceTree = "<group>"; };
+		E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyTransactionTest.swift; sourceTree = "<group>"; };
 		E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainerTest.swift; sourceTree = "<group>"; };
 		E36D83772698020400D4D5B2 /* AbstractTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractTransaction.swift; sourceTree = "<group>"; };
 		E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringTest.swift; sourceTree = "<group>"; };
@@ -467,13 +471,21 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E363D38B269C062B0077F6D2 /* transaction */ = {
+			isa = PBXGroup;
+			children = (
+				E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */,
+			);
+			path = transaction;
+			sourceTree = "<group>";
+		};
 		E36D8376269801F100D4D5B2 /* transaction */ = {
 			isa = PBXGroup;
 			children = (
-				E3DBBD512698294400BAFE27 /* type */,
 				E36D83772698020400D4D5B2 /* AbstractTransaction.swift */,
-				E3DBBD5826983D0500BAFE27 /* TransactionHasher.swift */,
 				E3DBBD5A2698452B00BAFE27 /* TransactionDecoder.swift */,
+				E3DBBD5826983D0500BAFE27 /* TransactionHasher.swift */,
+				E3DBBD512698294400BAFE27 /* type */,
 			);
 			path = transaction;
 			sourceTree = "<group>";
@@ -665,6 +677,7 @@
 		E39F2CD6262EA4EF003FA426 /* CaverSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A21D3526564CCA006C560D /* ABITests.swift */,
 				E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */,
 				E3917529268ECFFB006BB332 /* AccountTest.swift */,
@@ -923,9 +936,10 @@
 		E3DBBD512698294400BAFE27 /* type */ = {
 			isa = PBXGroup;
 			children = (
+				E363D389269BBE0E0077F6D2 /* AccountUpdate.swift */,
 				E3DBBD522698294E00BAFE27 /* Cancel.swift */,
-				E3DBBD5426982B9100BAFE27 /* TransactionType.swift */,
 				E3DBBD56269834CE00BAFE27 /* LegacyTransaction.swift */,
+				E3DBBD5426982B9100BAFE27 /* TransactionType.swift */,
 			);
 			path = type;
 			sourceTree = "<group>";
@@ -1360,6 +1374,7 @@
 				E38FA0C626896B6800F532D0 /* Division.swift in Sources */,
 				E3A21E32265654A7006C560D /* EthereumAccount+SignTransaction.swift in Sources */,
 				E3E0237B264A059A00791E00 /* ContractEvent.swift in Sources */,
+				E363D38A269BBE0E0077F6D2 /* AccountUpdate.swift in Sources */,
 				E3A21E3D265654A7006C560D /* EthereumTransaction.swift in Sources */,
 				E3E023492648B8EF00791E00 /* RPC.swift in Sources */,
 				E3A21E21265654A7006C560D /* HexUtil.swift in Sources */,
@@ -1392,6 +1407,7 @@
 				E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */,
 				E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */,
 				E3A5C8C22682F4A2002A0A2D /* UtilsTest.swift in Sources */,
+				E363D38D269C063F0077F6D2 /* LegacyTransactionTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,15 +7,15 @@
 
 import Foundation
 
-open class AbstractTransaction {
-    public var klaytnCall: Klay?
-    public var type = ""
-    public var from = ""
-    public var nonce = "0x"
-    public var gas = ""
-    public var gasPrice = "0x"
-    public var chainId = "0x"
-    public var signatures: [SignatureData] = []
+open class AbstractTransaction {    
+    private(set) public var klaytnCall: Klay?
+    private(set) public var type = ""
+    private(set) public var from = ""
+    private(set) public var nonce = "0x"
+    private(set) public var gas = ""
+    private(set) public var gasPrice = "0x"
+    private(set) public var chainId = "0x"
+    private(set) public var signatures: [SignatureData] = []
     
     public class Builder {
         var klaytnCall: Klay? = nil
@@ -31,53 +31,53 @@ open class AbstractTransaction {
             self.type = type
         }
         
-        public func setFrom(_ from: String) -> Builder {
+        public func setFrom (_ from: String) -> Self {
             self.from = from
             return self
         }
         
-        public func setNonce(_ nonce: String) -> Builder {
+        public func setNonce (_ nonce: String) -> Self {
             self.nonce = nonce
             return self
         }
         
-        public func setNonce(_ nonce: BigInt) -> Builder {
+        public func setNonce (_ nonce: BigInt) -> Self {
             return setNonce(nonce.hexa)
         }
         
-        public func setGas(_ gas: String) -> Builder {
+        public func setGas (_ gas: String) -> Self {
             self.gas = gas
             return self
         }
         
-        public func setGas(_ gas: BigInt) -> Builder {
+        public func setGas (_ gas: BigInt) -> Self {
             return setGas(gas.hexa)
         }
         
-        public func setGasPrice(_ gasPrice: String) -> Builder {
+        public func setGasPrice (_ gasPrice: String) -> Self {
             self.gasPrice = gasPrice
             return self
         }
         
-        public func setGasPrice(_ gasPrice: BigInt) -> Builder {
+        public func setGasPrice (_ gasPrice: BigInt) -> Self {
             return setGasPrice(gasPrice.hexa)
         }
         
-        public func setChainId(_ chainId: String) -> Builder {
+        public func setChainId (_ chainId: String) -> Self {
             self.chainId = chainId
             return self
         }
         
-        public func setChainId(_ chainId: BigInt) -> Builder {
+        public func setChainId (_ chainId: BigInt) -> Self {
             return setChainId(chainId.hexa)
         }
         
-        public func setSignatures(_ signatures: [SignatureData]) -> Builder {
+        public func setSignatures (_ signatures: [SignatureData]) -> Self {
             self.signatures.append(contentsOf: signatures)
             return self
         }
         
-        public func setSignatures(_ sign: SignatureData?) -> Builder {
+        public func setSignatures (_ sign: SignatureData?) -> Self {
             guard let sign = sign else {
                 self.signatures.append(SignatureData.getEmptySignature())
                 return self
@@ -87,7 +87,7 @@ open class AbstractTransaction {
             return self
         }
         
-        public func setKlaytnCall(_ klaytnCall: Klay) -> Builder {
+        public func setKlaytnCall (_ klaytnCall: Klay) -> Self {
             self.klaytnCall = klaytnCall
             return self
         }
@@ -100,15 +100,15 @@ open class AbstractTransaction {
     init(_ builder: Builder) throws {
         self.klaytnCall = builder.klaytnCall
         self.type = builder.type
-        try setFrom(from)
-        try setNonce(nonce)
-        try setGas(gas)
-        try setGasPrice(gasPrice)
-        try setChainId(chainId)
-        try setSignatures(signatures)
+        try setFrom(builder.from)
+        try setNonce(builder.nonce)
+        try setGas(builder.gas)
+        try setGasPrice(builder.gasPrice)
+        try setChainId(builder.chainId)
+        try setSignatures(builder.signatures)
     }
     
-    init(klaytnCall: Klay?, type: String, from: String, nonce: String = "0x", gas: String, gasPrice: String = "0x", chainId: String = "0x", signatures: [SignatureData] = []) throws {
+    init(_ klaytnCall: Klay?, _ type: String, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?) throws {
         self.klaytnCall = klaytnCall
         self.type = type
         try setFrom(from)
@@ -116,22 +116,13 @@ open class AbstractTransaction {
         try setGas(gas)
         try setGasPrice(gasPrice)
         try setChainId(chainId)
-        try setSignatures(signatures)
+        try setSignatures(signatures ?? [])
     }
     
     public func getRLPEncoding() throws -> String { throw CaverError.unexpectedReturnValue }
     
     public func getCommonRLPEncodingForSignature() throws -> String { throw CaverError.unexpectedReturnValue }
-    
-    public static func decode(_ rlpEncoded: String) throws -> AbstractTransaction {
-        guard let data = rlpEncoded.bytesFromHex else {
-            throw CaverError.unexpectedReturnValue
-        }
-        return try decode(data)
-    }
-    
-    public static func decode(_ rlpEncoded: [UInt8]) throws -> AbstractTransaction { throw CaverError.unexpectedReturnValue }
-    
+        
     public func sign(_ keyString: String) throws -> AbstractTransaction {
         let keyring = try KeyringFactory.createFromPrivateKey(keyString)
         return try sign(keyring, TransactionHasher.getHashForSignature)
@@ -278,11 +269,12 @@ open class AbstractTransaction {
     public func getRLPEncodingForSignature() throws -> String {
         guard let txRLP = try getCommonRLPEncodingForSignature().bytesFromHex else { throw CaverError.invalidValue }
         
-        var rlpTypeList: [Any] = []
-        rlpTypeList.append(Data(txRLP))
-        rlpTypeList.append(chainId)
-        rlpTypeList.append(0)
-        rlpTypeList.append(0)
+        let rlpTypeList: [Any] = [
+            Data(txRLP),
+            chainId,
+            0,
+            0
+        ]
         
         guard let encoded = Rlp.encode(rlpTypeList) else { throw CaverError.invalidValue }
         return encoded.hexString

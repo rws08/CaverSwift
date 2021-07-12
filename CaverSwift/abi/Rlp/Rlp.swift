@@ -156,7 +156,7 @@ public struct Rlp {
             let prefix = data[startPos] & 0xff
             
             if prefix < OFFSET_SHORT_STRING {
-                rlpList.append(String(prefix).cleanHexPrefix)
+                rlpList.append(prefix.hexa.cleanHexPrefix)
                 startPos += 1
             } else if prefix < OFFSET_LONG_STRING {
                 let strLen = (prefix - OFFSET_SHORT_STRING).int ?? 1

@@ -13,9 +13,9 @@ open class SignatureData: Equatable {
     var s = ""
     
     init(_ v: String, _ r: String, _ s: String) {
-        self.v = v
-        self.r = r
-        self.s = s
+        self.v = v.addHexPrefix
+        self.r = r.addHexPrefix
+        self.s = s.addHexPrefix
     }
     
     init(_ v: [UInt8], _ r: [UInt8], _ s: [UInt8]) {
@@ -28,6 +28,17 @@ open class SignatureData: Equatable {
         return SignatureData("0x01", "0x", "0x")
     }
     
+    public static func decodeSignatures(_ signatureRlpTypeList: [[String]]) -> [SignatureData]{
+        let signatureDataList: [SignatureData] = signatureRlpTypeList.filter{$0.count > 3}.map {
+            let v = $0[0]
+            let r = $0[0]
+            let s = $0[0]
+            return SignatureData(v, r, s)
+        }
+        
+        return signatureDataList
+    }
+    
     public func makeEIP155Signature(_ chainId: Int) throws {
         if v.isEmpty || v == "0x" {
             throw CaverError.IllegalArgumentException("V value must be set.")
@@ -36,6 +47,10 @@ open class SignatureData: Equatable {
         guard var v = BigInt(v, radix: 16) else { return }
         v = (v + BigInt(chainId) * BigInt(2)) + BigInt(8)
         self.v = v.hexa
+    }
+    
+    public func toRlpList() -> [String] {
+        return [v, r, s]
     }
     
     public var hash: Int {

@@ -12,7 +12,7 @@ open class Cancel: AbstractTransaction {
         init() {
             super.init(TransactionType.TxTypeCancel.string)
         }
-        public override func build() throws -> AbstractTransaction {
+        public override func build() throws -> Cancel {
             return try Cancel(self)
         }
     }
