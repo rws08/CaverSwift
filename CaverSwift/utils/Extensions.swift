@@ -270,17 +270,16 @@ public extension String {
     }
     
     var keccak256: Data {
-        let data = self.data(using: .utf8) ?? Data()
-        return data.keccak256
-    }
-    
-    var keccak256fromHex: Data {
-        let data = self.hexData!
+        guard let data = self.hexData else {
+            let data = self.data(using: .utf8) ?? Data()
+            return data.keccak256
+        }
+        
         return data.keccak256
     }
     
     var sha3String: String {
-        return String(bytes: keccak256.bytes).addHexPrefix
+        return cleanHexPrefix.keccak256.hexString
     }
 }
 

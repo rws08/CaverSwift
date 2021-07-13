@@ -43,8 +43,8 @@ open class SignatureData: Equatable {
         if v.isEmpty || v == "0x" {
             throw CaverError.IllegalArgumentException("V value must be set.")
         }
-                
-        guard var v = BigInt(v, radix: 16) else { return }
+        
+        guard var v = BigInt(v.cleanHexPrefix, radix: 16) else { return }
         v = (v + BigInt(chainId) * BigInt(2)) + BigInt(8)
         self.v = v.hexa
     }

@@ -133,11 +133,11 @@ open class LegacyTransaction: AbstractTransaction {
         return encodedStr
     }
     
-    public override func getRLPEncodingForSignature() throws -> String {
+    public override func getCommonRLPEncodingForSignature() throws -> String {
         return try getRLPEncodingForSignature()
     }
     
-    public override func getCommonRLPEncodingForSignature() throws -> String {
+    public override func getRLPEncodingForSignature() throws -> String {
         try validateOptionalValues(false)
         
         let rlpTypeList: [Any] = [

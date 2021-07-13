@@ -142,7 +142,7 @@ class createInstanceBuilder: XCTestCase {
     let chainID = "0x1"
     let input = "0x31323334"
     let value = "0xa"
-    
+        
     public func testBuilderTest() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
@@ -213,6 +213,91 @@ class createInstanceBuilder: XCTestCase {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid value : \(value)"))
         }
     }
+    
+    public func testThrowException_invalid_value2() throws {
+        let value = "invalid"
+        XCTAssertThrowsError(try LegacyTransaction.Builder()
+                                .setNonce(nonce)
+                                .setGas(gas)
+                                .setGasPrice(gasPrice)
+                                .setChainId(chainID)
+                                .setInput(input)
+                                .setTo(to)
+                                .setValue(value)
+                                .build()) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid value : \(value)"))
+        }
+    }
+    
+    public func testThrowException_invalid_To() throws {
+        let to = "invalid"
+        XCTAssertThrowsError(try LegacyTransaction.Builder()
+                                .setNonce(nonce)
+                                .setGas(gas)
+                                .setGasPrice(gasPrice)
+                                .setChainId(chainID)
+                                .setInput(input)
+                                .setTo(to)
+                                .setValue(value)
+                                .build()) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid address. : \(to)"))
+        }
+    }
+    
+    public func testThrowException_missingGas() throws {
+        XCTAssertThrowsError(try LegacyTransaction.Builder()
+                                .setNonce(nonce)
+                                .setGasPrice(gasPrice)
+                                .setChainId(chainID)
+                                .setInput(input)
+                                .setTo(to)
+                                .setValue(value)
+                                .build()) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("gas is missing."))
+        }
+    }
+}
+
+class signWithKeyTest2: XCTestCase {
+    var caver: Caver?
+    
+    var coupledKeyring: AbstractKeyring?
+    var deCoupledKeyring: AbstractKeyring?
+    
+    let privateKey = "0x45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8"
+    let nonce = "0x4D2"
+    let gas = "0xf4240"
+    let gasPrice = "0x19"
+    let to = "0x7b65b75d204abed71587c9e519a89277766ee1d0"
+    let chainID = "0x1"
+    let input = "0x31323334"
+    let value = "0xa"
+    
+    let expectedRawTransaction = "0xf8668204d219830f4240947b65b75d204abed71587c9e519a89277766ee1d00a843132333425a0b2a5a15550ec298dc7dddde3774429ed75f864c82caeb5ee24399649ad731be9a029da1014d16f2011b3307f7bbe1035b6e699a4204fc416c763def6cefd976567"
+    
+    public func createLegacyTransaction() throws -> LegacyTransaction{
+        return try LegacyTransaction.Builder()
+            .setNonce(nonce)
+            .setGas(gas)
+            .setGasPrice(gasPrice)
+            .setChainId(chainID)
+            .setInput(input)
+            .setTo(to)
+            .setValue(value)
+            .build()
+    }
+    
+    override func setUpWithError() throws {
+        caver = Caver(Caver.DEFAULT_URL)
+        coupledKeyring = try KeyringFactory.createFromPrivateKey(privateKey)
+        deCoupledKeyring = try KeyringFactory.createWithSingleKey(PrivateKey.generate().getDerivedAddress(), PrivateKey.generate().privateKey)
+    }
+    
+    public func testSignWithKey_Keyring() throws {
+        let legacyTransaction = try createLegacyTransaction()
+        let tx = try legacyTransaction.sign(coupledKeyring!, 0, TransactionHasher.getHashForSignature(_:))
+        XCTAssertEqual(expectedRawTransaction, try tx.getRawTransaction())
+    }
 }
 
 class getRLPEncodingTest: XCTestCase {
@@ -249,3 +334,36 @@ class getRLPEncodingTest: XCTestCase {
         XCTAssertTrue(legacyTransaction.compareTxField(expected, true))
     }
 }
+
+class getRLPEncodingForSignatureTest: XCTestCase {
+    public func testGetRLPEncodingForSignature() throws {
+        let nonce = BigInt(1234)
+        let gas = "0xf4240"
+        let gasPrice = "0x19"
+        let to = "0x7b65b75d204abed71587c9e519a89277766ee1d0"
+        let chainID = "0x1"
+        let input = "0x31323334"
+        let value = "0xa"
+        
+        let signatureData = SignatureData(
+            "0x25",
+            "0xb2a5a15550ec298dc7dddde3774429ed75f864c82caeb5ee24399649ad731be9",
+            "0x29da1014d16f2011b3307f7bbe1035b6e699a4204fc416c763def6cefd976567"
+        )
+        
+        let legacyTransaction = try LegacyTransaction.Builder()
+            .setNonce(nonce)
+            .setGas(gas)
+            .setGasPrice(gasPrice)
+            .setChainId(chainID)
+            .setValue(value)
+            .setInput(input)
+            .setSignatures([signatureData])
+            .setTo(to)
+            .build()
+        
+        let expected = "0xe68204d219830f4240947b65b75d204abed71587c9e519a89277766ee1d00a8431323334018080"
+        XCTAssertEqual(expected, try legacyTransaction.getRLPEncodingForSignature())
+    }
+}
+
