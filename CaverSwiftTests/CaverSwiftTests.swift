@@ -45,12 +45,11 @@ class CaverSwiftTests: XCTestCase {
 //            print(error.localizedDescription)
 //        }
 
-        caver.rpc.klay.getBalance("0x5330bF6E777aD4DFf04200Db46D9EBF042949ECf") { _, result in
-            print(result?.val.decimal as Any)
-            expectation.fulfill()
-        }
+        let(_, result) = caver.rpc.klay.getBalance("0x5330bF6E777aD4DFf04200Db46D9EBF042949ECf")
+        print(result?.val.decimal as Any)
+        expectation.fulfill()
         
-        let result = XCTWaiter.wait(for: [expectation], timeout: 2.0)
-        XCTAssertEqual(result, .completed)
+        let waiter = XCTWaiter.wait(for: [expectation], timeout: 2.0)
+        XCTAssertEqual(waiter, .completed)
     }
 }

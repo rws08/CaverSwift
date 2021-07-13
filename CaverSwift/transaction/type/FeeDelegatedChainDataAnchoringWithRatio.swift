@@ -1,51 +1,52 @@
 //
-//  FeeDelegatedAccountUpdateWithRatio.swift
+//  FeeDelegatedChainDataAnchoringWithRatioWithRatio.swift
 //  CaverSwift
 //
-//  Created by won on 2021/07/12.
+//  Created by won on 2021/07/13.
 //
 
 import Foundation
 
-open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTransaction {
-    private(set) public var account: Account?
+open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRatioTransaction {
+    private(set) public var input: String?
     
     public class Builder: AbstractFeeDelegatedWithRatioTransaction.Builder {
-        private(set) public var account: Account?
+        private(set) public var input: String?
         
         init() {
-            super.init(TransactionType.TxTypeFeeDelegatedAccountUpdate.string)
-        }
-        public override func build() throws -> FeeDelegatedAccountUpdateWithRatio {
-            return try FeeDelegatedAccountUpdateWithRatio(self)
+            super.init(TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.string)
         }
         
-        public func setAccount(_ account: Account) -> Self {
-            self.account = account
+        public override func build() throws -> FeeDelegatedChainDataAnchoringWithRatio {
+            return try FeeDelegatedChainDataAnchoringWithRatio(self)
+        }
+        
+        public func setInput(_ input: String) -> Self {
+            self.input = input
             return self
         }
     }
     
     init(_ builder: Builder) throws {
         try super.init(builder)
-        try setAccount(builder.account)
+        try setInput(builder.input)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures: [SignatureData]?, _ feeRatio: String, _ account: Account) throws {
-        try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedAccountUpdateWithRatio.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures, feeRatio)
-        try setAccount(account)
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures: [SignatureData]?, _ feeRatio: String, _ input: String) throws {
+        try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedCancelWithRatio.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures, feeRatio)
+        try setInput(input)
     }
     
-    public static func decode(_ rlpEncoded: String) throws -> FeeDelegatedAccountUpdateWithRatio {
+    public static func decode(_ rlpEncoded: String) throws -> FeeDelegatedChainDataAnchoringWithRatio {
         guard let data = rlpEncoded.bytesFromHex else {
             throw CaverError.unexpectedReturnValue
         }
         return try decode(data)
     }
     
-    public static func decode(_ rlpEncoded: [UInt8]) throws -> FeeDelegatedAccountUpdateWithRatio {
-        if rlpEncoded[0] != TransactionType.TxTypeFeeDelegatedAccountUpdateWithRatio.rawValue {
-            throw CaverError.IllegalArgumentException("Invalid RLP-encoded tag - \(TransactionType.TxTypeFeeDelegatedAccountUpdateWithRatio)")
+    public static func decode(_ rlpEncoded: [UInt8]) throws -> FeeDelegatedChainDataAnchoringWithRatio {
+        if rlpEncoded[0] != TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.rawValue {
+            throw CaverError.IllegalArgumentException("Invalid RLP-encoded tag - \(TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio)")
         }
         
         let rlpList = Rlp.decode(Array(rlpEncoded[1..<rlpEncoded.count]))
@@ -54,8 +55,7 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
               let gasPrice = values[1] as? String,
               let gas = values[2] as? String,
               let from = values[3] as? String,
-              let account = values[4] as? String,
-              let account = try? Account.createFromRLPEncoding(from, account),
+              let input = values[4] as? String,
               let feeRatio = values[5] as? String,
               let senderSignatures = values[6] as? [[String]],
               let feePayer = values[7] as? String,
@@ -65,23 +65,23 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
         
         let senderSignList = SignatureData.decodeSignatures(senderSignatures)
         let feePayerSignList = SignatureData.decodeSignatures(feePayerSignatures)
-        let feeDelegatedAccountUpdateWithRatio = try FeeDelegatedAccountUpdateWithRatio.Builder()
+        let feeDelegatedChainDataAnchoringWithRatio = try FeeDelegatedChainDataAnchoringWithRatio.Builder()
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setGas(gas)
             .setFrom(from)
-            .setAccount(account)
+            .setInput(input)
             .setFeeRatio(feeRatio)
             .setSignatures(senderSignList)
             .setFeePayer(feePayer)
             .setFeePayerSignatures(feePayerSignList)
             .build()
         
-        return feeDelegatedAccountUpdateWithRatio
+        return feeDelegatedChainDataAnchoringWithRatio
     }
     
     public override func getRLPEncoding() throws -> String {
-        guard let account = account else { throw CaverError.invalidValue }
+        guard let input = input else { throw CaverError.invalidValue }
         
         try validateOptionalValues(false)
         
@@ -98,7 +98,7 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
             gasPrice,
             gas,
             from,
-            try account.getRLPEncodingAccountKey(),
+            input,
             feeRatio,
             senderSignatureRLPList,
             feePayer,
@@ -106,18 +106,18 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedAccountUpdateWithRatio.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.string.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
     }
     
     public override func getCommonRLPEncodingForSignature() throws -> String {
-        guard let account = account else { throw CaverError.invalidValue }
+        guard let input = input else { throw CaverError.invalidValue }
         
         try validateOptionalValues(false)
         
-        let type = TransactionType.TxTypeFeeDelegatedAccountUpdateWithRatio.string
+        let type = TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.string
         
         let rlpTypeList: [Any] = [
             type,
@@ -125,7 +125,7 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
             gasPrice,
             gas,
             from,
-            try account.getRLPEncodingAccountKey(),
+            input,
             feeRatio
         ]
 
@@ -135,26 +135,26 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
     }
     
     public override func getSenderTxHash() throws -> String {
-        guard let account = account else { throw CaverError.invalidValue }
+        guard let input = input else { throw CaverError.invalidValue }
         
         try validateOptionalValues(false)
         
         let signatureRLPList = signatures.map {
             $0.toRlpList()
         }
-        
+                
         let rlpTypeList: [Any] = [
             nonce,
             gasPrice,
             gas,
             from,
-            try account.getRLPEncodingAccountKey(),
+            input,
             feeRatio,
             signatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedAccountUpdateWithRatio.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.string.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.keccak256.hexString
         return encodedStr
@@ -162,21 +162,20 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
 
     public override func compareTxField(_ txObj: AbstractFeeDelegatedWithRatioTransaction, _ checkSig: Bool) -> Bool {
         if !super.compareTxField(txObj, checkSig) { return false }
-        guard let txObj = txObj as? FeeDelegatedAccountUpdateWithRatio else { return false }
-        if account?.address.lowercased() != txObj.account?.address.lowercased() { return false }
-        if (try? account?.getRLPEncodingAccountKey()) != (try? txObj.account?.getRLPEncodingAccountKey()) { return false }
+        guard let txObj = txObj as? FeeDelegatedChainDataAnchoringWithRatio else { return false }
+        if input != txObj.input { return false }
         
         return true
     }
     
-    public func setAccount(_ account: Account?) throws {
-        guard let account = account else {
-            throw CaverError.IllegalArgumentException("account is missing.")
+    public func setInput(_ input: String?) throws {
+        guard let input = input else {
+            throw CaverError.IllegalArgumentException("input is missing.")
         }
-        if from.lowercased() != account.address.lowercased() {
-            throw CaverError.IllegalArgumentException("Transaction's 'from' address and 'account address' do not match.")
+        if !Utils.isHex(input) {
+            throw CaverError.IllegalArgumentException("Invalid input : \(input)")
         }
         
-        self.account = account
+        self.input = input
     }
 }

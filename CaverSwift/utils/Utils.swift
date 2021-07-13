@@ -431,6 +431,56 @@ public struct KlayUnit {
     }
 }
 
+public class CodeFormat {
+    public static let EVM = BigInt(0)
+}
+
+
+public enum DefaultBlockParameterName: Hashable {
+    case Latest
+    case Earliest
+    case Pending
+    case Number(Int)
+    
+    public var stringValue: String {
+        switch self {
+        case .Latest:
+            return "latest"
+        case .Earliest:
+            return "earliest"
+        case .Pending:
+            return "pending"
+        case .Number(let int):
+            return int.hexString
+        }
+    }
+    
+    public var intValue: Int? {
+        switch self {
+        case .Number(let int):
+            return int
+        default:
+            return nil
+        }
+    }
+    
+    public init(rawValue: Int) {
+        self = .Number(rawValue)
+    }
+    
+    public init(rawValue: String) {
+        if rawValue == "latest" {
+            self = .Latest
+        } else if rawValue == "earliest" {
+            self = .Earliest
+        } else if rawValue == "pending" {
+            self = .Pending
+        } else {
+            self = .Number(Int(hex: rawValue) ?? 0)
+        }
+    }
+}
+
 func WARNING(filename: String = #file, line: Int = #line, funcname: String = #function, message:Any...) {
     print("\(filename)[\(funcname)][Line \(line)] \(message)")
 }

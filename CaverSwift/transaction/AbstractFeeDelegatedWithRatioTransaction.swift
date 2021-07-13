@@ -11,7 +11,7 @@ open class AbstractFeeDelegatedWithRatioTransaction: AbstractFeeDelegatedTransac
     private(set) public var feeRatio = ""
     
     public class Builder: AbstractFeeDelegatedTransaction.Builder {
-        public var feeRatio = ""
+        private(set) public var feeRatio = ""
         
         override init(_ type: String) {
             super.init(type)

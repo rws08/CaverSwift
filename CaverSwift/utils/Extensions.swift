@@ -46,12 +46,14 @@ extension StringProtocol {
         }
     }
     public var addHexPrefix: String {
-        let clean = cleanHexPrefix
-        if clean.isMinus {
-            return "-0x\(clean)"
-        } else {
-            return "0x\(clean)"
+        if !isHexa {
+            if isMinus {
+                return "-0x\(self)"
+            } else {
+                return "0x\(self)"
+            }
         }
+        return "\(self)"
     }
     public var hexaToDecimal: Int { Int(cleanHexPrefix, radix: 16) ?? 0 }
     public var decimalToHexa: String { .init(Int(self) ?? 0, radix: 16) }
@@ -111,7 +113,11 @@ public extension BigUInt {
 
 public extension BigInt {
     init?(hex: String) {
-        self.init(hex.cleanHexPrefix.lowercased(), radix: 16)
+        let num = hex.cleanHexPrefix
+        if num.count == 0 {
+            return nil
+        }
+        self.init(num.lowercased(), radix: 16)
     }
     
     init(twosComplement data: Data) {

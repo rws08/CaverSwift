@@ -11,11 +11,12 @@ open class ChainDataAnchoring: AbstractTransaction {
     private(set) public var input: String?
     
     public class Builder: AbstractTransaction.Builder {
-        public var input: String?
+        private(set) public var input: String?
         
         init() {
             super.init(TransactionType.TxTypeChainDataAnchoring.string)
         }
+        
         public override func build() throws -> ChainDataAnchoring {
             return try ChainDataAnchoring(self)
         }

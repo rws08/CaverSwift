@@ -8,7 +8,8 @@
 import Foundation
 
 public class Caver {
-    public static var DEFAULT_URL = "http://localhost:8551";
+//    public static var DEFAULT_URL = "http://localhost:8551"
+    public static var DEFAULT_URL = "https://api.baobab.klaytn.net:8651"
     
     public var rpc: RPC
     

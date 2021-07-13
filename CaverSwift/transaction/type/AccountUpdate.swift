@@ -11,7 +11,7 @@ open class AccountUpdate: AbstractTransaction {
     private(set) public var account: Account?
     
     public class Builder: AbstractTransaction.Builder {
-        public var account: Account?
+        private(set) public var account: Account?
         
         init() {
             super.init(TransactionType.TxTypeAccountUpdate.string)

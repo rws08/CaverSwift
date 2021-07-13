@@ -11,7 +11,7 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
     private(set) public var account: Account?
     
     public class Builder: AbstractFeeDelegatedTransaction.Builder {
-        public var account: Account?
+        private(set) public var account: Account?
         
         init() {
             super.init(TransactionType.TxTypeFeeDelegatedAccountUpdate.string)

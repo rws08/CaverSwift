@@ -77,13 +77,12 @@ public class ContractMethod: Codable {
         
         callObject.data = encodedInput
         callObject.to = method.contractAddress
-        try caver?.rpc.klay.call(callObject, completion: { error, response in
-            if error == nil {
-                completion(ABI.decodeParameters(method, response!))
-            } else {
+        let(error, response) = try caver!.rpc.klay.call(callObject)
+        if error == nil {
+            completion(ABI.decodeParameters(method, response!))
+        } else {
 //                let result = ABI.decodeParameters()
-            }
-        })
+        }
     }
     
     private func findMatchedInstance(_ arguments: [Any]) throws -> ContractMethod {

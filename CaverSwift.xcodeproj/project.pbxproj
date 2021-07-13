@@ -15,6 +15,23 @@
 		E363D393269C2BBC0077F6D2 /* AbstractFeeDelegatedTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D392269C2BBC0077F6D2 /* AbstractFeeDelegatedTransaction.swift */; };
 		E363D395269C36830077F6D2 /* AbstractFeeDelegatedWithRatioTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D394269C36830077F6D2 /* AbstractFeeDelegatedWithRatioTransaction.swift */; };
 		E363D397269C39430077F6D2 /* FeeDelegatedAccountUpdateWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D396269C39430077F6D2 /* FeeDelegatedAccountUpdateWithRatio.swift */; };
+		E363D399269C3D1B0077F6D2 /* SmartContractDeploy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D398269C3D1B0077F6D2 /* SmartContractDeploy.swift */; };
+		E363D39B269D0CDD0077F6D2 /* SmartContractExecution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D39A269D0CDD0077F6D2 /* SmartContractExecution.swift */; };
+		E363D39D269D11560077F6D2 /* ValueTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D39C269D11560077F6D2 /* ValueTransfer.swift */; };
+		E363D39F269D12220077F6D2 /* ValueTransferMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D39E269D12220077F6D2 /* ValueTransferMemo.swift */; };
+		E363D3A1269D12B80077F6D2 /* FeeDelegatedCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3A0269D12B80077F6D2 /* FeeDelegatedCancel.swift */; };
+		E363D3A3269D149F0077F6D2 /* FeeDelegatedCancelWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3A2269D149F0077F6D2 /* FeeDelegatedCancelWithRatio.swift */; };
+		E363D3A5269D15330077F6D2 /* FeeDelegatedChainDataAnchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3A4269D15330077F6D2 /* FeeDelegatedChainDataAnchoring.swift */; };
+		E363D3A7269D16710077F6D2 /* FeeDelegatedChainDataAnchoringWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3A6269D16710077F6D2 /* FeeDelegatedChainDataAnchoringWithRatio.swift */; };
+		E363D3A9269D17590077F6D2 /* FeeDelegatedSmartContractDeploy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3A8269D17590077F6D2 /* FeeDelegatedSmartContractDeploy.swift */; };
+		E363D3AB269D19210077F6D2 /* FeeDelegatedSmartContractDeployWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3AA269D19210077F6D2 /* FeeDelegatedSmartContractDeployWithRatio.swift */; };
+		E363D3AD269D19CF0077F6D2 /* FeeDelegatedSmartContractExecution.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3AC269D19CF0077F6D2 /* FeeDelegatedSmartContractExecution.swift */; };
+		E363D3AF269D1A8E0077F6D2 /* FeeDelegatedSmartContractExecutionWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3AE269D1A8E0077F6D2 /* FeeDelegatedSmartContractExecutionWithRatio.swift */; };
+		E363D3B1269D1B670077F6D2 /* FeeDelegatedValueTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B0269D1B670077F6D2 /* FeeDelegatedValueTransfer.swift */; };
+		E363D3B3269D1F7D0077F6D2 /* FeeDelegatedValueTransferMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B2269D1F7D0077F6D2 /* FeeDelegatedValueTransferMemo.swift */; };
+		E363D3B5269D21E60077F6D2 /* FeeDelegatedValueTransferWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B4269D21E60077F6D2 /* FeeDelegatedValueTransferWithRatio.swift */; };
+		E363D3B7269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B6269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift */; };
+		E363D3BA269D37380077F6D2 /* Addresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B9269D37380077F6D2 /* Addresses.swift */; };
 		E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */; };
 		E36D83782698020400D4D5B2 /* AbstractTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83772698020400D4D5B2 /* AbstractTransaction.swift */; };
 		E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */; };
@@ -234,6 +251,23 @@
 		E363D392269C2BBC0077F6D2 /* AbstractFeeDelegatedTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractFeeDelegatedTransaction.swift; sourceTree = "<group>"; };
 		E363D394269C36830077F6D2 /* AbstractFeeDelegatedWithRatioTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractFeeDelegatedWithRatioTransaction.swift; sourceTree = "<group>"; };
 		E363D396269C39430077F6D2 /* FeeDelegatedAccountUpdateWithRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedAccountUpdateWithRatio.swift; sourceTree = "<group>"; };
+		E363D398269C3D1B0077F6D2 /* SmartContractDeploy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartContractDeploy.swift; sourceTree = "<group>"; };
+		E363D39A269D0CDD0077F6D2 /* SmartContractExecution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartContractExecution.swift; sourceTree = "<group>"; };
+		E363D39C269D11560077F6D2 /* ValueTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransfer.swift; sourceTree = "<group>"; };
+		E363D39E269D12220077F6D2 /* ValueTransferMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransferMemo.swift; sourceTree = "<group>"; };
+		E363D3A0269D12B80077F6D2 /* FeeDelegatedCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedCancel.swift; sourceTree = "<group>"; };
+		E363D3A2269D149F0077F6D2 /* FeeDelegatedCancelWithRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedCancelWithRatio.swift; sourceTree = "<group>"; };
+		E363D3A4269D15330077F6D2 /* FeeDelegatedChainDataAnchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedChainDataAnchoring.swift; sourceTree = "<group>"; };
+		E363D3A6269D16710077F6D2 /* FeeDelegatedChainDataAnchoringWithRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedChainDataAnchoringWithRatio.swift; sourceTree = "<group>"; };
+		E363D3A8269D17590077F6D2 /* FeeDelegatedSmartContractDeploy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedSmartContractDeploy.swift; sourceTree = "<group>"; };
+		E363D3AA269D19210077F6D2 /* FeeDelegatedSmartContractDeployWithRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedSmartContractDeployWithRatio.swift; sourceTree = "<group>"; };
+		E363D3AC269D19CF0077F6D2 /* FeeDelegatedSmartContractExecution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedSmartContractExecution.swift; sourceTree = "<group>"; };
+		E363D3AE269D1A8E0077F6D2 /* FeeDelegatedSmartContractExecutionWithRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedSmartContractExecutionWithRatio.swift; sourceTree = "<group>"; };
+		E363D3B0269D1B670077F6D2 /* FeeDelegatedValueTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedValueTransfer.swift; sourceTree = "<group>"; };
+		E363D3B2269D1F7D0077F6D2 /* FeeDelegatedValueTransferMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedValueTransferMemo.swift; sourceTree = "<group>"; };
+		E363D3B4269D21E60077F6D2 /* FeeDelegatedValueTransferWithRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedValueTransferWithRatio.swift; sourceTree = "<group>"; };
+		E363D3B6269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedValueTransferMemoWithRatio.swift; sourceTree = "<group>"; };
+		E363D3B9269D37380077F6D2 /* Addresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Addresses.swift; sourceTree = "<group>"; };
 		E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainerTest.swift; sourceTree = "<group>"; };
 		E36D83772698020400D4D5B2 /* AbstractTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractTransaction.swift; sourceTree = "<group>"; };
 		E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringTest.swift; sourceTree = "<group>"; };
@@ -489,9 +523,17 @@
 			path = transaction;
 			sourceTree = "<group>";
 		};
+		E363D3B8269D24260077F6D2 /* response */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = response;
+			sourceTree = "<group>";
+		};
 		E36D8376269801F100D4D5B2 /* transaction */ = {
 			isa = PBXGroup;
 			children = (
+				E363D3B8269D24260077F6D2 /* response */,
 				E36D83772698020400D4D5B2 /* AbstractTransaction.swift */,
 				E363D392269C2BBC0077F6D2 /* AbstractFeeDelegatedTransaction.swift */,
 				E363D394269C36830077F6D2 /* AbstractFeeDelegatedWithRatioTransaction.swift */,
@@ -689,17 +731,17 @@
 		E39F2CD6262EA4EF003FA426 /* CaverSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A21D3526564CCA006C560D /* ABITests.swift */,
 				E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */,
 				E3917529268ECFFB006BB332 /* AccountTest.swift */,
 				E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */,
 				E39F2CD9262EA4EF003FA426 /* Info.plist */,
+				E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */,
 				E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */,
 				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
 				E3E02388264CB16500791E00 /* testFunction.json */,
+				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
-				E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -950,11 +992,27 @@
 			children = (
 				E363D389269BBE0E0077F6D2 /* AccountUpdate.swift */,
 				E3DBBD522698294E00BAFE27 /* Cancel.swift */,
-				E3DBBD56269834CE00BAFE27 /* LegacyTransaction.swift */,
-				E3DBBD5426982B9100BAFE27 /* TransactionType.swift */,
 				E363D38E269C27930077F6D2 /* ChainDataAnchoring.swift */,
 				E363D390269C2AA30077F6D2 /* FeeDelegatedAccountUpdate.swift */,
 				E363D396269C39430077F6D2 /* FeeDelegatedAccountUpdateWithRatio.swift */,
+				E363D3A0269D12B80077F6D2 /* FeeDelegatedCancel.swift */,
+				E363D3A2269D149F0077F6D2 /* FeeDelegatedCancelWithRatio.swift */,
+				E363D3A4269D15330077F6D2 /* FeeDelegatedChainDataAnchoring.swift */,
+				E363D3A6269D16710077F6D2 /* FeeDelegatedChainDataAnchoringWithRatio.swift */,
+				E363D3A8269D17590077F6D2 /* FeeDelegatedSmartContractDeploy.swift */,
+				E363D3AA269D19210077F6D2 /* FeeDelegatedSmartContractDeployWithRatio.swift */,
+				E363D3AC269D19CF0077F6D2 /* FeeDelegatedSmartContractExecution.swift */,
+				E363D3AE269D1A8E0077F6D2 /* FeeDelegatedSmartContractExecutionWithRatio.swift */,
+				E363D3B0269D1B670077F6D2 /* FeeDelegatedValueTransfer.swift */,
+				E363D3B2269D1F7D0077F6D2 /* FeeDelegatedValueTransferMemo.swift */,
+				E363D3B6269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift */,
+				E363D3B4269D21E60077F6D2 /* FeeDelegatedValueTransferWithRatio.swift */,
+				E3DBBD56269834CE00BAFE27 /* LegacyTransaction.swift */,
+				E363D398269C3D1B0077F6D2 /* SmartContractDeploy.swift */,
+				E363D39A269D0CDD0077F6D2 /* SmartContractExecution.swift */,
+				E3DBBD5426982B9100BAFE27 /* TransactionType.swift */,
+				E363D39C269D11560077F6D2 /* ValueTransfer.swift */,
+				E363D39E269D12220077F6D2 /* ValueTransferMemo.swift */,
 			);
 			path = type;
 			sourceTree = "<group>";
@@ -1038,6 +1096,7 @@
 			isa = PBXGroup;
 			children = (
 				E3E0237F264A26F600791E00 /* Quantity.swift */,
+				E363D3B9269D37380077F6D2 /* Addresses.swift */,
 			);
 			path = response;
 			sourceTree = "<group>";
@@ -1235,12 +1294,15 @@
 				E38FA12F2689A6CB00F532D0 /* Base64.swift in Sources */,
 				E38FA1272689A6CB00F532D0 /* EC521.swift in Sources */,
 				E36EEA472696B05900C1B599 /* crypto_scrypt-hexconvert.c in Sources */,
+				E363D39B269D0CDD0077F6D2 /* SmartContractExecution.swift in Sources */,
 				E39F2CE6262EAAD3003FA426 /* Caver.swift in Sources */,
 				E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */,
 				E38FA1252689A6CB00F532D0 /* BP256.swift in Sources */,
 				E363D393269C2BBC0077F6D2 /* AbstractFeeDelegatedTransaction.swift in Sources */,
 				E38FA11E2689A6CB00F532D0 /* BitVector.swift in Sources */,
 				E38FA10C2689A6CB00F532D0 /* HMAC.swift in Sources */,
+				E363D3AD269D19CF0077F6D2 /* FeeDelegatedSmartContractExecution.swift in Sources */,
+				E363D3BA269D37380077F6D2 /* Addresses.swift in Sources */,
 				E38FA12E2689A6CB00F532D0 /* EC384.swift in Sources */,
 				E3A21E18265654A7006C560D /* DefaultFunctionEncoder.swift in Sources */,
 				E38FA0C826896B6800F532D0 /* Codable.swift in Sources */,
@@ -1255,6 +1317,7 @@
 				E363D38F269C27930077F6D2 /* ChainDataAnchoring.swift in Sources */,
 				E3A21E1C265654A7006C560D /* ERC20Responses.swift in Sources */,
 				E36EEA462696B05900C1B599 /* crypto_scrypt-hash.c in Sources */,
+				E363D3B3269D1F7D0077F6D2 /* FeeDelegatedValueTransferMemo.swift in Sources */,
 				E38FA1182689A6CB00F532D0 /* Point.swift in Sources */,
 				E3A21E82265F8705006C560D /* IWallet.swift in Sources */,
 				E3A21E57265CC247006C560D /* Array.swift in Sources */,
@@ -1267,11 +1330,13 @@
 				E3DBBD57269834CE00BAFE27 /* LegacyTransaction.swift in Sources */,
 				E38FA1132689A6CB00F532D0 /* GCMCipher.swift in Sources */,
 				E38FA12B2689A6CB00F532D0 /* BP160.swift in Sources */,
+				E363D3B5269D21E60077F6D2 /* FeeDelegatedValueTransferWithRatio.swift in Sources */,
 				E3A21E55265C9AF3006C560D /* Bytes.swift in Sources */,
 				E3A21E14265654A7006C560D /* ABIFunctionEncoder.swift in Sources */,
 				E3A21E53265B608A006C560D /* FunctionReturnDecoder.swift in Sources */,
 				E3B8E6B32685918A0069A223 /* MessageSigned.swift in Sources */,
 				E38FA1282689A6CB00F532D0 /* EC224.swift in Sources */,
+				E363D3AB269D19210077F6D2 /* FeeDelegatedSmartContractDeployWithRatio.swift in Sources */,
 				E38FA1152689A6CB00F532D0 /* Exception.swift in Sources */,
 				E3A21E3A265654A7006C560D /* EthereumBlock.swift in Sources */,
 				E38FA12A2689A6CB00F532D0 /* BP320.swift in Sources */,
@@ -1279,6 +1344,7 @@
 				E363D397269C39430077F6D2 /* FeeDelegatedAccountUpdateWithRatio.swift in Sources */,
 				E38FA1122689A6CB00F532D0 /* SHA2.swift in Sources */,
 				E390DAB6268DAE3000D05479 /* AccountKeyDecoder.swift in Sources */,
+				E363D3A7269D16710077F6D2 /* FeeDelegatedChainDataAnchoringWithRatio.swift in Sources */,
 				E38FA11F2689A6CB00F532D0 /* EC409.swift in Sources */,
 				E3A21E11265654A7006C560D /* ABIDecoder+Static.swift in Sources */,
 				E3A21E8826607458006C560D /* SwiftBigNumberCore.swift in Sources */,
@@ -1290,6 +1356,8 @@
 				E3A21E3C265654A7006C560D /* EthereumNetwork.swift in Sources */,
 				E3A21E4F265654B5006C560D /* aes.c in Sources */,
 				E38FA1312689A99D00F532D0 /* Extensions.swift in Sources */,
+				E363D3AF269D1A8E0077F6D2 /* FeeDelegatedSmartContractExecutionWithRatio.swift in Sources */,
+				E363D3A1269D12B80077F6D2 /* FeeDelegatedCancel.swift in Sources */,
 				E38FA0C926896B6800F532D0 /* BigUInt.swift in Sources */,
 				E38FA0CD26896B6800F532D0 /* Shifts.swift in Sources */,
 				E3A21E16265654A7006C560D /* ABIRawType+Static.swift in Sources */,
@@ -1307,6 +1375,7 @@
 				E3A21E0F265654A7006C560D /* ABIRawType+JSON.swift in Sources */,
 				E3A21E23265654A7006C560D /* AesUtil.swift in Sources */,
 				E36EEA392696B05900C1B599 /* crypto_scrypt-nosse.c in Sources */,
+				E363D39F269D12220077F6D2 /* ValueTransferMemo.swift in Sources */,
 				E38FA0CA26896B6800F532D0 /* Multiplication.swift in Sources */,
 				E3A21E19265654A7006C560D /* ERC20Functions.swift in Sources */,
 				E38FA12C2689A6CB00F532D0 /* BP224.swift in Sources */,
@@ -1324,8 +1393,10 @@
 				E363D395269C36830077F6D2 /* AbstractFeeDelegatedWithRatioTransaction.swift in Sources */,
 				E36EEA482696B05900C1B599 /* crypto-mcf.c in Sources */,
 				E36EEA422696B05900C1B599 /* b64.c in Sources */,
+				E363D3A5269D15330077F6D2 /* FeeDelegatedChainDataAnchoring.swift in Sources */,
 				E3A5C8C02682F2CC002A0A2D /* AccountKeyPublic.swift in Sources */,
 				E38FA1062689A6CB00F532D0 /* RP.swift in Sources */,
+				E363D39D269D11560077F6D2 /* ValueTransfer.swift in Sources */,
 				E38FA0CE26896B6800F532D0 /* Subtraction.swift in Sources */,
 				E3A21E37265654A7006C560D /* EthereumTransactionReceipt.swift in Sources */,
 				E38FA1202689A6CB00F532D0 /* EC283.swift in Sources */,
@@ -1346,6 +1417,7 @@
 				E36EEA3A2696B05900C1B599 /* slowequals.c in Sources */,
 				E38FA0C326896B6800F532D0 /* Comparable.swift in Sources */,
 				E3E023502648BCD800791E00 /* Klay.swift in Sources */,
+				E363D3A9269D17590077F6D2 /* FeeDelegatedSmartContractDeploy.swift in Sources */,
 				E38FA0C526896B6800F532D0 /* Square Root.swift in Sources */,
 				E36EEA1426957D0F00C1B599 /* KeyStoreOption.swift in Sources */,
 				E3A21E39265654A7006C560D /* EthereumBlockInfo.swift in Sources */,
@@ -1365,6 +1437,7 @@
 				E3DBBD5526982B9100BAFE27 /* TransactionType.swift in Sources */,
 				E3A21E09265654A7006C560D /* ENSContracts.swift in Sources */,
 				E3B8E6B826859C270069A223 /* File.swift in Sources */,
+				E363D3A3269D149F0077F6D2 /* FeeDelegatedCancelWithRatio.swift in Sources */,
 				E3A21E40265654A7006C560D /* MulticallContract.swift in Sources */,
 				E3B8E6AF2685783E0069A223 /* SingleKeyring.swift in Sources */,
 				E3A21E12265654A7006C560D /* ABITuple.swift in Sources */,
@@ -1390,9 +1463,11 @@
 				E38FA1142689A6CB00F532D0 /* DeterministicK.swift in Sources */,
 				E36D83782698020400D4D5B2 /* AbstractTransaction.swift in Sources */,
 				E38FA0C126896B6800F532D0 /* Data Conversion.swift in Sources */,
+				E363D3B7269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift in Sources */,
 				E38FA0CC26896B6800F532D0 /* Floating Point Conversion.swift in Sources */,
 				E38FA0C626896B6800F532D0 /* Division.swift in Sources */,
 				E3A21E32265654A7006C560D /* EthereumAccount+SignTransaction.swift in Sources */,
+				E363D399269C3D1B0077F6D2 /* SmartContractDeploy.swift in Sources */,
 				E3E0237B264A059A00791E00 /* ContractEvent.swift in Sources */,
 				E363D38A269BBE0E0077F6D2 /* AccountUpdate.swift in Sources */,
 				E3A21E3D265654A7006C560D /* EthereumTransaction.swift in Sources */,
@@ -1406,6 +1481,7 @@
 				E38FA0C726896B6800F532D0 /* Prime Test.swift in Sources */,
 				E38FA11A2689A6CB00F532D0 /* Point2.swift in Sources */,
 				E38FA11B2689A6CB00F532D0 /* Domain2.swift in Sources */,
+				E363D3B1269D1B670077F6D2 /* FeeDelegatedValueTransfer.swift in Sources */,
 				E3A21E3B265654A7006C560D /* EthereumLog.swift in Sources */,
 				E3A5C8C42683079E002A0A2D /* PrivateKey.swift in Sources */,
 				E36EEA102693DCEE00C1B599 /* MultipleKeyring.swift in Sources */,

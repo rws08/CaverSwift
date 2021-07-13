@@ -18,14 +18,14 @@ open class AbstractTransaction {
     private(set) public var signatures: [SignatureData] = []
     
     public class Builder {
-        var klaytnCall: Klay? = nil
-        var type = ""
-        var from = ""
-        var nonce = "0x"
-        var gas = ""
-        var gasPrice = "0x"
-        var chainId = "0x"
-        var signatures: [SignatureData] = []
+        private(set) public var klaytnCall: Klay? = nil
+        private(set) public var type = ""
+        private(set) public var from = ""
+        private(set) public var nonce = "0x"
+        private(set) public var gas = ""
+        private(set) public var gasPrice = "0x"
+        private(set) public var chainId = "0x"
+        private(set) public var signatures: [SignatureData] = []
         
         init(_ type: String) {
             self.type = type
@@ -192,7 +192,17 @@ open class AbstractTransaction {
     public func fillTransaction() throws {
         if klaytnCall != nil {
             if nonce == "0x" {
-                //TODO: 미완성!!!!
+                let(_, result) = klaytnCall!.getTransactionCount(from, .Pending)
+                print(result?.val.hexa as Any)
+                self.nonce = (result?.val.hexa)!
+            }
+            
+            if chainId == "0x" {
+                self.chainId = (klaytnCall?.getChainID().1?.val.hexa)!
+            }
+            
+            if gasPrice == "0x" {
+                self.gasPrice = (klaytnCall?.getGasPrice().1?.val.hexa)!
             }
         }
         
@@ -335,7 +345,7 @@ open class AbstractTransaction {
             nonce = "0x"
         }
     
-        if nonce != "0x" && !Utils.isNumber(gas) {
+        if nonce != "0x" && !Utils.isNumber(nonce) {
             throw CaverError.IllegalArgumentException("Invalid nonce. : \(nonce)")
         }
         self.nonce = nonce
