@@ -97,7 +97,7 @@ open class AccountUpdate: AbstractTransaction {
     public override func getCommonRLPEncodingForSignature() throws -> String {
         guard let account = account else { throw CaverError.invalidValue }
         
-        try validateOptionalValues(false)
+        try validateOptionalValues(true)
         
         let type = TransactionType.TxTypeAccountUpdate.string
         

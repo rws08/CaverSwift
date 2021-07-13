@@ -112,7 +112,7 @@ open class FeeDelegatedChainDataAnchoring: AbstractFeeDelegatedTransaction {
     public override func getCommonRLPEncodingForSignature() throws -> String {
         guard let input = input else { throw CaverError.invalidValue }
         
-        try validateOptionalValues(false)
+        try validateOptionalValues(true)
         
         let type = TransactionType.TxTypeFeeDelegatedChainDataAnchoring.string
         

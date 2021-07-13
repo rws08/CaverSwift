@@ -108,7 +108,7 @@ class KeyUtil {
     
     static func toChecksumAddress(_ address: String) -> String {
         let lowercaseAddress = address.cleanHexPrefix.lowercased()
-        let addressHash = lowercaseAddress.sha3String.cleanHexPrefix
+        let addressHash = lowercaseAddress.data(using: .utf8)!.keccak256.hexString.cleanHexPrefix
         
         var result = "0x"
         

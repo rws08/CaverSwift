@@ -126,7 +126,7 @@ open class ValueTransferMemo: AbstractTransaction {
     }
     
     public override func getCommonRLPEncodingForSignature() throws -> String {
-        try validateOptionalValues(false)
+        try validateOptionalValues(true)
         
         let type = TransactionType.TxTypeValueTransferMemo.string
         

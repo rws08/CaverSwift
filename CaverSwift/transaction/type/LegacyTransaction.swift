@@ -99,14 +99,14 @@ open class LegacyTransaction: AbstractTransaction {
     
     public override func appendSignatures(_ signatureData: SignatureData) throws {
         if !signatures.isEmpty && !Utils.isEmptySig(signatures[0]) {
-            throw CaverError.RuntimeException("Signatures already defined. \(TransactionType.TxTypeLegacyTransaction.string) cannot include more than one signature.")
+            throw CaverError.RuntimeException("Signatures already defined.\(TransactionType.TxTypeLegacyTransaction.string) cannot include more than one signature.")
         }
         try super.appendSignatures(signatureData)
     }
     
     public override func appendSignatures(_ signatureDataList: [SignatureData]) throws {
         if !signatures.isEmpty && !Utils.isEmptySig(signatures[0]) {
-            throw CaverError.RuntimeException("Signatures already defined. \(TransactionType.TxTypeLegacyTransaction.string) cannot include more than one signature.")
+            throw CaverError.RuntimeException("Signatures already defined.\(TransactionType.TxTypeLegacyTransaction.string) cannot include more than one signature.")
         }
         
         if signatureDataList.count != 1 {
@@ -138,7 +138,7 @@ open class LegacyTransaction: AbstractTransaction {
     }
     
     public override func getRLPEncodingForSignature() throws -> String {
-        try validateOptionalValues(false)
+        try validateOptionalValues(true)
         
         let rlpTypeList: [Any] = [
             nonce,

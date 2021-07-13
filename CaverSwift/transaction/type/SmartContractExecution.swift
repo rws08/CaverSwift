@@ -126,7 +126,7 @@ open class SmartContractExecution: AbstractTransaction {
     }
     
     public override func getCommonRLPEncodingForSignature() throws -> String {
-        try validateOptionalValues(false)
+        try validateOptionalValues(true)
         
         let type = TransactionType.TxTypeSmartContractExecution.string
         

@@ -115,7 +115,7 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
     public override func getCommonRLPEncodingForSignature() throws -> String {
         guard let account = account else { throw CaverError.invalidValue }
         
-        try validateOptionalValues(false)
+        try validateOptionalValues(true)
         
         let type = TransactionType.TxTypeFeeDelegatedAccountUpdateWithRatio.string
         

@@ -97,7 +97,7 @@ open class FeeDelegatedCancelWithRatio: AbstractFeeDelegatedWithRatioTransaction
     }
     
     public override func getCommonRLPEncodingForSignature() throws -> String {
-        try validateOptionalValues(false)
+        try validateOptionalValues(true)
         
         let type = TransactionType.TxTypeFeeDelegatedCancelWithRatio.string
         
