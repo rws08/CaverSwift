@@ -1,5 +1,5 @@
 //
-//  CancelTest.swift
+//  ChainDataAnchoringTest.swift
 //  CaverSwiftTests
 //
 //  Created by won on 2021/07/14.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import CaverSwift
 
-class CancelTest: XCTestCase {
+class ChainDataAnchoringTest: XCTestCase {
     static let caver = Caver(Caver.DEFAULT_URL)
 
     static let privateKey = "0x45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8"
@@ -17,16 +17,17 @@ class CancelTest: XCTestCase {
     static let gasPrice = "0x19"
     static let nonce = "0x4d2"
     static let chainID = "0x1"
+    static let input = "0xf8a6a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000002a00000000000000000000000000000000000000000000000000000000000000003a0000000000000000000000000000000000000000000000000000000000000000405"
 
     static let signatureData = SignatureData(
             "0x25",
-            "0xfb2c3d53d2f6b7bb1deb5a09f80366a5a45429cc1e3956687b075a9dcad20434",
-            "0x5c6187822ee23b1001e9613d29a5d6002f990498d2902904f7f259ab3358216e"
+            "0xe58b9abf9f33a066b998fccaca711553fb4df425c9234bbb3577f9d9775bb124",
+            "0x2c409a6c5d92277c0a812dd0cc553d7fe1d652a807274c3786df3292cd473e09"
     )
 
-    static let expectedRLPEncoding = "0x38f8648204d219830f424094a94f5374fce5edbc8e2a8697c15331677e6ebf0bf845f84325a0fb2c3d53d2f6b7bb1deb5a09f80366a5a45429cc1e3956687b075a9dcad20434a05c6187822ee23b1001e9613d29a5d6002f990498d2902904f7f259ab3358216e"
-    static let expectedTransactionHash = "0x10d135d590cb587cc45c1f94f4a0e3b8c24d24a6e4243f09ca395fb4e2450413"
-    static let expectedRLPEncodingForSigning = "0xe39fde388204d219830f424094a94f5374fce5edbc8e2a8697c15331677e6ebf0b018080"
+    static let expectedRLPEncoding = "0x48f9010e8204d219830f424094a94f5374fce5edbc8e2a8697c15331677e6ebf0bb8a8f8a6a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000002a00000000000000000000000000000000000000000000000000000000000000003a0000000000000000000000000000000000000000000000000000000000000000405f845f84325a0e58b9abf9f33a066b998fccaca711553fb4df425c9234bbb3577f9d9775bb124a02c409a6c5d92277c0a812dd0cc553d7fe1d652a807274c3786df3292cd473e09"
+    static let expectedTransactionHash = "0x4aad85735e777795d24aa3eab51be959d8ebdf9683083d85b66f70b7170f2ea3"
+    static let expectedRLPEncodingForSigning = "0xf8cfb8caf8c8488204d219830f424094a94f5374fce5edbc8e2a8697c15331677e6ebf0bb8a8f8a6a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000002a00000000000000000000000000000000000000000000000000000000000000003a0000000000000000000000000000000000000000000000000000000000000000405018080"
 
     public static func generateRoleBaseKeyring(_ numArr: [Int], _ address: String) throws -> AbstractKeyring {
         let keyArr = numArr.map {
@@ -39,21 +40,23 @@ class CancelTest: XCTestCase {
     }
 }
 
-class CancelTest_createInstanceBuilder: XCTestCase {
-    let from = CancelTest.from
-    let gas = CancelTest.gas
-    let nonce = CancelTest.nonce
-    let gasPrice = CancelTest.gasPrice
-    let chainID = CancelTest.chainID
-    let signatureData = CancelTest.signatureData
+class ChainDataAnchoringTest_createInstanceBuilder: XCTestCase {
+    let from = ChainDataAnchoringTest.from
+    let gas = ChainDataAnchoringTest.gas
+    let nonce = ChainDataAnchoringTest.nonce
+    let gasPrice = ChainDataAnchoringTest.gasPrice
+    let chainID = ChainDataAnchoringTest.chainID
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
     
     public func test_BuilderTest() throws {
-        let txObj = try Cancel.Builder()
+        let txObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setChainId(chainID)
             .setFrom(from)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
         
@@ -61,10 +64,11 @@ class CancelTest_createInstanceBuilder: XCTestCase {
     }
     
     public func test_BuilderWithRPCTest() throws {
-        let txObj = try Cancel.Builder()
+        let txObj = try ChainDataAnchoring.Builder()
             .setKlaytnCall(Caver(Caver.DEFAULT_URL).rpc.klay)
             .setGas(gas)
             .setFrom(from)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
         
@@ -76,12 +80,13 @@ class CancelTest_createInstanceBuilder: XCTestCase {
     }
     
     public func test_BuilderTestWithBigInteger() throws {
-        let txObj = try Cancel.Builder()
+        let txObj = try ChainDataAnchoring.Builder()
             .setNonce(BigInt(hex: nonce)!)
             .setGas(BigInt(hex: gas)!)
             .setGasPrice(BigInt(hex: gasPrice)!)
             .setChainId(BigInt(hex: chainID)!)
             .setFrom(from)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
         
@@ -94,12 +99,13 @@ class CancelTest_createInstanceBuilder: XCTestCase {
     
     public func test_throwException_invalidFrom() throws {
         let from = "invalid Address"
-        XCTAssertThrowsError(try Cancel.Builder()
+        XCTAssertThrowsError(try ChainDataAnchoring.Builder()
                                 .setNonce(nonce)
                                 .setGas(gas)
                                 .setGasPrice(gasPrice)
                                 .setChainId(chainID)
                                 .setFrom(from)
+                                .setInput(input)
                                 .setSignatures(signatureData)
                                 .build()) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid address. : \(from)"))
@@ -108,12 +114,13 @@ class CancelTest_createInstanceBuilder: XCTestCase {
     
     public func test_throwException_missingFrom() throws {
         let from = ""
-        XCTAssertThrowsError(try Cancel.Builder()
+        XCTAssertThrowsError(try ChainDataAnchoring.Builder()
                                 .setNonce(nonce)
                                 .setGas(gas)
                                 .setGasPrice(gasPrice)
                                 .setChainId(chainID)
                                 .setFrom(from)
+                                .setInput(input)
                                 .setSignatures(signatureData)
                                 .build()) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("from is missing."))
@@ -122,12 +129,13 @@ class CancelTest_createInstanceBuilder: XCTestCase {
     
     public func test_throwException_invalidGas() throws {
         let gas = "invalid gas"
-        XCTAssertThrowsError(try Cancel.Builder()
+        XCTAssertThrowsError(try ChainDataAnchoring.Builder()
                                 .setNonce(nonce)
                                 .setGas(gas)
                                 .setGasPrice(gasPrice)
                                 .setChainId(chainID)
                                 .setFrom(from)
+                                .setInput(input)
                                 .setSignatures(signatureData)
                                 .build()) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid gas. : \(gas)"))
@@ -136,36 +144,69 @@ class CancelTest_createInstanceBuilder: XCTestCase {
     
     public func test_throwException_missingGas() throws {
         let gas = ""
-        XCTAssertThrowsError(try Cancel.Builder()
+        XCTAssertThrowsError(try ChainDataAnchoring.Builder()
                                 .setNonce(nonce)
                                 .setGas(gas)
                                 .setGasPrice(gasPrice)
                                 .setChainId(chainID)
                                 .setFrom(from)
+                                .setInput(input)
                                 .setSignatures(signatureData)
                                 .build()) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("gas is missing."))
         }
     }
+    
+    public func test_throwException_invalidInput() throws {
+        let input = "invalid input"
+        XCTAssertThrowsError(try ChainDataAnchoring.Builder()
+                                .setNonce(nonce)
+                                .setGas(gas)
+                                .setGasPrice(gasPrice)
+                                .setChainId(chainID)
+                                .setFrom(from)
+                                .setInput(input)
+                                .setSignatures(signatureData)
+                                .build()) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input : \(input)"))
+        }
+    }
+    
+    public func test_throwException_missingInput() throws {
+        let input = ""
+        XCTAssertThrowsError(try ChainDataAnchoring.Builder()
+                                .setNonce(nonce)
+                                .setGas(gas)
+                                .setGasPrice(gasPrice)
+                                .setChainId(chainID)
+                                .setFrom(from)
+                                .setInput(input)
+                                .setSignatures(signatureData)
+                                .build()) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("input is missing."))
+        }
+    }
 }
 
-class CancelTest_createInstance: XCTestCase {
-    let from = CancelTest.from
-    let gas = CancelTest.gas
-    let nonce = CancelTest.nonce
-    let gasPrice = CancelTest.gasPrice
-    let chainID = CancelTest.chainID
-    let signatureData = CancelTest.signatureData
+class ChainDataAnchoringTest_createInstance: XCTestCase {
+    let from = ChainDataAnchoringTest.from
+    let gas = ChainDataAnchoringTest.gas
+    let nonce = ChainDataAnchoringTest.nonce
+    let gasPrice = ChainDataAnchoringTest.gasPrice
+    let chainID = ChainDataAnchoringTest.chainID
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
     
     public func test_createInstance() throws {
-        let txObj = try Cancel(
+        let txObj = try ChainDataAnchoring(
             nil,
             from,
             nonce,
             gas,
             gasPrice,
             chainID,
-            nil
+            nil,
+            input
         )
         
         XCTAssertNotNil(txObj)
@@ -173,14 +214,15 @@ class CancelTest_createInstance: XCTestCase {
     
     public func test_throwException_invalidFrom() throws {
         let from = "invalid Address"
-        XCTAssertThrowsError(try Cancel(
+        XCTAssertThrowsError(try ChainDataAnchoring(
             nil,
             from,
             nonce,
             gas,
             gasPrice,
             chainID,
-            nil
+            nil,
+            input
         )) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid address. : \(from)"))
         }
@@ -188,14 +230,15 @@ class CancelTest_createInstance: XCTestCase {
     
     public func test_throwException_missingFrom() throws {
         let from = ""
-        XCTAssertThrowsError(try Cancel(
+        XCTAssertThrowsError(try ChainDataAnchoring(
             nil,
             from,
             nonce,
             gas,
             gasPrice,
             chainID,
-            nil
+            nil,
+            input
         )) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("from is missing."))
         }
@@ -203,14 +246,15 @@ class CancelTest_createInstance: XCTestCase {
     
     public func test_throwException_invalidGas() throws {
         let gas = "invalid gas"
-        XCTAssertThrowsError(try Cancel(
+        XCTAssertThrowsError(try ChainDataAnchoring(
             nil,
             from,
             nonce,
             gas,
             gasPrice,
             chainID,
-            nil
+            nil,
+            input
         )) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid gas. : \(gas)"))
         }
@@ -218,36 +262,71 @@ class CancelTest_createInstance: XCTestCase {
     
     public func test_throwException_missingGas() throws {
         let gas = ""
-        XCTAssertThrowsError(try Cancel(
+        XCTAssertThrowsError(try ChainDataAnchoring(
             nil,
             from,
             nonce,
             gas,
             gasPrice,
             chainID,
-            nil
+            nil,
+            input
         )) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("gas is missing."))
         }
     }
+    
+    public func test_throwException_invalidInput() throws {
+        let input = "invalid input"
+        XCTAssertThrowsError(try ChainDataAnchoring(
+            nil,
+            from,
+            nonce,
+            gas,
+            gasPrice,
+            chainID,
+            nil,
+            input
+        )) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input : \(input)"))
+        }
+    }
+    
+    public func test_throwException_missingInput() throws {
+        let input = ""
+        XCTAssertThrowsError(try ChainDataAnchoring(
+            nil,
+            from,
+            nonce,
+            gas,
+            gasPrice,
+            chainID,
+            nil,
+            input
+        )) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("input is missing."))
+        }
+    }
 }
 
-class CancelTest_getRLPEncodingTest: XCTestCase {
-    let from = CancelTest.from
-    let gas = CancelTest.gas
-    let nonce = CancelTest.nonce
-    let gasPrice = CancelTest.gasPrice
-    let chainID = CancelTest.chainID
-    let signatureData = CancelTest.signatureData
-    let expectedRLPEncoding = CancelTest.expectedRLPEncoding
+class ChainDataAnchoringTest_getRLPEncodingTest: XCTestCase {
+    let from = ChainDataAnchoringTest.from
+    let gas = ChainDataAnchoringTest.gas
+    let nonce = ChainDataAnchoringTest.nonce
+    let gasPrice = ChainDataAnchoringTest.gasPrice
+    let chainID = ChainDataAnchoringTest.chainID
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
+    let expectedRLPEncoding = ChainDataAnchoringTest.expectedRLPEncoding
         
     public func test_getRLPEncoding() throws {
-        let txObj = try Cancel.Builder()
+        let txObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
         
@@ -255,11 +334,12 @@ class CancelTest_getRLPEncodingTest: XCTestCase {
     }
     
     public func test_throwException_NoNonce() throws {
-        let txObj = try Cancel.Builder()
+        let txObj = try ChainDataAnchoring.Builder()
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
         
@@ -269,11 +349,13 @@ class CancelTest_getRLPEncodingTest: XCTestCase {
     }
     
     public func test_throwException_NoGasPrice() throws {
-        let txObj = try Cancel.Builder()
+        let txObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
-            .setChainId(chainID)
             .setFrom(from)
+            .setChainId(chainID)
+            .setInput(input)
+            .setSignatures(signatureData)
             .build()
         
         XCTAssertThrowsError(try txObj.getRLPEncoding()) {
@@ -282,28 +364,30 @@ class CancelTest_getRLPEncodingTest: XCTestCase {
     }
 }
 
-class CancelTest_signWithKeyTest: XCTestCase {
-    var mTxObj: Cancel?
+class ChainDataAnchoringTest_signWithKeyTest: XCTestCase {
+    var mTxObj: ChainDataAnchoring?
     var klaytnWalletKey: String?
     var coupledKeyring: AbstractKeyring?
     var deCoupledKeyring: AbstractKeyring?
     
-    let privateKey = CancelTest.privateKey
-    let from = CancelTest.from
-    let gas = CancelTest.gas
-    let nonce = CancelTest.nonce
-    let gasPrice = CancelTest.gasPrice
-    let chainID = CancelTest.chainID
-    let signatureData = CancelTest.signatureData
-    let expectedRLPEncoding = CancelTest.expectedRLPEncoding
+    let privateKey = ChainDataAnchoringTest.privateKey
+    let from = ChainDataAnchoringTest.from
+    let gas = ChainDataAnchoringTest.gas
+    let nonce = ChainDataAnchoringTest.nonce
+    let gasPrice = ChainDataAnchoringTest.gasPrice
+    let chainID = ChainDataAnchoringTest.chainID
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
+    let expectedRLPEncoding = ChainDataAnchoringTest.expectedRLPEncoding
         
     override func setUpWithError() throws {
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .build()
         
         coupledKeyring = try KeyringFactory.createFromPrivateKey(privateKey)
@@ -361,28 +445,30 @@ class CancelTest_signWithKeyTest: XCTestCase {
     }
 }
 
-class CancelTest_signWithKeysTest: XCTestCase {
-    var mTxObj: Cancel?
+class ChainDataAnchoringTest_signWithKeysTest: XCTestCase {
+    var mTxObj: ChainDataAnchoring?
     var klaytnWalletKey: String?
     var coupledKeyring: AbstractKeyring?
     var deCoupledKeyring: AbstractKeyring?
     
-    let privateKey = CancelTest.privateKey
-    let from = CancelTest.from
-    let gas = CancelTest.gas
-    let nonce = CancelTest.nonce
-    let gasPrice = CancelTest.gasPrice
-    let chainID = CancelTest.chainID
-    let signatureData = CancelTest.signatureData
-    let expectedRLPEncoding = CancelTest.expectedRLPEncoding
+    let privateKey = ChainDataAnchoringTest.privateKey
+    let from = ChainDataAnchoringTest.from
+    let gas = ChainDataAnchoringTest.gas
+    let nonce = ChainDataAnchoringTest.nonce
+    let gasPrice = ChainDataAnchoringTest.gasPrice
+    let chainID = ChainDataAnchoringTest.chainID
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
+    let expectedRLPEncoding = ChainDataAnchoringTest.expectedRLPEncoding
         
     override func setUpWithError() throws {
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .build()
         
         coupledKeyring = try KeyringFactory.createFromPrivateKey(privateKey)
@@ -427,28 +513,30 @@ class CancelTest_signWithKeysTest: XCTestCase {
     }
 }
 
-class CancelTest_appendSignaturesTest: XCTestCase {
-    var mTxObj: Cancel?
+class ChainDataAnchoringTest_appendSignaturesTest: XCTestCase {
+    var mTxObj: ChainDataAnchoring?
     var klaytnWalletKey: String?
     var coupledKeyring: AbstractKeyring?
     var deCoupledKeyring: AbstractKeyring?
     
-    let privateKey = CancelTest.privateKey
-    let from = CancelTest.from
-    let gas = CancelTest.gas
-    let nonce = CancelTest.nonce
-    let gasPrice = CancelTest.gasPrice
-    let chainID = CancelTest.chainID
-    let signatureData = CancelTest.signatureData
-    let expectedRLPEncoding = CancelTest.expectedRLPEncoding
+    let privateKey = ChainDataAnchoringTest.privateKey
+    let from = ChainDataAnchoringTest.from
+    let gas = ChainDataAnchoringTest.gas
+    let nonce = ChainDataAnchoringTest.nonce
+    let gasPrice = ChainDataAnchoringTest.gasPrice
+    let chainID = ChainDataAnchoringTest.chainID
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
+    let expectedRLPEncoding = ChainDataAnchoringTest.expectedRLPEncoding
     
     override func setUpWithError() throws {
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .build()
         
         coupledKeyring = try KeyringFactory.createFromPrivateKey(privateKey)
@@ -478,12 +566,13 @@ class CancelTest_appendSignaturesTest: XCTestCase {
     
     public func test_appendSignatureList_EmptySig() throws {
         let emptySignature = SignatureData.getEmptySignature()
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
                             .setFrom(from)
                             .setGas(gas)
                             .setNonce(nonce)
                             .setGasPrice(gasPrice)
                             .setChainId(chainID)
+                            .setInput(input)
                             .setSignatures(emptySignature)
                             .build()
         
@@ -503,12 +592,13 @@ class CancelTest_appendSignaturesTest: XCTestCase {
             "0x38160105d78cef4529d765941ad6637d8dcf6bd99310e165fee1c39fff2aa27e"
         )
         
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
                             .setFrom(from)
                             .setGas(gas)
                             .setNonce(nonce)
                             .setGasPrice(gasPrice)
                             .setChainId(chainID)
+                            .setInput(input)
                             .setSignatures(signatureData)
                             .build()
         
@@ -530,12 +620,13 @@ class CancelTest_appendSignaturesTest: XCTestCase {
             "0x38160105d78cef4529d765941ad6637d8dcf6bd99310e165fee1c39fff2aa27e"
         )
         
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
                             .setFrom(from)
                             .setGas(gas)
                             .setNonce(nonce)
                             .setGasPrice(gasPrice)
                             .setChainId(chainID)
+                            .setInput(input)
                             .setSignatures(signatureData)
                             .build()
         
@@ -558,39 +649,41 @@ class CancelTest_appendSignaturesTest: XCTestCase {
     }
 }
 
-class CancelTest_combineSignatureTest: XCTestCase {
-    var mTxObj: Cancel?
+class ChainDataAnchoringTest_combineSignatureTest: XCTestCase {
+    var mTxObj: ChainDataAnchoring?
     var klaytnWalletKey: String?
     var coupledKeyring: AbstractKeyring?
     var deCoupledKeyring: AbstractKeyring?
     
-    let privateKey = CancelTest.privateKey
-    let from = "0x504a835246e030d70ded9027f9f5a0aefcd45143"
-    let gas = "0xdbba0"
+    let privateKey = ChainDataAnchoringTest.privateKey
+    let from = "0xb605c7550ad5fb15ddd9291a2d31a889db808152"
+    let gas = "0xf4240"
     let nonce = "0x1"
     let gasPrice = "0x5d21dba00"
     let chainID = "0x7e3"
-    let signatureData = CancelTest.signatureData
-    let expectedRLPEncoding = CancelTest.expectedRLPEncoding
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
+    let expectedRLPEncoding = ChainDataAnchoringTest.expectedRLPEncoding
     
     public func test_combineSignature() throws {
-        let expectedRLPEncoded = "0x38f869018505d21dba00830dbba094504a835246e030d70ded9027f9f5a0aefcd45143f847f845820feaa00382dcd275a9657d8fc3c4dc1509ad975f083184e3d34779dc6bef10e0e973c8a059d5deb0f4c06a35a8024506159864ffc46dd08d91d5ac16fa69e92fb2d6b9ae"
+        let expectedRLPEncoded = "0x48f90113018505d21dba00830f424094b605c7550ad5fb15ddd9291a2d31a889db808152b8a8f8a6a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000002a00000000000000000000000000000000000000000000000000000000000000003a0000000000000000000000000000000000000000000000000000000000000000405f847f845820feaa091e77e86e76dc7f1edb1ef1c87fd4bcba1fd95cbc659db407e1f358ae0cc00eda008c2fc7ec8ee14e734701435d0ca2e001bc1e0742c0fe0d58bd131a582e4f10c"
         
         let expectedSignature = SignatureData(
             "0x0fea",
-            "0x0382dcd275a9657d8fc3c4dc1509ad975f083184e3d34779dc6bef10e0e973c8",
-            "0x59d5deb0f4c06a35a8024506159864ffc46dd08d91d5ac16fa69e92fb2d6b9ae"
+            "0x91e77e86e76dc7f1edb1ef1c87fd4bcba1fd95cbc659db407e1f358ae0cc00ed",
+            "0x08c2fc7ec8ee14e734701435d0ca2e001bc1e0742c0fe0d58bd131a582e4f10c"
         )
         
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .build()
         
-        let rlpEncoded = "0x38f869018505d21dba00830dbba094504a835246e030d70ded9027f9f5a0aefcd45143f847f845820feaa00382dcd275a9657d8fc3c4dc1509ad975f083184e3d34779dc6bef10e0e973c8a059d5deb0f4c06a35a8024506159864ffc46dd08d91d5ac16fa69e92fb2d6b9ae"
+        let rlpEncoded = "0x48f90113018505d21dba00830f424094b605c7550ad5fb15ddd9291a2d31a889db808152b8a8f8a6a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000002a00000000000000000000000000000000000000000000000000000000000000003a0000000000000000000000000000000000000000000000000000000000000000405f847f845820feaa091e77e86e76dc7f1edb1ef1c87fd4bcba1fd95cbc659db407e1f358ae0cc00eda008c2fc7ec8ee14e734701435d0ca2e001bc1e0742c0fe0d58bd131a582e4f10c"
         
         let combined = try mTxObj!.combineSignedRawTransactions([rlpEncoded])
         XCTAssertEqual(expectedRLPEncoded, combined)
@@ -598,44 +691,45 @@ class CancelTest_combineSignatureTest: XCTestCase {
     }
     
     public func test_combine_multipleSignature() throws {
-        let expectedRLPEncoded = "0x38f8f7018505d21dba00830dbba094504a835246e030d70ded9027f9f5a0aefcd45143f8d5f845820feaa00382dcd275a9657d8fc3c4dc1509ad975f083184e3d34779dc6bef10e0e973c8a059d5deb0f4c06a35a8024506159864ffc46dd08d91d5ac16fa69e92fb2d6b9aef845820feaa05a3a7910ce495e316da1394f197cdadd95dbb6954d803052b9f62ce993c0ec3ca00934f8dda9666d759e511a5658de1db36faefb35e76a5e237d87ba8c3b9bb700f845820feaa0dccd060bd76582d221f6fe7e02e70877a25b65d80fed13b69b5c79d7c4520912a07572c5c68daf7094a17105eb6e5fed1b102bfe4ca737d62b51f921f7663fb2bd"
+        let expectedRLPEncoded = "0x48f901a1018505d21dba00830f424094b605c7550ad5fb15ddd9291a2d31a889db808152b8a8f8a6a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000002a00000000000000000000000000000000000000000000000000000000000000003a0000000000000000000000000000000000000000000000000000000000000000405f8d5f845820feaa091e77e86e76dc7f1edb1ef1c87fd4bcba1fd95cbc659db407e1f358ae0cc00eda008c2fc7ec8ee14e734701435d0ca2e001bc1e0742c0fe0d58bd131a582e4f10cf845820feaa0c17c5ad8820b984da2bc816f881e1e283a9d7806ed5e3c703f58a7ed1f40edf1a049c4aa23508715aba0891ddad59bab4ff6abde777adffc1f39c79e51a78b786af845820fe9a0d2779b46862d5d10cb31d08ad5907eccf6343148e4264c730e048bb859cf1456a052570001d11eee29ee96c9f530be948a5f270167895705454596f6e61680718c"
         
         let expectedSignature = [
             SignatureData(
                 "0x0fea",
-                "0x0382dcd275a9657d8fc3c4dc1509ad975f083184e3d34779dc6bef10e0e973c8",
-                "0x59d5deb0f4c06a35a8024506159864ffc46dd08d91d5ac16fa69e92fb2d6b9ae"
+                "0x91e77e86e76dc7f1edb1ef1c87fd4bcba1fd95cbc659db407e1f358ae0cc00ed",
+                "0x08c2fc7ec8ee14e734701435d0ca2e001bc1e0742c0fe0d58bd131a582e4f10c"
             ),
             SignatureData(
                 "0x0fea",
-                "0x5a3a7910ce495e316da1394f197cdadd95dbb6954d803052b9f62ce993c0ec3c",
-                "0x0934f8dda9666d759e511a5658de1db36faefb35e76a5e237d87ba8c3b9bb700"
+                "0xc17c5ad8820b984da2bc816f881e1e283a9d7806ed5e3c703f58a7ed1f40edf1",
+                "0x49c4aa23508715aba0891ddad59bab4ff6abde777adffc1f39c79e51a78b786a"
             ),
             SignatureData(
-                "0x0fea",
-                "0xdccd060bd76582d221f6fe7e02e70877a25b65d80fed13b69b5c79d7c4520912",
-                "0x7572c5c68daf7094a17105eb6e5fed1b102bfe4ca737d62b51f921f7663fb2bd"
+                "0x0fe9",
+                "0xd2779b46862d5d10cb31d08ad5907eccf6343148e4264c730e048bb859cf1456",
+                "0x52570001d11eee29ee96c9f530be948a5f270167895705454596f6e61680718c"
             )
         ]
         
         let signatureData = SignatureData(
             "0x0fea",
-            "0x0382dcd275a9657d8fc3c4dc1509ad975f083184e3d34779dc6bef10e0e973c8",
-            "0x59d5deb0f4c06a35a8024506159864ffc46dd08d91d5ac16fa69e92fb2d6b9ae"
+            "0x91e77e86e76dc7f1edb1ef1c87fd4bcba1fd95cbc659db407e1f358ae0cc00ed",
+            "0x08c2fc7ec8ee14e734701435d0ca2e001bc1e0742c0fe0d58bd131a582e4f10c"
         )
         
-        mTxObj = try Cancel.Builder()
-            .setFrom(from)
-            .setGas(gas)
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
+            .setGas(gas)
             .setGasPrice(gasPrice)
+            .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
         
         let rlpEncodedString = [
-            "0x38f869018505d21dba00830dbba094504a835246e030d70ded9027f9f5a0aefcd45143f847f845820feaa05a3a7910ce495e316da1394f197cdadd95dbb6954d803052b9f62ce993c0ec3ca00934f8dda9666d759e511a5658de1db36faefb35e76a5e237d87ba8c3b9bb700",
-            "0x38f869018505d21dba00830dbba094504a835246e030d70ded9027f9f5a0aefcd45143f847f845820feaa0dccd060bd76582d221f6fe7e02e70877a25b65d80fed13b69b5c79d7c4520912a07572c5c68daf7094a17105eb6e5fed1b102bfe4ca737d62b51f921f7663fb2bd"
+            "0x48f90113018505d21dba00830f424094b605c7550ad5fb15ddd9291a2d31a889db808152b8a8f8a6a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000002a00000000000000000000000000000000000000000000000000000000000000003a0000000000000000000000000000000000000000000000000000000000000000405f847f845820feaa0c17c5ad8820b984da2bc816f881e1e283a9d7806ed5e3c703f58a7ed1f40edf1a049c4aa23508715aba0891ddad59bab4ff6abde777adffc1f39c79e51a78b786a",
+            "0x48f90113018505d21dba00830f424094b605c7550ad5fb15ddd9291a2d31a889db808152b8a8f8a6a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000002a00000000000000000000000000000000000000000000000000000000000000003a0000000000000000000000000000000000000000000000000000000000000000405f847f845820fe9a0d2779b46862d5d10cb31d08ad5907eccf6343148e4264c730e048bb859cf1456a052570001d11eee29ee96c9f530be948a5f270167895705454596f6e61680718c"
         ]
         
         let combined = try mTxObj!.combineSignedRawTransactions(rlpEncodedString)
@@ -647,15 +741,16 @@ class CancelTest_combineSignatureTest: XCTestCase {
     
     public func test_throwException_differentField() throws {
         let nonce = BigInt(1234)
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setFrom(from)
             .setGas(gas)
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setChainId(chainID)
+            .setInput(input)
             .build()
         
-        let rlpEncoded = "0x38f869018505d21dba00830dbba094504a835246e030d70ded9027f9f5a0aefcd45143f847f845820feaa05a3a7910ce495e316da1394f197cdadd95dbb6954d803052b9f62ce993c0ec3ca00934f8dda9666d759e511a5658de1db36faefb35e76a5e237d87ba8c3b9bb700"
+        let rlpEncoded = "0x48f901a1018505d21dba00830f424094b605c7550ad5fb15ddd9291a2d31a889db808152b8a8f8a6a00000000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000002a00000000000000000000000000000000000000000000000000000000000000003a0000000000000000000000000000000000000000000000000000000000000000405f8d5f845820feaa091e77e86e76dc7f1edb1ef1c87fd4bcba1fd95cbc659db407e1f358ae0cc00eda008c2fc7ec8ee14e734701435d0ca2e001bc1e0742c0fe0d58bd131a582e4f10cf845820feaa0c17c5ad8820b984da2bc816f881e1e283a9d7806ed5e3c703f58a7ed1f40edf1a049c4aa23508715aba0891ddad59bab4ff6abde777adffc1f39c79e51a78b786af845820fe9a0d2779b46862d5d10cb31d08ad5907eccf6343148e4264c730e048bb859cf1456a052570001d11eee29ee96c9f530be948a5f270167895705454596f6e61680718c"
         
         XCTAssertThrowsError(try mTxObj!.combineSignedRawTransactions([rlpEncoded])) {
             XCTAssertEqual($0 as? CaverError, CaverError.RuntimeException("Transactions containing different information cannot be combined."))
@@ -663,28 +758,30 @@ class CancelTest_combineSignatureTest: XCTestCase {
     }
 }
 
-class CancelTest_getRawTransactionTest: XCTestCase {
-    var mTxObj: Cancel?
+class ChainDataAnchoringTest_getRawTransactionTest: XCTestCase {
+    var mTxObj: ChainDataAnchoring?
     var klaytnWalletKey: String?
     var coupledKeyring: AbstractKeyring?
     var deCoupledKeyring: AbstractKeyring?
     
-    let privateKey = CancelTest.privateKey
-    let from = CancelTest.from
-    let gas = CancelTest.gas
-    let nonce = CancelTest.nonce
-    let gasPrice = CancelTest.gasPrice
-    let chainID = CancelTest.chainID
-    let signatureData = CancelTest.signatureData
-    let expectedRLPEncoding = CancelTest.expectedRLPEncoding
+    let privateKey = ChainDataAnchoringTest.privateKey
+    let from = ChainDataAnchoringTest.from
+    let gas = ChainDataAnchoringTest.gas
+    let nonce = ChainDataAnchoringTest.nonce
+    let gasPrice = ChainDataAnchoringTest.gasPrice
+    let chainID = ChainDataAnchoringTest.chainID
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
+    let expectedRLPEncoding = ChainDataAnchoringTest.expectedRLPEncoding
     
     override func setUpWithError() throws {
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
         
@@ -699,29 +796,31 @@ class CancelTest_getRawTransactionTest: XCTestCase {
     }
 }
 
-class CancelTest_getTransactionHashTest: XCTestCase {
-    var mTxObj: Cancel?
+class ChainDataAnchoringTest_getTransactionHashTest: XCTestCase {
+    var mTxObj: ChainDataAnchoring?
     var klaytnWalletKey: String?
     var coupledKeyring: AbstractKeyring?
     var deCoupledKeyring: AbstractKeyring?
     
-    let privateKey = CancelTest.privateKey
-    let from = CancelTest.from
-    let gas = CancelTest.gas
-    let nonce = CancelTest.nonce
-    let gasPrice = CancelTest.gasPrice
-    let chainID = CancelTest.chainID
-    let signatureData = CancelTest.signatureData
-    let expectedRLPEncoding = CancelTest.expectedRLPEncoding
-    let expectedTransactionHash = CancelTest.expectedTransactionHash
+    let privateKey = ChainDataAnchoringTest.privateKey
+    let from = ChainDataAnchoringTest.from
+    let gas = ChainDataAnchoringTest.gas
+    let nonce = ChainDataAnchoringTest.nonce
+    let gasPrice = ChainDataAnchoringTest.gasPrice
+    let chainID = ChainDataAnchoringTest.chainID
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
+    let expectedRLPEncoding = ChainDataAnchoringTest.expectedRLPEncoding
+    let expectedTransactionHash = ChainDataAnchoringTest.expectedTransactionHash
     
     override func setUpWithError() throws {
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
         
@@ -738,12 +837,13 @@ class CancelTest_getTransactionHashTest: XCTestCase {
     public func test_throwException_NotDefined_Nonce() throws {
         let nonce = ""
         
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
                 
@@ -755,12 +855,13 @@ class CancelTest_getTransactionHashTest: XCTestCase {
     public func test_throwException_NotDefined_gasPrice() throws {
         let gasPrice = ""
         
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setFrom(from)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setNonce(nonce)
             .setChainId(chainID)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
                 
@@ -770,29 +871,31 @@ class CancelTest_getTransactionHashTest: XCTestCase {
     }
 }
 
-class CancelTest_getSenderTxHashTest: XCTestCase {
-    var mTxObj: Cancel?
+class ChainDataAnchoringTest_getSenderTxHashTest: XCTestCase {
+    var mTxObj: ChainDataAnchoring?
     var klaytnWalletKey: String?
     var coupledKeyring: AbstractKeyring?
     var deCoupledKeyring: AbstractKeyring?
     
-    let privateKey = CancelTest.privateKey
-    let from = CancelTest.from
-    let gas = CancelTest.gas
-    let nonce = CancelTest.nonce
-    let gasPrice = CancelTest.gasPrice
-    let chainID = CancelTest.chainID
-    let signatureData = CancelTest.signatureData
-    let expectedRLPEncoding = CancelTest.expectedRLPEncoding
-    let expectedTransactionHash = CancelTest.expectedTransactionHash
+    let privateKey = ChainDataAnchoringTest.privateKey
+    let from = ChainDataAnchoringTest.from
+    let gas = ChainDataAnchoringTest.gas
+    let nonce = ChainDataAnchoringTest.nonce
+    let gasPrice = ChainDataAnchoringTest.gasPrice
+    let chainID = ChainDataAnchoringTest.chainID
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
+    let expectedRLPEncoding = ChainDataAnchoringTest.expectedRLPEncoding
+    let expectedTransactionHash = ChainDataAnchoringTest.expectedTransactionHash
     
     override func setUpWithError() throws {
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
             .setSignatures(signatureData)
             .build()
         
@@ -809,12 +912,14 @@ class CancelTest_getSenderTxHashTest: XCTestCase {
     public func test_throwException_NotDefined_Nonce() throws {
         let nonce = ""
         
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
+            .setSignatures(signatureData)
             .build()
                 
         XCTAssertThrowsError(try mTxObj!.getSenderTxHash()) {
@@ -825,12 +930,14 @@ class CancelTest_getSenderTxHashTest: XCTestCase {
     public func test_throwException_NotDefined_gasPrice() throws {
         let gasPrice = ""
         
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setFrom(from)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setNonce(nonce)
             .setChainId(chainID)
+            .setInput(input)
+            .setSignatures(signatureData)
             .build()
                 
         XCTAssertThrowsError(try mTxObj!.getSenderTxHash()) {
@@ -839,30 +946,33 @@ class CancelTest_getSenderTxHashTest: XCTestCase {
     }
 }
 
-class CancelTest_getRLPEncodingForSignatureTest: XCTestCase {
-    var mTxObj: Cancel?
+class ChainDataAnchoringTest_getRLPEncodingForSignatureTest: XCTestCase {
+    var mTxObj: ChainDataAnchoring?
     var klaytnWalletKey: String?
     var coupledKeyring: AbstractKeyring?
     var deCoupledKeyring: AbstractKeyring?
     
-    let privateKey = CancelTest.privateKey
-    let from = CancelTest.from
-    let gas = CancelTest.gas
-    let nonce = CancelTest.nonce
-    let gasPrice = CancelTest.gasPrice
-    let chainID = CancelTest.chainID
-    let signatureData = CancelTest.signatureData
-    let expectedRLPEncoding = CancelTest.expectedRLPEncoding
-    let expectedTransactionHash = CancelTest.expectedTransactionHash
-    let expectedRLPEncodingForSigning = CancelTest.expectedRLPEncodingForSigning
+    let privateKey = ChainDataAnchoringTest.privateKey
+    let from = ChainDataAnchoringTest.from
+    let gas = ChainDataAnchoringTest.gas
+    let nonce = ChainDataAnchoringTest.nonce
+    let gasPrice = ChainDataAnchoringTest.gasPrice
+    let chainID = ChainDataAnchoringTest.chainID
+    let input = ChainDataAnchoringTest.input
+    let signatureData = ChainDataAnchoringTest.signatureData
+    let expectedRLPEncoding = ChainDataAnchoringTest.expectedRLPEncoding
+    let expectedTransactionHash = ChainDataAnchoringTest.expectedTransactionHash
+    let expectedRLPEncodingForSigning = ChainDataAnchoringTest.expectedRLPEncodingForSigning
     
     override func setUpWithError() throws {
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
+            .setSignatures(signatureData)
             .build()
         
         coupledKeyring = try KeyringFactory.createFromPrivateKey(privateKey)
@@ -878,12 +988,14 @@ class CancelTest_getRLPEncodingForSignatureTest: XCTestCase {
     public func test_throwException_NotDefined_Nonce() throws {
         let nonce = ""
         
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setNonce(nonce)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setFrom(from)
             .setChainId(chainID)
+            .setInput(input)
+            .setSignatures(signatureData)
             .build()
                 
         XCTAssertThrowsError(try mTxObj!.getRLPEncodingForSignature()) {
@@ -894,12 +1006,14 @@ class CancelTest_getRLPEncodingForSignatureTest: XCTestCase {
     public func test_throwException_NotDefined_gasPrice() throws {
         let gasPrice = ""
         
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setFrom(from)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setNonce(nonce)
             .setChainId(chainID)
+            .setInput(input)
+            .setSignatures(signatureData)
             .build()
                 
         XCTAssertThrowsError(try mTxObj!.getRLPEncodingForSignature()) {
@@ -910,12 +1024,14 @@ class CancelTest_getRLPEncodingForSignatureTest: XCTestCase {
     public func test_throwException_NotDefined_chainID() throws {
         let chainID = ""
         
-        mTxObj = try Cancel.Builder()
+        mTxObj = try ChainDataAnchoring.Builder()
             .setFrom(from)
             .setGas(gas)
             .setGasPrice(gasPrice)
             .setNonce(nonce)
             .setChainId(chainID)
+            .setInput(input)
+            .setSignatures(signatureData)
             .build()
                 
         XCTAssertThrowsError(try mTxObj!.getRLPEncodingForSignature()) {

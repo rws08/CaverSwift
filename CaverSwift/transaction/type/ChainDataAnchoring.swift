@@ -127,7 +127,8 @@ open class ChainDataAnchoring: AbstractTransaction {
     }
     
     public func setInput(_ input: String?) throws {
-        guard let input = input else {
+        guard let input = input,
+              !input.isEmpty else {
             throw CaverError.IllegalArgumentException("input is missing.")
         }
         if !Utils.isHex(input) {
