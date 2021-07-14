@@ -115,10 +115,10 @@ open class SmartContractDeploy: AbstractTransaction {
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setGas(gas)
-            .setTo(to)
+            .setTo(to.addHexPrefix)
             .setValue(value)
-            .setFrom(from)
-            .setInput(input)
+            .setFrom(from.addHexPrefix)
+            .setInput(input.addHexPrefix)
             .setHumanReadable(humanReadable)
             .setCodeFormat(codeFormat)
             .setSignatures(signatureDataList)
@@ -135,11 +135,11 @@ open class SmartContractDeploy: AbstractTransaction {
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             humanReadable ? 1 : 0,
@@ -148,7 +148,7 @@ open class SmartContractDeploy: AbstractTransaction {
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeSmartContractDeploy.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeSmartContractDeploy.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -157,15 +157,15 @@ open class SmartContractDeploy: AbstractTransaction {
     public override func getCommonRLPEncodingForSignature() throws -> String {
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeSmartContractDeploy.string
+        let type = TransactionType.TxTypeSmartContractDeploy.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             humanReadable ? 1 : 0,

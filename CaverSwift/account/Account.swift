@@ -12,7 +12,7 @@ open class Account {
     private(set) public var accountKey: IAccountKey
     
     init(_ address: String, _ accountKey: IAccountKey) {
-        self.address = address
+        self.address = address.addHexPrefix
         self.accountKey = accountKey
     }
     

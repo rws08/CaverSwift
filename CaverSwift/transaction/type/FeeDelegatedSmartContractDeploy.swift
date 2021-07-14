@@ -72,7 +72,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
         try setCodeFormat(builder.codeFormat)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData] = [], _ feePayer: String, _ feePayerSignatures:[SignatureData], _ to: String, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData], _ to: String, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeSmartContractDeploy.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
         try setTo(to)
         try setValue(value)
@@ -119,8 +119,8 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
             .setGas(gas)
             .setTo(to)
             .setValue(value)
-            .setFrom(from)
-            .setInput(input)
+            .setFrom(from.addHexPrefix)
+            .setInput(input.addHexPrefix)
             .setHumanReadable(humanReadable)
             .setCodeFormat(codeFormat)
             .setSignatures(senderSignList)
@@ -143,11 +143,11 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             humanReadable ? 1 : 0,
@@ -158,7 +158,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeSmartContractDeploy.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeSmartContractDeploy.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -167,15 +167,15 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
     public override func getCommonRLPEncodingForSignature() throws -> String {
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeSmartContractDeploy.string
+        let type = TransactionType.TxTypeSmartContractDeploy.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             humanReadable ? 1 : 0,
@@ -195,11 +195,11 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
         }
                 
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             humanReadable ? 1 : 0,
@@ -208,7 +208,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeSmartContractDeploy.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeSmartContractDeploy.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.keccak256.hexString
         return encodedStr

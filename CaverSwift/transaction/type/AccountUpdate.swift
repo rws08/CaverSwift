@@ -20,7 +20,7 @@ open class AccountUpdate: AbstractTransaction {
             return try AccountUpdate(self)
         }
         
-        public func setAccount(_ account: Account) -> Self {
+        public func setAccount(_ account: Account?) -> Self {
             self.account = account
             return self
         }
@@ -31,7 +31,7 @@ open class AccountUpdate: AbstractTransaction {
         try setAccount(builder.account)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData] = [], _ account: Account) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ account: Account) throws {
         try super.init(klaytnCall, TransactionType.TxTypeAccountUpdate.string, from, nonce, gas, gasPrice, chainId, signatures)
         try setAccount(account)
     }    
@@ -44,7 +44,11 @@ open class AccountUpdate: AbstractTransaction {
     }
     
     public static func decode(_ rlpEncoded: [UInt8]) throws -> AccountUpdate {
-        let rlpList = Rlp.decode(rlpEncoded)
+        if rlpEncoded[0] != TransactionType.TxTypeAccountUpdate.rawValue {
+            throw CaverError.IllegalArgumentException("Invalid RLP-encoded tag - \(TransactionType.TxTypeAccountUpdate)")
+        }
+        
+        let rlpList = Rlp.decode(Array(rlpEncoded[1..<rlpEncoded.count]))
         guard let values = rlpList as? [Any],
               let nonce = values[0] as? String,
               let gasPrice = values[1] as? String,
@@ -62,7 +66,7 @@ open class AccountUpdate: AbstractTransaction {
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setGas(gas)
-            .setFrom(from)
+            .setFrom(from.addHexPrefix)
             .setSignatures(signatureDataList)
             .build()
         
@@ -79,16 +83,16 @@ open class AccountUpdate: AbstractTransaction {
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
             try account.getRLPEncodingAccountKey(),
             signatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeAccountUpdate.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeAccountUpdate.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -99,13 +103,13 @@ open class AccountUpdate: AbstractTransaction {
         
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeAccountUpdate.string
+        let type = TransactionType.TxTypeAccountUpdate.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
             try account.getRLPEncodingAccountKey()
         ]

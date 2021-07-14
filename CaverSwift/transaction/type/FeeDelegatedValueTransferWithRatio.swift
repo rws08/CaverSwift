@@ -44,7 +44,7 @@ open class FeeDelegatedValueTransferWithRatio: AbstractFeeDelegatedWithRatioTran
         try setValue(builder.value)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData] = [], _ feePayer: String, _ feePayerSignatures:[SignatureData], _ feeRatio: String, _ to: String, _ value: String) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData], _ feeRatio: String, _ to: String, _ value: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedValueTransferWithRatio.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures, feeRatio)
         try setTo(to)
         try setValue(value)
@@ -83,9 +83,9 @@ open class FeeDelegatedValueTransferWithRatio: AbstractFeeDelegatedWithRatioTran
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setGas(gas)
-            .setTo(to)
+            .setTo(to.addHexPrefix)
             .setValue(value)
-            .setFrom(from)
+            .setFrom(from.addHexPrefix)
             .setFeeRatio(feeRatio)
             .setSignatures(senderSignList)
             .setFeePayer(feePayer)
@@ -107,20 +107,20 @@ open class FeeDelegatedValueTransferWithRatio: AbstractFeeDelegatedWithRatioTran
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
-            feeRatio,
+            BigInt(hex: feeRatio)!,
             senderSignatureRLPList,
             feePayer,
             feePayerSignatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedValueTransferWithRatio.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedValueTransferWithRatio.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -129,17 +129,17 @@ open class FeeDelegatedValueTransferWithRatio: AbstractFeeDelegatedWithRatioTran
     public override func getCommonRLPEncodingForSignature() throws -> String {
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeFeeDelegatedValueTransferWithRatio.string
+        let type = TransactionType.TxTypeFeeDelegatedValueTransferWithRatio.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
-            feeRatio,
+            BigInt(hex: feeRatio)!,
         ]
 
         guard let encoded = Rlp.encode(rlpTypeList) else { throw CaverError.invalidValue }
@@ -155,18 +155,18 @@ open class FeeDelegatedValueTransferWithRatio: AbstractFeeDelegatedWithRatioTran
         }
                 
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
-            feeRatio,
+            BigInt(hex: feeRatio)!,
             signatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedValueTransferWithRatio.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedValueTransferWithRatio.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.keccak256.hexString
         return encodedStr

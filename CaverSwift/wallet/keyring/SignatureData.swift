@@ -29,10 +29,10 @@ open class SignatureData: Equatable {
     }
     
     public static func decodeSignatures(_ signatureRlpTypeList: [[String]]) -> [SignatureData]{
-        let signatureDataList: [SignatureData] = signatureRlpTypeList.filter{$0.count > 3}.map {
+        let signatureDataList: [SignatureData] = signatureRlpTypeList.filter{$0.count >= 3}.map {
             let v = $0[0]
-            let r = $0[0]
-            let s = $0[0]
+            let r = $0[1]
+            let s = $0[2]
             return SignatureData(v, r, s)
         }
         

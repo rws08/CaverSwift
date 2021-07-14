@@ -90,10 +90,10 @@ open class ValueTransferMemo: AbstractTransaction {
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setGas(gas)
-            .setTo(to)
+            .setTo(to.addHexPrefix)
             .setValue(value)
-            .setFrom(from)
-            .setInput(input)
+            .setFrom(from.addHexPrefix)
+            .setInput(input.addHexPrefix)
             .setSignatures(signatureDataList)
             .build()
 
@@ -108,18 +108,18 @@ open class ValueTransferMemo: AbstractTransaction {
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             senderSignatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeValueTransferMemo.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeValueTransferMemo.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -128,15 +128,15 @@ open class ValueTransferMemo: AbstractTransaction {
     public override func getCommonRLPEncodingForSignature() throws -> String {
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeValueTransferMemo.string
+        let type = TransactionType.TxTypeValueTransferMemo.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input
         ]

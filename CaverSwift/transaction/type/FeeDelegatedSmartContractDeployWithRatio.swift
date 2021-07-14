@@ -72,7 +72,7 @@ open class FeeDelegatedSmartContractDeployWithRatio: AbstractFeeDelegatedWithRat
         try setCodeFormat(builder.codeFormat)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData] = [], _ feePayer: String, _ feePayerSignatures:[SignatureData], _ feeRatio: String, _ to: String, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData], _ feeRatio: String, _ to: String, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedSmartContractDeployWithRatio.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures, feeRatio)
         try setTo(to)
         try setValue(value)
@@ -120,9 +120,9 @@ open class FeeDelegatedSmartContractDeployWithRatio: AbstractFeeDelegatedWithRat
             .setGas(gas)
             .setTo(to)
             .setValue(value)
-            .setFrom(from)
+            .setFrom(from.addHexPrefix)
             .setFeeRatio(feeRatio)
-            .setInput(input)
+            .setInput(input.addHexPrefix)
             .setHumanReadable(humanReadable)
             .setCodeFormat(codeFormat)
             .setSignatures(senderSignList)
@@ -145,15 +145,15 @@ open class FeeDelegatedSmartContractDeployWithRatio: AbstractFeeDelegatedWithRat
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             humanReadable ? 1 : 0,
-            feeRatio,
+            BigInt(hex: feeRatio)!,
             codeFormat,
             senderSignatureRLPList,
             feePayer,
@@ -161,7 +161,7 @@ open class FeeDelegatedSmartContractDeployWithRatio: AbstractFeeDelegatedWithRat
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedSmartContractDeployWithRatio.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedSmartContractDeployWithRatio.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -170,19 +170,19 @@ open class FeeDelegatedSmartContractDeployWithRatio: AbstractFeeDelegatedWithRat
     public override func getCommonRLPEncodingForSignature() throws -> String {
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeFeeDelegatedSmartContractDeployWithRatio.string
+        let type = TransactionType.TxTypeFeeDelegatedSmartContractDeployWithRatio.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             humanReadable ? 1 : 0,
-            feeRatio,
+            BigInt(hex: feeRatio)!,
             codeFormat
         ]
 
@@ -199,21 +199,21 @@ open class FeeDelegatedSmartContractDeployWithRatio: AbstractFeeDelegatedWithRat
         }
                 
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             humanReadable ? 1 : 0,
             codeFormat,
-            feeRatio,
+            BigInt(hex: feeRatio)!,
             signatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedSmartContractDeployWithRatio.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedSmartContractDeployWithRatio.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.keccak256.hexString
         return encodedStr

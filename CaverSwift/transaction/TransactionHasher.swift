@@ -9,7 +9,7 @@ import Foundation
 
 open class TransactionHasher {
     public static func getHashForSignature(_ transaction: AbstractTransaction) throws -> String {
-        let rlpEncoded = try transaction.getCommonRLPEncodingForSignature()
+        let rlpEncoded = try transaction.getRLPEncodingForSignature()
         return rlpEncoded.sha3String
     }
     

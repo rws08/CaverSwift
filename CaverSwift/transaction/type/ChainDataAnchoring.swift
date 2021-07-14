@@ -32,7 +32,7 @@ open class ChainDataAnchoring: AbstractTransaction {
         try setInput(builder.input)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData] = [], _ input: String) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ input: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeChainDataAnchoring.string, from, nonce, gas, gasPrice, chainId, signatures)
         try setInput(input)
     }
@@ -65,8 +65,8 @@ open class ChainDataAnchoring: AbstractTransaction {
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setGas(gas)
-            .setFrom(from)
-            .setInput(input)
+            .setFrom(from.addHexPrefix)
+            .setInput(input.addHexPrefix)
             .setSignatures(signatureDataList)
             .build()
         
@@ -82,16 +82,16 @@ open class ChainDataAnchoring: AbstractTransaction {
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
             input,
             signatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeChainDataAnchoring.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeChainDataAnchoring.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -102,13 +102,13 @@ open class ChainDataAnchoring: AbstractTransaction {
         
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeChainDataAnchoring.string
+        let type = TransactionType.TxTypeChainDataAnchoring.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
             input
         ]

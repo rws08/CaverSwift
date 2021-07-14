@@ -66,7 +66,7 @@ class LegacyTransactionTest: XCTestCase {
         XCTAssertNotNil(legacyTransaction.chainId)
     }
     
-    public func testThrowException_missing_value() throws {
+    public func test_throwException_missing_value() throws {
         XCTAssertThrowsError(try LegacyTransaction(
             nil,
             "0x",
@@ -83,7 +83,7 @@ class LegacyTransactionTest: XCTestCase {
         }
     }
     
-    public func testThrowException_invalid_value() throws {
+    public func test_throwException_invalid_value() throws {
         let value = "invalid"
         XCTAssertThrowsError(try LegacyTransaction(
             nil,
@@ -101,7 +101,7 @@ class LegacyTransactionTest: XCTestCase {
         }
     }
     
-    public func testThrowException_invalid_To() throws {
+    public func test_throwException_invalid_To() throws {
         let to = "invalid"
         XCTAssertThrowsError(try LegacyTransaction(
             nil,
@@ -119,7 +119,7 @@ class LegacyTransactionTest: XCTestCase {
         }
     }
     
-    public func testThrowException_missingGas() throws {
+    public func test_throwException_missingGas() throws {
         XCTAssertThrowsError(try LegacyTransaction.Builder()
                                 .setNonce(nonce)
                                 .setGasPrice(gasPrice)
@@ -199,7 +199,7 @@ class LegacyTransactionTest_createInstanceBuilder: XCTestCase {
         XCTAssertNotNil(legacyTransaction.chainId)
     }
     
-    public func testThrowException_invalid_value() throws {
+    public func test_throwException_invalid_value() throws {
         let value = "0x"
         XCTAssertThrowsError(try LegacyTransaction.Builder()
                                 .setNonce(nonce)
@@ -214,7 +214,7 @@ class LegacyTransactionTest_createInstanceBuilder: XCTestCase {
         }
     }
     
-    public func testThrowException_invalid_value2() throws {
+    public func test_throwException_invalid_value2() throws {
         let value = "invalid"
         XCTAssertThrowsError(try LegacyTransaction.Builder()
                                 .setNonce(nonce)
@@ -229,7 +229,7 @@ class LegacyTransactionTest_createInstanceBuilder: XCTestCase {
         }
     }
     
-    public func testThrowException_invalid_To() throws {
+    public func test_throwException_invalid_To() throws {
         let to = "invalid"
         XCTAssertThrowsError(try LegacyTransaction.Builder()
                                 .setNonce(nonce)
@@ -244,7 +244,7 @@ class LegacyTransactionTest_createInstanceBuilder: XCTestCase {
         }
     }
     
-    public func testThrowException_missingGas() throws {
+    public func test_throwException_missingGas() throws {
         XCTAssertThrowsError(try LegacyTransaction.Builder()
                                 .setNonce(nonce)
                                 .setGasPrice(gasPrice)
@@ -323,14 +323,14 @@ class LegacyTransactionTest_signWithKeyTest: XCTestCase {
         XCTAssertEqual(expectedRawTransaction, try tx.getRawTransaction())
     }
     
-    public func testThrowException_decoupledKey() throws {
+    public func test_throwException_decoupledKey() throws {
         let legacyTransaction = try createLegacyTransaction()
         XCTAssertThrowsError(try legacyTransaction.sign(deCoupledKeyring!)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("A legacy transaction cannot be signed with a decoupled keyring."))
         }
     }
     
-    public func testThrowException_notEqualAddress() throws {
+    public func test_throwException_notEqualAddress() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
             .setGas(gas)
@@ -414,14 +414,14 @@ class LegacyTransactionTest_signWithKeysTest: XCTestCase {
         XCTAssertEqual(expectedRawTransaction, try tx.getRawTransaction())
     }
     
-    public func testThrowException_decoupledKey() throws {
+    public func test_throwException_decoupledKey() throws {
         let legacyTransaction = try createLegacyTransaction()
         XCTAssertThrowsError(try legacyTransaction.sign(deCoupledKeyring!)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("A legacy transaction cannot be signed with a decoupled keyring."))
         }
     }
     
-    public func testThrowException_KlaytnWalletKeyFormat_decoupledKey() throws {
+    public func test_throwException_KlaytnWalletKeyFormat_decoupledKey() throws {
         let legacyTransaction = try createLegacyTransaction()
         let klaytnKey = privateKey + "0x00" + KeyringFactory.generate()!.address
         XCTAssertThrowsError(try legacyTransaction.sign(klaytnKey)) {
@@ -429,7 +429,7 @@ class LegacyTransactionTest_signWithKeysTest: XCTestCase {
         }
     }
     
-    public func testThrowException_multipleKeyring() throws {
+    public func test_throwException_multipleKeyring() throws {
         let legacyTransaction = try createLegacyTransaction()
         let privateKeyArr = [
             PrivateKey.generate().privateKey,
@@ -441,7 +441,7 @@ class LegacyTransactionTest_signWithKeysTest: XCTestCase {
         }
     }
     
-    public func testThrowException_roleBasedKeyring() throws {
+    public func test_throwException_roleBasedKeyring() throws {
         let legacyTransaction = try createLegacyTransaction()
         let privateKeyArr = [
             [
@@ -463,7 +463,7 @@ class LegacyTransactionTest_signWithKeysTest: XCTestCase {
         }
     }
     
-    public func testThrowException_notEqualAddress() throws {
+    public func test_throwException_notEqualAddress() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
             .setGas(gas)
@@ -512,7 +512,7 @@ class LegacyTransactionTest_getRLPEncodingTest: XCTestCase {
         XCTAssertEqual(expectedRLP, try legacyTransaction.getRLPEncoding())
     }
     
-    public func testThrowException_NoNonce() throws {
+    public func test_throwException_NoNonce() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setGas(gas)
             .setGasPrice(gasPrice)
@@ -528,7 +528,7 @@ class LegacyTransactionTest_getRLPEncodingTest: XCTestCase {
         }
     }
     
-    public func testThrowException_NoGasPrice() throws {
+    public func test_throwException_NoGasPrice() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
             .setGas(gas)
@@ -592,7 +592,7 @@ class LegacyTransactionTest_combineSignatureTest: XCTestCase {
         XCTAssertEqual(rlpEncoded, combined)
     }
     
-    public func testThrowException_existSignature() throws {
+    public func test_throwException_existSignature() throws {
         let signatureData = SignatureData(
             "0x0fea",
             "0xade9480f584fe481bf070ab758ecc010afa15debc33e1bd75af637d834073a6e",
@@ -614,7 +614,7 @@ class LegacyTransactionTest_combineSignatureTest: XCTestCase {
         }
     }
     
-    public func testThrowException_differentField() throws {
+    public func test_throwException_differentField() throws {
         let nonce = "0x3F"
         
         let legacyTransaction = try LegacyTransaction.Builder()
@@ -696,7 +696,7 @@ class LegacyTransactionTest_getTransactionHashTest: XCTestCase {
         XCTAssertEqual(expected, try legacyTransaction.getTransactionHash())
     }
     
-    public func testThrowException_NotDefined_Nonce() throws {
+    public func test_throwException_NotDefined_Nonce() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setGas(gas)
             .setGasPrice(gasPrice)
@@ -712,7 +712,7 @@ class LegacyTransactionTest_getTransactionHashTest: XCTestCase {
         }
     }
     
-    public func testThrowException_NotDefined_gasPrice() throws {
+    public func test_throwException_NotDefined_gasPrice() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
             .setGas(gas)
@@ -760,7 +760,7 @@ class LegacyTransactionTest_getSenderTxHashTest: XCTestCase {
         XCTAssertEqual(expected, try legacyTransaction.getSenderTxHash())
     }
     
-    public func testThrowException_NotDefined_Nonce() throws {
+    public func test_throwException_NotDefined_Nonce() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setGas(gas)
             .setGasPrice(gasPrice)
@@ -776,7 +776,7 @@ class LegacyTransactionTest_getSenderTxHashTest: XCTestCase {
         }
     }
     
-    public func testThrowException_NotDefined_gasPrice() throws {
+    public func test_throwException_NotDefined_gasPrice() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
             .setGas(gas)
@@ -824,7 +824,7 @@ class LegacyTransactionTest_getRLPEncodingForSignatureTest: XCTestCase {
         XCTAssertEqual(expected, try legacyTransaction.getRLPEncodingForSignature())
     }
     
-    public func testThrowException_NotDefined_Nonce() throws {
+    public func test_throwException_NotDefined_Nonce() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setGas(gas)
             .setGasPrice(gasPrice)
@@ -840,7 +840,7 @@ class LegacyTransactionTest_getRLPEncodingForSignatureTest: XCTestCase {
         }
     }
     
-    public func testThrowException_NotDefined_gasPrice() throws {
+    public func test_throwException_NotDefined_gasPrice() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
             .setGas(gas)
@@ -856,7 +856,7 @@ class LegacyTransactionTest_getRLPEncodingForSignatureTest: XCTestCase {
         }
     }
     
-    public func testThrowException_NotDefined_gasChainID() throws {
+    public func test_throwException_NotDefined_gasChainID() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
             .setGas(gas)
@@ -951,7 +951,7 @@ class LegacyTransactionTest_appendSignaturesTest: XCTestCase {
         XCTAssertEqual(signatureData, legacyTransaction.signatures[0])
     }
     
-    public func testThrowException_appendData_existsSignatureInTransaction() throws {
+    public func test_throwException_appendData_existsSignatureInTransaction() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
             .setGas(gas)
@@ -967,7 +967,7 @@ class LegacyTransactionTest_appendSignaturesTest: XCTestCase {
         }
     }
     
-    public func testThrowException_appendList_existsSignatureInTransaction() throws {
+    public func test_throwException_appendList_existsSignatureInTransaction() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
             .setGas(gas)
@@ -983,7 +983,7 @@ class LegacyTransactionTest_appendSignaturesTest: XCTestCase {
         }
     }
     
-    public func testThrowException_tooLongSignatures() throws {
+    public func test_throwException_tooLongSignatures() throws {
         let legacyTransaction = try LegacyTransaction.Builder()
             .setNonce(nonce)
             .setGas(gas)

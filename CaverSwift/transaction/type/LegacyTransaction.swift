@@ -79,11 +79,11 @@ open class LegacyTransaction: AbstractTransaction {
         
         let legacyTransaction = try LegacyTransaction.Builder()            
             .setInput(input.addHexPrefix)
-            .setValue(value.addHexPrefix)
+            .setValue(value)
             .setTo(to.addHexPrefix)
-            .setNonce(nonce.addHexPrefix)
-            .setGas(gas.addHexPrefix)
-            .setGasPrice(gasPrice.addHexPrefix)
+            .setNonce(nonce)
+            .setGas(gas)
+            .setGasPrice(gasPrice)
             .build()
         
         guard let v = values[6] as? String,
@@ -119,11 +119,11 @@ open class LegacyTransaction: AbstractTransaction {
         try validateOptionalValues(false)
         
         var rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             input
         ]
         rlpTypeList.append(contentsOf: signatures[0].toRlpList())
@@ -141,13 +141,13 @@ open class LegacyTransaction: AbstractTransaction {
         try validateOptionalValues(true)
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             input,
-            chainId,
+            BigInt(hex: chainId)!,
             0,
             0
         ]

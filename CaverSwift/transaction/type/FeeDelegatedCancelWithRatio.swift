@@ -57,7 +57,7 @@ open class FeeDelegatedCancelWithRatio: AbstractFeeDelegatedWithRatioTransaction
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setGas(gas)
-            .setFrom(from)
+            .setFrom(from.addHexPrefix)
             .setFeeRatio(feeRatio)
             .setSignatures(senderSignList)
             .setFeePayer(feePayer)
@@ -79,18 +79,18 @@ open class FeeDelegatedCancelWithRatio: AbstractFeeDelegatedWithRatioTransaction
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
-            feeRatio,
+            BigInt(hex: feeRatio)!,
             senderSignatureRLPList,
             feePayer,
             feePayerSignatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedCancelWithRatio.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedCancelWithRatio.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -99,15 +99,15 @@ open class FeeDelegatedCancelWithRatio: AbstractFeeDelegatedWithRatioTransaction
     public override func getCommonRLPEncodingForSignature() throws -> String {
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeFeeDelegatedCancelWithRatio.string
+        let type = TransactionType.TxTypeFeeDelegatedCancelWithRatio.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
-            feeRatio
+            BigInt(hex: feeRatio)!
         ]
 
         guard let encoded = Rlp.encode(rlpTypeList) else { throw CaverError.invalidValue }
@@ -123,16 +123,16 @@ open class FeeDelegatedCancelWithRatio: AbstractFeeDelegatedWithRatioTransaction
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
-            feeRatio,
+            BigInt(hex: feeRatio)!,
             signatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedCancelWithRatio.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedCancelWithRatio.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.keccak256.hexString
         return encodedStr

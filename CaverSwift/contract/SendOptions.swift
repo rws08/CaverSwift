@@ -32,7 +32,7 @@ public class SendOptions {
     public func setFrom(_ from: String? = nil) throws {
         if from != nil {
             guard Utils.isAddress(from!) else {
-                throw CaverError.ArgumentException("Invalid address. : " + from!)
+                throw CaverError.ArgumentException("Invalid address. : \(from!)")
             }
         }
         self.from = from
@@ -41,7 +41,7 @@ public class SendOptions {
     public func setGas(_ gas: String?) throws {
         if gas != nil {
             guard Utils.isNumber(gas!) else {
-                throw CaverError.ArgumentException("Invalid gas. : " + gas!)
+                throw CaverError.ArgumentException("Invalid gas. : \(gas!)")
             }
         }
         self.gas = gas
@@ -56,7 +56,7 @@ public class SendOptions {
             self.value = "0x0"
         } else {
             guard Utils.isNumber(value!) else {
-                throw CaverError.ArgumentException("Invalid value. : " + value!)
+                throw CaverError.ArgumentException("Invalid value. : \(value!)")
             }
             self.value = value!
         }

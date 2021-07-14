@@ -31,7 +31,7 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
         try setAccount(builder.account)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData] = [], _ feePayer: String, _ feePayerSignatures:[SignatureData], _ account: Account) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData], _ account: Account) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedAccountUpdate.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
         try setAccount(account)
     }
@@ -68,7 +68,7 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setGas(gas)
-            .setFrom(from)
+            .setFrom(from.addHexPrefix)
             .setAccount(account)
             .setSignatures(senderSignList)
             .setFeePayer(feePayer)
@@ -92,9 +92,9 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
             try account.getRLPEncodingAccountKey(),
             senderSignatureRLPList,
@@ -103,7 +103,7 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedAccountUpdate.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedAccountUpdate.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -118,13 +118,13 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
             $0.toRlpList()
         }
         
-        let type = TransactionType.TxTypeFeeDelegatedAccountUpdate.string
+        let type = TransactionType.TxTypeFeeDelegatedAccountUpdate.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
             try account.getRLPEncodingAccountKey(),
             signatureRLPList
@@ -140,19 +140,19 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
         
         try validateOptionalValues(false)
         
-        let type = TransactionType.TxTypeFeeDelegatedAccountUpdate.string
+        let type = TransactionType.TxTypeFeeDelegatedAccountUpdate.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
             try account.getRLPEncodingAccountKey()
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedAccountUpdate.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedAccountUpdate.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.keccak256.hexString
         return encodedStr

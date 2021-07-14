@@ -52,7 +52,7 @@ open class FeeDelegatedValueTransferMemo: AbstractFeeDelegatedTransaction {
         try setInput(builder.input)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData] = [], _ feePayer: String, _ feePayerSignatures:[SignatureData], _ to: String, _ value: String, _ input: String) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData], _ to: String, _ value: String, _ input: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedValueTransferMemo.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
         try setTo(to)
         try setValue(value)
@@ -92,10 +92,10 @@ open class FeeDelegatedValueTransferMemo: AbstractFeeDelegatedTransaction {
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setGas(gas)
-            .setTo(to)
+            .setTo(to.addHexPrefix)
             .setValue(value)
-            .setFrom(from)
-            .setInput(input)
+            .setFrom(from.addHexPrefix)
+            .setInput(input.addHexPrefix)
             .setSignatures(senderSignList)
             .setFeePayer(feePayer)
             .setFeePayerSignatures(feePayerSignList)
@@ -116,11 +116,11 @@ open class FeeDelegatedValueTransferMemo: AbstractFeeDelegatedTransaction {
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             senderSignatureRLPList,
@@ -129,7 +129,7 @@ open class FeeDelegatedValueTransferMemo: AbstractFeeDelegatedTransaction {
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedValueTransferMemo.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedValueTransferMemo.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -138,15 +138,15 @@ open class FeeDelegatedValueTransferMemo: AbstractFeeDelegatedTransaction {
     public override func getCommonRLPEncodingForSignature() throws -> String {
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeFeeDelegatedValueTransferMemo.string
+        let type = TransactionType.TxTypeFeeDelegatedValueTransferMemo.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input
         ]
@@ -164,18 +164,18 @@ open class FeeDelegatedValueTransferMemo: AbstractFeeDelegatedTransaction {
         }
                 
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             to,
-            value,
+            BigInt(hex: value)!,
             from,
             input,
             signatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedValueTransferMemo.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedValueTransferMemo.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.keccak256.hexString
         return encodedStr

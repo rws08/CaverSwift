@@ -69,8 +69,8 @@ open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRati
             .setNonce(nonce)
             .setGasPrice(gasPrice)
             .setGas(gas)
-            .setFrom(from)
-            .setInput(input)
+            .setFrom(from.addHexPrefix)
+            .setInput(input.addHexPrefix)
             .setFeeRatio(feeRatio)
             .setSignatures(senderSignList)
             .setFeePayer(feePayer)
@@ -94,19 +94,19 @@ open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRati
         }
         
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
             input,
-            feeRatio,
+            BigInt(hex: feeRatio)!,
             senderSignatureRLPList,
             feePayer,
             feePayerSignatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -117,16 +117,16 @@ open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRati
         
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.string
+        let type = TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
             input,
-            feeRatio
+            BigInt(hex: feeRatio)!
         ]
 
         guard let encoded = Rlp.encode(rlpTypeList) else { throw CaverError.invalidValue }
@@ -144,17 +144,17 @@ open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRati
         }
                 
         let rlpTypeList: [Any] = [
-            nonce,
-            gasPrice,
-            gas,
+            BigInt(hex: nonce)!,
+            BigInt(hex: gasPrice)!,
+            BigInt(hex: gas)!,
             from,
             input,
-            feeRatio,
+            BigInt(hex: feeRatio)!,
             signatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.string.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.keccak256.hexString
         return encodedStr
