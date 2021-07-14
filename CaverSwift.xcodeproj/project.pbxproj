@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7AFFF8073AD1370A6A8E5500 /* Pods_CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */; };
 		E31BEDF4269D92E700196C0A /* AccountUpdateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */; };
+		E31BEDF6269EC6F800196C0A /* CancelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF5269EC6F800196C0A /* CancelTest.swift */; };
 		E363D38A269BBE0E0077F6D2 /* AccountUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D389269BBE0E0077F6D2 /* AccountUpdate.swift */; };
 		E363D38D269C063F0077F6D2 /* LegacyTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */; };
 		E363D38F269C27930077F6D2 /* ChainDataAnchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D38E269C27930077F6D2 /* ChainDataAnchoring.swift */; };
@@ -246,6 +247,7 @@
 		9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D117BAAE088D8DB011A1C1A5 /* Pods-CaverSwift-CaverSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift-CaverSwiftTests/Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
 		E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUpdateTest.swift; sourceTree = "<group>"; };
+		E31BEDF5269EC6F800196C0A /* CancelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelTest.swift; sourceTree = "<group>"; };
 		E363D389269BBE0E0077F6D2 /* AccountUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUpdate.swift; sourceTree = "<group>"; };
 		E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyTransactionTest.swift; sourceTree = "<group>"; };
 		E363D38E269C27930077F6D2 /* ChainDataAnchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDataAnchoring.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 			children = (
 				E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */,
 				E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */,
+				E31BEDF5269EC6F800196C0A /* CancelTest.swift */,
 			);
 			path = transaction;
 			sourceTree = "<group>";
@@ -1500,6 +1503,7 @@
 			files = (
 				E3A21D3626564CCA006C560D /* ABITests.swift in Sources */,
 				E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */,
+				E31BEDF6269EC6F800196C0A /* CancelTest.swift in Sources */,
 				E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */,
 				E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */,
 				E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */,
