@@ -20,7 +20,7 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
             return try FeeDelegatedAccountUpdateWithRatio(self)
         }
         
-        public func setAccount(_ account: Account) -> Self {
+        public func setAccount(_ account: Account?) -> Self {
             self.account = account
             return self
         }
@@ -31,7 +31,7 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
         try setAccount(builder.account)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures: [SignatureData]?, _ feeRatio: String, _ account: Account) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures: [SignatureData]?, _ feeRatio: String, _ account: Account?) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedAccountUpdateWithRatio.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures, feeRatio)
         try setAccount(account)
     }
@@ -73,7 +73,7 @@ open class FeeDelegatedAccountUpdateWithRatio: AbstractFeeDelegatedWithRatioTran
             .setAccount(account)
             .setFeeRatio(feeRatio)
             .setSignatures(senderSignList)
-            .setFeePayer(feePayer)
+            .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)
             .build()
         

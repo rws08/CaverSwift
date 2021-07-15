@@ -20,7 +20,7 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
             return try FeeDelegatedAccountUpdate(self)
         }
         
-        public func setAccount(_ account: Account) -> Self {
+        public func setAccount(_ account: Account?) -> Self {
             self.account = account
             return self
         }
@@ -31,7 +31,7 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
         try setAccount(builder.account)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData], _ account: Account) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]?, _ account: Account?) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedAccountUpdate.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
         try setAccount(account)
     }
@@ -71,7 +71,7 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
             .setFrom(from.addHexPrefix)
             .setAccount(account)
             .setSignatures(senderSignList)
-            .setFeePayer(feePayer)
+            .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)
             .build()
         
@@ -114,10 +114,6 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
         
         try validateOptionalValues(true)
         
-        let signatureRLPList = signatures.map {
-            $0.toRlpList()
-        }
-        
         let type = TransactionType.TxTypeFeeDelegatedAccountUpdate.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
@@ -126,8 +122,7 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
             BigInt(hex: gasPrice)!,
             BigInt(hex: gas)!,
             from,
-            try account.getRLPEncodingAccountKey(),
-            signatureRLPList
+            try account.getRLPEncodingAccountKey()
         ]
 
         guard let encoded = Rlp.encode(rlpTypeList) else { throw CaverError.invalidValue }
@@ -139,16 +134,18 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
         guard let account = account else { throw CaverError.invalidValue }
         
         try validateOptionalValues(false)
-        
-        let type = TransactionType.TxTypeFeeDelegatedAccountUpdate.rawValue.hexa.hexData!
+                
+        let senderSignatureRLPList = signatures.map {
+            $0.toRlpList()
+        }
         
         let rlpTypeList: [Any] = [
-            type,
             BigInt(hex: nonce)!,
             BigInt(hex: gasPrice)!,
             BigInt(hex: gas)!,
             from,
-            try account.getRLPEncodingAccountKey()
+            try account.getRLPEncodingAccountKey(),
+            senderSignatureRLPList
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),

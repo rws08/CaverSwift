@@ -52,7 +52,7 @@ open class FeeDelegatedSmartContractExecutionWithRatio: AbstractFeeDelegatedWith
         try setInput(builder.input)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData], _ feeRatio: String, _ to: String, _ value: String, _ input: String) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]?, _ feeRatio: String, _ to: String, _ value: String, _ input: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedSmartContractExecutionWithRatio.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures, feeRatio)
         try setTo(to)
         try setValue(value)
@@ -99,7 +99,7 @@ open class FeeDelegatedSmartContractExecutionWithRatio: AbstractFeeDelegatedWith
             .setFeeRatio(feeRatio)
             .setInput(input)
             .setSignatures(senderSignList)
-            .setFeePayer(feePayer)
+            .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)
             .build()
         

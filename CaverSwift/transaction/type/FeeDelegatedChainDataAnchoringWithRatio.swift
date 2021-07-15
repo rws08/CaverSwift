@@ -73,7 +73,7 @@ open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRati
             .setInput(input.addHexPrefix)
             .setFeeRatio(feeRatio)
             .setSignatures(senderSignList)
-            .setFeePayer(feePayer)
+            .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)
             .build()
         

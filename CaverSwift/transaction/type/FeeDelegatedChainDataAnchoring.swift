@@ -32,7 +32,7 @@ open class FeeDelegatedChainDataAnchoring: AbstractFeeDelegatedTransaction {
         try setInput(builder.input)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData], _ input: String) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]?, _ input: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedChainDataAnchoring.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
         try setInput(input)
     }
@@ -71,7 +71,7 @@ open class FeeDelegatedChainDataAnchoring: AbstractFeeDelegatedTransaction {
             .setFrom(from.addHexPrefix)
             .setInput(input)
             .setSignatures(senderSignList)
-            .setFeePayer(feePayer)
+            .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)
             .build()
         

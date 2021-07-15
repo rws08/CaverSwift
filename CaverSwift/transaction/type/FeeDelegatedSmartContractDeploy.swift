@@ -72,7 +72,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
         try setCodeFormat(builder.codeFormat)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData], _ to: String, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]?, _ to: String, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeSmartContractDeploy.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
         try setTo(to)
         try setValue(value)
@@ -124,7 +124,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
             .setHumanReadable(humanReadable)
             .setCodeFormat(BigInt(hex: codeFormat)!)
             .setSignatures(senderSignList)
-            .setFeePayer(feePayer)
+            .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)
             .build()
         

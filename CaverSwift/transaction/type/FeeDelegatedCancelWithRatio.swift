@@ -60,7 +60,7 @@ open class FeeDelegatedCancelWithRatio: AbstractFeeDelegatedWithRatioTransaction
             .setFrom(from.addHexPrefix)
             .setFeeRatio(feeRatio)
             .setSignatures(senderSignList)
-            .setFeePayer(feePayer)
+            .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)
             .build()
         

@@ -214,7 +214,7 @@ open class AbstractFeeDelegatedTransaction: AbstractTransaction {
             }
         }
         
-        feePayerSignatures.append(contentsOf: feePayerSignatures)
-        feePayerSignatures = try refineSignature(feePayerSignatures)
+        self.feePayerSignatures.append(contentsOf: feePayerSignatures)
+        self.feePayerSignatures = try refineSignature(self.feePayerSignatures)
     }
 }

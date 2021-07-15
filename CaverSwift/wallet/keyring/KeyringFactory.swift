@@ -40,6 +40,30 @@ open class KeyringFactory {
         return SingleKeyring(address, privateKey)
     }
     
+    public static func generateMultipleKeys(_ num: Int) -> [String] {
+        return generateMultipleKeys(num, "")
+    }
+    
+    public static func generateMultipleKeys(_ num: Int, _ entropy: String) -> [String] {
+        let keyArr = (0..<num).map { _ in
+            PrivateKey.generate(entropy).privateKey
+        }
+        return keyArr
+    }
+    
+    public static func generateRoleBasedKeys(_ numArr: [Int]) -> [[String]] {
+        return generateRoleBasedKeys(numArr, "")
+    }
+    
+    public static func generateRoleBasedKeys(_ numArr: [Int], _ entropy: String) -> [[String]] {
+        let keyArr = numArr.map {
+            (0..<$0).map { _ in
+                PrivateKey.generate(entropy).privateKey
+            }
+        }
+        return keyArr
+    }
+    
     public static func createWithMultipleKey(_ address: String, _ multipleKey: [String]) throws -> MultipleKeyring {
         if(multipleKey.count > WeightedMultiSigOptions.MAX_COUNT_WEIGHTED_PUBLIC_KEY) {
             throw CaverError.IllegalArgumentException("MultipleKey has up to 10.")

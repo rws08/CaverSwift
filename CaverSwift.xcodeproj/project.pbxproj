@@ -131,6 +131,7 @@
 		E391752C268ED56C006BB332 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391752B268ED56C006BB332 /* Account.swift */; };
 		E394F0C2269FD79700371199 /* ValueTransferMemoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0C1269FD79700371199 /* ValueTransferMemoTest.swift */; };
 		E394F0C4269FEB0C00371199 /* ValueTransferTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0C3269FEB0C00371199 /* ValueTransferTest.swift */; };
+		E394F0C6269FEEF800371199 /* FeeDelegatedAccountUpdateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0C5269FEEF800371199 /* FeeDelegatedAccountUpdateTest.swift */; };
 		E39F2CD3262EA4EF003FA426 /* CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */; };
 		E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */; };
 		E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* CaverSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -381,6 +382,7 @@
 		E391752B268ED56C006BB332 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		E394F0C1269FD79700371199 /* ValueTransferMemoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransferMemoTest.swift; sourceTree = "<group>"; };
 		E394F0C3269FEB0C00371199 /* ValueTransferTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransferTest.swift; sourceTree = "<group>"; };
+		E394F0C5269FEEF800371199 /* FeeDelegatedAccountUpdateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedAccountUpdateTest.swift; sourceTree = "<group>"; };
 		E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CCC262EA4EF003FA426 /* CaverSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaverSwift.h; sourceTree = "<group>"; };
 		E39F2CCD262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -536,14 +538,15 @@
 		E363D38B269C062B0077F6D2 /* transaction */ = {
 			isa = PBXGroup;
 			children = (
-				E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */,
 				E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */,
 				E31BEDF5269EC6F800196C0A /* CancelTest.swift */,
 				E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */,
+				E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */,
 				E31BEDF9269EE34400196C0A /* SmartContractDeployTest.swift */,
 				E39FBC8E269FCAB800E2E893 /* SmartContractExecutionTest.swift */,
 				E394F0C1269FD79700371199 /* ValueTransferMemoTest.swift */,
 				E394F0C3269FEB0C00371199 /* ValueTransferTest.swift */,
+				E394F0C5269FEEF800371199 /* FeeDelegatedAccountUpdateTest.swift */,
 			);
 			path = transaction;
 			sourceTree = "<group>";
@@ -1514,6 +1517,7 @@
 				E39FBC8F269FCAB800E2E893 /* SmartContractExecutionTest.swift in Sources */,
 				E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */,
 				E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */,
+				E394F0C6269FEEF800371199 /* FeeDelegatedAccountUpdateTest.swift in Sources */,
 				E31BEDF8269EDC3400196C0A /* ChainDataAnchoringTest.swift in Sources */,
 				E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */,
 				E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */,

@@ -44,7 +44,7 @@ open class FeeDelegatedValueTransfer: AbstractFeeDelegatedTransaction {
         try setValue(builder.value)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData], _ to: String, _ value: String) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]?, _ to: String, _ value: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedValueTransfer.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
         try setTo(to)
         try setValue(value)
@@ -86,7 +86,7 @@ open class FeeDelegatedValueTransfer: AbstractFeeDelegatedTransaction {
             .setValue(BigInt(hex: value)!)
             .setFrom(from.addHexPrefix)
             .setSignatures(senderSignList)
-            .setFeePayer(feePayer)
+            .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)
             .build()
         

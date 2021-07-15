@@ -22,7 +22,7 @@ open class FeeDelegatedCancel: AbstractFeeDelegatedTransaction {
         try super.init(builder)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]?) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedCancel.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
     }
     
@@ -58,7 +58,7 @@ open class FeeDelegatedCancel: AbstractFeeDelegatedTransaction {
             .setGas(gas)
             .setFrom(from.addHexPrefix)
             .setSignatures(senderSignList)
-            .setFeePayer(feePayer)
+            .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)
             .build()
         
