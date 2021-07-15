@@ -15,10 +15,10 @@ public struct Address: Codable, Hashable {
     public init(_ hexValue: String) {
         self.val = BigUInt(hexValue.cleanHexPrefix, radix: 16) ?? Address.zero.val
     }
-    
+
     public var toValue: String {
         get {
-            "0x\(self.val.hexa)"
+            self.val.hexa
         }
     }
     

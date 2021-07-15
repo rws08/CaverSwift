@@ -102,7 +102,7 @@ extension Address: ABIType {
     public static var parser: ParserFunction {
         return { data in
             let first = data.first ?? ""
-            return try ABIDecoder.decode(first, to: EthereumAddress.self)
+            return try ABIDecoder.decode(first, to: Address.self)
         }
     }
 }

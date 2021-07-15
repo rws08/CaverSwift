@@ -164,4 +164,13 @@ public class ABIDecoder {
         
         try deepDecode(data: data, type: type, result: &result, offset: &offset, size: &size)
     }
+    
+    public static func decode(_ data: String, to: Address.Type) throws -> Address {
+        let address = Address(data)
+        guard address.toValue.hasPrefix("0x") else {
+            throw ABIError.invalidValue
+        }
+        
+        return address
+    }
 }
