@@ -57,7 +57,7 @@ open class AbstractFeeDelegatedWithRatioTransaction: AbstractFeeDelegatedTransac
             throw CaverError.IllegalArgumentException("Invalid type of feeRatio: feeRatio should be number type or hex number string")
         }
     
-        guard let feeRatioVal = BigInt(feeRatio) else { throw CaverError.invalidValue }
+        guard let feeRatioVal = BigInt(hex: feeRatio) else { throw CaverError.invalidValue }
         if feeRatioVal <= 0 || feeRatioVal >= 100 {
             throw CaverError.IllegalArgumentException("Invalid feeRatio: feeRatio is out of range. [1,99]")
         }

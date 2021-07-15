@@ -858,77 +858,77 @@ class FeeDelegatedAccountUpdateTest_signAsFeePayer_OneKeyTest: XCTestCase {
 }
 
 class FeeDelegatedAccountUpdateTest_signAsFeePayer_AllKeyTest: XCTestCase {
-var mTxObj: FeeDelegatedAccountUpdate?
-var klaytnWalletKey: String?
-var singleKeyring, multipleKeyring, roleBasedKeyring: AbstractKeyring?
-    
-let privateKey = FeeDelegatedAccountUpdateTest.privateKey
-let feePayerPrivateKey = FeeDelegatedAccountUpdateTest.feePayerPrivateKey
-    
-let from = "0xa94f5374Fce5edBC8E2a8697C15331677e6EbF0B"
-var account: Account?
-let to = FeeDelegatedAccountUpdateTest.to
-let gas = "0xf4240"
-let nonce = "0x4d2"
-let gasPrice = "0x19"
-let chainID = "0x1"
-let value = FeeDelegatedAccountUpdateTest.value
-let input = FeeDelegatedAccountUpdateTest.input
-let humanReadable = FeeDelegatedAccountUpdateTest.humanReadable
-let codeFormat = FeeDelegatedAccountUpdateTest.codeFormat
-let senderSignature = SignatureData(
-    "0x26",
-    "0xab69d9adca15d9763c4ce6f98b35256717c6e932007658f19c5a255de9e70dda",
-    "0x26aa676a3a1a6e96aff4a3df2335788d614d54fb4db1c3c48551ce1fa7ac5e52"
-)
-let feePayer = "0x5A0043070275d9f6054307Ee7348bD660849D90f"
-let feePayerSignatureData = FeeDelegatedAccountUpdateTest.feePayerSignatureData
-    
-override func setUpWithError() throws {
-    account = Account.createWithAccountKeyFail(from)
-    
-    mTxObj = try FeeDelegatedAccountUpdate.Builder()
-        .setNonce(nonce)
-        .setGas(gas)
-        .setGasPrice(gasPrice)
-        .setChainId(chainID)
-        .setFrom(from)
-        .setSignatures(senderSignature)
-        .setFeePayer(feePayer)
-        .setAccount(account)
-        .build()
-    
-    singleKeyring = try KeyringFactory.createWithSingleKey(feePayer, feePayerPrivateKey)
-    multipleKeyring = try KeyringFactory.createWithMultipleKey(feePayer, KeyringFactory.generateMultipleKeys(8))
-    roleBasedKeyring = try KeyringFactory.createWithRoleBasedKey(feePayer, KeyringFactory.generateRoleBasedKeys([3,4,5]))
-}
-
-public func test_signWithKeys_singleKeyring() throws {
-    _ = try mTxObj!.signAsFeePayer(singleKeyring!, TransactionHasher.getHashForFeePayerSignature(_:))
-    XCTAssertEqual(1, mTxObj?.signatures.count)
-}
-
-public func test_signWithKeys_singleKeyring_NoSigner() throws {
-    _ = try mTxObj!.signAsFeePayer(singleKeyring!)
-    XCTAssertEqual(1, mTxObj?.feePayerSignatures.count)
-}
-
-public func test_signWithKeys_multipleKeyring() throws {
-    _ = try mTxObj!.signAsFeePayer(multipleKeyring!)
-    XCTAssertEqual(8, mTxObj?.feePayerSignatures.count)
-}
-
-public func test_signWithKeys_roleBasedKeyring() throws {
-    _ = try mTxObj!.signAsFeePayer(roleBasedKeyring!)
-    XCTAssertEqual(5, mTxObj?.feePayerSignatures.count)
-}
-
-public func test_throwException_NotMatchAddress() throws {
-    let keyring = try KeyringFactory.createFromPrivateKey(PrivateKey.generate().privateKey)
-    XCTAssertThrowsError(try mTxObj!.signAsFeePayer(keyring)) {
-        XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("The feePayer address of the transaction is different with the address of the keyring to use."))
+    var mTxObj: FeeDelegatedAccountUpdate?
+    var klaytnWalletKey: String?
+    var singleKeyring, multipleKeyring, roleBasedKeyring: AbstractKeyring?
+        
+    let privateKey = FeeDelegatedAccountUpdateTest.privateKey
+    let feePayerPrivateKey = FeeDelegatedAccountUpdateTest.feePayerPrivateKey
+        
+    let from = "0xa94f5374Fce5edBC8E2a8697C15331677e6EbF0B"
+    var account: Account?
+    let to = FeeDelegatedAccountUpdateTest.to
+    let gas = "0xf4240"
+    let nonce = "0x4d2"
+    let gasPrice = "0x19"
+    let chainID = "0x1"
+    let value = FeeDelegatedAccountUpdateTest.value
+    let input = FeeDelegatedAccountUpdateTest.input
+    let humanReadable = FeeDelegatedAccountUpdateTest.humanReadable
+    let codeFormat = FeeDelegatedAccountUpdateTest.codeFormat
+    let senderSignature = SignatureData(
+        "0x26",
+        "0xab69d9adca15d9763c4ce6f98b35256717c6e932007658f19c5a255de9e70dda",
+        "0x26aa676a3a1a6e96aff4a3df2335788d614d54fb4db1c3c48551ce1fa7ac5e52"
+    )
+    let feePayer = "0x5A0043070275d9f6054307Ee7348bD660849D90f"
+    let feePayerSignatureData = FeeDelegatedAccountUpdateTest.feePayerSignatureData
+        
+    override func setUpWithError() throws {
+        account = Account.createWithAccountKeyFail(from)
+        
+        mTxObj = try FeeDelegatedAccountUpdate.Builder()
+            .setNonce(nonce)
+            .setGas(gas)
+            .setGasPrice(gasPrice)
+            .setChainId(chainID)
+            .setFrom(from)
+            .setSignatures(senderSignature)
+            .setFeePayer(feePayer)
+            .setAccount(account)
+            .build()
+        
+        singleKeyring = try KeyringFactory.createWithSingleKey(feePayer, feePayerPrivateKey)
+        multipleKeyring = try KeyringFactory.createWithMultipleKey(feePayer, KeyringFactory.generateMultipleKeys(8))
+        roleBasedKeyring = try KeyringFactory.createWithRoleBasedKey(feePayer, KeyringFactory.generateRoleBasedKeys([3,4,5]))
     }
-}
+
+    public func test_signWithKeys_singleKeyring() throws {
+        _ = try mTxObj!.signAsFeePayer(singleKeyring!, TransactionHasher.getHashForFeePayerSignature(_:))
+        XCTAssertEqual(1, mTxObj?.signatures.count)
+    }
+
+    public func test_signWithKeys_singleKeyring_NoSigner() throws {
+        _ = try mTxObj!.signAsFeePayer(singleKeyring!)
+        XCTAssertEqual(1, mTxObj?.feePayerSignatures.count)
+    }
+
+    public func test_signWithKeys_multipleKeyring() throws {
+        _ = try mTxObj!.signAsFeePayer(multipleKeyring!)
+        XCTAssertEqual(8, mTxObj?.feePayerSignatures.count)
+    }
+
+    public func test_signWithKeys_roleBasedKeyring() throws {
+        _ = try mTxObj!.signAsFeePayer(roleBasedKeyring!)
+        XCTAssertEqual(5, mTxObj?.feePayerSignatures.count)
+    }
+
+    public func test_throwException_NotMatchAddress() throws {
+        let keyring = try KeyringFactory.createFromPrivateKey(PrivateKey.generate().privateKey)
+        XCTAssertThrowsError(try mTxObj!.signAsFeePayer(keyring)) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("The feePayer address of the transaction is different with the address of the keyring to use."))
+        }
+    }
 }
 
 class FeeDelegatedAccountUpdateTest_appendFeePayerSignaturesTest: XCTestCase {
