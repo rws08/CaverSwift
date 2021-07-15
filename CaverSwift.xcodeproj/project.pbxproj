@@ -133,6 +133,7 @@
 		E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */; };
 		E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* CaverSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E39F2CE6262EAAD3003FA426 /* Caver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CE5262EAAD3003FA426 /* Caver.swift */; };
+		E39FBC8F269FCAB800E2E893 /* SmartContractExecutionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39FBC8E269FCAB800E2E893 /* SmartContractExecutionTest.swift */; };
 		E3A21D3626564CCA006C560D /* ABITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21D3526564CCA006C560D /* ABITests.swift */; };
 		E3A21E08265654A7006C560D /* ENSMultiResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC1265654A7006C560D /* ENSMultiResolver.swift */; };
 		E3A21E09265654A7006C560D /* ENSContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC2265654A7006C560D /* ENSContracts.swift */; };
@@ -381,6 +382,7 @@
 		E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaverSwiftTests.swift; sourceTree = "<group>"; };
 		E39F2CD9262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E39F2CE5262EAAD3003FA426 /* Caver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caver.swift; sourceTree = "<group>"; };
+		E39FBC8E269FCAB800E2E893 /* SmartContractExecutionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartContractExecutionTest.swift; sourceTree = "<group>"; };
 		E3A21D3526564CCA006C560D /* ABITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABITests.swift; sourceTree = "<group>"; };
 		E3A21DC1265654A7006C560D /* ENSMultiResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSMultiResolver.swift; sourceTree = "<group>"; };
 		E3A21DC2265654A7006C560D /* ENSContracts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ENSContracts.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				E31BEDF5269EC6F800196C0A /* CancelTest.swift */,
 				E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */,
 				E31BEDF9269EE34400196C0A /* SmartContractDeployTest.swift */,
+				E39FBC8E269FCAB800E2E893 /* SmartContractExecutionTest.swift */,
 			);
 			path = transaction;
 			sourceTree = "<group>";
@@ -1511,6 +1514,7 @@
 				E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */,
 				E31BEDF6269EC6F800196C0A /* CancelTest.swift in Sources */,
 				E31BEDFA269EE34400196C0A /* SmartContractDeployTest.swift in Sources */,
+				E39FBC8F269FCAB800E2E893 /* SmartContractExecutionTest.swift in Sources */,
 				E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */,
 				E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */,
 				E31BEDF8269EDC3400196C0A /* ChainDataAnchoringTest.swift in Sources */,
