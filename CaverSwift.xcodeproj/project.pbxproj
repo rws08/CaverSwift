@@ -76,8 +76,8 @@
 		E38FA0CF26896B6800F532D0 /* Integer Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0B926896B6800F532D0 /* Integer Conversion.swift */; };
 		E38FA0D026896B6800F532D0 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0BA26896B6800F532D0 /* BigInt.swift */; };
 		E38FA0D126896B6800F532D0 /* String Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0BB26896B6800F532D0 /* String Conversion.swift */; };
-		E38FA0D42689A6AF00F532D0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E38FA0D32689A6AF00F532D0 /* SwiftPackageProductDependency */; };
-		E38FA0D72689A6BF00F532D0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E38FA0D62689A6BF00F532D0 /* SwiftPackageProductDependency */; };
+		E38FA0D42689A6AF00F532D0 /* ASN1 in Frameworks */ = {isa = PBXBuildFile; productRef = E38FA0D32689A6AF00F532D0 /* ASN1 */; };
+		E38FA0D72689A6BF00F532D0 /* BigInt in Frameworks */ = {isa = PBXBuildFile; productRef = E38FA0D62689A6BF00F532D0 /* BigInt */; };
 		E38FA1062689A6CB00F532D0 /* RP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0D92689A6CB00F532D0 /* RP.swift */; };
 		E38FA1072689A6CB00F532D0 /* Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0DA2689A6CB00F532D0 /* Curve.swift */; };
 		E38FA1082689A6CB00F532D0 /* ECPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0DB2689A6CB00F532D0 /* ECPublicKey.swift */; };
@@ -129,13 +129,14 @@
 		E390DAB8268DAFC500D05479 /* AccountKeyNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB7268DAFC500D05479 /* AccountKeyNil.swift */; };
 		E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3917529268ECFFB006BB332 /* AccountTest.swift */; };
 		E391752C268ED56C006BB332 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391752B268ED56C006BB332 /* Account.swift */; };
+		E394F0C2269FD79700371199 /* ValueTransferMemoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0C1269FD79700371199 /* ValueTransferMemoTest.swift */; };
 		E39F2CD3262EA4EF003FA426 /* CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */; };
 		E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */; };
 		E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* CaverSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E39F2CE6262EAAD3003FA426 /* Caver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CE5262EAAD3003FA426 /* Caver.swift */; };
 		E39FBC8F269FCAB800E2E893 /* SmartContractExecutionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39FBC8E269FCAB800E2E893 /* SmartContractExecutionTest.swift */; };
-		E39FBC92269FD57D00E2E893 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E39FBC91269FD57D00E2E893 /* SwiftPackageProductDependency */; };
-		E39FBC95269FD5E800E2E893 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E39FBC94269FD5E800E2E893 /* SwiftPackageProductDependency */; };
+		E39FBC92269FD57D00E2E893 /* GenericJSON in Frameworks */ = {isa = PBXBuildFile; productRef = E39FBC91269FD57D00E2E893 /* GenericJSON */; };
+		E39FBC95269FD5E800E2E893 /* secp256k1 in Frameworks */ = {isa = PBXBuildFile; productRef = E39FBC94269FD5E800E2E893 /* secp256k1 */; };
 		E3A21D3626564CCA006C560D /* ABITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21D3526564CCA006C560D /* ABITests.swift */; };
 		E3A21E08265654A7006C560D /* ENSMultiResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC1265654A7006C560D /* ENSMultiResolver.swift */; };
 		E3A21E09265654A7006C560D /* ENSContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC2265654A7006C560D /* ENSContracts.swift */; };
@@ -377,6 +378,7 @@
 		E390DAB7268DAFC500D05479 /* AccountKeyNil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKeyNil.swift; sourceTree = "<group>"; };
 		E3917529268ECFFB006BB332 /* AccountTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTest.swift; sourceTree = "<group>"; };
 		E391752B268ED56C006BB332 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		E394F0C1269FD79700371199 /* ValueTransferMemoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueTransferMemoTest.swift; sourceTree = "<group>"; };
 		E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CCC262EA4EF003FA426 /* CaverSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaverSwift.h; sourceTree = "<group>"; };
 		E39F2CCD262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -489,11 +491,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E38FA0D72689A6BF00F532D0 /* BuildFile in Frameworks */,
-				E39FBC95269FD5E800E2E893 /* BuildFile in Frameworks */,
+				E38FA0D72689A6BF00F532D0 /* BigInt in Frameworks */,
+				E39FBC95269FD5E800E2E893 /* secp256k1 in Frameworks */,
 				7AFFF8073AD1370A6A8E5500 /* Pods_CaverSwift.framework in Frameworks */,
-				E39FBC92269FD57D00E2E893 /* BuildFile in Frameworks */,
-				E38FA0D42689A6AF00F532D0 /* BuildFile in Frameworks */,
+				E39FBC92269FD57D00E2E893 /* GenericJSON in Frameworks */,
+				E38FA0D42689A6AF00F532D0 /* ASN1 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +540,7 @@
 				E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */,
 				E31BEDF9269EE34400196C0A /* SmartContractDeployTest.swift */,
 				E39FBC8E269FCAB800E2E893 /* SmartContractExecutionTest.swift */,
+				E394F0C1269FD79700371199 /* ValueTransferMemoTest.swift */,
 			);
 			path = transaction;
 			sourceTree = "<group>";
@@ -1153,10 +1156,10 @@
 			);
 			name = CaverSwift;
 			packageProductDependencies = (
-				E38FA0D32689A6AF00F532D0 /* SwiftPackageProductDependency */,
-				E38FA0D62689A6BF00F532D0 /* SwiftPackageProductDependency */,
-				E39FBC91269FD57D00E2E893 /* SwiftPackageProductDependency */,
-				E39FBC94269FD5E800E2E893 /* SwiftPackageProductDependency */,
+				E38FA0D32689A6AF00F532D0 /* ASN1 */,
+				E38FA0D62689A6BF00F532D0 /* BigInt */,
+				E39FBC91269FD57D00E2E893 /* GenericJSON */,
+				E39FBC94269FD5E800E2E893 /* secp256k1 */,
 			);
 			productName = "Caver-swift";
 			productReference = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */;
@@ -1209,10 +1212,10 @@
 			);
 			mainGroup = E39F2CBF262EA4EF003FA426;
 			packageReferences = (
-				E38FA0D22689A6AF00F532D0 /* RemoteSwiftPackageReference */,
-				E38FA0D52689A6BF00F532D0 /* RemoteSwiftPackageReference */,
-				E39FBC90269FD57D00E2E893 /* RemoteSwiftPackageReference */,
-				E39FBC93269FD5E800E2E893 /* RemoteSwiftPackageReference */,
+				E38FA0D22689A6AF00F532D0 /* XCRemoteSwiftPackageReference "ASN1" */,
+				E38FA0D52689A6BF00F532D0 /* XCRemoteSwiftPackageReference "BigInt" */,
+				E39FBC90269FD57D00E2E893 /* XCRemoteSwiftPackageReference "generic-json-swift" */,
+				E39FBC93269FD5E800E2E893 /* XCRemoteSwiftPackageReference "secp256k1" */,
 			);
 			productRefGroup = E39F2CCA262EA4EF003FA426 /* Products */;
 			projectDirPath = "";
@@ -1511,6 +1514,7 @@
 				E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */,
 				E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */,
 				E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */,
+				E394F0C2269FD79700371199 /* ValueTransferMemoTest.swift in Sources */,
 				E3A5C8C22682F4A2002A0A2D /* UtilsTest.swift in Sources */,
 				E31BEDF4269D92E700196C0A /* AccountUpdateTest.swift in Sources */,
 				E363D38D269C063F0077F6D2 /* LegacyTransactionTest.swift in Sources */,
@@ -1786,7 +1790,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E38FA0D22689A6AF00F532D0 /* RemoteSwiftPackageReference */ = {
+		E38FA0D22689A6AF00F532D0 /* XCRemoteSwiftPackageReference "ASN1" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/leif-ibsen/ASN1";
 			requirement = {
@@ -1794,7 +1798,7 @@
 				minimumVersion = 1.2.1;
 			};
 		};
-		E38FA0D52689A6BF00F532D0 /* RemoteSwiftPackageReference */ = {
+		E38FA0D52689A6BF00F532D0 /* XCRemoteSwiftPackageReference "BigInt" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/leif-ibsen/BigInt";
 			requirement = {
@@ -1802,7 +1806,7 @@
 				minimumVersion = 1.2.5;
 			};
 		};
-		E39FBC90269FD57D00E2E893 /* RemoteSwiftPackageReference */ = {
+		E39FBC90269FD57D00E2E893 /* XCRemoteSwiftPackageReference "generic-json-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/zoul/generic-json-swift";
 			requirement = {
@@ -1810,7 +1814,7 @@
 				minimumVersion = 2.0.1;
 			};
 		};
-		E39FBC93269FD5E800E2E893 /* RemoteSwiftPackageReference */ = {
+		E39FBC93269FD5E800E2E893 /* XCRemoteSwiftPackageReference "secp256k1" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Boilertalk/secp256k1.swift";
 			requirement = {
@@ -1821,24 +1825,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E38FA0D32689A6AF00F532D0 /* SwiftPackageProductDependency */ = {
+		E38FA0D32689A6AF00F532D0 /* ASN1 */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E38FA0D22689A6AF00F532D0 /* RemoteSwiftPackageReference */;
+			package = E38FA0D22689A6AF00F532D0 /* XCRemoteSwiftPackageReference "ASN1" */;
 			productName = ASN1;
 		};
-		E38FA0D62689A6BF00F532D0 /* SwiftPackageProductDependency */ = {
+		E38FA0D62689A6BF00F532D0 /* BigInt */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E38FA0D52689A6BF00F532D0 /* RemoteSwiftPackageReference */;
+			package = E38FA0D52689A6BF00F532D0 /* XCRemoteSwiftPackageReference "BigInt" */;
 			productName = BigInt;
 		};
-		E39FBC91269FD57D00E2E893 /* SwiftPackageProductDependency */ = {
+		E39FBC91269FD57D00E2E893 /* GenericJSON */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E39FBC90269FD57D00E2E893 /* RemoteSwiftPackageReference */;
+			package = E39FBC90269FD57D00E2E893 /* XCRemoteSwiftPackageReference "generic-json-swift" */;
 			productName = GenericJSON;
 		};
-		E39FBC94269FD5E800E2E893 /* SwiftPackageProductDependency */ = {
+		E39FBC94269FD5E800E2E893 /* secp256k1 */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E39FBC93269FD5E800E2E893 /* RemoteSwiftPackageReference */;
+			package = E39FBC93269FD5E800E2E893 /* XCRemoteSwiftPackageReference "secp256k1" */;
 			productName = secp256k1;
 		};
 /* End XCSwiftPackageProductDependency section */

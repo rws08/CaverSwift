@@ -14,7 +14,7 @@ open class TransactionDecoder {
         
         switch type {
         case TransactionType.TxTypeValueTransfer:
-            return try LegacyTransaction.decode(rlpBytes)
+            return try ValueTransfer.decode(rlpBytes)
         case TransactionType.TxTypeValueTransferMemo:
             return try ValueTransferMemo.decode(rlpBytes)
         case TransactionType.TxTypeSmartContractDeploy:
