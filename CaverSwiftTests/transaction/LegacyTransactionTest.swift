@@ -200,7 +200,7 @@ class LegacyTransactionTest_createInstanceBuilder: XCTestCase {
     }
     
     public func test_throwException_invalid_value() throws {
-        let value = "0x"
+        let value = "invalid"
         XCTAssertThrowsError(try LegacyTransaction.Builder()
                                 .setNonce(nonce)
                                 .setGas(gas)

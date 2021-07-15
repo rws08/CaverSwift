@@ -115,7 +115,7 @@ public extension BigInt {
     init?(hex: String) {
         let num = hex.cleanHexPrefix
         if num.count == 0 {
-            return nil
+            self.init(0)
         }
         self.init(num.lowercased(), radix: 16)
     }

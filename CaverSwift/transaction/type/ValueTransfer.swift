@@ -81,7 +81,7 @@ open class ValueTransfer: AbstractTransaction {
             .setGasPrice(gasPrice)
             .setGas(gas)
             .setTo(to.addHexPrefix)
-            .setValue(value)
+            .setValue(BigInt(hex: value)!)
             .setFrom(from.addHexPrefix)
             .setSignatures(signatureDataList)
             .build()

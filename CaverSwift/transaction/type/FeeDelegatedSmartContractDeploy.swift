@@ -103,7 +103,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
               let from = values[5] as? String,
               let input = values[6] as? String,
               let humanReadable = values[7] as? String,
-              let humanReadable = Bool(humanReadable),
+              let humanReadable = humanReadable.count == 0 ? false : Bool(humanReadable),
               let codeFormat = values[8] as? String,
               let senderSignatures = values[9] as? [[String]],
               let feePayer = values[10] as? String,
@@ -118,11 +118,11 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
             .setGasPrice(gasPrice)
             .setGas(gas)
             .setTo(to)
-            .setValue(value)
+            .setValue(BigInt(hex: value)!)
             .setFrom(from.addHexPrefix)
             .setInput(input.addHexPrefix)
             .setHumanReadable(humanReadable)
-            .setCodeFormat(codeFormat)
+            .setCodeFormat(BigInt(hex: codeFormat)!)
             .setSignatures(senderSignList)
             .setFeePayer(feePayer)
             .setFeePayerSignatures(feePayerSignList)
@@ -151,7 +151,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
             from,
             input,
             humanReadable ? 1 : 0,
-            codeFormat,
+            BigInt(hex: codeFormat)!,
             senderSignatureRLPList,
             feePayer,
             feePayerSignatureRLPList
@@ -179,7 +179,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
             from,
             input,
             humanReadable ? 1 : 0,
-            codeFormat
+            BigInt(hex: codeFormat)!
         ]
 
         guard let encoded = Rlp.encode(rlpTypeList) else { throw CaverError.invalidValue }
@@ -203,7 +203,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
             from,
             input,
             humanReadable ? 1 : 0,
-            codeFormat,
+            BigInt(hex: codeFormat)!,
             signatureRLPList
         ]
         
@@ -256,12 +256,12 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
             to = "0x"
         }
         if to != "0x" && !Utils.isAddress(to) {
-            throw CaverError.IllegalArgumentException("Invalid address. : \(to)")
+            throw CaverError.IllegalArgumentException("'to' field must be nil('0x') : \(to)")
         }
         self.to = to
     }
     
-    public func setHumanReadable(_ input: Bool) throws {
+    public func setHumanReadable(_ humanReadable: Bool) throws {
         if humanReadable {
             throw CaverError.IllegalArgumentException("HumanReadable attribute must set false")
         }
@@ -273,7 +273,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
             throw CaverError.IllegalArgumentException("codeFormat is missing")
         }
         
-        if BigInt(codeFormat) != CodeFormat.EVM {
+        if BigInt(hex: codeFormat) != CodeFormat.EVM {
             throw CaverError.IllegalArgumentException("CodeFormat attribute only support EVM(0)")
         }
         self.codeFormat = codeFormat

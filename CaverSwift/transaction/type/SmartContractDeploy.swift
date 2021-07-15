@@ -59,7 +59,7 @@ open class SmartContractDeploy: AbstractTransaction {
         }
         
         public func setCodeFormat(_ codeFormat: BigInt) -> Self {
-            return setValue(codeFormat.hexa)
+            return setCodeFormat(codeFormat.hexa)
         }
     }
     
@@ -72,9 +72,9 @@ open class SmartContractDeploy: AbstractTransaction {
         try setCodeFormat(builder.codeFormat)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ to: String, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
+    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ to: String?, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeSmartContractDeploy.string, from, nonce, gas, gasPrice, chainId, signatures)
-        try setTo(to)
+        try setTo(to ?? "0x")
         try setValue(value)
         try setInput(input)
         try setHumanReadable(humanReadable)
@@ -103,7 +103,7 @@ open class SmartContractDeploy: AbstractTransaction {
               let from = values[5] as? String,
               let input = values[6] as? String,
               let humanReadable = values[7] as? String,
-              let humanReadable = Bool(humanReadable),
+              let humanReadable = humanReadable.count == 0 ? false : Bool(humanReadable),
               let codeFormat = values[8] as? String,
               let senderSignatures = values[9] as? [[String]] else {
             throw CaverError.RuntimeException("There is an error while decoding process.")
@@ -116,11 +116,11 @@ open class SmartContractDeploy: AbstractTransaction {
             .setGasPrice(gasPrice)
             .setGas(gas)
             .setTo(to.addHexPrefix)
-            .setValue(value)
+            .setValue(BigInt(hex: value)!)
             .setFrom(from.addHexPrefix)
             .setInput(input.addHexPrefix)
             .setHumanReadable(humanReadable)
-            .setCodeFormat(codeFormat)
+            .setCodeFormat(BigInt(hex: codeFormat)!)
             .setSignatures(signatureDataList)
             .build()
 
@@ -143,7 +143,7 @@ open class SmartContractDeploy: AbstractTransaction {
             from,
             input,
             humanReadable ? 1 : 0,
-            codeFormat,
+            BigInt(hex: codeFormat)!,
             senderSignatureRLPList
         ]
         
@@ -169,7 +169,7 @@ open class SmartContractDeploy: AbstractTransaction {
             from,
             input,
             humanReadable ? 1 : 0,
-            codeFormat
+            BigInt(hex: codeFormat)!
         ]
 
         guard let encoded = Rlp.encode(rlpTypeList) else { throw CaverError.invalidValue }
@@ -219,12 +219,12 @@ open class SmartContractDeploy: AbstractTransaction {
             to = "0x"
         }
         if to != "0x" && !Utils.isAddress(to) {
-            throw CaverError.IllegalArgumentException("Invalid address. : \(to)")
+            throw CaverError.IllegalArgumentException("'to' field must be nil('0x') : \(to)")
         }
         self.to = to
     }
     
-    public func setHumanReadable(_ input: Bool) throws {
+    public func setHumanReadable(_ humanReadable: Bool) throws {
         if humanReadable {
             throw CaverError.IllegalArgumentException("HumanReadable attribute must set false")
         }
@@ -236,7 +236,7 @@ open class SmartContractDeploy: AbstractTransaction {
             throw CaverError.IllegalArgumentException("codeFormat is missing")
         }
         
-        if BigInt(codeFormat) != CodeFormat.EVM {
+        if BigInt(hex: codeFormat) != CodeFormat.EVM {
             throw CaverError.IllegalArgumentException("CodeFormat attribute only support EVM(0)")
         }
         self.codeFormat = codeFormat

@@ -94,7 +94,7 @@ open class FeeDelegatedValueTransferMemoWithRatio: AbstractFeeDelegatedWithRatio
             .setGasPrice(gasPrice)
             .setGas(gas)
             .setTo(to.addHexPrefix)
-            .setValue(value)
+            .setValue(BigInt(hex: value)!)
             .setFrom(from.addHexPrefix)
             .setFeeRatio(feeRatio)
             .setInput(input.addHexPrefix)

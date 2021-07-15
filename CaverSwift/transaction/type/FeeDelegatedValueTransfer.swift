@@ -83,7 +83,7 @@ open class FeeDelegatedValueTransfer: AbstractFeeDelegatedTransaction {
             .setGasPrice(gasPrice)
             .setGas(gas)
             .setTo(to.addHexPrefix)
-            .setValue(value)
+            .setValue(BigInt(hex: value)!)
             .setFrom(from.addHexPrefix)
             .setSignatures(senderSignList)
             .setFeePayer(feePayer)

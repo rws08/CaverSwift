@@ -93,7 +93,7 @@ open class FeeDelegatedSmartContractExecution: AbstractFeeDelegatedTransaction {
             .setGasPrice(gasPrice)
             .setGas(gas)
             .setTo(to.addHexPrefix)
-            .setValue(value)
+            .setValue(BigInt(hex: value)!)
             .setFrom(from.addHexPrefix)
             .setInput(input)
             .setSignatures(senderSignList)

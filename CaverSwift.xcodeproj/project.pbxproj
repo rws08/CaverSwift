@@ -11,6 +11,7 @@
 		E31BEDF4269D92E700196C0A /* AccountUpdateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */; };
 		E31BEDF6269EC6F800196C0A /* CancelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF5269EC6F800196C0A /* CancelTest.swift */; };
 		E31BEDF8269EDC3400196C0A /* ChainDataAnchoringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */; };
+		E31BEDFA269EE34400196C0A /* SmartContractDeployTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF9269EE34400196C0A /* SmartContractDeployTest.swift */; };
 		E363D38A269BBE0E0077F6D2 /* AccountUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D389269BBE0E0077F6D2 /* AccountUpdate.swift */; };
 		E363D38D269C063F0077F6D2 /* LegacyTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */; };
 		E363D38F269C27930077F6D2 /* ChainDataAnchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D38E269C27930077F6D2 /* ChainDataAnchoring.swift */; };
@@ -250,6 +251,7 @@
 		E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUpdateTest.swift; sourceTree = "<group>"; };
 		E31BEDF5269EC6F800196C0A /* CancelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelTest.swift; sourceTree = "<group>"; };
 		E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDataAnchoringTest.swift; sourceTree = "<group>"; };
+		E31BEDF9269EE34400196C0A /* SmartContractDeployTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartContractDeployTest.swift; sourceTree = "<group>"; };
 		E363D389269BBE0E0077F6D2 /* AccountUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUpdate.swift; sourceTree = "<group>"; };
 		E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyTransactionTest.swift; sourceTree = "<group>"; };
 		E363D38E269C27930077F6D2 /* ChainDataAnchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDataAnchoring.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 				E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */,
 				E31BEDF5269EC6F800196C0A /* CancelTest.swift */,
 				E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */,
+				E31BEDF9269EE34400196C0A /* SmartContractDeployTest.swift */,
 			);
 			path = transaction;
 			sourceTree = "<group>";
@@ -1507,6 +1510,7 @@
 				E3A21D3626564CCA006C560D /* ABITests.swift in Sources */,
 				E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */,
 				E31BEDF6269EC6F800196C0A /* CancelTest.swift in Sources */,
+				E31BEDFA269EE34400196C0A /* SmartContractDeployTest.swift in Sources */,
 				E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */,
 				E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */,
 				E31BEDF8269EDC3400196C0A /* ChainDataAnchoringTest.swift in Sources */,

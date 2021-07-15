@@ -91,7 +91,7 @@ open class SmartContractExecution: AbstractTransaction {
             .setGasPrice(gasPrice)
             .setGas(gas)
             .setTo(to.addHexPrefix)
-            .setValue(value)
+            .setValue(BigInt(hex: value)!)
             .setFrom(from.addHexPrefix)
             .setInput(input.addHexPrefix)
             .setSignatures(signatureDataList)
