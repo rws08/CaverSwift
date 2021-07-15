@@ -76,8 +76,8 @@
 		E38FA0CF26896B6800F532D0 /* Integer Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0B926896B6800F532D0 /* Integer Conversion.swift */; };
 		E38FA0D026896B6800F532D0 /* BigInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0BA26896B6800F532D0 /* BigInt.swift */; };
 		E38FA0D126896B6800F532D0 /* String Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0BB26896B6800F532D0 /* String Conversion.swift */; };
-		E38FA0D42689A6AF00F532D0 /* ASN1 in Frameworks */ = {isa = PBXBuildFile; productRef = E38FA0D32689A6AF00F532D0 /* ASN1 */; };
-		E38FA0D72689A6BF00F532D0 /* BigInt in Frameworks */ = {isa = PBXBuildFile; productRef = E38FA0D62689A6BF00F532D0 /* BigInt */; };
+		E38FA0D42689A6AF00F532D0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E38FA0D32689A6AF00F532D0 /* SwiftPackageProductDependency */; };
+		E38FA0D72689A6BF00F532D0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E38FA0D62689A6BF00F532D0 /* SwiftPackageProductDependency */; };
 		E38FA1062689A6CB00F532D0 /* RP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0D92689A6CB00F532D0 /* RP.swift */; };
 		E38FA1072689A6CB00F532D0 /* Curve.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0DA2689A6CB00F532D0 /* Curve.swift */; };
 		E38FA1082689A6CB00F532D0 /* ECPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0DB2689A6CB00F532D0 /* ECPublicKey.swift */; };
@@ -134,6 +134,8 @@
 		E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* CaverSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E39F2CE6262EAAD3003FA426 /* Caver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CE5262EAAD3003FA426 /* Caver.swift */; };
 		E39FBC8F269FCAB800E2E893 /* SmartContractExecutionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39FBC8E269FCAB800E2E893 /* SmartContractExecutionTest.swift */; };
+		E39FBC92269FD57D00E2E893 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E39FBC91269FD57D00E2E893 /* SwiftPackageProductDependency */; };
+		E39FBC95269FD5E800E2E893 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E39FBC94269FD5E800E2E893 /* SwiftPackageProductDependency */; };
 		E3A21D3626564CCA006C560D /* ABITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21D3526564CCA006C560D /* ABITests.swift */; };
 		E3A21E08265654A7006C560D /* ENSMultiResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC1265654A7006C560D /* ENSMultiResolver.swift */; };
 		E3A21E09265654A7006C560D /* ENSContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC2265654A7006C560D /* ENSContracts.swift */; };
@@ -487,9 +489,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E38FA0D72689A6BF00F532D0 /* BigInt in Frameworks */,
+				E38FA0D72689A6BF00F532D0 /* BuildFile in Frameworks */,
+				E39FBC95269FD5E800E2E893 /* BuildFile in Frameworks */,
 				7AFFF8073AD1370A6A8E5500 /* Pods_CaverSwift.framework in Frameworks */,
-				E38FA0D42689A6AF00F532D0 /* ASN1 in Frameworks */,
+				E39FBC92269FD57D00E2E893 /* BuildFile in Frameworks */,
+				E38FA0D42689A6AF00F532D0 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1149,8 +1153,10 @@
 			);
 			name = CaverSwift;
 			packageProductDependencies = (
-				E38FA0D32689A6AF00F532D0 /* ASN1 */,
-				E38FA0D62689A6BF00F532D0 /* BigInt */,
+				E38FA0D32689A6AF00F532D0 /* SwiftPackageProductDependency */,
+				E38FA0D62689A6BF00F532D0 /* SwiftPackageProductDependency */,
+				E39FBC91269FD57D00E2E893 /* SwiftPackageProductDependency */,
+				E39FBC94269FD5E800E2E893 /* SwiftPackageProductDependency */,
 			);
 			productName = "Caver-swift";
 			productReference = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */;
@@ -1164,7 +1170,6 @@
 				E39F2CCE262EA4EF003FA426 /* Sources */,
 				E39F2CCF262EA4EF003FA426 /* Frameworks */,
 				E39F2CD0262EA4EF003FA426 /* Resources */,
-				69937B763F0FEFE521E54457 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1204,8 +1209,10 @@
 			);
 			mainGroup = E39F2CBF262EA4EF003FA426;
 			packageReferences = (
-				E38FA0D22689A6AF00F532D0 /* XCRemoteSwiftPackageReference "ASN1" */,
-				E38FA0D52689A6BF00F532D0 /* XCRemoteSwiftPackageReference "BigInt" */,
+				E38FA0D22689A6AF00F532D0 /* RemoteSwiftPackageReference */,
+				E38FA0D52689A6BF00F532D0 /* RemoteSwiftPackageReference */,
+				E39FBC90269FD57D00E2E893 /* RemoteSwiftPackageReference */,
+				E39FBC93269FD5E800E2E893 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = E39F2CCA262EA4EF003FA426 /* Products */;
 			projectDirPath = "";
@@ -1237,23 +1244,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		69937B763F0FEFE521E54457 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CaverSwift-CaverSwiftTests/Pods-CaverSwift-CaverSwiftTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CaverSwift-CaverSwiftTests/Pods-CaverSwift-CaverSwiftTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CaverSwift-CaverSwiftTests/Pods-CaverSwift-CaverSwiftTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		92254FC202E9CCEFBFA3CD9C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1796,7 +1786,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E38FA0D22689A6AF00F532D0 /* XCRemoteSwiftPackageReference "ASN1" */ = {
+		E38FA0D22689A6AF00F532D0 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/leif-ibsen/ASN1";
 			requirement = {
@@ -1804,7 +1794,7 @@
 				minimumVersion = 1.2.1;
 			};
 		};
-		E38FA0D52689A6BF00F532D0 /* XCRemoteSwiftPackageReference "BigInt" */ = {
+		E38FA0D52689A6BF00F532D0 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/leif-ibsen/BigInt";
 			requirement = {
@@ -1812,18 +1802,44 @@
 				minimumVersion = 1.2.5;
 			};
 		};
+		E39FBC90269FD57D00E2E893 /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zoul/generic-json-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.1;
+			};
+		};
+		E39FBC93269FD5E800E2E893 /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Boilertalk/secp256k1.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E38FA0D32689A6AF00F532D0 /* ASN1 */ = {
+		E38FA0D32689A6AF00F532D0 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E38FA0D22689A6AF00F532D0 /* XCRemoteSwiftPackageReference "ASN1" */;
+			package = E38FA0D22689A6AF00F532D0 /* RemoteSwiftPackageReference */;
 			productName = ASN1;
 		};
-		E38FA0D62689A6BF00F532D0 /* BigInt */ = {
+		E38FA0D62689A6BF00F532D0 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E38FA0D52689A6BF00F532D0 /* XCRemoteSwiftPackageReference "BigInt" */;
+			package = E38FA0D52689A6BF00F532D0 /* RemoteSwiftPackageReference */;
 			productName = BigInt;
+		};
+		E39FBC91269FD57D00E2E893 /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E39FBC90269FD57D00E2E893 /* RemoteSwiftPackageReference */;
+			productName = GenericJSON;
+		};
+		E39FBC94269FD5E800E2E893 /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E39FBC93269FD5E800E2E893 /* RemoteSwiftPackageReference */;
+			productName = secp256k1;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

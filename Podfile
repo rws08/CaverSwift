@@ -8,8 +8,8 @@ target 'CaverSwift' do
   # Pods for CaverSwift
 #  pod 'web3.swift'
 #  pod 'BigInt'
-  pod 'GenericJSON'
-  pod 'secp256k1.swift'
+#  pod 'GenericJSON'
+#  pod 'secp256k1.swift'
 
   target 'CaverSwiftTests' do
     # Pods for testing
