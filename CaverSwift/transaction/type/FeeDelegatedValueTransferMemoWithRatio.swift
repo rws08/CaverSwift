@@ -18,7 +18,7 @@ open class FeeDelegatedValueTransferMemoWithRatio: AbstractFeeDelegatedWithRatio
         private(set) public var value = ""
         
         init() {
-            super.init(TransactionType.TxTypeFeeDelegatedValueTransferMemo.string)
+            super.init(TransactionType.TxTypeFeeDelegatedValueTransferMemoWithRatio.string)
         }
         
         public override func build() throws -> FeeDelegatedValueTransferMemoWithRatio {
@@ -53,7 +53,7 @@ open class FeeDelegatedValueTransferMemoWithRatio: AbstractFeeDelegatedWithRatio
     }
     
     init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]?, _ feeRatio: String, _ to: String, _ value: String, _ input: String) throws {
-        try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedValueTransferMemo.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures, feeRatio)
+        try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedValueTransferMemoWithRatio.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures, feeRatio)
         try setTo(to)
         try setValue(value)
         try setInput(input)
@@ -67,8 +67,8 @@ open class FeeDelegatedValueTransferMemoWithRatio: AbstractFeeDelegatedWithRatio
     }
     
     public static func decode(_ rlpEncoded: [UInt8]) throws -> FeeDelegatedValueTransferMemoWithRatio {
-        if rlpEncoded[0] != TransactionType.TxTypeFeeDelegatedValueTransferMemo.rawValue {
-            throw CaverError.IllegalArgumentException("Invalid RLP-encoded tag - \(TransactionType.TxTypeFeeDelegatedValueTransferMemo)")
+        if rlpEncoded[0] != TransactionType.TxTypeFeeDelegatedValueTransferMemoWithRatio.rawValue {
+            throw CaverError.IllegalArgumentException("Invalid RLP-encoded tag - \(TransactionType.TxTypeFeeDelegatedValueTransferMemoWithRatio)")
         }
         
         let rlpList = Rlp.decode(Array(rlpEncoded[1..<rlpEncoded.count]))
@@ -132,7 +132,7 @@ open class FeeDelegatedValueTransferMemoWithRatio: AbstractFeeDelegatedWithRatio
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedValueTransferMemo.rawValue.hexa.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedValueTransferMemoWithRatio.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -141,7 +141,7 @@ open class FeeDelegatedValueTransferMemoWithRatio: AbstractFeeDelegatedWithRatio
     public override func getCommonRLPEncodingForSignature() throws -> String {
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeFeeDelegatedValueTransferMemo.rawValue.hexa.hexData!
+        let type = TransactionType.TxTypeFeeDelegatedValueTransferMemoWithRatio.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
@@ -180,7 +180,7 @@ open class FeeDelegatedValueTransferMemoWithRatio: AbstractFeeDelegatedWithRatio
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeFeeDelegatedValueTransferMemo.rawValue.hexa.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedValueTransferMemoWithRatio.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.keccak256.hexString
         return encodedStr
