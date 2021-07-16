@@ -69,7 +69,7 @@ open class FeeDelegatedChainDataAnchoring: AbstractFeeDelegatedTransaction {
             .setGasPrice(gasPrice)
             .setGas(gas)
             .setFrom(from.addHexPrefix)
-            .setInput(input)
+            .setInput(input.addHexPrefix)
             .setSignatures(senderSignList)
             .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)

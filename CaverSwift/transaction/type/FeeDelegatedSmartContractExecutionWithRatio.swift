@@ -97,7 +97,7 @@ open class FeeDelegatedSmartContractExecutionWithRatio: AbstractFeeDelegatedWith
             .setValue(BigInt(hex: value)!)
             .setFrom(from.addHexPrefix)
             .setFeeRatio(feeRatio)
-            .setInput(input)
+            .setInput(input.addHexPrefix)
             .setSignatures(senderSignList)
             .setFeePayer(feePayer.addHexPrefix)
             .setFeePayerSignatures(feePayerSignList)
