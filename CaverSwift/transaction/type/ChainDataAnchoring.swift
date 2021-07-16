@@ -135,6 +135,6 @@ open class ChainDataAnchoring: AbstractTransaction {
             throw CaverError.IllegalArgumentException("Invalid input. : \(input)")
         }
         
-        self.input = input
+        self.input = input.addHexPrefix
     }
 }

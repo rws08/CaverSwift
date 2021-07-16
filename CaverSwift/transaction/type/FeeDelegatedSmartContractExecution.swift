@@ -212,7 +212,7 @@ open class FeeDelegatedSmartContractExecution: AbstractFeeDelegatedTransaction {
         if !Utils.isHex(input) {
             throw CaverError.IllegalArgumentException("Invalid input. : \(input)")
         }
-        self.input = input
+        self.input = input.addHexPrefix
     }
     
     public func setTo(_ to: String) throws {

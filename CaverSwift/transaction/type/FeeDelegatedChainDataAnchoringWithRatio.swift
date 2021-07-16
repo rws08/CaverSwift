@@ -177,6 +177,6 @@ open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRati
             throw CaverError.IllegalArgumentException("Invalid input. : \(input)")
         }
         
-        self.input = input
+        self.input = input.addHexPrefix
     }
 }
