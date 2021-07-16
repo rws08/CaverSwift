@@ -207,8 +207,8 @@ open class FeeDelegatedSmartContractDeployWithRatio: AbstractFeeDelegatedWithRat
             from,
             input,
             humanReadable ? 1 : 0,
-            BigInt(hex: codeFormat)!,
             BigInt(hex: feeRatio)!,
+            BigInt(hex: codeFormat)!,
             signatureRLPList
         ]
         
