@@ -1410,5 +1410,3 @@ class FeeDelegatedCancelWithRatioTest_getRLPEncodingForFeePayerSignatureTest: XC
         }
     }
 }
-
-

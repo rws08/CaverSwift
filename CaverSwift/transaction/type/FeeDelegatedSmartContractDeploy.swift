@@ -22,7 +22,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
         private(set) public var codeFormat = CodeFormat.EVM.hexa
         
         init() {
-            super.init(TransactionType.TxTypeSmartContractDeploy.string)
+            super.init(TransactionType.TxTypeFeeDelegatedSmartContractDeploy.string)
         }
         
         public override func build() throws -> FeeDelegatedSmartContractDeploy {
@@ -73,7 +73,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
     }
     
     init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]?, _ to: String, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
-        try super.init(klaytnCall, TransactionType.TxTypeSmartContractDeploy.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
+        try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedSmartContractDeploy.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
         try setTo(to)
         try setValue(value)
         try setInput(input)
@@ -89,8 +89,8 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
     }
     
     public static func decode(_ rlpEncoded: [UInt8]) throws -> FeeDelegatedSmartContractDeploy {
-        if rlpEncoded[0] != TransactionType.TxTypeSmartContractDeploy.rawValue {
-            throw CaverError.IllegalArgumentException("Invalid RLP-encoded tag - \(TransactionType.TxTypeSmartContractDeploy)")
+        if rlpEncoded[0] != TransactionType.TxTypeFeeDelegatedSmartContractDeploy.rawValue {
+            throw CaverError.IllegalArgumentException("Invalid RLP-encoded tag - \(TransactionType.TxTypeFeeDelegatedSmartContractDeploy)")
         }
         
         let rlpList = Rlp.decode(Array(rlpEncoded[1..<rlpEncoded.count]))
@@ -158,7 +158,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeSmartContractDeploy.rawValue.hexa.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedSmartContractDeploy.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.hexString
         return encodedStr
@@ -167,7 +167,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
     public override func getCommonRLPEncodingForSignature() throws -> String {
         try validateOptionalValues(true)
         
-        let type = TransactionType.TxTypeSmartContractDeploy.rawValue.hexa.hexData!
+        let type = TransactionType.TxTypeFeeDelegatedSmartContractDeploy.rawValue.hexa.hexData!
         
         let rlpTypeList: [Any] = [
             type,
@@ -208,7 +208,7 @@ open class FeeDelegatedSmartContractDeploy: AbstractFeeDelegatedTransaction {
         ]
         
         guard let encoded = Rlp.encode(rlpTypeList),
-              var type = TransactionType.TxTypeSmartContractDeploy.rawValue.hexa.hexData else { throw CaverError.invalidValue }
+              var type = TransactionType.TxTypeFeeDelegatedSmartContractDeploy.rawValue.hexa.hexData else { throw CaverError.invalidValue }
         type.append(encoded)
         let encodedStr = type.keccak256.hexString
         return encodedStr

@@ -136,6 +136,8 @@
 		E394F0CA26A033F800371199 /* FeeDelegatedCancelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0C926A033F800371199 /* FeeDelegatedCancelTest.swift */; };
 		E394F0CC26A104B900371199 /* FeeDelegatedCancelWithRatioTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0CB26A104B900371199 /* FeeDelegatedCancelWithRatioTest.swift */; };
 		E394F0CE26A10AF000371199 /* FeeDelegatedChainDataAnchoringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0CD26A10AF000371199 /* FeeDelegatedChainDataAnchoringTest.swift */; };
+		E394F0D026A1136000371199 /* FeeDelegatedChainDataAnchoringWithRatioTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0CF26A1136000371199 /* FeeDelegatedChainDataAnchoringWithRatioTest.swift */; };
+		E394F0D226A11B3500371199 /* FeeDelegatedSmartContractDeployTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0D126A11B3500371199 /* FeeDelegatedSmartContractDeployTest.swift */; };
 		E39F2CD3262EA4EF003FA426 /* CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */; };
 		E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */; };
 		E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* CaverSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -391,6 +393,8 @@
 		E394F0C926A033F800371199 /* FeeDelegatedCancelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedCancelTest.swift; sourceTree = "<group>"; };
 		E394F0CB26A104B900371199 /* FeeDelegatedCancelWithRatioTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedCancelWithRatioTest.swift; sourceTree = "<group>"; };
 		E394F0CD26A10AF000371199 /* FeeDelegatedChainDataAnchoringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedChainDataAnchoringTest.swift; sourceTree = "<group>"; };
+		E394F0CF26A1136000371199 /* FeeDelegatedChainDataAnchoringWithRatioTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedChainDataAnchoringWithRatioTest.swift; sourceTree = "<group>"; };
+		E394F0D126A11B3500371199 /* FeeDelegatedSmartContractDeployTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedSmartContractDeployTest.swift; sourceTree = "<group>"; };
 		E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CCC262EA4EF003FA426 /* CaverSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaverSwift.h; sourceTree = "<group>"; };
 		E39F2CCD262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -559,6 +563,8 @@
 				E394F0C926A033F800371199 /* FeeDelegatedCancelTest.swift */,
 				E394F0CB26A104B900371199 /* FeeDelegatedCancelWithRatioTest.swift */,
 				E394F0CD26A10AF000371199 /* FeeDelegatedChainDataAnchoringTest.swift */,
+				E394F0CF26A1136000371199 /* FeeDelegatedChainDataAnchoringWithRatioTest.swift */,
+				E394F0D126A11B3500371199 /* FeeDelegatedSmartContractDeployTest.swift */,
 			);
 			path = transaction;
 			sourceTree = "<group>";
@@ -1531,10 +1537,12 @@
 				E39FBC8F269FCAB800E2E893 /* SmartContractExecutionTest.swift in Sources */,
 				E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */,
 				E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */,
+				E394F0D226A11B3500371199 /* FeeDelegatedSmartContractDeployTest.swift in Sources */,
 				E394F0C6269FEEF800371199 /* FeeDelegatedAccountUpdateTest.swift in Sources */,
 				E31BEDF8269EDC3400196C0A /* ChainDataAnchoringTest.swift in Sources */,
 				E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */,
 				E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */,
+				E394F0D026A1136000371199 /* FeeDelegatedChainDataAnchoringWithRatioTest.swift in Sources */,
 				E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */,
 				E394F0C2269FD79700371199 /* ValueTransferMemoTest.swift in Sources */,
 				E394F0CE26A10AF000371199 /* FeeDelegatedChainDataAnchoringTest.swift in Sources */,

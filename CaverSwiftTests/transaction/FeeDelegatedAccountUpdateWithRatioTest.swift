@@ -1015,7 +1015,7 @@ class FeeDelegatedAccountUpdateWithRatioTest_signAsFeePayer_OneKeyTest: XCTestCa
     }
     
     public func test_throwException_InvalidIndex() throws {
-        let role = try AccountUpdateTest.generateRoleBaseKeyring([3,3,3], feePayer )
+        let role = try AccountUpdateTest.generateRoleBaseKeyring([3,3,3], feePayer)
         
         XCTAssertThrowsError(try mTxObj!.signAsFeePayer(role, 4)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid index : index must be less than the length of the key."))
