@@ -25,7 +25,7 @@ class FeeDelegatedCancelTest: XCTestCase {
     static let humanReadable = false
     static let codeFormat = CodeFormat.EVM.hexa
 
-    static let senderSignature = SignatureData(
+    static let senderSignatureData = SignatureData(
         "0x26",
         "0x8409f5441d4725f90905ad87f03793857d124de7a43169bc67320cd2f020efa9",
         "0x60af63e87bdc565d7f7de906916b2334336ee7b24d9a71c9521a67df02e7ec92"
@@ -60,7 +60,7 @@ class FeeDelegatedCancelTest_createInstanceBuilder: XCTestCase {
     let input = FeeDelegatedCancelTest.input
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
         
@@ -72,7 +72,7 @@ class FeeDelegatedCancelTest_createInstanceBuilder: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
         
@@ -85,7 +85,7 @@ class FeeDelegatedCancelTest_createInstanceBuilder: XCTestCase {
             .setGas(gas)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
         
@@ -104,7 +104,7 @@ class FeeDelegatedCancelTest_createInstanceBuilder: XCTestCase {
             .setChainId(BigInt(hex: chainID)!)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
         
@@ -124,7 +124,7 @@ class FeeDelegatedCancelTest_createInstanceBuilder: XCTestCase {
                                 .setChainId(chainID)
                                 .setFrom(from)
                                 .setFeePayer(feePayer)
-                                .setSignatures(senderSignature)
+                                .setSignatures(senderSignatureData)
                                 .setFeePayerSignatures(feePayerSignatureData)
                                 .build()) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid address. : \(from)"))
@@ -140,7 +140,7 @@ class FeeDelegatedCancelTest_createInstanceBuilder: XCTestCase {
                                 .setChainId(chainID)
                                 .setFrom(from)
                                 .setFeePayer(feePayer)
-                                .setSignatures(senderSignature)
+                                .setSignatures(senderSignatureData)
                                 .setFeePayerSignatures(feePayerSignatureData)
                                 .build()) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("from is missing."))
@@ -156,7 +156,7 @@ class FeeDelegatedCancelTest_createInstanceBuilder: XCTestCase {
                                 .setChainId(chainID)
                                 .setFrom(from)
                                 .setFeePayer(feePayer)
-                                .setSignatures(senderSignature)
+                                .setSignatures(senderSignatureData)
                                 .setFeePayerSignatures(feePayerSignatureData)
                                 .build()) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid gas. : \(gas)"))
@@ -172,7 +172,7 @@ class FeeDelegatedCancelTest_createInstanceBuilder: XCTestCase {
                                 .setChainId(chainID)
                                 .setFrom(from)
                                 .setFeePayer(feePayer)
-                                .setSignatures(senderSignature)
+                                .setSignatures(senderSignatureData)
                                 .setFeePayerSignatures(feePayerSignatureData)
                                 .build()) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("gas is missing."))
@@ -188,7 +188,7 @@ class FeeDelegatedCancelTest_createInstanceBuilder: XCTestCase {
                                 .setChainId(chainID)
                                 .setFrom(from)
                                 .setFeePayer(feePayer)
-                                .setSignatures(senderSignature)
+                                .setSignatures(senderSignatureData)
                                 .setFeePayerSignatures(feePayerSignatureData)
                                 .build()) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("feePayer is missing: feePayer must be defined with feePayerSignatures."))
@@ -208,7 +208,7 @@ class FeeDelegatedCancelTest_createInstance: XCTestCase {
     let input = FeeDelegatedCancelTest.input
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
     
@@ -220,7 +220,7 @@ class FeeDelegatedCancelTest_createInstance: XCTestCase {
             gas,
             gasPrice,
             chainID,
-            [senderSignature],
+            [senderSignatureData],
             feePayer,
             [feePayerSignatureData]
         )
@@ -237,7 +237,7 @@ class FeeDelegatedCancelTest_createInstance: XCTestCase {
             gas,
             gasPrice,
             chainID,
-            [senderSignature],
+            [senderSignatureData],
             feePayer,
             [feePayerSignatureData]
         )) {
@@ -254,7 +254,7 @@ class FeeDelegatedCancelTest_createInstance: XCTestCase {
             gas,
             gasPrice,
             chainID,
-            [senderSignature],
+            [senderSignatureData],
             feePayer,
             [feePayerSignatureData]
         )) {
@@ -271,7 +271,7 @@ class FeeDelegatedCancelTest_createInstance: XCTestCase {
             gas,
             gasPrice,
             chainID,
-            [senderSignature],
+            [senderSignatureData],
             feePayer,
             [feePayerSignatureData]
         )) {
@@ -288,7 +288,7 @@ class FeeDelegatedCancelTest_createInstance: XCTestCase {
             gas,
             gasPrice,
             chainID,
-            [senderSignature],
+            [senderSignatureData],
             feePayer,
             [feePayerSignatureData]
         )) {
@@ -305,7 +305,7 @@ class FeeDelegatedCancelTest_createInstance: XCTestCase {
             gas,
             gasPrice,
             chainID,
-            [senderSignature],
+            [senderSignatureData],
             feePayer,
             [feePayerSignatureData]
         )) {
@@ -326,7 +326,7 @@ class FeeDelegatedCancelTest_getRLPEncodingTest: XCTestCase {
     let input = FeeDelegatedCancelTest.input
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
     
@@ -340,7 +340,7 @@ class FeeDelegatedCancelTest_getRLPEncodingTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
         
@@ -354,7 +354,7 @@ class FeeDelegatedCancelTest_getRLPEncodingTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
         
@@ -370,7 +370,7 @@ class FeeDelegatedCancelTest_getRLPEncodingTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
         
@@ -399,7 +399,7 @@ class FeeDelegatedCancelTest_signAsFeePayer_OneKeyTest: XCTestCase {
     let input = FeeDelegatedCancelTest.input
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
     
@@ -413,7 +413,7 @@ class FeeDelegatedCancelTest_signAsFeePayer_OneKeyTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .build()
         
         keyring = try KeyringFactory.createWithSingleKey(feePayer, feePayerPrivateKey)
@@ -505,7 +505,7 @@ class FeeDelegatedCancelTest_signAsFeePayer_AllKeyTest: XCTestCase {
     let input = FeeDelegatedCancelTest.input
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
     
@@ -519,7 +519,7 @@ class FeeDelegatedCancelTest_signAsFeePayer_AllKeyTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .build()
         
         singleKeyring = try KeyringFactory.createWithSingleKey(feePayer, feePayerPrivateKey)
@@ -575,7 +575,7 @@ class FeeDelegatedCancelTest_appendFeePayerSignaturesTest: XCTestCase {
     let input = FeeDelegatedCancelTest.input
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
     
@@ -587,7 +587,7 @@ class FeeDelegatedCancelTest_appendFeePayerSignaturesTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .build()
         
         coupledKeyring = try KeyringFactory.createFromPrivateKey(privateKey)
@@ -624,7 +624,7 @@ class FeeDelegatedCancelTest_appendFeePayerSignaturesTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(emptySignature)
             .build()
         
@@ -651,7 +651,7 @@ class FeeDelegatedCancelTest_appendFeePayerSignaturesTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(signatureData)
             .build()
         
@@ -680,7 +680,7 @@ class FeeDelegatedCancelTest_appendFeePayerSignaturesTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(signatureData)
             .build()
         
@@ -721,7 +721,7 @@ class FeeDelegatedCancelTest_combineSignatureTest: XCTestCase {
     let input = "0x68656c6c6f"
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
     let expectedRLPEncoding = FeeDelegatedCancelTest.expectedRLPEncoding
@@ -780,7 +780,7 @@ class FeeDelegatedCancelTest_combineSignatureTest: XCTestCase {
             "0x39f86f018505d21dba00830dbba094dcad313f2bf2240dbdb243eaf5eee2f512e0bfd1f847f845820feaa02f3c7b7aebd6c9af7a5b4259f0ea77d96362efbdca397b9f17e3c6924296c53fa00e4197ba6e38cecf99715f523c1805a58559072f944443bad1152dee73bfb16780c4c3018080"
         ]
         
-        let senderSignature = SignatureData(
+        let senderSignatureData = SignatureData(
             "0x0fe9",
             "0x4d9bf7a8bd15a41143eeecd3c39691cdc151b50d641534f0c73055849f7abca1",
             "0x7123185b4cc046eb6a78e1ee370c059dfe437012098ebe18379685acd907606f"
@@ -792,7 +792,7 @@ class FeeDelegatedCancelTest_combineSignatureTest: XCTestCase {
             .setGasPrice(gasPrice)
             .setChainId(chainID)
             .setFrom(from)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .build()
         
         let combined = try mTxObj!.combineSignedRawTransactions(rlpEncodedString)
@@ -876,7 +876,7 @@ class FeeDelegatedCancelTest_combineSignatureTest: XCTestCase {
         XCTAssertEqual(expectedSignature[2], mTxObj?.feePayerSignatures[2])
     }
     
-    public func test_multipleSignature_senderSignature_feePayerSignature() throws {
+    public func test_multipleSignature_senderSignatureData_feePayerSignature() throws {
         mTxObj = try FeeDelegatedCancel.Builder()
             .setNonce(nonce)
             .setGas(gas)
@@ -972,7 +972,7 @@ class FeeDelegatedCancelTest_getRawTransactionTest: XCTestCase {
     let input = FeeDelegatedCancelTest.input
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
     
@@ -986,7 +986,7 @@ class FeeDelegatedCancelTest_getRawTransactionTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
 
@@ -1014,7 +1014,7 @@ class FeeDelegatedCancelTest_getTransactionHashTest: XCTestCase {
     let input = FeeDelegatedCancelTest.input
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
     
@@ -1029,7 +1029,7 @@ class FeeDelegatedCancelTest_getTransactionHashTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
 
@@ -1046,7 +1046,7 @@ class FeeDelegatedCancelTest_getTransactionHashTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
                 
@@ -1065,7 +1065,7 @@ class FeeDelegatedCancelTest_getTransactionHashTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
                 
@@ -1093,7 +1093,7 @@ class FeeDelegatedCancelTest_getSenderTxHashTest: XCTestCase {
     let input = FeeDelegatedCancelTest.input
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
     let expectedRLPEncoding = FeeDelegatedCancelTest.expectedRLPEncoding
@@ -1108,7 +1108,7 @@ class FeeDelegatedCancelTest_getSenderTxHashTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
         
@@ -1125,7 +1125,7 @@ class FeeDelegatedCancelTest_getSenderTxHashTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
                 
@@ -1144,7 +1144,7 @@ class FeeDelegatedCancelTest_getSenderTxHashTest: XCTestCase {
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
                 
@@ -1172,7 +1172,7 @@ class FeeDelegatedCancelTest_getRLPEncodingForFeePayerSignatureTest: XCTestCase 
     let input = FeeDelegatedCancelTest.input
     let humanReadable = FeeDelegatedCancelTest.humanReadable
     let codeFormat = FeeDelegatedCancelTest.codeFormat
-    let senderSignature = FeeDelegatedCancelTest.senderSignature
+    let senderSignatureData = FeeDelegatedCancelTest.senderSignatureData
     let feePayer = FeeDelegatedCancelTest.feePayer
     let feePayerSignatureData = FeeDelegatedCancelTest.feePayerSignatureData
     let expectedRLPEncoding = FeeDelegatedCancelTest.expectedRLPEncoding
@@ -1188,7 +1188,7 @@ class FeeDelegatedCancelTest_getRLPEncodingForFeePayerSignatureTest: XCTestCase 
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
         
@@ -1205,7 +1205,7 @@ class FeeDelegatedCancelTest_getRLPEncodingForFeePayerSignatureTest: XCTestCase 
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
                 
@@ -1224,7 +1224,7 @@ class FeeDelegatedCancelTest_getRLPEncodingForFeePayerSignatureTest: XCTestCase 
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
                 
@@ -1243,7 +1243,7 @@ class FeeDelegatedCancelTest_getRLPEncodingForFeePayerSignatureTest: XCTestCase 
             .setChainId(chainID)
             .setFrom(from)
             .setFeePayer(feePayer)
-            .setSignatures(senderSignature)
+            .setSignatures(senderSignatureData)
             .setFeePayerSignatures(feePayerSignatureData)
             .build()
                 
