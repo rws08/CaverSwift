@@ -184,7 +184,7 @@ open class LegacyTransaction: AbstractTransaction {
         }
         
         if !Utils.isHex(input) {
-            throw CaverError.IllegalArgumentException("Invalid input : \(input)")
+            throw CaverError.IllegalArgumentException("Invalid input. : \(input)")
         }
         self.input = input
     }

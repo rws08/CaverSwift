@@ -168,7 +168,7 @@ class ChainDataAnchoringTest_createInstanceBuilder: XCTestCase {
                                 .setInput(input)
                                 .setSignatures(signatureData)
                                 .build()) {
-            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input : \(input)"))
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input. : \(input)"))
         }
     }
     
@@ -288,7 +288,7 @@ class ChainDataAnchoringTest_createInstance: XCTestCase {
             nil,
             input
         )) {
-            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input : \(input)"))
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input. : \(input)"))
         }
     }
     

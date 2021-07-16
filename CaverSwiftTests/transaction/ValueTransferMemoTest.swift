@@ -248,7 +248,7 @@ class ValueTransferMemoTest_createInstanceBuilder: XCTestCase {
                                 .setFrom(from)
                                 .setInput(input)
                                 .build()) {
-            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input : \(input)"))
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input. : \(input)"))
         }
     }
     
@@ -457,7 +457,7 @@ class ValueTransferMemoTest_createInstance: XCTestCase {
             value,
             input
         )) {
-            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input : \(input)"))
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input. : \(input)"))
         }
     }
     

@@ -224,7 +224,7 @@ class SmartContractDeployTest_createInstanceBuilder: XCTestCase {
                                 .setHumanReadable(humanReadable)
                                 .setCodeFormat(codeFormat)
                                 .build()) {
-            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input : \(input)"))
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input. : \(input)"))
         }
     }
     
@@ -482,7 +482,7 @@ class SmartContractDeployTest_createInstance: XCTestCase {
             humanReadable,
             codeFormat
         )) {
-            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input : \(input)"))
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid input. : \(input)"))
         }
     }
     

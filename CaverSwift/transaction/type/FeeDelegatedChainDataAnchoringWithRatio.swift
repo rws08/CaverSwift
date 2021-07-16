@@ -174,7 +174,7 @@ open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRati
             throw CaverError.IllegalArgumentException("input is missing.")
         }
         if !Utils.isHex(input) {
-            throw CaverError.IllegalArgumentException("Invalid input : \(input)")
+            throw CaverError.IllegalArgumentException("Invalid input. : \(input)")
         }
         
         self.input = input

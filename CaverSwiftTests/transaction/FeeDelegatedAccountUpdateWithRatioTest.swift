@@ -1008,15 +1008,16 @@ class FeeDelegatedAccountUpdateWithRatioTest_signAsFeePayer_OneKeyTest: XCTestCa
     }
     
     public func test_throwException_NotMatchAddress() throws {
-        XCTAssertThrowsError(try mTxObj!.sign(keyring!)) {
-            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("The from address of the transaction is different with the address of the keyring to use"))
+        let keyring = try KeyringFactory.createWithSingleKey(feePayerPrivateKey, PrivateKey.generate().privateKey)
+        XCTAssertThrowsError(try mTxObj!.signAsFeePayer(keyring, 0)) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("The feePayer address of the transaction is different with the address of the keyring to use."))
         }
     }
     
     public func test_throwException_InvalidIndex() throws {
-        let role = try AccountUpdateTest.generateRoleBaseKeyring([3,3,3], from)
+        let role = try AccountUpdateTest.generateRoleBaseKeyring([3,3,3], feePayer )
         
-        XCTAssertThrowsError(try mTxObj!.sign(role, 4)) {
+        XCTAssertThrowsError(try mTxObj!.signAsFeePayer(role, 4)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid index : index must be less than the length of the key."))
         }
     }
