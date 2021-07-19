@@ -19,11 +19,9 @@ open class PrivateKey {
         self.privateKey = privateKey.addHexPrefix
     }
     
-    public static func generate() -> PrivateKey {
-        return PrivateKey.generate("")
-    }
-    
-    public static func generate(_ entropy: String) -> PrivateKey {
+    public static func generate(_ entropy: String? = "") -> PrivateKey {
+        var entropy: String! = entropy
+        if entropy == nil { entropy = "" }
         let random = Utils.generateRandomBytes(32)
         var entropyArr: Data
         if entropy.isEmpty {

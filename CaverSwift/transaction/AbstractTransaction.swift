@@ -151,7 +151,7 @@ open class AbstractTransaction {
         }
         
         try fillTransaction()
-        let role = type.contains("AccountUpdate") ? AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue : AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue
+        let role = type == TransactionType.TxTypeAccountUpdate.string ? AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue : AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue
         
         let hash = try signer(self)
         guard let chainId = Int(hex: chainId),

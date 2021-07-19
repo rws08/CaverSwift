@@ -7,12 +7,8 @@
 
 import Foundation
 
-open class KeyringFactory {
-    public static func generate() -> SingleKeyring? {
-        return KeyringFactory.generate("")
-    }
-    
-    public static func generate(_ entropy: String) -> SingleKeyring? {
+open class KeyringFactory {    
+    public static func generate(_ entropy: String? = "") -> SingleKeyring? {
         let privateKey = PrivateKey.generate(entropy)
         let address = privateKey.getDerivedAddress()
         

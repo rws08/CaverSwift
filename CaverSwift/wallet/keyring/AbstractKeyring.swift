@@ -40,6 +40,20 @@ open class AbstractKeyring {
     
     func copy() -> AbstractKeyring { return AbstractKeyring("") }
     
+    func sign(_ txHash: String, _ chainId: String, _ role: Int) throws -> [SignatureData]? {
+        if !Utils.isNumber(chainId) {
+            throw CaverError.IllegalArgumentException("Invalid chainId : ")
+        }
+        return try sign(txHash, chainId.hexaToDecimal, role)
+    }
+    
+    func sign(_ txHash: String, _ chainId: String, _ role: Int, _ index: Int) throws -> SignatureData? {
+        if !Utils.isNumber(chainId) {
+            throw CaverError.IllegalArgumentException("Invalid chainId : ")
+        }
+        return try sign(txHash, chainId.hexaToDecimal, role, index)        
+    }
+    
     var isDecoupled: Bool {
         get{ true }
     }
