@@ -36,6 +36,9 @@
 		E363D3B5269D21E60077F6D2 /* FeeDelegatedValueTransferWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B4269D21E60077F6D2 /* FeeDelegatedValueTransferWithRatio.swift */; };
 		E363D3B7269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B6269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift */; };
 		E363D3BA269D37380077F6D2 /* Addresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B9269D37380077F6D2 /* Addresses.swift */; };
+		E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A026A56F3400FF2FD4 /* ContractTest.swift */; };
+		E36B78A326A5734C00FF2FD4 /* ContractDeployParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A226A5734C00FF2FD4 /* ContractDeployParams.swift */; };
+		E36B78A526A575CC00FF2FD4 /* EventFilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A426A575CC00FF2FD4 /* EventFilterOptions.swift */; };
 		E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */; };
 		E36D83782698020400D4D5B2 /* AbstractTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83772698020400D4D5B2 /* AbstractTransaction.swift */; };
 		E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */; };
@@ -294,6 +297,9 @@
 		E363D3B4269D21E60077F6D2 /* FeeDelegatedValueTransferWithRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedValueTransferWithRatio.swift; sourceTree = "<group>"; };
 		E363D3B6269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedValueTransferMemoWithRatio.swift; sourceTree = "<group>"; };
 		E363D3B9269D37380077F6D2 /* Addresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Addresses.swift; sourceTree = "<group>"; };
+		E36B78A026A56F3400FF2FD4 /* ContractTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractTest.swift; sourceTree = "<group>"; };
+		E36B78A226A5734C00FF2FD4 /* ContractDeployParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractDeployParams.swift; sourceTree = "<group>"; };
+		E36B78A426A575CC00FF2FD4 /* EventFilterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilterOptions.swift; sourceTree = "<group>"; };
 		E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainerTest.swift; sourceTree = "<group>"; };
 		E36D83772698020400D4D5B2 /* AbstractTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractTransaction.swift; sourceTree = "<group>"; };
 		E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringTest.swift; sourceTree = "<group>"; };
@@ -806,6 +812,7 @@
 				E3E02388264CB16500791E00 /* testFunction.json */,
 				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
+				E36B78A026A56F3400FF2FD4 /* ContractTest.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -1094,8 +1101,8 @@
 			isa = PBXGroup;
 			children = (
 				E3A21E81265F8705006C560D /* IWallet.swift */,
-				E3E0234A2648BAE600791E00 /* KeyringContainer.swift */,
 				E3E0234C2648BB5800791E00 /* keyring */,
+				E3E0234A2648BAE600791E00 /* KeyringContainer.swift */,
 			);
 			path = wallet;
 			sourceTree = "<group>";
@@ -1125,6 +1132,8 @@
 				E3E023542648C00D00791E00 /* ContractIOType.swift */,
 				E3E023662648EFE700791E00 /* ContractMethod.swift */,
 				E3E023562648C58E00791E00 /* SendOptions.swift */,
+				E36B78A226A5734C00FF2FD4 /* ContractDeployParams.swift */,
+				E36B78A426A575CC00FF2FD4 /* EventFilterOptions.swift */,
 			);
 			path = contract;
 			sourceTree = "<group>";
@@ -1416,6 +1425,7 @@
 				E3A21E1A265654A7006C560D /* ERC20Events.swift in Sources */,
 				E3A21E13265654A7006C560D /* ABIEncoder+Static.swift in Sources */,
 				E38FA1162689A6CB00F532D0 /* Signature.swift in Sources */,
+				E36B78A326A5734C00FF2FD4 /* ContractDeployParams.swift in Sources */,
 				E36EEA252696B01100C1B599 /* main.c in Sources */,
 				E36EEA402696B05900C1B599 /* crypto_scrypt-check.c in Sources */,
 				E390DAAE268C60FC00D05479 /* WeightedMultiSigOptions.swift in Sources */,
@@ -1450,6 +1460,7 @@
 				E38FA0CE26896B6800F532D0 /* Subtraction.swift in Sources */,
 				E3A21E37265654A7006C560D /* EthereumTransactionReceipt.swift in Sources */,
 				E38FA1202689A6CB00F532D0 /* EC283.swift in Sources */,
+				E36B78A526A575CC00FF2FD4 /* EventFilterOptions.swift in Sources */,
 				E38FA0BC26896B6800F532D0 /* Random.swift in Sources */,
 				E3A21E2E265654A7006C560D /* ERC721Responses.swift in Sources */,
 				E38FA1112689A6CB00F532D0 /* OFBCipher.swift in Sources */,
@@ -1568,6 +1579,7 @@
 				E394F0D626A1610100371199 /* FeeDelegatedSmartContractExecutionTest.swift in Sources */,
 				E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */,
 				E394F0D426A127F700371199 /* FeeDelegatedSmartContractDeployWithRatioTest.swift in Sources */,
+				E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */,
 				E394F0C2269FD79700371199 /* ValueTransferMemoTest.swift in Sources */,
 				E394F0CE26A10AF000371199 /* FeeDelegatedChainDataAnchoringTest.swift in Sources */,
 				E394F0CC26A104B900371199 /* FeeDelegatedCancelWithRatioTest.swift in Sources */,

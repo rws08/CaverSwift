@@ -9,7 +9,7 @@ import Foundation
 import BigInt
 import OSLog
 
-public class ContractMethod: Codable {
+open class ContractMethod: Codable {
     var caver: Caver? = nil
     var type: String
     var name: String

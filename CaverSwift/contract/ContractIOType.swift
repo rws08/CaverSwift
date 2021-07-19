@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ContractIOType: Codable {
+open class ContractIOType: Codable {
     var name: String
     var type: String
     var indexed: Bool

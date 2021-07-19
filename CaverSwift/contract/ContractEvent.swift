@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class ContractEvent: Codable {
+open class ContractEvent: Codable {
     var type: String
     var name: String
     var inputs: [ContractIOType] = []

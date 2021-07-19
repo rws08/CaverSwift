@@ -8,7 +8,7 @@
 import Foundation
 import BigInt
 
-public class SendOptions {
+open class SendOptions {
     var from: String?
     var gas: String?
     var value = "0x0"
