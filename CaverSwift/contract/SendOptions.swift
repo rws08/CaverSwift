@@ -48,7 +48,7 @@ open class SendOptions {
     }
     
     public func setGas(_ gas: BigInt) throws {
-        self.gas = String(bytes: gas.bytes)
+        self.gas = gas.hexa
     }
     
     public func setValue(_ value: String?) throws {
@@ -63,7 +63,7 @@ open class SendOptions {
     }
     
     public func setValue(_ value: BigInt) {
-        let gas = String(bytes: value.bytes)
+        let gas = value.hexa
         try? self.setValue(gas)
     }
 }

@@ -56,7 +56,10 @@ open class ContractMethod: Codable {
         self.contractAddress = contractAddress
     }
     
-    public func call(_ arguments: [Any]?, _ callObject: CallObject, completion: @escaping(([Type]?) -> Void)) throws {
+    public func call(_ arguments: [Any]?, _ callObject: CallObject? = CallObject.createCallObject()) throws -> [Type]?{
+        guard let callObject = callObject else {
+            throw CaverError.invalidValue
+        }
         var functionParams: [Any] = []
         if arguments != nil {
             functionParams.append(contentsOf: arguments!)
@@ -65,23 +68,52 @@ open class ContractMethod: Codable {
         let matchedMethod = try findMatchedInstance(functionParams)
         let encodedFunction = try ABI.encodeFunctionCall(matchedMethod, functionParams)
         
-        return try callFunction(matchedMethod, encodedFunction, callObject) {
-            completion($0)
+        return try callFunction(matchedMethod, encodedFunction, callObject)
+    }
+    
+    public func send(_ arguments: [Any]? = nil, _ options: SendOptions? = nil, _ processor: TransactionReceiptProcessor? = nil) throws -> TransactionReceiptData? {
+        var functionParams: [Any] = []
+        if arguments != nil {
+            functionParams.append(contentsOf: arguments!)
+        }
+        
+        let matchedMethod = try findMatchedInstance(functionParams)
+        let encodedFunction = try ABI.encodeFunctionCall(matchedMethod, functionParams)
+        
+        return try sendTransaction(matchedMethod, options, encodedFunction, processor ?? PollingTransactionReceiptProcessor(caver!, 1000, 15))
+    }
+    
+    public func encodeABI(_ arguments: [Any]?) throws -> String{
+        var functionParams: [Any] = []
+        if arguments != nil {
+            functionParams.append(contentsOf: arguments!)
+        }
+        
+        let matchedMethod = try findMatchedInstance(functionParams)
+        return try ABI.encodeFunctionCall(matchedMethod, functionParams)
+    }
+    
+    public func estimateGas(_ arguments: [Any], _ callObject: CallObject) throws -> String {
+        let encodedFunctionCall = try encodeABI(arguments)
+        return try estimateGas(encodedFunctionCall, callObject)
+    }
+    
+    public func checkTypeValid(_ types: [Any]) throws {
+        if types.count != inputs.count {
+            throw CaverError.IllegalArgumentException("Not matched passed parameter count.")
         }
     }
     
-    private func callFunction(_ method: ContractMethod, _ encodedInput: String, _ callObject: CallObject, completion: @escaping(([Type]?) -> Void)) throws {
-        if callObject.data != nil || callObject.to != nil {
-            WARNING(message: "'to' and 'data' field in CallObject will overwrite.")
+    private func checkSendOption(_ options: SendOptions?) throws {
+        guard let options = options else { return }
+        if options.from == nil || !Utils.isAddress((options.from)!) {
+            throw CaverError.IllegalArgumentException("Invalid 'from' parameter : \(options.from ?? "")")
         }
-        
-        callObject.data = encodedInput
-        callObject.to = method.contractAddress
-        let(error, response) = try caver!.rpc.klay.call(callObject)
-        if error == nil {
-            completion(ABI.decodeParameters(method, response!))
-        } else {
-//                let result = ABI.decodeParameters()
+        if options.gas == nil || !Utils.isNumber((options.gas)!) {
+            throw CaverError.IllegalArgumentException("Invalid 'gas' parameter : \(options.gas ?? "")")
+        }
+        if options.value.isEmpty || !Utils.isNumber(options.value) {
+            throw CaverError.IllegalArgumentException("Invalid 'value' parameter : \(options.value)")
         }
     }
     
@@ -106,5 +138,86 @@ open class ContractMethod: Codable {
         }
         
         return matchedMethod[0]
+    }
+    
+    private func sendTransaction(_ method: ContractMethod, _ options: SendOptions?, _ encodedInput: String, _ processor: TransactionReceiptProcessor) throws -> TransactionReceiptData? {
+        guard let klay = caver?.rpc.klay else {
+            throw CaverError.invalidValue
+        }
+        let sendOptions = makeSendOption(options)
+        try checkSendOption(sendOptions)
+        
+        let smartContractExecution = try SmartContractExecution.Builder()
+            .setKlaytnCall(klay)
+            .setFrom(sendOptions.from!)
+            .setTo(method.contractAddress)
+            .setInput(encodedInput)
+            .setGas(sendOptions.gas!)
+            .setValue(sendOptions.value)
+            .build()
+        
+        _ = try wallet?.sign(sendOptions.from!, smartContractExecution)
+        let (error, response) = klay.sendRawTransaction(smartContractExecution)
+        if let resDataString = response {
+            let receipt = try processor.waitForTransactionReceipt(resDataString.val)
+            return receipt
+        } else if let error = error {
+            throw CaverError.IOException(error.localizedDescription)
+        }
+        return nil
+    }
+    
+    private func callFunction(_ method: ContractMethod, _ encodedInput: String, _ callObject: CallObject) throws -> [Type]? {
+        var callObject = callObject
+        if callObject.data != nil || callObject.to != nil {
+            WARNING(message: "'to' and 'data' field in CallObject will overwrite.")
+        }
+        
+        callObject.data = encodedInput
+        callObject.to = method.contractAddress
+        let(error, response) = try caver!.rpc.klay.call(callObject)
+        if error == nil {
+            return ABI.decodeParameters(method, response!)
+        } else {
+            throw CaverError.IOException(error.debugDescription)
+        }
+    }
+    
+    private func estimateGas(_ encodedFunctionCall: String, _ callObject: CallObject) throws -> String {
+        var callObject = callObject
+        if callObject.data != nil || callObject.to != nil {
+            WARNING(message: "'to' and 'data' field in CallObject will overwrite.")
+        }
+        
+        callObject.data = encodedFunctionCall
+        callObject.to = contractAddress
+        let(error, response) = try caver!.rpc.klay.estimateGas(callObject)
+        if error == nil {
+            return (response?.val.hexa)!
+        } else {
+            throw CaverError.IOException(error.debugDescription)
+        }
+    }
+    
+    public func makeSendOption(_ sendOption: SendOptions?) -> SendOptions {
+        let defaultSendOption = defaultSendOptions
+        var from = defaultSendOption.from
+        var gas = defaultSendOption.gas
+        var value = defaultSendOption.value
+        
+        guard let sendOption = sendOption else {
+            return SendOptions(from, gas, value)
+        }
+        
+        if sendOption.from != nil {
+            from = sendOption.from
+        }
+        if sendOption.gas != nil {
+            gas = sendOption.gas
+        }
+        if sendOption.value != "0x0" {
+            value = sendOption.value
+        }
+        return SendOptions(from, gas, value)
     }
 }

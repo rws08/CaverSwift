@@ -211,9 +211,9 @@ public class EthereumClient: EthereumClientProtocol {
         
         let params = CallParams(from: transaction.from?.value,
                                 to: transaction.to.value,
-                                gas: transaction.gasLimit?.hexString,
-                                gasPrice: transaction.gasPrice?.hexString,
-                                value: value?.hexString,
+                                gas: transaction.gasLimit?.hexa,
+                                gasPrice: transaction.gasPrice?.hexa,
+                                value: value?.hexa,
                                 data: transaction.data?.hexString)
         EthereumRPC.execute(session: session, url: url, method: "eth_estimateGas", params: params, receive: String.self) { (error, response) in
             if let gasHex = response as? String, let gas = BigUInt(hex: gasHex) {

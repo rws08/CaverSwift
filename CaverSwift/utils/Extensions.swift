@@ -85,6 +85,7 @@ extension BinaryInteger {
     public var binary: String { .init(self, radix: 2) }
     public var hexa: String { .init(self, radix: 16).addHexPrefix }
     public var decimal: String { .init(self, radix: 10) }
+    public var int: Int { .init(self) }
     public var double: BDouble { BDouble(self.decimal) ?? BDouble.zero }
 }
 
@@ -106,9 +107,9 @@ public extension BigUInt {
         return Array(bytes[firstIndex...lastIndex])
     }
     
-    var hexString: String {
-        return String(bytes: self.bytes)
-    }
+//    var hexString: String {
+//        self.hexa
+//    }
 }
 
 public extension BigInt {

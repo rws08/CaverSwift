@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class AbstractTransaction {    
+open class AbstractTransaction {
     private(set) public var klaytnCall: Klay?
     private(set) public var type = ""
     private(set) public var from = ""

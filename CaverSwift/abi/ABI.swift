@@ -36,6 +36,25 @@ public class ABI {
         return String(signature[..<signature.index(signature.startIndex, offsetBy: 10)])
     }
     
+    static func encodeContractDeploy(_ constructor: ContractMethod?, _ byteCode: String, _ constructorParams: [Any]) throws -> String {
+        guard let constructor = constructor else {
+            return byteCode
+        }
+        
+        try constructor.checkTypeValid(constructorParams)
+        let encodedParam = try ABI.encodeParameters(constructor, constructorParams)
+        
+        return byteCode + encodedParam
+    }
+    
+    static func encodeParameters(_ method: ContractMethod, _ values: [Any]) throws -> String {
+        let solTypeList = method.inputs.map {
+            $0.getTypeAsString()
+        }
+        
+        return try encodeParameters(solTypeList, values)
+    }
+    
     static func encodeParameters(_ solTypeList: [String], _ params: [Any]) throws -> String {
         var typeList: [Type] = []
         for (idx, solidityType) in solTypeList.enumerated() {
@@ -133,5 +152,25 @@ public class ABI {
         }
         try FunctionReturnDecoder.decode(encoded, &params)
         return params
+    }
+    
+    static func decodeLog(_ inputs: [ContractIOType], _ data: String, _ topics:[String]) throws -> EventValues {
+        var indexedList: [Type] = []
+        var nonIndexedList: [Type] = []
+        
+        try inputs.forEach {
+            if $0.indexed {
+                indexedList.append(try TypeDecoder.makeTypeReference($0.getTypeAsString()))
+            } else {
+                nonIndexedList.append(try TypeDecoder.makeTypeReference($0.getTypeAsString()))
+            }
+        }
+        
+        try FunctionReturnDecoder.decode(data, &nonIndexedList)
+        try indexedList.enumerated().forEach {
+            let idx = $0.offset
+            try FunctionReturnDecoder.decodeIndexedValue(topics[idx + 1], &indexedList[idx])
+        }
+        return EventValues(indexedList, nonIndexedList)
     }
 }

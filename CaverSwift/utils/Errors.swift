@@ -28,4 +28,5 @@ public enum CaverError: Error, Equatable {
     case NullPointerException(String)
     case SignatureException(String)
     case CipherException(String)
+    case TransactionException(String, String)
 }

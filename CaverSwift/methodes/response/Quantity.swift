@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import BigInt
 
 public class Quantity: Decodable {
     public var val = BigInt.zero

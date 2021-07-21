@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class SignatureData: Equatable {
+open class SignatureData: Equatable, Decodable {    
     var v = ""
     var r = ""
     var s = ""
@@ -22,6 +22,13 @@ open class SignatureData: Equatable {
         self.v = Data(v).hexString
         self.r = Data(r).hexString
         self.s = Data(s).hexString
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.v = (try? container.decode(String.self)) ?? ""
+        self.r = (try? container.decode(String.self)) ?? ""
+        self.s = (try? container.decode(String.self)) ?? ""
     }
     
     public static func getEmptySignature() -> SignatureData {

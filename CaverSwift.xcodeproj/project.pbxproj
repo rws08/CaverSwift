@@ -57,6 +57,16 @@
 		E36EEA472696B05900C1B599 /* crypto_scrypt-hexconvert.c in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA352696B05900C1B599 /* crypto_scrypt-hexconvert.c */; };
 		E36EEA482696B05900C1B599 /* crypto-mcf.c in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA362696B05900C1B599 /* crypto-mcf.c */; };
 		E36EEA492696B05900C1B599 /* sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA372696B05900C1B599 /* sha256.c */; };
+		E37E748B26A65F500019B06D /* TransactionReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E748A26A65F500019B06D /* TransactionReceipt.swift */; };
+		E37E748D26A6631A0019B06D /* KlayLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E748C26A6631A0019B06D /* KlayLogs.swift */; };
+		E37E748F26A671800019B06D /* TransactionReceiptProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E748E26A671800019B06D /* TransactionReceiptProcessor.swift */; };
+		E37E749126A673A20019B06D /* NoOpTransactionReceiptProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749026A673A20019B06D /* NoOpTransactionReceiptProcessor.swift */; };
+		E37E749326A674740019B06D /* PollingTransactionReceiptProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749226A674740019B06D /* PollingTransactionReceiptProcessor.swift */; };
+		E37E749926A6A0E50019B06D /* ContractTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E749826A6A01E0019B06D /* ContractTestData.json */; };
+		E37E749B26A7C89E0019B06D /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749A26A7C89E0019B06D /* Filter.swift */; };
+		E37E749D26A7EB0B0019B06D /* KlayFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749C26A7EB0B0019B06D /* KlayFilter.swift */; };
+		E37E749F26A7EC310019B06D /* KlayLogFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749E26A7EC310019B06D /* KlayLogFilter.swift */; };
+		E37E74A126A7F96B0019B06D /* EventValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A026A7F96B0019B06D /* EventValues.swift */; };
 		E38FA0BC26896B6800F532D0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A626896B6800F532D0 /* Random.swift */; };
 		E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A726896B6800F532D0 /* GCD.swift */; };
 		E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A826896B6800F532D0 /* Hashable.swift */; };
@@ -325,6 +335,16 @@
 		E36EEA352696B05900C1B599 /* crypto_scrypt-hexconvert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto_scrypt-hexconvert.c"; sourceTree = "<group>"; };
 		E36EEA362696B05900C1B599 /* crypto-mcf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto-mcf.c"; sourceTree = "<group>"; };
 		E36EEA372696B05900C1B599 /* sha256.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha256.c; sourceTree = "<group>"; };
+		E37E748A26A65F500019B06D /* TransactionReceipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionReceipt.swift; sourceTree = "<group>"; };
+		E37E748C26A6631A0019B06D /* KlayLogs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlayLogs.swift; sourceTree = "<group>"; };
+		E37E748E26A671800019B06D /* TransactionReceiptProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionReceiptProcessor.swift; sourceTree = "<group>"; };
+		E37E749026A673A20019B06D /* NoOpTransactionReceiptProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOpTransactionReceiptProcessor.swift; sourceTree = "<group>"; };
+		E37E749226A674740019B06D /* PollingTransactionReceiptProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingTransactionReceiptProcessor.swift; sourceTree = "<group>"; };
+		E37E749826A6A01E0019B06D /* ContractTestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ContractTestData.json; sourceTree = "<group>"; };
+		E37E749A26A7C89E0019B06D /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		E37E749C26A7EB0B0019B06D /* KlayFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlayFilter.swift; sourceTree = "<group>"; };
+		E37E749E26A7EC310019B06D /* KlayLogFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlayLogFilter.swift; sourceTree = "<group>"; };
+		E37E74A026A7F96B0019B06D /* EventValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventValues.swift; sourceTree = "<group>"; };
 		E38FA0A626896B6800F532D0 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E38FA0A726896B6800F532D0 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		E38FA0A826896B6800F532D0 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
@@ -596,6 +616,9 @@
 		E363D3B8269D24260077F6D2 /* response */ = {
 			isa = PBXGroup;
 			children = (
+				E37E748E26A671800019B06D /* TransactionReceiptProcessor.swift */,
+				E37E749026A673A20019B06D /* NoOpTransactionReceiptProcessor.swift */,
+				E37E749226A674740019B06D /* PollingTransactionReceiptProcessor.swift */,
 			);
 			path = response;
 			sourceTree = "<group>";
@@ -813,6 +836,7 @@
 				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
 				E36B78A026A56F3400FF2FD4 /* ContractTest.swift */,
+				E37E749826A6A01E0019B06D /* ContractTestData.json */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -835,6 +859,7 @@
 				E3A21DEF265654A7006C560D /* ERC721 */,
 				E3A21E05265654A7006C560D /* Multicall */,
 				E3A21DDD265654A7006C560D /* Utils */,
+				E37E74A026A7F96B0019B06D /* EventValues.swift */,
 			);
 			path = abi;
 			sourceTree = "<group>";
@@ -1161,6 +1186,9 @@
 			isa = PBXGroup;
 			children = (
 				E3E023702648F5E900791E00 /* CallObject.swift */,
+				E37E749A26A7C89E0019B06D /* Filter.swift */,
+				E37E749C26A7EB0B0019B06D /* KlayFilter.swift */,
+				E37E749E26A7EC310019B06D /* KlayLogFilter.swift */,
 			);
 			path = request;
 			sourceTree = "<group>";
@@ -1170,6 +1198,8 @@
 			children = (
 				E3E0237F264A26F600791E00 /* Quantity.swift */,
 				E363D3B9269D37380077F6D2 /* Addresses.swift */,
+				E37E748A26A65F500019B06D /* TransactionReceipt.swift */,
+				E37E748C26A6631A0019B06D /* KlayLogs.swift */,
 			);
 			path = response;
 			sourceTree = "<group>";
@@ -1292,6 +1322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3E02389264CB16500791E00 /* testFunction.json in Resources */,
+				E37E749926A6A0E50019B06D /* ContractTestData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1368,6 +1399,7 @@
 				E3A21E0D265654A7006C560D /* ABIEncoder.swift in Sources */,
 				E38FA0CB26896B6800F532D0 /* Exponentiation.swift in Sources */,
 				E3A21E2B265654A7006C560D /* ABI.swift in Sources */,
+				E37E748D26A6631A0019B06D /* KlayLogs.swift in Sources */,
 				E38FA1242689A6CB00F532D0 /* EC256.swift in Sources */,
 				E38FA1212689A6CB00F532D0 /* EC163.swift in Sources */,
 				E38FA1262689A6CB00F532D0 /* DomainP.swift in Sources */,
@@ -1416,6 +1448,7 @@
 				E3A21E4F265654B5006C560D /* aes.c in Sources */,
 				E38FA1312689A99D00F532D0 /* Extensions.swift in Sources */,
 				E363D3AF269D1A8E0077F6D2 /* FeeDelegatedSmartContractExecutionWithRatio.swift in Sources */,
+				E37E749326A674740019B06D /* PollingTransactionReceiptProcessor.swift in Sources */,
 				E363D3A1269D12B80077F6D2 /* FeeDelegatedCancel.swift in Sources */,
 				E38FA0C926896B6800F532D0 /* BigUInt.swift in Sources */,
 				E38FA0CD26896B6800F532D0 /* Shifts.swift in Sources */,
@@ -1429,6 +1462,7 @@
 				E36EEA252696B01100C1B599 /* main.c in Sources */,
 				E36EEA402696B05900C1B599 /* crypto_scrypt-check.c in Sources */,
 				E390DAAE268C60FC00D05479 /* WeightedMultiSigOptions.swift in Sources */,
+				E37E748F26A671800019B06D /* TransactionReceiptProcessor.swift in Sources */,
 				E3A21E4E265654B5006C560D /* keccak-tiny.c in Sources */,
 				E38FA11C2689A6CB00F532D0 /* EC233.swift in Sources */,
 				E3B8E6AD2685782B0069A223 /* KeyringFactory.swift in Sources */,
@@ -1443,14 +1477,17 @@
 				E3E023672648EFE700791E00 /* ContractMethod.swift in Sources */,
 				E3E023572648C58E00791E00 /* SendOptions.swift in Sources */,
 				E38FA1292689A6CB00F532D0 /* BP512.swift in Sources */,
+				E37E749D26A7EB0B0019B06D /* KlayFilter.swift in Sources */,
 				E3A21E1F265654A7006C560D /* Rlp.swift in Sources */,
 				E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */,
 				E38FA0BF26896B6800F532D0 /* Strideable.swift in Sources */,
 				E3A21E31265654A7006C560D /* ERC721Functions.swift in Sources */,
 				E38FA10E2689A6CB00F532D0 /* CTRCipher.swift in Sources */,
+				E37E749F26A7EC310019B06D /* KlayLogFilter.swift in Sources */,
 				E38FA10B2689A6CB00F532D0 /* Cipher.swift in Sources */,
 				E3DBBD5B2698452B00BAFE27 /* TransactionDecoder.swift in Sources */,
 				E363D395269C36830077F6D2 /* AbstractFeeDelegatedWithRatioTransaction.swift in Sources */,
+				E37E749B26A7C89E0019B06D /* Filter.swift in Sources */,
 				E36EEA482696B05900C1B599 /* crypto-mcf.c in Sources */,
 				E36EEA422696B05900C1B599 /* b64.c in Sources */,
 				E363D3A5269D15330077F6D2 /* FeeDelegatedChainDataAnchoring.swift in Sources */,
@@ -1493,6 +1530,7 @@
 				E3B8E6B12685903F0069A223 /* SignatureData.swift in Sources */,
 				E38FA12D2689A6CB00F532D0 /* BP384.swift in Sources */,
 				E3A21E10265654A7006C560D /* ABIFunction.swift in Sources */,
+				E37E749126A673A20019B06D /* NoOpTransactionReceiptProcessor.swift in Sources */,
 				E390DAB0268C68AF00D05479 /* AccountKeyWeightedMultiSig.swift in Sources */,
 				E363D391269C2AA30077F6D2 /* FeeDelegatedAccountUpdate.swift in Sources */,
 				E3DBBD5526982B9100BAFE27 /* TransactionType.swift in Sources */,
@@ -1512,6 +1550,7 @@
 				E3A21E1E265654A7006C560D /* Type.swift in Sources */,
 				E3A21E20265654A7006C560D /* KeystoreUtil.swift in Sources */,
 				E3A5C8BC2682AF29002A0A2D /* AccountKeyFail.swift in Sources */,
+				E37E748B26A65F500019B06D /* TransactionReceipt.swift in Sources */,
 				E3A21E2D265654A7006C560D /* ERC165.swift in Sources */,
 				E38FA10F2689A6CB00F532D0 /* CFBCipher.swift in Sources */,
 				E3E023522648BE4200791E00 /* Contract.swift in Sources */,
@@ -1544,6 +1583,7 @@
 				E38FA11B2689A6CB00F532D0 /* Domain2.swift in Sources */,
 				E363D3B1269D1B670077F6D2 /* FeeDelegatedValueTransfer.swift in Sources */,
 				E3A21E3B265654A7006C560D /* EthereumLog.swift in Sources */,
+				E37E74A126A7F96B0019B06D /* EventValues.swift in Sources */,
 				E3A5C8C42683079E002A0A2D /* PrivateKey.swift in Sources */,
 				E36EEA102693DCEE00C1B599 /* MultipleKeyring.swift in Sources */,
 				E38FA0C026896B6800F532D0 /* Addition.swift in Sources */,

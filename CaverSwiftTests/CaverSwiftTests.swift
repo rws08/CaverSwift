@@ -20,7 +20,7 @@ class CaverSwiftTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testExample() throws {        
         let expectation = XCTestExpectation(description: "Some description")
 
 //        let caver = Caver("https://kaikas.cypress.klaytn.net:8651")

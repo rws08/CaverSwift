@@ -10,12 +10,12 @@ import GenericJSON
 
 open class Contract {
     var caver: Caver
-    var abi: String
-    var contractAddress: String? = nil
-    var methods: [String:ContractMethod] = [:]
-    var events: [String:ContractEvent] = [:]
-    var constructor: ContractMethod?
-    var defaultSendOptions: SendOptions?
+    private(set) public var abi: String
+    private(set) public var contractAddress: String? = nil
+    private(set) public var methods: [String:ContractMethod] = [:]
+    private(set) public var events: [String:ContractEvent] = [:]
+    private(set) public var constructor: ContractMethod?
+    private(set) public var defaultSendOptions: SendOptions?
     var wallet: IWallet?
     
     public init(_ caver: Caver, _ abi: String, _ contractAddress: String? = nil) throws {
@@ -28,6 +28,44 @@ open class Contract {
         setContractAddress(contractAddress)
         setDefaultSendOptions(SendOptions())
         setWallet(caver.wallet)
+    }
+    
+    public func deploy(_ sendOptions: SendOptions, _ contractBinaryData: String, _ constructorParams: Any...) throws -> Contract {
+        let deployParams = try ContractDeployParams(contractBinaryData, [constructorParams])
+        return try deploy(deployParams, sendOptions)
+    }
+    
+    public func deploy(_ deployParam: ContractDeployParams, _ sendOptions: SendOptions) throws -> Contract {
+        return try deploy(deployParam, sendOptions, PollingTransactionReceiptProcessor(caver, 1000, 15))
+    }
+    
+    public func deploy(_ deployParam: ContractDeployParams, _ sendOptions: SendOptions, _ processor: TransactionReceiptProcessor) throws -> Contract {
+        let input = try ABI.encodeContractDeploy(constructor, deployParam.bytecode, deployParam.deployParams)
+        guard let from = sendOptions.from,
+              let gas = sendOptions.gas
+        else {
+            throw CaverError.invalidValue
+        }
+        let smartContractDeploy = try SmartContractDeploy.Builder()
+            .setKlaytnCall(caver.rpc.klay)
+            .setFrom(from)
+            .setInput(input)
+            .setCodeFormat(CodeFormat.EVM)
+            .setHumanReadable(false)
+            .setGas(gas)
+            .build()
+        
+        _ = try wallet?.sign(from, smartContractDeploy)
+        let (error, response) = caver.rpc.klay.sendRawTransaction(try smartContractDeploy.getRawTransaction())
+        if let resDataString = response {
+            let receipt = try processor.waitForTransactionReceipt(resDataString.val)
+            let contractAddress = receipt?.contractAddress
+            setContractAddress(contractAddress)
+            return self
+        } else if let error = error {
+            throw CaverError.IOException(error.localizedDescription)
+        }
+        throw CaverError.unexpectedReturnValue
     }
     
     func setCaver(_ caver: Caver) {
@@ -63,27 +101,46 @@ open class Contract {
         }
     }
     
+    func getWallet() -> IWallet? {
+        return self.wallet
+    }
+    
     public func getMethod(_ methodName: String) throws -> ContractMethod {
         guard let method = methods[methodName] else {
-            throw CaverError.NoSuchMethodException("\(methodName) method is not exist.")
+            throw CaverError.NullPointerException("\(methodName) method is not exist.")
         }
         return method
     }
     
     public func getEvent(_ eventName: String) throws -> ContractEvent {
         guard let event = events[eventName] else {
-            throw CaverError.NoSuchMethodException("\(eventName) method is not exist.")
+            throw CaverError.NullPointerException("\(eventName) event is not exist.")
         }
         return event
     }
     
-    public func call(_ methodName: String, _ methodArguments:[Any], completion: @escaping(([Type]?) -> Void)) {
-        call(CallObject.init(), methodName, methodArguments, completion: completion)
+    public func getPastEvent(_ eventName: String, _ filterOption: KlayLogFilter) throws -> KlayLogs {
+        guard let event = events[eventName] else {
+            throw CaverError.NullPointerException("\(eventName) event is not exist.")
+        }
+        _ = filterOption.addSingleTopic(try ABI.encodeEventSignature(event))
+        
+        let (error, response) = caver.rpc.klay.getLogs(filterOption)
+        if let resDataString = response {
+            return resDataString
+        } else if let error = error {
+            throw CaverError.IOException(error.localizedDescription)
+        }
+        throw CaverError.unexpectedReturnValue
     }
     
-    public func call(_ callObject: CallObject, _ methodName: String, _ methodArguments:[Any], completion: @escaping(([Type]?) -> Void)) {
-        guard let contractMethod = try? getMethod(methodName) else { return }
-        try? contractMethod.call(methodArguments, callObject, completion: completion)
+    public func call(_ methodName: String, _ methodArguments:[Any]) -> [Type]? {
+        return call(CallObject.init(), methodName, methodArguments)
+    }
+    
+    public func call(_ callObject: CallObject, _ methodName: String, _ methodArguments:[Any]) -> [Type]?{
+        guard let contractMethod = try? getMethod(methodName) else { return nil }
+        return try? contractMethod.call(methodArguments, callObject)
     }
     
     private func initAbi() throws {

@@ -9,6 +9,16 @@ import Foundation
 import BigInt
 
 public class FunctionReturnDecoder {
+    static func decodeIndexedValue(_ rawInput: String, _ outputParameters: inout Type) throws {
+        if rawInput.cleanHexPrefix.isEmpty {
+            return
+        }
+        
+        guard let bytes = rawInput.bytesFromHex else { throw ABIError.invalidValue }
+        let decoded = try FunctionReturnDecoder.decode(bytes, forType: outputParameters)
+        outputParameters.value = decoded
+    }
+    
     static func decode(_ rawInput: String, _ outputParameters: inout [Type]) throws {
         if rawInput.cleanHexPrefix.isEmpty {
             return
@@ -43,7 +53,7 @@ public class FunctionReturnDecoder {
             guard let result = try decode(data, forType: Type(type.value, .FixedUInt(typeABI.size)), offset: offset) as? BigUInt else {
                 throw ABIError.invalidValue
             }
-            return Address(result.hexString)
+            return Address(result.hexa)
         case .DynamicString:
             guard let result = try decode(data, forType: Type(type.value, .DynamicBytes), offset: offset) as? Data else {
                 throw ABIError.invalidValue

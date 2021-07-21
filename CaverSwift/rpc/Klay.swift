@@ -7,6 +7,7 @@
 
 import Foundation
 import BigInt
+import GenericJSON
 
 public class Klay {
     var rpc: RPC
@@ -26,8 +27,8 @@ public class Klay {
     }
     
     public func accountCreated(_ address: String, _ blockTag: DefaultBlockParameterName = .Latest) -> (CaverError?, Bool?) {
-        let(error, response) = rpc.execute(url: url, method: "klay_accountCreated",
-                    params: [address, blockTag.stringValue], receive: Bool.self)
+        let(error, response) = rpc.request(url: url, method: "klay_accountCreated",
+                    params: [address, blockTag.stringValue], receive: Bool.self)!.send()
         if let resDataString = response as? Bool {
             return (nil, resDataString)
         } else if let error = error {
@@ -38,8 +39,8 @@ public class Klay {
     }
     
     public func getAccounts() -> (CaverError?, Addresses?) {
-        let(error, response) = rpc.execute(url: url, method: "klay_accounts",
-                    params: Array<String>(), receive: Addresses.self)
+        let(error, response) = rpc.request(url: url, method: "klay_accounts",
+                    params: Array<String>(), receive: Addresses.self)!.send()
         if let resDataString = response as? Addresses {
             return (nil, resDataString)
         } else if let error = error {
@@ -58,8 +59,8 @@ public class Klay {
     }
     
     public func getTransactionCount(_ address: String, _ blockTag: DefaultBlockParameterName = .Latest) -> (CaverError?, Quantity?) {
-        let(error, response) = rpc.execute(url: url, method: "klay_getTransactionCount",
-                    params: [address, blockTag.stringValue], receive: Quantity.self)
+        let(error, response) = rpc.request(url: url, method: "klay_getTransactionCount",
+                    params: [address, blockTag.stringValue], receive: Quantity.self)!.send()
         if let resDataString = response as? Quantity {
             return (nil, resDataString)
         } else if let error = error {
@@ -70,8 +71,8 @@ public class Klay {
     }
     
     public func getChainID() -> (CaverError?, Quantity?) {
-        let(error, response) = rpc.execute(url: url, method: "klay_chainID",
-                    params: Array<String>(), receive: Quantity.self)
+        let(error, response) = rpc.request(url: url, method: "klay_chainID",
+                    params: Array<String>(), receive: Quantity.self)!.send()
         if let resDataString = response as? Quantity {
             return (nil, resDataString)
         } else if let error = error {
@@ -82,8 +83,8 @@ public class Klay {
     }
     
     public func getGasPrice() -> (CaverError?, Quantity?) {
-        let(error, response) = rpc.execute(url: url, method: "klay_gasPrice",
-                    params: Array<String>(), receive: Quantity.self)
+        let(error, response) = rpc.request(url: url, method: "klay_gasPrice",
+                    params: Array<String>(), receive: Quantity.self)!.send()
         if let resDataString = response as? Quantity {
             return (nil, resDataString)
         } else if let error = error {
@@ -99,7 +100,7 @@ public class Klay {
             }
         }
         let params = CallParams()
-        let(error, response) = rpc.execute(url: url, method: "klay_blockNumber", params: params, receive: String.self)
+        let(error, response) = rpc.request(url: url, method: "klay_blockNumber", params: params, receive: String.self)!.send()
         if let resDataString = response as? String {
             return (nil, resDataString)
         } else if let error = error {
@@ -110,11 +111,8 @@ public class Klay {
     }
     
     public func getBalance(_ address: String) -> (CaverError?, Quantity?) {
-        let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
-        
-        let(error, response) = rpc.execute(url: url, method: "klay_getBalance",
-                            params: [address, DefaultBlockParameterName.Latest.stringValue], receive: Quantity.self)
+        let(error, response) = rpc.request(url: url, method: "klay_getBalance",
+                            params: [address, DefaultBlockParameterName.Latest.stringValue], receive: Quantity.self)!.send()
         if let resDataString = response as? Quantity {
             return (nil, resDataString)
         } else if let error = error {
@@ -125,13 +123,9 @@ public class Klay {
     }
     
     func call(_ callObject: CallObject, _ blockNumber: DefaultBlockParameterName = .Latest) throws -> (CaverError?, String?){
-        guard let to = callObject.to,
-              let data = callObject.data else {
-            throw CaverError.ArgumentException("'to' and 'data' field in CallObject will overwrite.")
-        }
-        
-        let params = CallParams(from: callObject.from, to: to, data: data, block: blockNumber.stringValue)
-        let(error, response) = rpc.execute(url: url, method: "klay_call", params: params, receive: String.self)
+        let params = CallParams(callObject, blockNumber.stringValue)
+//        let te = rpc.request(url: url, method: "klay_call", params: [callObject, blockNumber.stringValue], receive: String.self)
+        let(error, response) = rpc.request(url: url, method: "klay_call", params: params, receive: String.self)!.send()
         if let resDataString = response as? String {
             return (nil, resDataString)
         } else if let error = error {
@@ -141,27 +135,177 @@ public class Klay {
         }
     }
     
+    func estimateGas(_ callObject: CallObject) throws -> (CaverError?, Quantity?) {
+        let params = CallParams(callObject)
+        let(error, response) = rpc.request(url: url, method: "klay_estimateGas", params: params, receive: Quantity.self)!.send()
+        if let resDataString = response as? Quantity {
+            return (nil, resDataString)
+        } else if let error = error {
+            return (CaverError.IOException(error.localizedDescription), nil)
+        } else {
+            return (CaverError.unexpectedReturnValue, nil)
+        }
+    }
+    
+    public func sendRawTransaction(_ signedTransactionData: String) -> (CaverError?, Bytes32?) {
+        let (error, response) = rpc.request(url: url, method: "klay_sendRawTransaction",
+                    params: [signedTransactionData], receive: Bytes32.self)!.send()
+        if let resDataString = response as? Bytes32 {
+            return (nil, resDataString)
+        } else if let error = error {
+            return (CaverError.IOException(error.localizedDescription), nil)
+        } else {
+            return (CaverError.unexpectedReturnValue, nil)
+        }
+    }
+    
+    public func sendRawTransaction(_ transaction: AbstractTransaction) -> (CaverError?, Bytes32?) {
+        let rawTransaction = try? transaction.getRLPEncoding()
+        let (error, response) = rpc.request(url: url, method: "klay_sendRawTransaction",
+                                            params: [rawTransaction], receive: Bytes32.self)!.send()
+        if let resDataString = response as? Bytes32 {
+            return (nil, resDataString)
+        } else if let error = error {
+            return (CaverError.IOException(error.localizedDescription), nil)
+        } else {
+            return (CaverError.unexpectedReturnValue, nil)
+        }
+    }
+    
+    public func getTransactionReceipt(_ transactionHash: String) -> (CaverError?, TransactionReceiptData?) {
+        let (error, response) = rpc.request(url: url, method: "klay_getTransactionReceipt",
+                    params: [transactionHash], receive: TransactionReceiptData.self)!.send()
+        if let resDataString = response as? TransactionReceiptData {
+            return (nil, resDataString)
+        } else if let error = error {
+            return (CaverError.IOException(error.localizedDescription), nil)
+        } else {
+            return (CaverError.unexpectedReturnValue, nil)
+        }
+    }
+    
+    public func getLogs(_ filterOption: KlayLogFilter) -> (CaverError?, KlayLogs?) {
+        let params = KlayLogFilterParams(filterOption)
+        let (error, response) = rpc.request(url: url, method: "klay_getLogs",
+                    params: params, receive: KlayLogs.self)!.send()
+        
+        if let resDataString = response as? KlayLogs {
+            return (nil, resDataString)
+        } else if let error = error {
+            return (CaverError.IOException(error.localizedDescription), nil)
+        } else {
+            return (CaverError.unexpectedReturnValue, nil)
+        }
+    }    
+    
+    public struct Bytes32: Decodable {
+        var val: String
+        
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            self.val = (try? container.decode(String.self)) ?? ""
+        }
+    }
+    
+    public struct KlayLogFilterParams: Encodable {
+        let fromBlock: String?
+        let toBlock: String?
+        let address: [String]?
+        let topics: [String?]?
+        let blockHash: String?
+        
+        init(_ filter: KlayLogFilter) {
+            self.fromBlock = filter.fromBlock.stringValue
+            self.toBlock = filter.toBlock.stringValue
+            self.address = filter.address
+            self.topics = filter.topics.map {
+                $0.getValue()
+            }
+            self.blockHash = filter.blockHash
+        }
+        
+        enum CodingKeys: String, CodingKey {
+            case fromBlock
+            case toBlock
+            case address
+            case topics
+            case blockHash
+        }
+        
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.unkeyedContainer()
+            var nested = container.nestedContainer(keyedBy: CodingKeys.self)
+            if let fromBlock = fromBlock {
+                try nested.encode(fromBlock, forKey: .fromBlock)
+            }
+            if let toBlock = toBlock {
+                try nested.encode(toBlock, forKey: .toBlock)
+            }
+            if let address = address {
+                try nested.encode(address, forKey: .address)
+            }
+            if let topics = topics {
+                try nested.encode(topics, forKey: .topics)
+            }
+            if let blockHash = blockHash {
+                try nested.encode(blockHash, forKey: .blockHash)
+            }
+        }
+    }
+    
     struct CallParams: Encodable {
         let from: String?
-        let to: String
-        let data: String
-        let block: String
+        let to: String?
+        let gasLimit: BigInt?
+        let gasPrice: BigInt?
+        let value: BigInt?
+        let data: String?
+        let block: String?
         
-        enum TransactionCodingKeys: String, CodingKey {
+        init(_ callObject: CallObject, _ block: String? = nil) {
+            self.from = callObject.from
+            self.to = callObject.to
+            self.gasLimit = callObject.gasLimit
+            self.gasPrice = callObject.gasPrice
+            self.value = callObject.value
+            self.data = callObject.data
+            self.block = block
+        }
+        
+        enum CodingKeys: String, CodingKey {
             case from
             case to
+            case gasLimit
+            case gasPrice
+            case value
             case data
+            case block
         }
         
         func encode(to encoder: Encoder) throws {
             var container = encoder.unkeyedContainer()
-            var nested = container.nestedContainer(keyedBy: TransactionCodingKeys.self)
+            var nested = container.nestedContainer(keyedBy: CodingKeys.self)
             if let from = from {
                 try nested.encode(from, forKey: .from)
             }
-            try nested.encode(to, forKey: .to)
-            try nested.encode(data, forKey: .data)
-            try container.encode(block)
+            if let to = to {
+                try nested.encode(to, forKey: .to)
+            }
+            if let gasLimit = gasLimit {
+                try nested.encode(gasLimit.hexa, forKey: .gasLimit)
+            }
+            if let gasPrice = gasPrice {
+                try nested.encode(gasPrice.hexa, forKey: .gasPrice)
+            }
+            if let value = value {
+                try nested.encode(value.hexa, forKey: .value)
+            }
+            if let data = data {
+                try nested.encode(data, forKey: .data)
+            }
+            if let block = block {
+                try container.encode(block)
+            }
         }
     }
 }
