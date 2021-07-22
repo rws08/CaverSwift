@@ -36,12 +36,7 @@ class ContractTest: XCTestCase {
         "0x1e558ea00698990d875cb69d3c8f9a234fe8eab5c6bd898488d851669289e178"
     )
     
-    static let TEST: SingleKeyring = try! KeyringFactory.create(
-        "0x5458d5A35b901fe09270655BEA8ffA67F37010b3",
-        "0x0b2791a154bce37238d18f0b8681a513a2cd8a15ce316a1e7843b34e46c43a0a"
-    )
-    
-    static let ownerData = BRANDON
+    static let ownerData = LUMAN
     
     static let GAS_LIMIT = BigInt(9_000_000)
     static let GAS_PRICE = BigInt(4_100_000_000)
@@ -296,7 +291,7 @@ class ContractTest: XCTestCase {
         let logs = try contract.getPastEvent("Transfer", filter)
         
         let logResults = logs.getLogs()
-        guard let log = logResults[0] as? KlayLogs.LogObject,
+        guard let log = logResults[0] as? KlayLogs.Log,
               let data = log.data,
               let topics = log.topics
         else { XCTAssert(true); return }
@@ -307,8 +302,38 @@ class ContractTest: XCTestCase {
         XCTAssertEqual(1, eventValues.nonIndexedValues.count)
         
         let value = BigUInt(100_000) * BigUInt(10).power(18)
-        XCTAssertEqual(eventValues.indexedValues[0].value as? String, "0x0000000000000000000000000000000000000000")
-        XCTAssertEqual(eventValues.indexedValues[1].value as? String, "0x2c8ad0ea2e0781db8b8c9242e07de3a5beabb71a")
+        XCTAssertEqual((eventValues.indexedValues[0].value as? Address)?.toValue, "0x0000000000000000000000000000000000000000")
+        XCTAssertEqual((eventValues.indexedValues[1].value as? Address)?.toValue, ContractTest.ownerData.address)
         XCTAssertEqual(eventValues.nonIndexedValues[0].value as? BigUInt, value)
+    }
+    
+    func onceTest() throws {
+        let session = URLSession(configuration: URLSession.shared.configuration)
+        let caver = Caver(session, URL.init(string: Caver.DEFAULT_URL)!)
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey(ContractTest.ownerData.key.privateKey))
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey(ContractTest.BRANDON.key.privateKey))
+        
+        let contract = try Contract(caver, ContractTest.jsonObj, ContractTest.contractAddress)
+        
+        let options = [
+            [Address(ContractTest.BRANDON.address), Address(ContractTest.LUMAN.address)]
+        ]
+        
+        let indexedParameter = EventFilterOptions.IndexedParameter("from", [ContractTest.LUMAN.address])
+        let eventFilterOptions = EventFilterOptions([indexedParameter], [])
+        
+    }
+    
+    func test_setWallet() throws {
+        let caver = Caver(Caver.DEFAULT_URL)
+        let contract = try Contract(caver, ContractTest.jsonObj, ContractTest.contractAddress)
+        
+        XCTAssertEqual(0, (contract.wallet as? KeyringContainer)?.count)
+        
+        let container = KeyringContainer()
+        _ = try container.generate(3)
+        
+        contract.setWallet(container)
+        XCTAssertEqual(3, (contract.wallet as? KeyringContainer)?.count)
     }
 }

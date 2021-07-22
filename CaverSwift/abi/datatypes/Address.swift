@@ -9,6 +9,7 @@ import Foundation
 import BigInt
 
 public struct Address: Codable, Hashable {
+    private static var MAX_BYTE_LENGTH = 20
     public let val: BigUInt
     public static let zero = Address("0x0000000000000000000000000000000000000000")
     
@@ -18,7 +19,13 @@ public struct Address: Codable, Hashable {
 
     public var toValue: String {
         get {
-            self.val.hexa
+            let bytes = self.val.bytes
+            if Address.MAX_BYTE_LENGTH - bytes.count > 0 {
+                let encoded = [UInt8](repeating: 0x00, count: Address.MAX_BYTE_LENGTH - bytes.count) + bytes
+                return String(bytes: encoded).addHexPrefix
+            }
+            
+            return self.val.hexa
         }
     }
     

@@ -67,6 +67,7 @@
 		E37E749D26A7EB0B0019B06D /* KlayFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749C26A7EB0B0019B06D /* KlayFilter.swift */; };
 		E37E749F26A7EC310019B06D /* KlayLogFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749E26A7EC310019B06D /* KlayLogFilter.swift */; };
 		E37E74A126A7F96B0019B06D /* EventValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A026A7F96B0019B06D /* EventValues.swift */; };
+		E37E74A326A909110019B06D /* StructContractTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E74A226A909100019B06D /* StructContractTestData.json */; };
 		E38FA0BC26896B6800F532D0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A626896B6800F532D0 /* Random.swift */; };
 		E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A726896B6800F532D0 /* GCD.swift */; };
 		E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A826896B6800F532D0 /* Hashable.swift */; };
@@ -345,6 +346,7 @@
 		E37E749C26A7EB0B0019B06D /* KlayFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlayFilter.swift; sourceTree = "<group>"; };
 		E37E749E26A7EC310019B06D /* KlayLogFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlayLogFilter.swift; sourceTree = "<group>"; };
 		E37E74A026A7F96B0019B06D /* EventValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventValues.swift; sourceTree = "<group>"; };
+		E37E74A226A909100019B06D /* StructContractTestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = StructContractTestData.json; sourceTree = "<group>"; };
 		E38FA0A626896B6800F532D0 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E38FA0A726896B6800F532D0 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		E38FA0A826896B6800F532D0 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
@@ -837,6 +839,7 @@
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
 				E36B78A026A56F3400FF2FD4 /* ContractTest.swift */,
 				E37E749826A6A01E0019B06D /* ContractTestData.json */,
+				E37E74A226A909100019B06D /* StructContractTestData.json */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -1322,6 +1325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3E02389264CB16500791E00 /* testFunction.json in Resources */,
+				E37E74A326A909110019B06D /* StructContractTestData.json in Resources */,
 				E37E749926A6A0E50019B06D /* ContractTestData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
