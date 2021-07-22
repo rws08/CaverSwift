@@ -68,6 +68,7 @@
 		E37E749F26A7EC310019B06D /* KlayLogFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749E26A7EC310019B06D /* KlayLogFilter.swift */; };
 		E37E74A126A7F96B0019B06D /* EventValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A026A7F96B0019B06D /* EventValues.swift */; };
 		E37E74A326A909110019B06D /* StructContractTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E74A226A909100019B06D /* StructContractTestData.json */; };
+		E37E74A526A90AAF0019B06D /* TestAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */; };
 		E38FA0BC26896B6800F532D0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A626896B6800F532D0 /* Random.swift */; };
 		E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A726896B6800F532D0 /* GCD.swift */; };
 		E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A826896B6800F532D0 /* Hashable.swift */; };
@@ -347,6 +348,7 @@
 		E37E749E26A7EC310019B06D /* KlayLogFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlayLogFilter.swift; sourceTree = "<group>"; };
 		E37E74A026A7F96B0019B06D /* EventValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventValues.swift; sourceTree = "<group>"; };
 		E37E74A226A909100019B06D /* StructContractTestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = StructContractTestData.json; sourceTree = "<group>"; };
+		E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAccountInfo.swift; sourceTree = "<group>"; };
 		E38FA0A626896B6800F532D0 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E38FA0A726896B6800F532D0 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		E38FA0A826896B6800F532D0 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
@@ -830,16 +832,17 @@
 				E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */,
 				E3917529268ECFFB006BB332 /* AccountTest.swift */,
 				E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */,
+				E36B78A026A56F3400FF2FD4 /* ContractTest.swift */,
+				E37E749826A6A01E0019B06D /* ContractTestData.json */,
 				E39F2CD9262EA4EF003FA426 /* Info.plist */,
 				E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */,
 				E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */,
 				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
+				E37E74A226A909100019B06D /* StructContractTestData.json */,
 				E3E02388264CB16500791E00 /* testFunction.json */,
 				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
-				E36B78A026A56F3400FF2FD4 /* ContractTest.swift */,
-				E37E749826A6A01E0019B06D /* ContractTestData.json */,
-				E37E74A226A909100019B06D /* StructContractTestData.json */,
+				E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -1612,6 +1615,7 @@
 				E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */,
 				E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */,
 				E394F0DA26A18B4900371199 /* FeeDelegatedValueTransferMemoWithRatioTest.swift in Sources */,
+				E37E74A526A90AAF0019B06D /* TestAccountInfo.swift in Sources */,
 				E394F0D226A11B3500371199 /* FeeDelegatedSmartContractDeployTest.swift in Sources */,
 				E394F0DE26A1938500371199 /* FeeDelegatedValueTransferWithRatioTest.swift in Sources */,
 				E394F0C6269FEEF800371199 /* FeeDelegatedAccountUpdateTest.swift in Sources */,
