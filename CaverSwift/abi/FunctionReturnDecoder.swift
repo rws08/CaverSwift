@@ -129,7 +129,7 @@ public class FunctionReturnDecoder {
                 result.append(try decode(Array(data.dropFirst(currentOffset)), forType: Type(type.value, arrayType), offset: instanceOffset * MAX_BYTE_LENGTH))
             }
             
-            return TypeArray(result, typeABI)
+            return StaticArray(result, typeABI)
         case .FixedArray(let arrayType, let size):
             var result: [ABIType] = []
             var size = size
@@ -137,7 +137,7 @@ public class FunctionReturnDecoder {
             
             try deepDecode(data: data, type: Type(type.value, arrayType), result: &result, offset: &currentOffset, size: &size)
             
-            return TypeArray(result, typeABI)
+            return StaticArray(result, typeABI)
         // NOTE: Needs analysis to confirm it can handle an inner `DynamicArray` too
         case .DynamicArray(let arrayType) where arrayType.isDynamic:
             var result: [ABIType] = []
@@ -162,7 +162,7 @@ public class FunctionReturnDecoder {
                 result.append(try decode(Array(data.dropFirst(currentOffset)), forType: Type(type.value, arrayType), offset: instanceOffset * MAX_BYTE_LENGTH))
             }
 
-            return TypeArray(result, typeABI)
+            return DynamicArray(result, typeABI)
         case .DynamicArray(let arrayType):
             var result: [ABIType] = []
             var newOffset = offset
@@ -180,7 +180,7 @@ public class FunctionReturnDecoder {
             newOffset += MAX_BYTE_LENGTH
             
             try deepDecode(data: data, type: Type(type.value, arrayType), result: &result, offset: &newOffset, size: &size)
-            return TypeArray(result, typeABI)
+            return DynamicArray(result, typeABI)
         case .Tuple(let subTypes) where typeABI.isDynamic:
             var result: [ABIType] = []
             var currentOffset = offset
@@ -197,7 +197,7 @@ public class FunctionReturnDecoder {
                 newOffset += item.memory
             }
             
-            return TypeStruct(result, subTypes)
+            return DynamicStruct(result, subTypes)
         case .Tuple(let subTypes):
             var result: [ABIType] = []
             var currentOffset = offset
@@ -207,7 +207,7 @@ public class FunctionReturnDecoder {
                 currentOffset += item.memory
             }
             
-            return TypeStruct(result, subTypes)
+            return StaticStruct(result, subTypes)
         }
     }
     

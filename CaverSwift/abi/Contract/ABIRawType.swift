@@ -125,6 +125,21 @@ extension ABIRawType: RawRepresentable {
         }
     }
     
+    public var subType: ABIRawType? {
+        switch self {
+        case .FixedArray(let type, _): return type
+        case .DynamicArray(let type): return type
+        default: return nil
+        }
+    }
+    
+    public var subTypes: [ABIRawType]? {
+        switch self {
+        case .Tuple(let types): return types
+        default: return nil
+        }
+    }
+    
     public var isDynamic: Bool {
         switch self {
         case .FixedArray(let type, _):

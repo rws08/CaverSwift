@@ -24,10 +24,17 @@ public class TypeDecoder {
                 types.append(type.value)
                 subRawType.append(type.rawType)
             }
-            param = TypeStruct(types, subRawType)
-        case .DynamicArray(let type), .FixedArray(let type, _):
+            if abiType.isDynamic {
+                param = DynamicStruct(types, subRawType)
+            } else {
+                param = StaticStruct(types, subRawType)
+            }
+        case .FixedArray(let type, _):
             let types:[ABIType] = [try makeTypeReference(type.rawValue).value]
-            param = TypeArray(types, solidityType)
+            param = StaticArray(types, solidityType)
+        case .DynamicArray(let type):
+            let types:[ABIType] = [try makeTypeReference(type.rawValue).value]
+            param = DynamicArray(types, solidityType)
         case .DynamicBytes, .FixedBytes(_):
             param = Data()
         case .FixedAddress:
@@ -49,33 +56,70 @@ public class TypeDecoder {
         guard let abiType = ABIRawType(rawValue: solidityType) else {
             throw CaverError.UnsupportedOperationException("Unsupported TypeReference: \(solidityType)")
         }
-        
-        var param = param
+        return try instantiateType(abiType, param)
+    }
+    
+    static func instantiateType(_ abiType: ABIRawType, _ param: Any?) throws -> Type {
         if param is [Any] {
+            guard let paramArray = param as? [Any] else { throw CaverError.UnsupportedOperationException("Unsupported TypeReference: \(abiType.rawValue)") }
+            
             switch abiType {
-            case .Tuple(let values):
-                guard let paramArray = param as? [Any] else { throw CaverError.UnsupportedOperationException("Unsupported TypeReference: \(solidityType)") }
-                var types:[ABIType] = []
-                var subRawType:[ABIRawType] = []
-                for (idx, item) in paramArray.enumerated() {
-                    let type = try instantiateType(values[idx].rawValue, item)
-                    types.append(type.value)
-                    subRawType.append(type.rawType)
-                }
-                param = TypeStruct(types, subRawType)
-            case .DynamicArray(let type), .FixedArray(let type, _):
-                guard let paramArray = param as? [Any] else { throw CaverError.UnsupportedOperationException("Unsupported TypeReference: \(solidityType)") }
-                var types:[ABIType] = []
-                try paramArray.forEach {
-                    let type = try instantiateType(type.rawValue, $0)
-                    types.append(type.value)
-                }
-                
-                param = TypeArray(types, solidityType)
+            case .Tuple(_):
+                return try instantiateStructType(abiType, paramArray)
+            case .DynamicArray(_), .FixedArray(_, _):
+                return try instantiateArrayType(abiType, paramArray)
             default:
-                break
+                throw CaverError.invalidValue
             }
-        } else if !(param is ABIType) {
+        } else {
+            return try instantiateAtomicType(abiType, param)
+        }
+    }
+    
+    static func instantiateStructType(_ abiType: ABIRawType, _ param: [Any]) throws -> Type {
+        var typeStruct: TypeStruct
+        switch abiType {
+        case .Tuple(let values):
+            var types:[ABIType] = []
+            var subRawType:[ABIRawType] = []
+            for (idx, item) in param.enumerated() {
+                let type = try instantiateType(values[idx].rawValue, item)
+                types.append(type.value)
+                subRawType.append(type.rawType)
+            }
+            
+            if abiType.isDynamic {
+                typeStruct = DynamicStruct(types, subRawType)
+            } else {
+                typeStruct = StaticStruct(types, subRawType)
+            }
+        default:
+            throw CaverError.invalidValue
+        }
+        
+        return Type(typeStruct, abiType)
+    }
+    
+    static func instantiateArrayType(_ abiType: ABIRawType, _ param: [Any]) throws -> Type {
+        var typeArray: TypeArray
+        switch abiType {
+        case .DynamicArray(let type), .FixedArray(let type, _):
+            let types:[ABIType] = try param.map {
+                let type = try instantiateType(type.rawValue, $0)
+                return type.value
+            }
+            
+            typeArray = TypeArray(types, abiType)
+        default:
+            throw CaverError.invalidValue
+        }
+        
+        return Type(typeArray, abiType)
+    }
+    
+    static func instantiateAtomicType(_ abiType: ABIRawType, _ param: Any?) throws -> Type {
+        var param = param
+        if !(param is ABIType) {
             switch param {
             case is Int:
                 param = BigInt(param as! Int)
@@ -104,5 +148,9 @@ public class TypeDecoder {
         guard let param = param as? ABIType else { throw CaverError.invalidValue }
         
         return Type(param, abiType)
+    }
+    
+    static func decode() {
+        
     }
 }

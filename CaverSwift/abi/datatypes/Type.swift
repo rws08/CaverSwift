@@ -31,9 +31,29 @@ public class Type: Any, Equatable {
             case .DynamicString:
                 ret = (lhs.value as? String) == (rhs.value as? String)
             case .DynamicArray(_), .FixedArray(_, _):
-                ret = (lhs.value as? TypeArray) == (rhs.value as? TypeArray)
+                guard let lValues = (lhs.value as? TypeArray)?.values,
+                      let rValues = (rhs.value as? TypeArray)?.values else {
+                    return false
+                }
+                if lValues.count != rValues.count {
+                    return false
+                }
+                
+                ret = zip(lValues, rValues).filter {
+                    Type($0) != Type($1)
+                }.isEmpty
             case .Tuple(_):
-                ret = (lhs.value as? TypeStruct) == (rhs.value as? TypeStruct)
+                guard let lValues = (lhs.value as? TypeStruct)?.values,
+                      let rValues = (rhs.value as? TypeStruct)?.values else {
+                    return false
+                }
+                if lValues.count != rValues.count {
+                    return false
+                }
+                
+                ret = zip(lValues, rValues).filter {
+                    Type($0) != Type($1)
+                }.isEmpty
             }
         }
         return ret
@@ -107,7 +127,7 @@ extension Address: ABIType {
     }
 }
 
-public struct TypeStruct: Equatable {
+public class TypeStruct: Equatable {
     public static func == (lhs: TypeStruct, rhs: TypeStruct) -> Bool {
         return lhs.values.elementsEqual(rhs.values) { lhsItem, rhsItem in
             Type(lhsItem) == Type(rhsItem)
@@ -116,9 +136,15 @@ public struct TypeStruct: Equatable {
     
     public var values: [ABIType]
     
-    public init(_ values: [ABIType], _ subRawType:[ABIRawType]) {
+    public init(_ values: [ABIType], _ subRawType:[ABIRawType] = []) {
         self.values = values
-        self.subRawType = subRawType
+        if subRawType.isEmpty {
+            self.subRawType = values.map {
+                Type($0).rawType
+            }
+        } else {
+            self.subRawType = subRawType
+        }
     }
     public var subRawType: [ABIRawType] = []
     var subParser: ParserFunction = String.parser
@@ -140,7 +166,11 @@ extension TypeStruct: ABIType {
     }
 }
 
-public struct TypeArray: Equatable {
+public class DynamicStruct: TypeStruct { }
+
+public class StaticStruct: TypeStruct { }
+
+public class TypeArray: Equatable {
     public static func == (lhs: TypeArray, rhs: TypeArray) -> Bool {
         return lhs.values.elementsEqual(rhs.values) { lhsItem, rhsItem in
             Type(lhsItem) == Type(rhsItem)
@@ -160,11 +190,15 @@ public struct TypeArray: Equatable {
                 let sub = solidityType?[solidityType!.startIndex..<solidityType!.lastIndex(of: "[")!]
                 self.subRawType = ABIRawType(rawValue: String(describing: String(sub!))) ?? .DynamicString
             }
+        } else if let val = values.first {
+            self.rawType = .DynamicArray(type(of: val).rawType)
         }
     }
     
     public init(_ values: [ABIType], _ rawType: ABIRawType) {
-        self.init(values, rawType.rawValue)
+        self.values = values
+        self.rawType = rawType
+        self.subRawType = rawType.subType ?? .DynamicString
     }
     
     public var subRawType: ABIRawType = .DynamicString
@@ -183,5 +217,33 @@ extension TypeArray: ABIType {
     public var value: ABIType { self }
     public var parser: ParserFunction {
         return self.subParser
+    }
+}
+
+public class DynamicArray: TypeArray {
+    public override init(_ values: [ABIType], _ rawType: ABIRawType) {
+        super.init(values, rawType)
+    }
+    
+    public override init(_ values: [ABIType], _ solidityType: String? = nil) {
+        if solidityType == nil {
+            super.init(values, ABIRawType.DynamicArray(type(of: values.first!).rawType).rawValue)
+        } else {
+            super.init(values, solidityType)
+        }
+    }
+}
+
+public class StaticArray: TypeArray {
+    public override init(_ values: [ABIType], _ rawType: ABIRawType) {
+        super.init(values, rawType)
+    }
+    
+    public override init(_ values: [ABIType], _ solidityType: String? = nil) {
+        if solidityType == nil {
+            super.init(values, ABIRawType.FixedArray(type(of: values.first!).rawType, values.count).rawValue)
+        } else {
+            super.init(values, solidityType)
+        }        
     }
 }

@@ -19,7 +19,7 @@ open class ContractMethod: Codable {
     var contractAddress: String
     var defaultSendOptions = SendOptions(nil, BigInt.zero)
     var wallet: IWallet? = nil
-    var nextContractMethods: Array<ContractMethod> = []
+    var nextContractMethods: [ContractMethod] = []
     
     enum CodingKeys: CodingKey {
         case type, name, inputs, outputs, signature, contractAddress
@@ -118,7 +118,7 @@ open class ContractMethod: Codable {
     }
     
     private func findMatchedInstance(_ arguments: [Any]) throws -> ContractMethod {
-        var matchedMethod: Array<ContractMethod> = []
+        var matchedMethod: [ContractMethod] = []
         if inputs.count != arguments.count {
             for item in nextContractMethods {
                 if item.inputs.count == arguments.count {

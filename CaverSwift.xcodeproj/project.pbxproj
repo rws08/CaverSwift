@@ -69,6 +69,8 @@
 		E37E74A126A7F96B0019B06D /* EventValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A026A7F96B0019B06D /* EventValues.swift */; };
 		E37E74A326A909110019B06D /* StructContractTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E74A226A909100019B06D /* StructContractTestData.json */; };
 		E37E74A526A90AAF0019B06D /* TestAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */; };
+		E37E74A726A90CC70019B06D /* StructContractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A626A90CC70019B06D /* StructContractTest.swift */; };
+		E37E74A926A914780019B06D /* DefaultFunctionReturnDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A826A914780019B06D /* DefaultFunctionReturnDecoder.swift */; };
 		E38FA0BC26896B6800F532D0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A626896B6800F532D0 /* Random.swift */; };
 		E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A726896B6800F532D0 /* GCD.swift */; };
 		E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A826896B6800F532D0 /* Hashable.swift */; };
@@ -349,6 +351,8 @@
 		E37E74A026A7F96B0019B06D /* EventValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventValues.swift; sourceTree = "<group>"; };
 		E37E74A226A909100019B06D /* StructContractTestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = StructContractTestData.json; sourceTree = "<group>"; };
 		E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAccountInfo.swift; sourceTree = "<group>"; };
+		E37E74A626A90CC70019B06D /* StructContractTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructContractTest.swift; sourceTree = "<group>"; };
+		E37E74A826A914780019B06D /* DefaultFunctionReturnDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFunctionReturnDecoder.swift; sourceTree = "<group>"; };
 		E38FA0A626896B6800F532D0 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E38FA0A726896B6800F532D0 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		E38FA0A826896B6800F532D0 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
@@ -843,6 +847,7 @@
 				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
 				E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */,
+				E37E74A626A90CC70019B06D /* StructContractTest.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -866,6 +871,7 @@
 				E3A21E05265654A7006C560D /* Multicall */,
 				E3A21DDD265654A7006C560D /* Utils */,
 				E37E74A026A7F96B0019B06D /* EventValues.swift */,
+				E37E74A826A914780019B06D /* DefaultFunctionReturnDecoder.swift */,
 			);
 			path = abi;
 			sourceTree = "<group>";
@@ -1409,6 +1415,7 @@
 				E37E748D26A6631A0019B06D /* KlayLogs.swift in Sources */,
 				E38FA1242689A6CB00F532D0 /* EC256.swift in Sources */,
 				E38FA1212689A6CB00F532D0 /* EC163.swift in Sources */,
+				E37E74A926A914780019B06D /* DefaultFunctionReturnDecoder.swift in Sources */,
 				E38FA1262689A6CB00F532D0 /* DomainP.swift in Sources */,
 				E38FA11D2689A6CB00F532D0 /* EC571.swift in Sources */,
 				E36EEA122693FEC900C1B599 /* RoleBasedKeyring.swift in Sources */,
@@ -1625,6 +1632,7 @@
 				E394F0D826A1856E00371199 /* FeeDelegatedValueTransferMemoTest.swift in Sources */,
 				E394F0D026A1136000371199 /* FeeDelegatedChainDataAnchoringWithRatioTest.swift in Sources */,
 				E394F0D626A1610100371199 /* FeeDelegatedSmartContractExecutionTest.swift in Sources */,
+				E37E74A726A90CC70019B06D /* StructContractTest.swift in Sources */,
 				E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */,
 				E394F0D426A127F700371199 /* FeeDelegatedSmartContractDeployWithRatioTest.swift in Sources */,
 				E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */,
