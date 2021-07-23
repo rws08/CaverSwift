@@ -68,7 +68,7 @@ class isValidPrivateKeyTest: XCTestCase {
 
 class isKlaytnWalletKeyTest: XCTestCase {
     func testValidWalletKey() throws {
-        guard let walletKey = KeyringFactory.generate()?.getKlaytnWalletKey() else { XCTAssert(true); return }
+        guard let walletKey = KeyringFactory.generate()?.getKlaytnWalletKey() else { XCTAssert(false); return }
         XCTAssertTrue(Utils.isKlaytnWalletKey(walletKey))
     }
     
@@ -87,7 +87,7 @@ class isKlaytnWalletKeyTest: XCTestCase {
 
 class isValidPublicKeyTest: XCTestCase {
     func testUncompressedKey() throws {
-        guard let key = try? KeyringFactory.generate()?.getPublicKey() else { XCTAssert(true); return }
+        guard let key = try? KeyringFactory.generate()?.getPublicKey() else { XCTAssert(false); return }
         XCTAssertTrue(Utils.isValidPublicKey(key))
     }
     
@@ -98,7 +98,7 @@ class isValidPublicKeyTest: XCTestCase {
     
     func testCompressedKey() throws {
         guard let key = try? KeyringFactory.generate()?.getPublicKey(),
-              let key = try? Utils.compressPublicKey(key) else { XCTAssert(true); return }
+              let key = try? Utils.compressPublicKey(key) else { XCTAssert(false); return }
         
         XCTAssertTrue(Utils.isValidPublicKey(key))
     }
@@ -127,14 +127,14 @@ class isValidPublicKeyTest: XCTestCase {
 class decompressPublicKeyTest: XCTestCase {
     func testDecompressPublicKey() throws {
         let compressed = "03434dedfc2eceed1e98fddfde3ebc57512c57f017195988cd5de62b722656b943"
-        guard let uncompressed = try? Utils.decompressPublicKey(compressed) else { XCTAssert(true); return }
+        guard let uncompressed = try? Utils.decompressPublicKey(compressed) else { XCTAssert(false); return }
         
         XCTAssertTrue(Utils.isValidPublicKey(uncompressed))
     }
     
     func testAlreadyDecompressedKey() throws {
         guard let expectedUncompressed = try? PrivateKey.generate().getPublicKey(false),
-              let actualUncompressed = try? Utils.decompressPublicKey(expectedUncompressed) else { XCTAssert(true); return }
+              let actualUncompressed = try? Utils.decompressPublicKey(expectedUncompressed) else { XCTAssert(false); return }
         
         XCTAssertTrue(Utils.isValidPublicKey(actualUncompressed))
         XCTAssertEqual(expectedUncompressed, actualUncompressed)
@@ -142,7 +142,7 @@ class decompressPublicKeyTest: XCTestCase {
     
     func testAlreadyDecompressedKeyWithTag() throws {
         let expected = "0x04019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"
-        guard let uncompressed = try? Utils.decompressPublicKey(expected) else { XCTAssert(true); return }
+        guard let uncompressed = try? Utils.decompressPublicKey(expected) else { XCTAssert(false); return }
         
         XCTAssertEqual(expected, uncompressed)
     }
@@ -151,14 +151,14 @@ class decompressPublicKeyTest: XCTestCase {
 class compressPublicKeyTest: XCTestCase {
     func testCompressPublicKey() throws {
         guard let uncompressed = try? PrivateKey.generate().getPublicKey(false),
-              let compressed = try? Utils.compressPublicKey(uncompressed) else { XCTAssert(true); return }
+              let compressed = try? Utils.compressPublicKey(uncompressed) else { XCTAssert(false); return }
         
         XCTAssertTrue(Utils.isValidPublicKey(compressed))
     }
     
     func testAlreadyCompressedKey() throws {
         guard let expectedCompressed = try? PrivateKey.generate().getPublicKey(true),
-              let actualCompressed = try? Utils.compressPublicKey(expectedCompressed) else { XCTAssert(true); return }
+              let actualCompressed = try? Utils.compressPublicKey(expectedCompressed) else { XCTAssert(false); return }
         
         XCTAssertTrue(Utils.isValidPublicKey(actualCompressed))
         XCTAssertEqual(expectedCompressed, actualCompressed)
@@ -167,7 +167,7 @@ class compressPublicKeyTest: XCTestCase {
     func testAlreadyCompressedKeyWithTag() throws {
         let key = "0x04019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"
         guard let expected = try? Utils.compressPublicKey("019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"),
-              let compressed = try? Utils.compressPublicKey(key) else { XCTAssert(true); return }
+              let compressed = try? Utils.compressPublicKey(key) else { XCTAssert(false); return }
         
         XCTAssertEqual(expected, compressed)
     }
@@ -184,7 +184,7 @@ class parseKlaytnWalletKeyTest: XCTestCase {
     func testParseKlaytnWalletKey() throws {
         let keyring = KeyringFactory.generate()
         guard let walletKey = keyring?.getKlaytnWalletKey(),
-              let parsedData = try? Utils.parseKlaytnWalletKey(walletKey) else { XCTAssert(true); return }
+              let parsedData = try? Utils.parseKlaytnWalletKey(walletKey) else { XCTAssert(false); return }
         
         XCTAssertEqual(keyring?.key.privateKey, parsedData[0])
         XCTAssertEqual("0x00", parsedData[1])

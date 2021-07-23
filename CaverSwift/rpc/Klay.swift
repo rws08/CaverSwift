@@ -29,25 +29,13 @@ public class Klay {
     public func accountCreated(_ address: String, _ blockTag: DefaultBlockParameterName = .Latest) -> (CaverError?, Bool?) {
         let(error, response) = rpc.request(url: url, method: "klay_accountCreated",
                     params: [address, blockTag.stringValue], receive: Bool.self)!.send()
-        if let resDataString = response as? Bool {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     public func getAccounts() -> (CaverError?, Addresses?) {
         let(error, response) = rpc.request(url: url, method: "klay_accounts",
                     params: Array<String>(), receive: Addresses.self)!.send()
-        if let resDataString = response as? Addresses {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     public func getTransactionCount(_ address: String) -> (CaverError?, Quantity?) {
@@ -61,37 +49,19 @@ public class Klay {
     public func getTransactionCount(_ address: String, _ blockTag: DefaultBlockParameterName = .Latest) -> (CaverError?, Quantity?) {
         let(error, response) = rpc.request(url: url, method: "klay_getTransactionCount",
                     params: [address, blockTag.stringValue], receive: Quantity.self)!.send()
-        if let resDataString = response as? Quantity {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     public func getChainID() -> (CaverError?, Quantity?) {
         let(error, response) = rpc.request(url: url, method: "klay_chainID",
                     params: Array<String>(), receive: Quantity.self)!.send()
-        if let resDataString = response as? Quantity {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     public func getGasPrice() -> (CaverError?, Quantity?) {
         let(error, response) = rpc.request(url: url, method: "klay_gasPrice",
                     params: Array<String>(), receive: Quantity.self)!.send()
-        if let resDataString = response as? Quantity {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     public func getBlockNumber() -> (CaverError?, String?) {
@@ -101,87 +71,45 @@ public class Klay {
         }
         let params = CallParams()
         let(error, response) = rpc.request(url: url, method: "klay_blockNumber", params: params, receive: String.self)!.send()
-        if let resDataString = response as? String {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     public func getBalance(_ address: String) -> (CaverError?, Quantity?) {
         let(error, response) = rpc.request(url: url, method: "klay_getBalance",
                             params: [address, DefaultBlockParameterName.Latest.stringValue], receive: Quantity.self)!.send()
-        if let resDataString = response as? Quantity {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
-    func call(_ callObject: CallObject, _ blockNumber: DefaultBlockParameterName = .Latest) throws -> (CaverError?, String?){
+    func call(_ callObject: CallObject, _ blockNumber: DefaultBlockParameterName = .Latest) throws -> (CaverError?, String?) {
         let params = CallParams(callObject, blockNumber.stringValue)
 //        let te = rpc.request(url: url, method: "klay_call", params: [callObject, blockNumber.stringValue], receive: String.self)
         let(error, response) = rpc.request(url: url, method: "klay_call", params: params, receive: String.self)!.send()
-        if let resDataString = response as? String {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     func estimateGas(_ callObject: CallObject) throws -> (CaverError?, Quantity?) {
         let params = CallParams(callObject)
         let(error, response) = rpc.request(url: url, method: "klay_estimateGas", params: params, receive: Quantity.self)!.send()
-        if let resDataString = response as? Quantity {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     public func sendRawTransaction(_ signedTransactionData: String) -> (CaverError?, Bytes32?) {
         let (error, response) = rpc.request(url: url, method: "klay_sendRawTransaction",
                     params: [signedTransactionData], receive: Bytes32.self)!.send()
-        if let resDataString = response as? Bytes32 {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     public func sendRawTransaction(_ transaction: AbstractTransaction) -> (CaverError?, Bytes32?) {
         let rawTransaction = try? transaction.getRLPEncoding()
         let (error, response) = rpc.request(url: url, method: "klay_sendRawTransaction",
                                             params: [rawTransaction], receive: Bytes32.self)!.send()
-        if let resDataString = response as? Bytes32 {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     public func getTransactionReceipt(_ transactionHash: String) -> (CaverError?, TransactionReceiptData?) {
         let (error, response) = rpc.request(url: url, method: "klay_getTransactionReceipt",
                     params: [transactionHash], receive: TransactionReceiptData.self)!.send()
-        if let resDataString = response as? TransactionReceiptData {
-            return (nil, resDataString)
-        } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
-        } else {
-            return (CaverError.unexpectedReturnValue, nil)
-        }
+        return parseReturn(error, response)
     }
     
     public func getLogs(_ filterOption: KlayLogFilter) -> (CaverError?, KlayLogs?) {
@@ -189,14 +117,23 @@ public class Klay {
         let (error, response) = rpc.request(url: url, method: "klay_getLogs",
                     params: params, receive: KlayLogs.self)!.send()
         
-        if let resDataString = response as? KlayLogs {
+        return parseReturn(error, response)
+    }
+    
+    private func parseReturn<T: Any>(_ error: JSONRPCError?, _ response: Any?) -> (CaverError?, T?) {
+        if let resDataString = response as? T {
             return (nil, resDataString)
         } else if let error = error {
-            return (CaverError.IOException(error.localizedDescription), nil)
+            switch error {
+            case .executionError(let result):
+                return (CaverError.JSONRPCError(result.error.message), nil)
+            default:
+                return (CaverError.JSONRPCError(error.localizedDescription), nil)
+            }
         } else {
             return (CaverError.unexpectedReturnValue, nil)
         }
-    }    
+    }
     
     public struct Bytes32: Decodable {
         var val: String

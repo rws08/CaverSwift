@@ -47,13 +47,13 @@ public class RPC {
         return Request<U>(session, request)
     }
     
-    public func send<U: Decodable>(request: URLRequest, receive: U) -> (Error?, Any?) {
+    public func send<U: Decodable>(request: URLRequest, receive: U) -> (JSONRPCError?, Any?) {
         RPC.send(session: session, request: request, receive: receive)
     }
     
-    public static func send<U: Decodable>(session: URLSession, request: URLRequest, receive: U) -> (Error?, Any?) {
+    public static func send<U: Decodable>(session: URLSession, request: URLRequest, receive: U) -> (JSONRPCError?, Any?) {
                
-        var result: (Error?, Any?) = (nil, nil)
+        var result: (JSONRPCError?, Any?) = (nil, nil)
                 
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
@@ -90,9 +90,9 @@ public class RPC {
         RPC.execute(session: session, url: url, method: method, params: params, receive: receive, id: id)
     }
     
-    public static func execute<T: Encodable, U: Decodable>(session: URLSession, url: URL, method: String, params: T, receive: U.Type, id: Int = 1) -> (Error?, Any?) {
+    public static func execute<T: Encodable, U: Decodable>(session: URLSession, url: URL, method: String, params: T, receive: U.Type, id: Int = 1) -> (JSONRPCError?, Any?) {
                
-        var result: (Error?, Any?) = (nil, nil)
+        var result: (JSONRPCError?, Any?) = (nil, nil)
         
         if type(of: params) == [Any].self {
             // If params are passed in with Array<Any> and not caught, runtime fatal error
@@ -150,7 +150,7 @@ public class RPC {
             self.urlRequest = urlRequest
         }
 
-        public func send() -> (Error?, Any?) {
+        public func send() -> (JSONRPCError?, Any?) {
             RPC.send(session: session, request: urlRequest, receive: receiveType)
         }
     }

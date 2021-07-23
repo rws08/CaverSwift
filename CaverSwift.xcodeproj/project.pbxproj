@@ -39,6 +39,9 @@
 		E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A026A56F3400FF2FD4 /* ContractTest.swift */; };
 		E36B78A326A5734C00FF2FD4 /* ContractDeployParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A226A5734C00FF2FD4 /* ContractDeployParams.swift */; };
 		E36B78A526A575CC00FF2FD4 /* EventFilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A426A575CC00FF2FD4 /* EventFilterOptions.swift */; };
+		E36D344C26AA634300F0F679 /* Utf8String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D344B26AA634300F0F679 /* Utf8String.swift */; };
+		E36D344E26AA644A00F0F679 /* Uint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D344D26AA644A00F0F679 /* Uint.swift */; };
+		E36D345026AA912700F0F679 /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D344F26AA912700F0F679 /* Struct.swift */; };
 		E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */; };
 		E36D83782698020400D4D5B2 /* AbstractTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83772698020400D4D5B2 /* AbstractTransaction.swift */; };
 		E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */; };
@@ -71,6 +74,8 @@
 		E37E74A526A90AAF0019B06D /* TestAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */; };
 		E37E74A726A90CC70019B06D /* StructContractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A626A90CC70019B06D /* StructContractTest.swift */; };
 		E37E74A926A914780019B06D /* DefaultFunctionReturnDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A826A914780019B06D /* DefaultFunctionReturnDecoder.swift */; };
+		E37E74AB26AA3DC60019B06D /* ContractImproveFuncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */; };
+		E37E74AD26AA3DDB0019B06D /* ContractImproveFuncTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */; };
 		E38FA0BC26896B6800F532D0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A626896B6800F532D0 /* Random.swift */; };
 		E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A726896B6800F532D0 /* GCD.swift */; };
 		E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A826896B6800F532D0 /* Hashable.swift */; };
@@ -314,6 +319,9 @@
 		E36B78A026A56F3400FF2FD4 /* ContractTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractTest.swift; sourceTree = "<group>"; };
 		E36B78A226A5734C00FF2FD4 /* ContractDeployParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractDeployParams.swift; sourceTree = "<group>"; };
 		E36B78A426A575CC00FF2FD4 /* EventFilterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilterOptions.swift; sourceTree = "<group>"; };
+		E36D344B26AA634300F0F679 /* Utf8String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utf8String.swift; sourceTree = "<group>"; };
+		E36D344D26AA644A00F0F679 /* Uint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uint.swift; sourceTree = "<group>"; };
+		E36D344F26AA912700F0F679 /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
 		E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringContainerTest.swift; sourceTree = "<group>"; };
 		E36D83772698020400D4D5B2 /* AbstractTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractTransaction.swift; sourceTree = "<group>"; };
 		E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyringTest.swift; sourceTree = "<group>"; };
@@ -353,6 +361,8 @@
 		E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAccountInfo.swift; sourceTree = "<group>"; };
 		E37E74A626A90CC70019B06D /* StructContractTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructContractTest.swift; sourceTree = "<group>"; };
 		E37E74A826A914780019B06D /* DefaultFunctionReturnDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFunctionReturnDecoder.swift; sourceTree = "<group>"; };
+		E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractImproveFuncTest.swift; sourceTree = "<group>"; };
+		E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ContractImproveFuncTestData.json; sourceTree = "<group>"; };
 		E38FA0A626896B6800F532D0 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E38FA0A726896B6800F532D0 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		E38FA0A826896B6800F532D0 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
@@ -842,12 +852,14 @@
 				E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */,
 				E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */,
 				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
+				E37E74A626A90CC70019B06D /* StructContractTest.swift */,
 				E37E74A226A909100019B06D /* StructContractTestData.json */,
+				E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */,
 				E3E02388264CB16500791E00 /* testFunction.json */,
 				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
-				E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */,
-				E37E74A626A90CC70019B06D /* StructContractTest.swift */,
+				E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */,
+				E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -940,6 +952,9 @@
 				E3A21DDC265654A7006C560D /* Type.swift */,
 				E3A21E54265C9AF3006C560D /* Bytes.swift */,
 				E3A21E56265CC247006C560D /* Array.swift */,
+				E36D344B26AA634300F0F679 /* Utf8String.swift */,
+				E36D344D26AA644A00F0F679 /* Uint.swift */,
+				E36D344F26AA912700F0F679 /* Struct.swift */,
 			);
 			path = datatypes;
 			sourceTree = "<group>";
@@ -1333,6 +1348,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E37E74AD26AA3DDB0019B06D /* ContractImproveFuncTestData.json in Resources */,
 				E3E02389264CB16500791E00 /* testFunction.json in Resources */,
 				E37E74A326A909110019B06D /* StructContractTestData.json in Resources */,
 				E37E749926A6A0E50019B06D /* ContractTestData.json in Resources */,
@@ -1442,6 +1458,7 @@
 				E3B8E6B32685918A0069A223 /* MessageSigned.swift in Sources */,
 				E38FA1282689A6CB00F532D0 /* EC224.swift in Sources */,
 				E363D3AB269D19210077F6D2 /* FeeDelegatedSmartContractDeployWithRatio.swift in Sources */,
+				E36D344E26AA644A00F0F679 /* Uint.swift in Sources */,
 				E38FA1152689A6CB00F532D0 /* Exception.swift in Sources */,
 				E3A21E3A265654A7006C560D /* EthereumBlock.swift in Sources */,
 				E38FA12A2689A6CB00F532D0 /* BP320.swift in Sources */,
@@ -1512,6 +1529,7 @@
 				E3A21E37265654A7006C560D /* EthereumTransactionReceipt.swift in Sources */,
 				E38FA1202689A6CB00F532D0 /* EC283.swift in Sources */,
 				E36B78A526A575CC00FF2FD4 /* EventFilterOptions.swift in Sources */,
+				E36D345026AA912700F0F679 /* Struct.swift in Sources */,
 				E38FA0BC26896B6800F532D0 /* Random.swift in Sources */,
 				E3A21E2E265654A7006C560D /* ERC721Responses.swift in Sources */,
 				E38FA1112689A6CB00F532D0 /* OFBCipher.swift in Sources */,
@@ -1573,6 +1591,7 @@
 				E38FA0C426896B6800F532D0 /* Words and Bits.swift in Sources */,
 				E38FA1102689A6CB00F532D0 /* MD.swift in Sources */,
 				E3E0234B2648BAE600791E00 /* KeyringContainer.swift in Sources */,
+				E36D344C26AA634300F0F679 /* Utf8String.swift in Sources */,
 				E3A21E38265654A7006C560D /* EthereumAddress.swift in Sources */,
 				E38FA1142689A6CB00F532D0 /* DeterministicK.swift in Sources */,
 				E36D83782698020400D4D5B2 /* AbstractTransaction.swift in Sources */,
@@ -1629,6 +1648,7 @@
 				E31BEDF8269EDC3400196C0A /* ChainDataAnchoringTest.swift in Sources */,
 				E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */,
 				E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */,
+				E37E74AB26AA3DC60019B06D /* ContractImproveFuncTest.swift in Sources */,
 				E394F0D826A1856E00371199 /* FeeDelegatedValueTransferMemoTest.swift in Sources */,
 				E394F0D026A1136000371199 /* FeeDelegatedChainDataAnchoringWithRatioTest.swift in Sources */,
 				E394F0D626A1610100371199 /* FeeDelegatedSmartContractExecutionTest.swift in Sources */,

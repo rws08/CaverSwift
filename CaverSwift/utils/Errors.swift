@@ -29,4 +29,5 @@ public enum CaverError: Error, Equatable {
     case SignatureException(String)
     case CipherException(String)
     case TransactionException(String, String)
+    case JSONRPCError(String)
 }

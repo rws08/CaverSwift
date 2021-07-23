@@ -26,6 +26,13 @@ public class ABI {
         return methodId + encodedParams
     }
     
+    static func encodeFunctionCallWithSolidityWrapper(_ method: ContractMethod, _ params: [Type]) throws -> String {
+        let methodId = try encodeFunctionSignature(method)
+        let encodedArguments = try encodeParameters(params)
+        
+        return methodId + encodedArguments
+    }
+    
     static func encodeFunctionSignature(_ method: ContractMethod) throws -> String {
         return try encodeFunctionSignature(buildFunctionString(method))
     }

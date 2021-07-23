@@ -11,7 +11,7 @@ import XCTest
 class KeyringContainerTest: XCTestCase {
     static func validateSingleKeyring(_ actual: AbstractKeyring,_ expectedAddress: String, _ expectKey: String) throws {
         guard let actual = actual as? SingleKeyring else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         XCTAssertEqual(expectedAddress, actual.address)
@@ -20,7 +20,7 @@ class KeyringContainerTest: XCTestCase {
 
     static func validateMultipleKeyring(_ actual: AbstractKeyring,_ expectedAddress: String, _ expectKeyArr: [String]) throws {
         guard let actual = actual as? MultipleKeyring else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         XCTAssertEqual(expectedAddress, actual.address)
@@ -32,7 +32,7 @@ class KeyringContainerTest: XCTestCase {
 
     static func validateRoleBasedKeyring(_ actual: AbstractKeyring,_ expectedAddress: String, _ expectKeyArr: [[String]]) throws {
         guard let actual = actual as? RoleBasedKeyring else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         XCTAssertEqual(expectedAddress, actual.address)
@@ -175,7 +175,7 @@ class KeyringContainerTest_updateKeyringTest: XCTestCase {
         let container = KeyringContainer()
         guard let coupled = KeyringFactory.generate()
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
 
@@ -197,7 +197,7 @@ class KeyringContainerTest_updateKeyringTest: XCTestCase {
         let container = KeyringContainer()
         guard let coupled = KeyringFactory.generate()
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
 
@@ -216,7 +216,7 @@ class KeyringContainerTest_updateKeyringTest: XCTestCase {
         let container = KeyringContainer()
         guard let origin = KeyringFactory.generate()
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
 
@@ -241,7 +241,7 @@ class KeyringContainerTest_updateKeyringTest: XCTestCase {
         let container = KeyringContainer()
         guard let origin = KeyringFactory.generate()
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
 
@@ -275,7 +275,7 @@ class KeyringContainerTest_updateKeyringTest: XCTestCase {
         let container = KeyringContainer()
         guard let keyring = KeyringFactory.generate()
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -292,7 +292,7 @@ class KeyringContainerTest_getKeyringTest: XCTestCase {
               let added = try container.add(key) as? SingleKeyring,
               let keyring = try container.getKeyring(added.address)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
 
@@ -303,7 +303,7 @@ class KeyringContainerTest_getKeyringTest: XCTestCase {
         let container = KeyringContainer()
         guard let keyring = KeyringFactory.generate()
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
 
@@ -316,7 +316,7 @@ class KeyringContainerTest_getKeyringTest: XCTestCase {
         let container = KeyringContainer()
         guard let keyring = try? KeyringFactory.create(address, PrivateKey.generate().privateKey)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -333,7 +333,7 @@ class KeyringContainerTest_addTest: XCTestCase {
               let added = try container.add(keyringToAdd) as? SingleKeyring,
               let fromContainer = try container.getKeyring(added.address)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -347,7 +347,7 @@ class KeyringContainerTest_addTest: XCTestCase {
               let added = try container.add(deCoupled) as? SingleKeyring,
               let fromContainer = try container.getKeyring(deCoupled.address)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -367,7 +367,7 @@ class KeyringContainerTest_addTest: XCTestCase {
         guard let added = try? container.add(multipleKeyring),
               let fromContainer = try container.getKeyring(added.address)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -397,7 +397,7 @@ class KeyringContainerTest_addTest: XCTestCase {
         guard let added = try? container.add(roleBasedKeyring),
               let fromContainer = try container.getKeyring(added.address)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -413,7 +413,7 @@ class KeyringContainerTest_removeTest: XCTestCase {
               let added = try container.add(keyringToAdd) as? SingleKeyring,
               let result = try? container.remove(added.address)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -428,7 +428,7 @@ class KeyringContainerTest_removeTest: XCTestCase {
               let added = try container.add(deCoupled) as? SingleKeyring,
               let result = try? container.remove(added.address)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -449,7 +449,7 @@ class KeyringContainerTest_removeTest: XCTestCase {
         guard let added = try? container.add(multipleKeyring),
               let result = try? container.remove(added.address)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -480,7 +480,7 @@ class KeyringContainerTest_removeTest: XCTestCase {
         guard let added = try? container.add(roleBasedKeyring),
               let result = try? container.remove(added.address)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -514,7 +514,7 @@ class KeyringContainerTest_signMessageTest: XCTestCase {
               let expectedData = try? roleBased.signMessage(message, 0, 0),
               let actualData = try? container.signMessage(address, message)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -550,7 +550,7 @@ class KeyringContainerTest_signMessageTest: XCTestCase {
               let expectedData = try? roleBased.signMessage(message, 1, 0),
               let actualData = try? container.signMessage(address, message, 1, 0)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -573,7 +573,7 @@ class KeyringContainerTest_signTest: XCTestCase {
               let _ = try? container.sign(singleKeyring.address, valueTransfer, 0),
               let expectedSig = try singleKeyring.sign(TransactionHasher.getHashForSignature(valueTransfer), valueTransfer.chainId, 0, 0)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -591,7 +591,7 @@ class KeyringContainerTest_signTest: XCTestCase {
               let _ = try? container.sign(keyring.address, valueTransfer, 1),
               let expectedSig = try keyring.sign(TransactionHasher.getHashForSignature(valueTransfer), valueTransfer.chainId, 0, 1)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -610,7 +610,7 @@ class KeyringContainerTest_signTest: XCTestCase {
               let _ = try? container.sign(keyring.address, valueTransfer, 2),
               let expectedSig = try keyring.sign(TransactionHasher.getHashForSignature(valueTransfer), valueTransfer.chainId, 0, 2)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -629,7 +629,7 @@ class KeyringContainerTest_signTest: XCTestCase {
               let _ = try? container.sign(keyring.address, accountUpdate, 2),
               let expectedSig = try keyring.sign(TransactionHasher.getHashForSignature(accountUpdate), accountUpdate.chainId, 1, 2)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -643,7 +643,7 @@ class KeyringContainerTest_signTest: XCTestCase {
         let address = "0x1234567890123456789012345678901234567890"
         guard let valueTransfer = try? KeyringContainerTest.generateValueTransfer(KeyringFactory.generate()!)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -659,7 +659,7 @@ class KeyringContainerTest_signTest: XCTestCase {
               let valueTransfer = try? KeyringContainerTest.generateValueTransfer(singleKeyring),
               let _ = try? container.sign(singleKeyring.address, valueTransfer)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -675,7 +675,7 @@ class KeyringContainerTest_signTest: XCTestCase {
               let keyring = try? container.add(multipleKeyring),
               let _ = try? container.sign(keyring.address, valueTransfer)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -692,7 +692,7 @@ class KeyringContainerTest_signTest: XCTestCase {
               let keyring = try? container.add(roleBasedKeyring),
               let _ = try? container.sign(keyring.address, valueTransfer)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -710,7 +710,7 @@ class KeyringContainerTest_signTest: XCTestCase {
             }),
               let expected = try? singleKeyring.sign("0xd4aab6590bdb708d1d3eafe95a967dafcd2d7cde197e512f3f0b8158e7b65fd1", valueTransfer.chainId, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -726,7 +726,7 @@ class KeyringContainerTest_signTest: XCTestCase {
               let tx = try? KeyringContainerTest.generateAccountUpdate(roleBasedKeyring),
               let _ = try? container.sign(address, tx)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -738,7 +738,7 @@ class KeyringContainerTest_signTest: XCTestCase {
         let address = "0x1234567890123456789012345678901234567890"
         guard let valueTransfer = try? KeyringContainerTest.generateValueTransfer(KeyringFactory.generate()!)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -757,7 +757,7 @@ class KeyringContainerTest_signAsFeePayerTest: XCTestCase {
               let _ = try? container.signAsFeePayer(singleKeyring.address, feeDelegatedValueTransfer, 0),
               let expectedSig = try singleKeyring.sign(TransactionHasher.getHashForFeePayerSignature(feeDelegatedValueTransfer), feeDelegatedValueTransfer.chainId, 2, 0)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -775,7 +775,7 @@ class KeyringContainerTest_signAsFeePayerTest: XCTestCase {
               let _ = try? container.signAsFeePayer(keyring.address, feeDelegatedValueTransfer, 1),
               let expectedSig = try keyring.sign(TransactionHasher.getHashForFeePayerSignature(feeDelegatedValueTransfer), feeDelegatedValueTransfer.chainId, 2, 1)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -794,7 +794,7 @@ class KeyringContainerTest_signAsFeePayerTest: XCTestCase {
               let _ = try? container.signAsFeePayer(keyring.address, feeDelegatedValueTransfer, 2),
               let expectedSig = try keyring.sign(TransactionHasher.getHashForFeePayerSignature(feeDelegatedValueTransfer), feeDelegatedValueTransfer.chainId, 2, 2)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -808,7 +808,7 @@ class KeyringContainerTest_signAsFeePayerTest: XCTestCase {
         let address = "0x1234567890123456789012345678901234567890"
         guard let feeDelegatedValueTransfer = try? KeyringContainerTest.generateFeeDelegatedValueTransfer(KeyringFactory.generate()!)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -824,7 +824,7 @@ class KeyringContainerTest_signAsFeePayerTest: XCTestCase {
               let feeDelegatedValueTransfer = try? KeyringContainerTest.generateFeeDelegatedValueTransfer(singleKeyring),
               let _ = try? container.signAsFeePayer(singleKeyring.address, feeDelegatedValueTransfer)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -840,7 +840,7 @@ class KeyringContainerTest_signAsFeePayerTest: XCTestCase {
               let keyring = try? container.add(multipleKeyring),
               let _ = try? container.signAsFeePayer(keyring.address, feeDelegatedValueTransfer)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -857,7 +857,7 @@ class KeyringContainerTest_signAsFeePayerTest: XCTestCase {
               let keyring = try? container.add(roleBasedKeyring),
               let _ = try? container.signAsFeePayer(keyring.address, feeDelegatedValueTransfer)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -875,7 +875,7 @@ class KeyringContainerTest_signAsFeePayerTest: XCTestCase {
             }),
               let expected = try? singleKeyring.sign("0xd4aab6590bdb708d1d3eafe95a967dafcd2d7cde197e512f3f0b8158e7b65fd1", feeDelegatedValueTransfer.chainId, AccountKeyRoleBased.RoleGroup.FEE_PAYER.rawValue)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         
@@ -887,7 +887,7 @@ class KeyringContainerTest_signAsFeePayerTest: XCTestCase {
         let address = "0x1234567890123456789012345678901234567890"
         guard let feeDelegatedValueTransfer = try? KeyringContainerTest.generateFeeDelegatedValueTransfer(KeyringFactory.generate()!)
         else {
-            XCTAssert(true)
+            XCTAssert(false)
             return
         }
         

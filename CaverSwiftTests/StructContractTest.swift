@@ -46,7 +46,7 @@ class StructContractTest: XCTestCase {
     
     func testDs() throws {
         guard let result = try StructContractTest.testContract.getMethod("setDs").call([["name", [1, 2, 3]]])
-        else { XCTAssert(true); return }
+        else { XCTAssert(false); return }
         let dynamicStruct = result[0].value as! DynamicStruct
         XCTAssertEqual(dynamicStruct.values[0] as! String, "name")
         XCTAssertEqual(dynamicStruct.values[1] as! TypeArray, TypeArray([BigUInt(1), BigUInt(2), BigUInt(3)], BigUInt.rawType))
@@ -54,7 +54,7 @@ class StructContractTest: XCTestCase {
     
     func testSs() throws {
         guard let result = try StructContractTest.testContract.getMethod("setSs").call([[1, false]])
-        else { XCTAssert(true); return }
+        else { XCTAssert(false); return }
         let staticStruct = result[0].value as! StaticStruct
         XCTAssertEqual(staticStruct, StaticStruct([BigUInt(1), false]))
     }
@@ -76,7 +76,7 @@ class StructContractTest: XCTestCase {
                     [1, false],
                     123
                 ]])
-        else { XCTAssert(true); return }
+        else { XCTAssert(false); return }
         let dynamicStruct = result[0].value as! DynamicStruct
         XCTAssertEqual(dynamicStruct, expected)
     }
@@ -95,7 +95,7 @@ class StructContractTest: XCTestCase {
                     [2, false],
                     [3, true]
                 ]])
-        else { XCTAssert(true); return }
+        else { XCTAssert(false); return }
         XCTAssertEqual(result[0].value as? DynamicArray, expected)
     }
 }

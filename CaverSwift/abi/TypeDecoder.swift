@@ -46,7 +46,7 @@ public class TypeDecoder {
         case .FixedBool:
             param = false
         case .DynamicString:
-            param = ""
+            return Utf8String("")
         }
         
         return Type(param, abiType)

@@ -27,7 +27,7 @@ open class ContractDeployParams {
     
     init(_ bytecode: String, _ deployParams: Any...) throws {
         self.bytecode = bytecode
-        setDeployParams([deployParams])
+        setDeployParams(deployParams.flatCompactMapForVariadicParameters())
     }
     
     init(_ bytecode: String, _ deployParams: [Any]) throws {

@@ -17,22 +17,22 @@ open class PollingTransactionReceiptProcessor: TransactionReceiptProcessor {
         super.init(caver)
     }
     
-    public override func waitForTransactionReceipt(_ transactionHash: String) throws -> TransactionReceiptData? {
+    public override func waitForTransactionReceipt(_ transactionHash: String) throws -> TransactionReceiptData {
         return try getTransactionReceipt(transactionHash, sleepDuration, attempts)
     }
     
-    private func getTransactionReceipt(_ transactionHash: String, _ sleepDuration: Int, _ attempts: Int) throws -> TransactionReceiptData? {
+    private func getTransactionReceipt(_ transactionHash: String, _ sleepDuration: Int, _ attempts: Int) throws -> TransactionReceiptData {
         var receiptOptional = try? sendTransactionReceiptRequest(transactionHash)
         
         for _ in (0..<attempts) {
-            if receiptOptional == nil {
+            if let receiptOptional = receiptOptional {
+                return receiptOptional
+            } else {
                 do {
                     usleep(useconds_t(sleepDuration * 1000))
                 }
             
                 receiptOptional = try? sendTransactionReceiptRequest(transactionHash)
-            } else {
-                return receiptOptional
             }
         }
         

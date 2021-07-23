@@ -9,230 +9,229 @@ import Foundation
 
 public class Bytes: Type {
     public init(_ value: Data) {
-        super.init(value)
-        self.rawType = .DynamicBytes
+        super.init(value, .DynamicBytes)
     }
 }
 
-public class Bytes1: Type {
-    public init(_ value: Data) {
-        super.init(value)
-        self.rawType = .FixedBytes(self.size)
-    }
-}
-
-public class Bytes2: Type {
-    public init(_ value: Data) {
+public class Bytes1: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes3: Type {
-    public init(_ value: Data) {
+public class Bytes2: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes4: Type {
-    public init(_ value: Data) {
+public class Bytes3: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes5: Type {
-    public init(_ value: Data) {
+public class Bytes4: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes6: Type {
-    public init(_ value: Data) {
+public class Bytes5: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes7: Type {
-    public init(_ value: Data) {
+public class Bytes6: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes8: Type {
-    public init(_ value: Data) {
+public class Bytes7: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes9: Type {
-    public init(_ value: Data) {
+public class Bytes8: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes10: Type {
-    public init(_ value: Data) {
+public class Bytes9: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes11: Type {
-    public init(_ value: Data) {
+public class Bytes10: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes12: Type {
-    public init(_ value: Data) {
+public class Bytes11: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes13: Type {
-    public init(_ value: Data) {
+public class Bytes12: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes14: Type {
-    public init(_ value: Data) {
+public class Bytes13: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes15: Type {
-    public init(_ value: Data) {
+public class Bytes14: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes16: Type {
-    public init(_ value: Data) {
+public class Bytes15: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes17: Type {
-    public init(_ value: Data) {
+public class Bytes16: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes18: Type {
-    public init(_ value: Data) {
+public class Bytes17: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes19: Type {
-    public init(_ value: Data) {
+public class Bytes18: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes20: Type {
-    public init(_ value: Data) {
+public class Bytes19: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes21: Type {
-    public init(_ value: Data) {
+public class Bytes20: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes22: Type {
-    public init(_ value: Data) {
+public class Bytes21: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes23: Type {
-    public init(_ value: Data) {
+public class Bytes22: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes24: Type {
-    public init(_ value: Data) {
+public class Bytes23: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes25: Type {
-    public init(_ value: Data) {
+public class Bytes24: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes26: Type {
-    public init(_ value: Data) {
+public class Bytes25: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes27: Type {
-    public init(_ value: Data) {
+public class Bytes26: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes28: Type {
-    public init(_ value: Data) {
+public class Bytes27: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes29: Type {
-    public init(_ value: Data) {
+public class Bytes28: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes30: Type {
-    public init(_ value: Data) {
+public class Bytes29: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes31: Type {
-    public init(_ value: Data) {
+public class Bytes30: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
 }
 
-public class Bytes32: Type {
-    public init(_ value: Data) {
+public class Bytes31: Bytes {
+    public override init(_ value: Data) {
+        super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+}
+
+public class Bytes32: Bytes {
+    public override init(_ value: Data) {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }

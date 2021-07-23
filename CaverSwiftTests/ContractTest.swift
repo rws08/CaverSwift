@@ -16,7 +16,7 @@ class ContractTest: XCTestCase {
     static var contractAddress = ""
     static let ownerPrivateKey = "0x2359d1ae7317c01532a58b01452476b796a3ac713336e97d8d3c9651cc0aecc3"
             
-    static let ownerData = TestAccountInfo.LUMAN
+    static let ownerData = TestAccountInfo.TEST
     
     static let GAS_LIMIT = BigInt(9_000_000)
     static let GAS_PRICE = BigInt(4_100_000_000)
@@ -148,7 +148,7 @@ class ContractTest: XCTestCase {
             ContractTest.contractAddress)
         
         guard let result = try contract.getMethod("symbol").call(nil, callObject)
-        else { XCTAssert(true); return }
+        else { XCTAssert(false); return }
         let symbol = result[0].value as! String
         XCTAssertEqual("KCT", symbol)
     }
@@ -158,7 +158,7 @@ class ContractTest: XCTestCase {
         let contract = try Contract(caver, ContractTest.jsonObj, ContractTest.contractAddress)
         
         guard let result = try contract.getMethod("symbol").call(nil)
-        else { XCTAssert(true); return }
+        else { XCTAssert(false); return }
         let symbol = result[0].value as! String
         XCTAssertEqual("KCT", symbol)
     }
@@ -171,14 +171,14 @@ class ContractTest: XCTestCase {
         
         let callParams = [TestAccountInfo.BRANDON.address]
         guard let list = try contract.getMethod("balanceOf").call(callParams, CallObject.createCallObject())
-        else { XCTAssert(true); return }
+        else { XCTAssert(false); return }
         let balance = list[0].value as! BigUInt
         let amount = BigUInt(1) * BigUInt(10).power(17)
         let functionParams: [Any] = [TestAccountInfo.BRANDON.address, amount]
         
         let _ = try contract.getMethod("transfer").send(functionParams, sendOptions)
         guard let result = try contract.getMethod("balanceOf").call(callParams, CallObject.createCallObject())
-        else { XCTAssert(true); return }
+        else { XCTAssert(false); return }
         XCTAssertEqual(balance + amount, result[0].value as! BigUInt)
     }
     
@@ -274,7 +274,7 @@ class ContractTest: XCTestCase {
         guard let log = logResults[0] as? KlayLogs.Log,
               let data = log.data,
               let topics = log.topics
-        else { XCTAssert(true); return }
+        else { XCTAssert(false); return }
         
         let eventValues = try ABI.decodeLog(try contract.getEvent("Transfer").inputs, data, topics)
         

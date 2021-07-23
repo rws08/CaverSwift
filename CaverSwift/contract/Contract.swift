@@ -31,7 +31,7 @@ open class Contract {
     }
     
     public func deploy(_ sendOptions: SendOptions, _ contractBinaryData: String, _ constructorParams: Any...) throws -> Contract {
-        let deployParams = try ContractDeployParams(contractBinaryData, [constructorParams])
+        let deployParams = try ContractDeployParams(contractBinaryData, constructorParams.flatCompactMapForVariadicParameters())
         return try deploy(deployParams, sendOptions)
     }
     
@@ -59,11 +59,11 @@ open class Contract {
         let (error, response) = caver.rpc.klay.sendRawTransaction(try smartContractDeploy.getRawTransaction())
         if let resDataString = response {
             let receipt = try processor.waitForTransactionReceipt(resDataString.val)
-            let contractAddress = receipt?.contractAddress
+            let contractAddress = receipt.contractAddress
             setContractAddress(contractAddress)
             return self
         } else if let error = error {
-            throw CaverError.IOException(error.localizedDescription)
+            throw error
         }
         throw CaverError.unexpectedReturnValue
     }
@@ -129,18 +129,87 @@ open class Contract {
         if let resDataString = response {
             return resDataString
         } else if let error = error {
-            throw CaverError.IOException(error.localizedDescription)
+            throw error
         }
         throw CaverError.unexpectedReturnValue
     }
     
-    public func call(_ methodName: String, _ methodArguments:[Any]) -> [Type]? {
-        return call(CallObject.init(), methodName, methodArguments)
+    public func call(_ methodName: String, _ methodArguments: Any...) -> [Type]? {
+        return call(CallObject.init(), methodName, methodArguments.flatCompactMapForVariadicParameters())
     }
     
-    public func call(_ callObject: CallObject, _ methodName: String, _ methodArguments:[Any]) -> [Type]?{
+    public func call(_ callObject: CallObject, _ methodName: String, _ methodArguments: Any...) -> [Type]? {
+        guard let contractMethod = try? getMethod(methodName) else { return nil }
+        return try? contractMethod.call(methodArguments.flatCompactMapForVariadicParameters(), callObject)
+    }
+    
+    public func call(_ callObject: CallObject, _ methodName: String, _ methodArguments: [Any]? = nil) -> [Type]? {
         guard let contractMethod = try? getMethod(methodName) else { return nil }
         return try? contractMethod.call(methodArguments, callObject)
+    }
+    
+    public func callWithSolidityType(_ methodName: String, _ methodArguments: Type...) -> [Type]? {
+        return callWithSolidityType(CallObject.createCallObject(), methodName, methodArguments)
+    }
+    
+    public func callWithSolidityType(_ callObject: CallObject, _ methodName: String, _ methodArguments: Type...) -> [Type]? {
+        guard let contractMethod = try? getMethod(methodName) else { return nil }
+        return try? contractMethod.callWithSolidityWrapper(methodArguments, callObject)
+    }
+    
+    public func callWithSolidityType(_ callObject: CallObject, _ methodName: String, _ methodArguments: [Type]? = nil) -> [Type]? {
+        guard let contractMethod = try? getMethod(methodName) else { return nil }
+        return try? contractMethod.callWithSolidityWrapper(methodArguments, callObject)
+    }
+        
+    public func send(_ methodName: String, _ methodArguments: Any...) throws -> TransactionReceiptData {
+        return try send(nil, methodName, methodArguments.flatCompactMapForVariadicParameters())
+    }
+    
+    public func send(_ options: SendOptions? = nil, _ methodName: String, _ methodArguments: Any...) throws -> TransactionReceiptData {
+        return try send(options, PollingTransactionReceiptProcessor(caver, 1000, 15), methodName, methodArguments.flatCompactMapForVariadicParameters())
+    }
+    
+    public func send(_ options: SendOptions? = nil, _ receiptProcessor: TransactionReceiptProcessor, _ methodName: String, _ methodArguments: Any...) throws -> TransactionReceiptData {
+        let contractMethod = try getMethod(methodName)
+        return try contractMethod.send(methodArguments.flatCompactMapForVariadicParameters(), options, receiptProcessor)
+    }
+    
+    public func sendWithSolidityType(_ methodName: String, _ methodArguments: Type...) throws -> TransactionReceiptData {
+        return try sendWithSolidityType(nil, PollingTransactionReceiptProcessor(caver, 1000, 15), methodName, methodArguments)
+    }
+    
+    public func sendWithSolidityType(_ options: SendOptions? = nil, _ methodName: String, _ methodArguments: Type...) throws -> TransactionReceiptData {
+        return try sendWithSolidityType(options, PollingTransactionReceiptProcessor(caver, 1000, 15), methodName, methodArguments)
+    }
+    
+    public func sendWithSolidityType(_ options: SendOptions? = nil, _ receiptProcessor: TransactionReceiptProcessor, _ methodName: String, _ methodArguments: Type...) throws -> TransactionReceiptData {
+        return try sendWithSolidityType(options, receiptProcessor, methodName, methodArguments)
+    }
+    
+    public func sendWithSolidityType(_ options: SendOptions? = nil, _ receiptProcessor: TransactionReceiptProcessor, _ methodName: String, _ methodArguments: [Type]) throws -> TransactionReceiptData {
+        let contractMethod = try getMethod(methodName)
+        return try contractMethod.sendWithSolidityWrapper(methodArguments, options, receiptProcessor)
+    }
+    
+    public func encodeABI(_ methodName: String, _ methodArguments: Any...) -> String? {
+        guard let method = try? getMethod(methodName) else { return nil }
+        return try? method.encodeABI(methodArguments.flatCompactMapForVariadicParameters())
+    }
+        
+    public func encodeABIWithSolidityType(_ methodName: String, _ methodArguments: Type...) -> String? {
+        guard let method = try? getMethod(methodName) else { return nil }
+        return try? method.encodeABIWithSolidityWrapper(methodArguments)
+    }
+    
+    public func estimateGas(_ callObject: CallObject, _ methodName: String, _ methodArguments: Any...) -> String? {
+        guard let method = try? getMethod(methodName) else { return nil }
+        return try? method.estimateGas(methodArguments.flatCompactMapForVariadicParameters(), callObject)
+    }
+    
+    public func estimateGasWithSolidityType(_ callObject: CallObject, _ methodName: String, _ methodArguments: Type...) -> String? {
+        guard let method = try? getMethod(methodName) else { return nil }
+        return try? method.estimateGasWithSolidityWrapper(methodArguments, callObject)
     }
     
     private func initAbi() throws {

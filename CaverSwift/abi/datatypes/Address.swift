@@ -8,7 +8,7 @@
 import Foundation
 import BigInt
 
-public struct Address: Codable, Hashable {
+public struct Address: Codable, Hashable, ABIType {
     private static var MAX_BYTE_LENGTH = 20
     public let val: BigUInt
     public static let zero = Address("0x0000000000000000000000000000000000000000")
@@ -31,5 +31,15 @@ public struct Address: Codable, Hashable {
     
     public static func == (lhs: Address, rhs: Address) -> Bool {
         return lhs.val == rhs.val
+    }
+    
+    public var value: ABIType { self.val }
+    public static var typeAsString: String { return String(describing: self) }
+    public static var rawType: ABIRawType { .FixedAddress }
+    public static var parser: ParserFunction {
+        return { data in
+            let first = data.first ?? ""
+            return try ABIDecoder.decode(first, to: Address.self)
+        }
     }
 }

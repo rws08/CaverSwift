@@ -71,7 +71,22 @@ open class ContractMethod: Codable {
         return try callFunction(matchedMethod, encodedFunction, callObject)
     }
     
-    public func send(_ arguments: [Any]? = nil, _ options: SendOptions? = nil, _ processor: TransactionReceiptProcessor? = nil) throws -> TransactionReceiptData? {
+    public func callWithSolidityWrapper(_ arguments: [Type]?, _ callObject: CallObject? = CallObject.createCallObject()) throws -> [Type]?{
+        guard let callObject = callObject else {
+            throw CaverError.invalidValue
+        }
+        var functionParams: [Type] = []
+        if arguments != nil {
+            functionParams.append(contentsOf: arguments!)
+        }
+        
+        let matchedMethod = try findMatchedInstanceWithSolidityWrapper(functionParams)
+        let encodedFunction = try ABI.encodeFunctionCallWithSolidityWrapper(matchedMethod, functionParams)
+        
+        return try callFunction(matchedMethod, encodedFunction, callObject)
+    }
+    
+    public func send(_ arguments: [Any]? = nil, _ options: SendOptions? = nil, _ processor: TransactionReceiptProcessor? = nil) throws -> TransactionReceiptData {
         var functionParams: [Any] = []
         if arguments != nil {
             functionParams.append(contentsOf: arguments!)
@@ -79,6 +94,18 @@ open class ContractMethod: Codable {
         
         let matchedMethod = try findMatchedInstance(functionParams)
         let encodedFunction = try ABI.encodeFunctionCall(matchedMethod, functionParams)
+        
+        return try sendTransaction(matchedMethod, options, encodedFunction, processor ?? PollingTransactionReceiptProcessor(caver!, 1000, 15))
+    }
+    
+    public func sendWithSolidityWrapper(_ wrapperArguments: [Type]? = nil, _ options: SendOptions? = nil, _ processor: TransactionReceiptProcessor? = nil) throws -> TransactionReceiptData {
+        var functionParams: [Type] = []
+        if wrapperArguments != nil {
+            functionParams.append(contentsOf: wrapperArguments!)
+        }
+        
+        let matchedMethod = try findMatchedInstanceWithSolidityWrapper(functionParams)
+        let encodedFunction = try ABI.encodeFunctionCallWithSolidityWrapper(matchedMethod, functionParams)
         
         return try sendTransaction(matchedMethod, options, encodedFunction, processor ?? PollingTransactionReceiptProcessor(caver!, 1000, 15))
     }
@@ -93,8 +120,23 @@ open class ContractMethod: Codable {
         return try ABI.encodeFunctionCall(matchedMethod, functionParams)
     }
     
+    public func encodeABIWithSolidityWrapper(_ arguments: [Type]?) throws -> String{
+        var functionParams: [Type] = []
+        if arguments != nil {
+            functionParams.append(contentsOf: arguments!)
+        }
+        
+        let matchedMethod = try findMatchedInstanceWithSolidityWrapper(functionParams)
+        return try ABI.encodeFunctionCallWithSolidityWrapper(matchedMethod, functionParams)
+    }
+    
     public func estimateGas(_ arguments: [Any], _ callObject: CallObject) throws -> String {
         let encodedFunctionCall = try encodeABI(arguments)
+        return try estimateGas(encodedFunctionCall, callObject)
+    }
+    
+    public func estimateGasWithSolidityWrapper(_ arguments: [Type], _ callObject: CallObject) throws -> String {
+        let encodedFunctionCall = try encodeABIWithSolidityWrapper(arguments)
         return try estimateGas(encodedFunctionCall, callObject)
     }
     
@@ -140,7 +182,37 @@ open class ContractMethod: Codable {
         return matchedMethod[0]
     }
     
-    private func sendTransaction(_ method: ContractMethod, _ options: SendOptions?, _ encodedInput: String, _ processor: TransactionReceiptProcessor) throws -> TransactionReceiptData? {
+    private func findMatchedInstanceWithSolidityWrapper(_ arguments: [Type]) throws -> ContractMethod {
+        var matchedMethod: ContractMethod? = nil
+        
+        if checkParamsTypeMatched(arguments) {
+            matchedMethod = self
+        } else {
+            for method in nextContractMethods {
+                if method.checkParamsTypeMatched(arguments) {
+                    matchedMethod = method
+                }
+            }
+        }
+        
+        guard let matchedMethod = matchedMethod else {
+            throw CaverError.IllegalArgumentException("Cannot find method with passed parameters.")
+        }
+        
+        return matchedMethod
+    }
+    
+    private func checkParamsTypeMatched(_ arguments: [Type]) -> Bool {
+        if(inputs.count != arguments.count) {
+            return false
+        }
+        
+        return inputs.elementsEqual(arguments) { ioType, arg in
+            ioType.getTypeAsString() == arg.typeName
+        }
+    }
+    
+    private func sendTransaction(_ method: ContractMethod, _ options: SendOptions?, _ encodedInput: String, _ processor: TransactionReceiptProcessor) throws -> TransactionReceiptData {
         guard let klay = caver?.rpc.klay else {
             throw CaverError.invalidValue
         }
@@ -162,9 +234,9 @@ open class ContractMethod: Codable {
             let receipt = try processor.waitForTransactionReceipt(resDataString.val)
             return receipt
         } else if let error = error {
-            throw CaverError.IOException(error.localizedDescription)
+            throw error
         }
-        return nil
+        throw CaverError.invalidValue
     }
     
     private func callFunction(_ method: ContractMethod, _ encodedInput: String, _ callObject: CallObject) throws -> [Type]? {

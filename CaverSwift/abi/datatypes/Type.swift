@@ -13,7 +13,7 @@ let MAX_BYTE_LENGTH = MAX_BIT_LENGTH / 8
 let MAX_BYTE_LENGTH_FOR_HEX_STRING = MAX_BYTE_LENGTH << 1
 func MAX_INT(_ x: Int) -> BigInt { return (BigInt(Data((0...(x/8)).map{ _ in 0xff })) - 1) }
 
-public class Type: Any, Equatable {
+public class Type: Any, Equatable {    
     public static func == (lhs: Type, rhs: Type) -> Bool {
         var ret = false
         if lhs.rawType == rhs.rawType {
@@ -39,9 +39,9 @@ public class Type: Any, Equatable {
                     return false
                 }
                 
-                ret = zip(lValues, rValues).filter {
-                    Type($0) != Type($1)
-                }.isEmpty
+                ret = lValues.elementsEqual(rValues) {
+                    Type($0) == Type($1)
+                }
             case .Tuple(_):
                 guard let lValues = (lhs.value as? TypeStruct)?.values,
                       let rValues = (rhs.value as? TypeStruct)?.values else {
@@ -49,11 +49,11 @@ public class Type: Any, Equatable {
                 }
                 if lValues.count != rValues.count {
                     return false
-                }
+                }                
                 
-                ret = zip(lValues, rValues).filter {
-                    Type($0) != Type($1)
-                }.isEmpty
+                ret = lValues.elementsEqual(rValues) {
+                    Type($0) == Type($1)
+                }
             }
         }
         return ret
@@ -61,9 +61,12 @@ public class Type: Any, Equatable {
     
     public var value: ABIType
     var rawType: ABIRawType
-    static var typeName: String { return String(describing: self).lowercased() }
-    var typeName: String { return String(describing: type(of: self)).lowercased() }
-    var size: Int { Int(self.typeName.filter { "0"..."9" ~= $0 }) ?? 0 }
+    var typeName: String {
+        return self.rawType.rawValue
+    }
+    var size: Int {
+        Int(String(describing: type(of: self)).lowercased().filter { "0"..."9" ~= $0 }) ?? MAX_BIT_LENGTH
+    }
     
     public init(_ value: ABIType, _ rawType: ABIRawType? = nil) {
         if value is TypeArray {
@@ -89,6 +92,10 @@ public class Type: Any, Equatable {
             self.rawType = rawType
         }
     }
+    
+    public func getValue<T>() -> T? where T : ABIType {
+        return value as? T
+    }
 }
 
 extension Int: ABIType {
@@ -112,138 +119,5 @@ extension UInt: ABIType {
             guard value.bitWidth <= 256 else { throw ABIError.invalidValue }
             return UInt(value)
         }
-    }
-}
-
-extension Address: ABIType {
-    public var value: ABIType { self.val }
-    public static var typeAsString: String { return String(describing: self) }
-    public static var rawType: ABIRawType { .FixedAddress }
-    public static var parser: ParserFunction {
-        return { data in
-            let first = data.first ?? ""
-            return try ABIDecoder.decode(first, to: Address.self)
-        }
-    }
-}
-
-public class TypeStruct: Equatable {
-    public static func == (lhs: TypeStruct, rhs: TypeStruct) -> Bool {
-        return lhs.values.elementsEqual(rhs.values) { lhsItem, rhsItem in
-            Type(lhsItem) == Type(rhsItem)
-        }
-    }
-    
-    public var values: [ABIType]
-    
-    public init(_ values: [ABIType], _ subRawType:[ABIRawType] = []) {
-        self.values = values
-        if subRawType.isEmpty {
-            self.subRawType = values.map {
-                Type($0).rawType
-            }
-        } else {
-            self.subRawType = subRawType
-        }
-    }
-    public var subRawType: [ABIRawType] = []
-    var subParser: ParserFunction = String.parser
-}
-
-extension TypeStruct: ABIType {
-    public static var rawType: ABIRawType {
-        .Tuple([])
-    }
-    
-    public static var parser: ParserFunction {
-        String.parser
-    }
-    
-    public var value: ABIType { self }
-    public var rawType: ABIRawType { .Tuple(self.subRawType) }
-    public var parser: ParserFunction {
-        return self.subParser
-    }
-}
-
-public class DynamicStruct: TypeStruct { }
-
-public class StaticStruct: TypeStruct { }
-
-public class TypeArray: Equatable {
-    public static func == (lhs: TypeArray, rhs: TypeArray) -> Bool {
-        return lhs.values.elementsEqual(rhs.values) { lhsItem, rhsItem in
-            Type(lhsItem) == Type(rhsItem)
-        }
-    }
-    
-    public var rawType = ABIRawType.DynamicArray(.DynamicString)
-    public var values: [ABIType]
-    
-    public init(_ values: [ABIType], _ solidityType: String? = nil) {
-        self.values = values
-        if solidityType != nil {
-            self.rawType = ABIRawType(rawValue: solidityType!) ?? .DynamicArray(.DynamicString)
-            guard let components = solidityType?.components(separatedBy: CharacterSet(charactersIn: "[]")) else { return }
-            self.subRawType = ABIRawType(rawValue: String(describing: components[0])) ?? .DynamicString
-            if components.count > 3 {
-                let sub = solidityType?[solidityType!.startIndex..<solidityType!.lastIndex(of: "[")!]
-                self.subRawType = ABIRawType(rawValue: String(describing: String(sub!))) ?? .DynamicString
-            }
-        } else if let val = values.first {
-            self.rawType = .DynamicArray(type(of: val).rawType)
-        }
-    }
-    
-    public init(_ values: [ABIType], _ rawType: ABIRawType) {
-        self.values = values
-        self.rawType = rawType
-        self.subRawType = rawType.subType ?? .DynamicString
-    }
-    
-    public var subRawType: ABIRawType = .DynamicString
-    var subParser: ParserFunction = String.parser
-}
-
-extension TypeArray: ABIType {
-    public static var rawType: ABIRawType {
-        .DynamicArray(.DynamicString)
-    }
-    
-    public static var parser: ParserFunction {
-        String.parser
-    }
-    
-    public var value: ABIType { self }
-    public var parser: ParserFunction {
-        return self.subParser
-    }
-}
-
-public class DynamicArray: TypeArray {
-    public override init(_ values: [ABIType], _ rawType: ABIRawType) {
-        super.init(values, rawType)
-    }
-    
-    public override init(_ values: [ABIType], _ solidityType: String? = nil) {
-        if solidityType == nil {
-            super.init(values, ABIRawType.DynamicArray(type(of: values.first!).rawType).rawValue)
-        } else {
-            super.init(values, solidityType)
-        }
-    }
-}
-
-public class StaticArray: TypeArray {
-    public override init(_ values: [ABIType], _ rawType: ABIRawType) {
-        super.init(values, rawType)
-    }
-    
-    public override init(_ values: [ABIType], _ solidityType: String? = nil) {
-        if solidityType == nil {
-            super.init(values, ABIRawType.FixedArray(type(of: values.first!).rawType, values.count).rawValue)
-        } else {
-            super.init(values, solidityType)
-        }        
     }
 }
