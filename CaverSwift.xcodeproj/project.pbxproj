@@ -76,6 +76,8 @@
 		E37E74A926A914780019B06D /* DefaultFunctionReturnDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A826A914780019B06D /* DefaultFunctionReturnDecoder.swift */; };
 		E37E74AB26AA3DC60019B06D /* ContractImproveFuncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */; };
 		E37E74AD26AA3DDB0019B06D /* ContractImproveFuncTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */; };
+		E382FEDF26AE31130094AF2A /* ContractOverloadFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEDE26AE31130094AF2A /* ContractOverloadFunctionsTest.swift */; };
+		E382FEE126AE31210094AF2A /* ContractOverloadFunctionsTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */; };
 		E38FA0BC26896B6800F532D0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A626896B6800F532D0 /* Random.swift */; };
 		E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A726896B6800F532D0 /* GCD.swift */; };
 		E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A826896B6800F532D0 /* Hashable.swift */; };
@@ -363,6 +365,8 @@
 		E37E74A826A914780019B06D /* DefaultFunctionReturnDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFunctionReturnDecoder.swift; sourceTree = "<group>"; };
 		E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractImproveFuncTest.swift; sourceTree = "<group>"; };
 		E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ContractImproveFuncTestData.json; sourceTree = "<group>"; };
+		E382FEDE26AE31130094AF2A /* ContractOverloadFunctionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractOverloadFunctionsTest.swift; sourceTree = "<group>"; };
+		E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ContractOverloadFunctionsTestData.json; sourceTree = "<group>"; };
 		E38FA0A626896B6800F532D0 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E38FA0A726896B6800F532D0 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		E38FA0A826896B6800F532D0 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
@@ -846,6 +850,8 @@
 				E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */,
 				E3917529268ECFFB006BB332 /* AccountTest.swift */,
 				E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */,
+				E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */,
+				E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */,
 				E36B78A026A56F3400FF2FD4 /* ContractTest.swift */,
 				E37E749826A6A01E0019B06D /* ContractTestData.json */,
 				E39F2CD9262EA4EF003FA426 /* Info.plist */,
@@ -858,8 +864,8 @@
 				E3E02388264CB16500791E00 /* testFunction.json */,
 				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
-				E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */,
-				E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */,
+				E382FEDE26AE31130094AF2A /* ContractOverloadFunctionsTest.swift */,
+				E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -1351,6 +1357,7 @@
 				E37E74AD26AA3DDB0019B06D /* ContractImproveFuncTestData.json in Resources */,
 				E3E02389264CB16500791E00 /* testFunction.json in Resources */,
 				E37E74A326A909110019B06D /* StructContractTestData.json in Resources */,
+				E382FEE126AE31210094AF2A /* ContractOverloadFunctionsTestData.json in Resources */,
 				E37E749926A6A0E50019B06D /* ContractTestData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1658,6 +1665,7 @@
 				E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */,
 				E394F0C2269FD79700371199 /* ValueTransferMemoTest.swift in Sources */,
 				E394F0CE26A10AF000371199 /* FeeDelegatedChainDataAnchoringTest.swift in Sources */,
+				E382FEDF26AE31130094AF2A /* ContractOverloadFunctionsTest.swift in Sources */,
 				E394F0CC26A104B900371199 /* FeeDelegatedCancelWithRatioTest.swift in Sources */,
 				E3A5C8C22682F4A2002A0A2D /* UtilsTest.swift in Sources */,
 				E31BEDF4269D92E700196C0A /* AccountUpdateTest.swift in Sources */,

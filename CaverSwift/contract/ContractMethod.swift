@@ -16,7 +16,16 @@ open class ContractMethod: Codable {
     var inputs: [ContractIOType] = []
     var outputs: [ContractIOType] = []
     var signature: String = ""
-    var contractAddress: String
+    var _contractAddress: String = ""
+    var contractAddress: String {
+        get{ _contractAddress }
+        set(v){
+            _contractAddress = v
+            nextContractMethods.forEach {
+                $0.contractAddress = v
+            }
+        }
+    }
     var defaultSendOptions = SendOptions(nil, BigInt.zero)
     var wallet: IWallet? = nil
     var nextContractMethods: [ContractMethod] = []
@@ -270,7 +279,7 @@ open class ContractMethod: Codable {
             throw CaverError.IOException(error.debugDescription)
         }
     }
-    
+        
     public func makeSendOption(_ sendOption: SendOptions?) -> SendOptions {
         let defaultSendOption = defaultSendOptions
         var from = defaultSendOption.from

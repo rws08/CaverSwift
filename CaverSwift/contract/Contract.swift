@@ -10,8 +10,17 @@ import GenericJSON
 
 open class Contract {
     var caver: Caver
-    private(set) public var abi: String
-    private(set) public var contractAddress: String? = nil
+    private(set) public var abi: String = ""
+    var _contractAddress: String? = nil
+    private(set) public var contractAddress: String? {
+        get { _contractAddress }
+        set(v) {
+            _contractAddress = v
+            methods.values.forEach {
+                $0.contractAddress = v ?? ""
+            }
+        }
+    }
     private(set) public var methods: [String:ContractMethod] = [:]
     private(set) public var events: [String:ContractEvent] = [:]
     private(set) public var constructor: ContractMethod?
@@ -19,13 +28,11 @@ open class Contract {
     var wallet: IWallet?
     
     public init(_ caver: Caver, _ abi: String, _ contractAddress: String? = nil) throws {
-        self.abi = abi
         self.caver = caver
-        self.contractAddress = contractAddress
         
         try setAbi(abi)
         setCaver(caver)
-        setContractAddress(contractAddress)
+        self.contractAddress = contractAddress
         setDefaultSendOptions(SendOptions())
         setWallet(caver.wallet)
     }
@@ -59,8 +66,7 @@ open class Contract {
         let (error, response) = caver.rpc.klay.sendRawTransaction(try smartContractDeploy.getRawTransaction())
         if let resDataString = response {
             let receipt = try processor.waitForTransactionReceipt(resDataString.val)
-            let contractAddress = receipt.contractAddress
-            setContractAddress(contractAddress)
+            self.contractAddress = receipt.contractAddress
             return self
         } else if let error = error {
             throw error
@@ -78,13 +84,6 @@ open class Contract {
     func setAbi(_ abi: String) throws {
         self.abi = abi
         try initAbi()
-    }
-    
-    func setContractAddress(_ contractAddress: String?) {
-        self.contractAddress = contractAddress
-        methods.values.forEach {
-            $0.contractAddress = contractAddress ?? ""
-        }
     }
     
     func setDefaultSendOptions(_ defaultSendOptions: SendOptions) {
