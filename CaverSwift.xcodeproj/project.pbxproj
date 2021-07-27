@@ -725,14 +725,14 @@
 		E382FEE226AE4A600094AF2A /* kct */ = {
 			isa = PBXGroup;
 			children = (
-				E382FEF726AFBE990094AF2A /* KIP17 */,
-				E382FEE326AE4A680094AF2A /* KIP7 */,
-				E382FEF026AF9E200094AF2A /* KIP13 */,
+				E382FEE326AE4A680094AF2A /* kip7 */,
+				E382FEF026AF9E200094AF2A /* kip13 */,
+				E382FEF726AFBE990094AF2A /* kip17 */,
 			);
 			path = kct;
 			sourceTree = "<group>";
 		};
-		E382FEE326AE4A680094AF2A /* KIP7 */ = {
+		E382FEE326AE4A680094AF2A /* kip7 */ = {
 			isa = PBXGroup;
 			children = (
 				E382FEE826AE4B520094AF2A /* KIP7.swift */,
@@ -740,20 +740,20 @@
 				E382FEE626AE4AFA0094AF2A /* KIP7ConstantData.swift */,
 				E382FEE426AE4A790094AF2A /* KIP7DeployParams.swift */,
 			);
-			path = KIP7;
+			path = kip7;
 			sourceTree = "<group>";
 		};
-		E382FEF026AF9E200094AF2A /* KIP13 */ = {
+		E382FEF026AF9E200094AF2A /* kip13 */ = {
 			isa = PBXGroup;
 			children = (
 				E382FEF126AF9E500094AF2A /* KIP13.swift */,
 				E382FEF526AF9E960094AF2A /* KIP13ConstantData.json */,
 				E382FEF326AF9E5B0094AF2A /* KIP13ConstantData.swift */,
 			);
-			path = KIP13;
+			path = kip13;
 			sourceTree = "<group>";
 		};
-		E382FEF726AFBE990094AF2A /* KIP17 */ = {
+		E382FEF726AFBE990094AF2A /* kip17 */ = {
 			isa = PBXGroup;
 			children = (
 				E382FEF826AFBEBA0094AF2A /* KIP17.swift */,
@@ -761,7 +761,7 @@
 				E382FEFC26AFBED10094AF2A /* KIP17ConstantData.json */,
 				E382FEFE26AFBEDF0094AF2A /* KIP17DeployParams.swift */,
 			);
-			path = KIP17;
+			path = kip17;
 			sourceTree = "<group>";
 		};
 		E38FA0A526896B6800F532D0 /* BigInt */ = {
@@ -919,30 +919,30 @@
 		E39F2CD6262EA4EF003FA426 /* CaverSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */,
-				E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */,
-				E37E749826A6A01E0019B06D /* ContractTestData.json */,
-				E382FEEE26AF98740094AF2A /* KIP7TestData.json */,
-				E37E74A226A909100019B06D /* StructContractTestData.json */,
-				E3E02388264CB16500791E00 /* testFunction.json */,
-				E39F2CD9262EA4EF003FA426 /* Info.plist */,
 				E3A21D3526564CCA006C560D /* ABITests.swift */,
 				E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */,
 				E3917529268ECFFB006BB332 /* AccountTest.swift */,
 				E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */,
 				E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */,
+				E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */,
 				E382FEDE26AE31130094AF2A /* ContractOverloadFunctionsTest.swift */,
+				E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */,
 				E36B78A026A56F3400FF2FD4 /* ContractTest.swift */,
+				E37E749826A6A01E0019B06D /* ContractTestData.json */,
+				E39F2CD9262EA4EF003FA426 /* Info.plist */,
 				E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */,
 				E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */,
 				E382FEEC26AE76070094AF2A /* KIP7Test.swift */,
-				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
-				E37E74A626A90CC70019B06D /* StructContractTest.swift */,
-				E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */,
-				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
-				E363D38B269C062B0077F6D2 /* transaction */,
+				E382FEEE26AF98740094AF2A /* KIP7TestData.json */,
 				E382FF0026AFC5360094AF2A /* KIP17Test.swift */,
 				E382FF0226AFC57A0094AF2A /* KIP17TestData.json */,
+				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
+				E37E74A626A90CC70019B06D /* StructContractTest.swift */,
+				E37E74A226A909100019B06D /* StructContractTestData.json */,
+				E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */,
+				E3E02388264CB16500791E00 /* testFunction.json */,
+				E363D38B269C062B0077F6D2 /* transaction */,
+				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
