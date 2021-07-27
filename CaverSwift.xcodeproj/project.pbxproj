@@ -91,6 +91,7 @@
 		E382FEFB26AFBEC70094AF2A /* KIP17ConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEFA26AFBEC70094AF2A /* KIP17ConstantData.swift */; };
 		E382FEFD26AFBED10094AF2A /* KIP17ConstantData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEFC26AFBED10094AF2A /* KIP17ConstantData.json */; };
 		E382FEFF26AFBEDF0094AF2A /* KIP17DeployParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEFE26AFBEDF0094AF2A /* KIP17DeployParams.swift */; };
+		E382FF0126AFC5360094AF2A /* KIP17Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FF0026AFC5360094AF2A /* KIP17Test.swift */; };
 		E38FA0BC26896B6800F532D0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A626896B6800F532D0 /* Random.swift */; };
 		E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A726896B6800F532D0 /* GCD.swift */; };
 		E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A826896B6800F532D0 /* Hashable.swift */; };
@@ -393,6 +394,7 @@
 		E382FEFA26AFBEC70094AF2A /* KIP17ConstantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP17ConstantData.swift; sourceTree = "<group>"; };
 		E382FEFC26AFBED10094AF2A /* KIP17ConstantData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KIP17ConstantData.json; sourceTree = "<group>"; };
 		E382FEFE26AFBEDF0094AF2A /* KIP17DeployParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP17DeployParams.swift; sourceTree = "<group>"; };
+		E382FF0026AFC5360094AF2A /* KIP17Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP17Test.swift; sourceTree = "<group>"; };
 		E38FA0A626896B6800F532D0 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E38FA0A726896B6800F532D0 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		E38FA0A826896B6800F532D0 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
@@ -937,6 +939,7 @@
 				E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
 				E363D38B269C062B0077F6D2 /* transaction */,
+				E382FF0026AFC5360094AF2A /* KIP17Test.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -1749,6 +1752,7 @@
 				E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */,
 				E394F0C2269FD79700371199 /* ValueTransferMemoTest.swift in Sources */,
 				E394F0CE26A10AF000371199 /* FeeDelegatedChainDataAnchoringTest.swift in Sources */,
+				E382FF0126AFC5360094AF2A /* KIP17Test.swift in Sources */,
 				E382FEDF26AE31130094AF2A /* ContractOverloadFunctionsTest.swift in Sources */,
 				E394F0CC26A104B900371199 /* FeeDelegatedCancelWithRatioTest.swift in Sources */,
 				E3A5C8C22682F4A2002A0A2D /* UtilsTest.swift in Sources */,
