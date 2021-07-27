@@ -87,6 +87,10 @@
 		E382FEF226AF9E500094AF2A /* KIP13.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEF126AF9E500094AF2A /* KIP13.swift */; };
 		E382FEF426AF9E5B0094AF2A /* KIP13ConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEF326AF9E5B0094AF2A /* KIP13ConstantData.swift */; };
 		E382FEF626AF9E960094AF2A /* KIP13ConstantData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEF526AF9E960094AF2A /* KIP13ConstantData.json */; };
+		E382FEF926AFBEBA0094AF2A /* KIP17.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEF826AFBEBA0094AF2A /* KIP17.swift */; };
+		E382FEFB26AFBEC70094AF2A /* KIP17ConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEFA26AFBEC70094AF2A /* KIP17ConstantData.swift */; };
+		E382FEFD26AFBED10094AF2A /* KIP17ConstantData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEFC26AFBED10094AF2A /* KIP17ConstantData.json */; };
+		E382FEFF26AFBEDF0094AF2A /* KIP17DeployParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEFE26AFBEDF0094AF2A /* KIP17DeployParams.swift */; };
 		E38FA0BC26896B6800F532D0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A626896B6800F532D0 /* Random.swift */; };
 		E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A726896B6800F532D0 /* GCD.swift */; };
 		E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A826896B6800F532D0 /* Hashable.swift */; };
@@ -385,6 +389,10 @@
 		E382FEF126AF9E500094AF2A /* KIP13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP13.swift; sourceTree = "<group>"; };
 		E382FEF326AF9E5B0094AF2A /* KIP13ConstantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP13ConstantData.swift; sourceTree = "<group>"; };
 		E382FEF526AF9E960094AF2A /* KIP13ConstantData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KIP13ConstantData.json; sourceTree = "<group>"; };
+		E382FEF826AFBEBA0094AF2A /* KIP17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP17.swift; sourceTree = "<group>"; };
+		E382FEFA26AFBEC70094AF2A /* KIP17ConstantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP17ConstantData.swift; sourceTree = "<group>"; };
+		E382FEFC26AFBED10094AF2A /* KIP17ConstantData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KIP17ConstantData.json; sourceTree = "<group>"; };
+		E382FEFE26AFBEDF0094AF2A /* KIP17DeployParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP17DeployParams.swift; sourceTree = "<group>"; };
 		E38FA0A626896B6800F532D0 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E38FA0A726896B6800F532D0 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		E38FA0A826896B6800F532D0 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
@@ -713,8 +721,9 @@
 		E382FEE226AE4A600094AF2A /* kct */ = {
 			isa = PBXGroup;
 			children = (
-				E382FEF026AF9E200094AF2A /* KIP13 */,
+				E382FEF726AFBE990094AF2A /* KIP17 */,
 				E382FEE326AE4A680094AF2A /* KIP7 */,
+				E382FEF026AF9E200094AF2A /* KIP13 */,
 			);
 			path = kct;
 			sourceTree = "<group>";
@@ -722,10 +731,10 @@
 		E382FEE326AE4A680094AF2A /* KIP7 */ = {
 			isa = PBXGroup;
 			children = (
-				E382FEE426AE4A790094AF2A /* KIP7DeployParams.swift */,
-				E382FEE626AE4AFA0094AF2A /* KIP7ConstantData.swift */,
 				E382FEE826AE4B520094AF2A /* KIP7.swift */,
 				E382FEEA26AE4B940094AF2A /* KIP7ConstantData.json */,
+				E382FEE626AE4AFA0094AF2A /* KIP7ConstantData.swift */,
+				E382FEE426AE4A790094AF2A /* KIP7DeployParams.swift */,
 			);
 			path = KIP7;
 			sourceTree = "<group>";
@@ -734,10 +743,21 @@
 			isa = PBXGroup;
 			children = (
 				E382FEF126AF9E500094AF2A /* KIP13.swift */,
-				E382FEF326AF9E5B0094AF2A /* KIP13ConstantData.swift */,
 				E382FEF526AF9E960094AF2A /* KIP13ConstantData.json */,
+				E382FEF326AF9E5B0094AF2A /* KIP13ConstantData.swift */,
 			);
 			path = KIP13;
+			sourceTree = "<group>";
+		};
+		E382FEF726AFBE990094AF2A /* KIP17 */ = {
+			isa = PBXGroup;
+			children = (
+				E382FEF826AFBEBA0094AF2A /* KIP17.swift */,
+				E382FEFA26AFBEC70094AF2A /* KIP17ConstantData.swift */,
+				E382FEFC26AFBED10094AF2A /* KIP17ConstantData.json */,
+				E382FEFE26AFBEDF0094AF2A /* KIP17DeployParams.swift */,
+			);
+			path = KIP17;
 			sourceTree = "<group>";
 		};
 		E38FA0A526896B6800F532D0 /* BigInt */ = {
@@ -898,6 +918,7 @@
 				E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */,
 				E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */,
 				E37E749826A6A01E0019B06D /* ContractTestData.json */,
+				E382FEEE26AF98740094AF2A /* KIP7TestData.json */,
 				E37E74A226A909100019B06D /* StructContractTestData.json */,
 				E3E02388264CB16500791E00 /* testFunction.json */,
 				E39F2CD9262EA4EF003FA426 /* Info.plist */,
@@ -910,13 +931,12 @@
 				E36B78A026A56F3400FF2FD4 /* ContractTest.swift */,
 				E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */,
 				E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */,
+				E382FEEC26AE76070094AF2A /* KIP7Test.swift */,
 				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
 				E37E74A626A90CC70019B06D /* StructContractTest.swift */,
 				E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
 				E363D38B269C062B0077F6D2 /* transaction */,
-				E382FEEC26AE76070094AF2A /* KIP7Test.swift */,
-				E382FEEE26AF98740094AF2A /* KIP7TestData.json */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -1399,6 +1419,7 @@
 			files = (
 				E382FEEB26AE4B940094AF2A /* KIP7ConstantData.json in Resources */,
 				E382FEF626AF9E960094AF2A /* KIP13ConstantData.json in Resources */,
+				E382FEFD26AFBED10094AF2A /* KIP17ConstantData.json in Resources */,
 				E3A21E86265F9321006C560D /* CaverSwift.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1596,6 +1617,7 @@
 				E36D345026AA912700F0F679 /* Struct.swift in Sources */,
 				E38FA0BC26896B6800F532D0 /* Random.swift in Sources */,
 				E3A21E2E265654A7006C560D /* ERC721Responses.swift in Sources */,
+				E382FEF926AFBEBA0094AF2A /* KIP17.swift in Sources */,
 				E38FA1112689A6CB00F532D0 /* OFBCipher.swift in Sources */,
 				E3A21E3E265654A7006C560D /* EthereumClient.swift in Sources */,
 				E38FA0D026896B6800F532D0 /* BigInt.swift in Sources */,
@@ -1609,6 +1631,7 @@
 				E390DAB2268C68DD00D05479 /* WeightedPublicKey.swift in Sources */,
 				E3A21E15265654A7006C560D /* ABIEvent.swift in Sources */,
 				E36EEA3A2696B05900C1B599 /* slowequals.c in Sources */,
+				E382FEFF26AFBEDF0094AF2A /* KIP17DeployParams.swift in Sources */,
 				E38FA0C326896B6800F532D0 /* Comparable.swift in Sources */,
 				E3E023502648BCD800791E00 /* Klay.swift in Sources */,
 				E363D3A9269D17590077F6D2 /* FeeDelegatedSmartContractDeploy.swift in Sources */,
@@ -1663,6 +1686,7 @@
 				E38FA0C126896B6800F532D0 /* Data Conversion.swift in Sources */,
 				E363D3B7269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift in Sources */,
 				E38FA0CC26896B6800F532D0 /* Floating Point Conversion.swift in Sources */,
+				E382FEFB26AFBEC70094AF2A /* KIP17ConstantData.swift in Sources */,
 				E382FEE526AE4A790094AF2A /* KIP7DeployParams.swift in Sources */,
 				E38FA0C626896B6800F532D0 /* Division.swift in Sources */,
 				E3A21E32265654A7006C560D /* EthereumAccount+SignTransaction.swift in Sources */,

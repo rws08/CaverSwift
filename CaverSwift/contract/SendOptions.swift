@@ -19,14 +19,14 @@ open class SendOptions {
         try? setValue(value)
     }
     
-    public init(_ from: String? = nil, _ gas: BigInt, _ value: BigInt) {
+    public init(_ from: String? = nil, _ gas: BigUInt, _ value: BigUInt) {
         try? setFrom(from)
         try? setGas(gas)
         setValue(value)
     }
     
-    public convenience init(_ from: String? = nil, _ gas: BigInt) {
-        self.init(from, gas, BigInt.zero)
+    public convenience init(_ from: String? = nil, _ gas: BigUInt) {
+        self.init(from, gas, BigUInt.zero)
     }
     
     public func setFrom(_ from: String? = nil) throws {
@@ -47,7 +47,7 @@ open class SendOptions {
         self.gas = gas
     }
     
-    public func setGas(_ gas: BigInt) throws {
+    public func setGas(_ gas: BigUInt) throws {
         self.gas = gas.hexa
     }
     
@@ -62,7 +62,7 @@ open class SendOptions {
         }
     }
     
-    public func setValue(_ value: BigInt) {
+    public func setValue(_ value: BigUInt) {
         let gas = value.hexa
         try? self.setValue(gas)
     }

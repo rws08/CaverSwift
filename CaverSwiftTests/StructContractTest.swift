@@ -40,7 +40,7 @@ class StructContractTest: XCTestCase {
         StructContractTest.testContract = try! Contract(StructContractTest.caver, StructContractTest.CONTRACT_ABI)
         StructContractTest.deployerKeyring = try StructContractTest.caver.wallet.add(try! KeyringFactory.createFromPrivateKey("871ccee7755bb4247e783110cafa6437f9f593a1eaeebe0efcc1b0852282c3e5")) as! SingleKeyring
         
-        _ = try! StructContractTest.testContract.deploy(SendOptions(StructContractTest.deployerKeyring.address, BigInt(30000000)), StructContractTest.BYTECODE)
+        _ = try! StructContractTest.testContract.deploy(SendOptions(StructContractTest.deployerKeyring.address, BigUInt(30000000)), StructContractTest.BYTECODE)
         print("\(String(describing: StructContractTest.testContract.contractAddress))")
     }
     

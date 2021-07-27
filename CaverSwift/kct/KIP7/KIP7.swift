@@ -60,7 +60,7 @@ open class KIP7: Contract {
         try super.init(caver, KIP7ConstantData.ABI, contractAddress)
     }
     
-    public static func deploy(_ caver: Caver, _ deployer: String, _ name: String, _ symbol: String, _ decimals: Int, _ initialSupply: BigInt, _ wallet: IWallet? = nil) throws -> KIP7 {
+    public static func deploy(_ caver: Caver, _ deployer: String, _ name: String, _ symbol: String, _ decimals: Int, _ initialSupply: BigUInt, _ wallet: IWallet? = nil) throws -> KIP7 {
         let params = KIP7DeployParams(name, symbol, decimals, initialSupply)
         return try KIP7.deploy(caver, params, deployer, wallet ?? caver.wallet)
     }
@@ -74,7 +74,7 @@ open class KIP7: Contract {
         
         let deployArgument: [Any] = [tokenInfo.name, tokenInfo.symbol, tokenInfo.decimals, tokenInfo.initialSupply]
         let contractDeployParams = try ContractDeployParams(KIP7ConstantData.BINARY, deployArgument)
-        let sendOption = SendOptions(deployer, BigInt(4000000))
+        let sendOption = SendOptions(deployer, BigUInt(4000000))
         
         let kip7 = try KIP7(caver)
         kip7.wallet = wallet

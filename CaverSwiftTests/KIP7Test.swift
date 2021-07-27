@@ -21,7 +21,7 @@ class KIP7Test: XCTestCase {
         _ = try! caver.wallet.add(try! KeyringFactory.createFromPrivateKey("0x2359d1ae7317c01532a58b01452476b796a3ac713336e97d8d3c9651cc0aecc3"))
         _ = try! caver.wallet.add(try! KeyringFactory.createFromPrivateKey("0x734aa75ef35fd4420eea2965900e90040b8b9f9f7484219b1a06d06394330f4e"))
         
-        let kip7DeployParam = KIP7DeployParams(CONTRACT_NAME, CONTRACT_SYMBOL, CONTRACT_DECIMALS, BigInt(CONTRACT_INITIAL_SUPPLY))
+        let kip7DeployParam = KIP7DeployParams(CONTRACT_NAME, CONTRACT_SYMBOL, CONTRACT_DECIMALS, CONTRACT_INITIAL_SUPPLY)
         KIP7Test.kip7contract = try? KIP7.deploy(caver, kip7DeployParam, TestAccountInfo.LUMAN.address)
     }
 }
@@ -40,7 +40,7 @@ class KIP7Test_ConstructorTest: XCTestCase {
     func test_deploy() throws {
         let caver = Caver(Caver.DEFAULT_URL)
         _ = try! caver.wallet.add(try! KeyringFactory.createFromPrivateKey("0x2359d1ae7317c01532a58b01452476b796a3ac713336e97d8d3c9651cc0aecc3"))
-        let contract = try? KIP7.deploy(caver, TestAccountInfo.LUMAN.address, KIP7Test.CONTRACT_NAME, KIP7Test.CONTRACT_SYMBOL, KIP7Test.CONTRACT_DECIMALS, BigInt(KIP7Test.CONTRACT_INITIAL_SUPPLY))
+        let contract = try? KIP7.deploy(caver, TestAccountInfo.LUMAN.address, KIP7Test.CONTRACT_NAME, KIP7Test.CONTRACT_SYMBOL, KIP7Test.CONTRACT_DECIMALS, KIP7Test.CONTRACT_INITIAL_SUPPLY)
         
         XCTAssertNotNil(contract)
     }
@@ -98,19 +98,19 @@ class KIP7Test_PausableTest: XCTestCase {
             return
         }
         if paused {
-            let options = SendOptions(TestAccountInfo.LUMAN.address, BigInt(4000000))
+            let options = SendOptions(TestAccountInfo.LUMAN.address, BigUInt(4000000))
             _ = try kip7contract.unpause(options)
         }
     }
     
     func test_pause() throws {
-        let options = SendOptions(TestAccountInfo.LUMAN.address, BigInt(4000000))
+        let options = SendOptions(TestAccountInfo.LUMAN.address, BigUInt(4000000))
         _ = try kip7contract?.pause(options)
         XCTAssertTrue(try kip7contract?.paused() ?? false)
     }
     
     func test_pausedDefaultOptions() throws {
-        let options = SendOptions(TestAccountInfo.LUMAN.address, BigInt(4000000))
+        let options = SendOptions(TestAccountInfo.LUMAN.address, BigUInt(4000000))
         kip7contract?.setDefaultSendOptions(options)
         _ = try kip7contract?.pause()
         XCTAssertTrue(try kip7contract?.paused() ?? false)
@@ -129,7 +129,7 @@ class KIP7Test_PausableTest: XCTestCase {
     }
     
     func test_unPause() throws {
-        let options = SendOptions(TestAccountInfo.LUMAN.address, BigInt(4000000))
+        let options = SendOptions(TestAccountInfo.LUMAN.address, BigUInt(4000000))
         _ = try kip7contract?.pause(options)
         XCTAssertTrue(try kip7contract?.paused() ?? false)
         
@@ -138,7 +138,7 @@ class KIP7Test_PausableTest: XCTestCase {
     }
     
     func test_addPauser() throws {
-        let options = SendOptions(TestAccountInfo.LUMAN.address, BigInt(4000000))
+        let options = SendOptions(TestAccountInfo.LUMAN.address, BigUInt(4000000))
         _ = try kip7contract?.addPauser(TestAccountInfo.BRANDON.address, options)
         XCTAssertTrue(try kip7contract?.isPauser(TestAccountInfo.BRANDON.address) ?? false)
     }
@@ -149,11 +149,11 @@ class KIP7Test_PausableTest: XCTestCase {
             return
         }
         if !isPauser {
-            let options = SendOptions(TestAccountInfo.LUMAN.address, BigInt(4000000))
+            let options = SendOptions(TestAccountInfo.LUMAN.address, BigUInt(4000000))
             _ = try kip7contract?.addPauser(TestAccountInfo.BRANDON.address, options)
         }
         
-        let options = SendOptions(TestAccountInfo.BRANDON.address, BigInt(4000000))
+        let options = SendOptions(TestAccountInfo.BRANDON.address, BigUInt(4000000))
         _ = try kip7contract?.renouncePauser(options)
         
         XCTAssertFalse(try kip7contract?.isPauser(TestAccountInfo.BRANDON.address) ?? true)
@@ -503,7 +503,7 @@ class KIP7Test_DetectInterfaceTest: XCTestCase {
     
     func test_only_mintable() throws {
         let contract = try Contract(caver!, abi_mintable)
-        _ = try contract.deploy(SendOptions(TestAccountInfo.LUMAN.address, BigInt(10000000)), byteCodeWithMintable, BigUInt(100000000000))
+        _ = try contract.deploy(SendOptions(TestAccountInfo.LUMAN.address, BigUInt(10000000)), byteCodeWithMintable, BigUInt(100000000000))
         guard let result = try? KIP7.detectInterface(caver!, contract.contractAddress!) else {
             XCTAssert(false)
             return
@@ -517,7 +517,7 @@ class KIP7Test_DetectInterfaceTest: XCTestCase {
     
     func test_withoutBurnable_Pausable() throws {
         let contract = try Contract(caver!, abi_without_pausable_burnable)
-        _ = try contract.deploy(SendOptions(TestAccountInfo.LUMAN.address, BigInt(10000000)), byteCodeWithoutBurnablePausable, "Test", "TST", 18, BigUInt(100000000000))
+        _ = try contract.deploy(SendOptions(TestAccountInfo.LUMAN.address, BigUInt(10000000)), byteCodeWithoutBurnablePausable, "Test", "TST", 18, BigUInt(100000000000))
         guard let result = try? KIP7.detectInterface(caver!, contract.contractAddress!) else {
             XCTAssert(false)
             return
@@ -531,7 +531,7 @@ class KIP7Test_DetectInterfaceTest: XCTestCase {
     
     func test_notSupportedKIP13() throws {
         let contract = try Contract(caver!, abi_not_supported_kip13)
-        _ = try contract.deploy(SendOptions(TestAccountInfo.LUMAN.address, BigInt(10000000)), byteCodeNotSupportedKIP13)
+        _ = try contract.deploy(SendOptions(TestAccountInfo.LUMAN.address, BigUInt(10000000)), byteCodeNotSupportedKIP13)
                 
         XCTAssertThrowsError(try KIP7.detectInterface(caver!, contract.contractAddress!)) {
             XCTAssertEqual($0 as? CaverError, CaverError.RuntimeException("This contract does not support KIP-13."))

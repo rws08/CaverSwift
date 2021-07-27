@@ -26,7 +26,7 @@ open class ContractMethod: Codable {
             }
         }
     }
-    var defaultSendOptions = SendOptions(nil, BigInt.zero)
+    var defaultSendOptions = SendOptions(nil, BigUInt.zero)
     var wallet: IWallet? = nil
     var nextContractMethods: [ContractMethod] = []
     

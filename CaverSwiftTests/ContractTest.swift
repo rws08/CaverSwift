@@ -18,8 +18,8 @@ class ContractTest: XCTestCase {
             
     static let ownerData = TestAccountInfo.TEST
     
-    static let GAS_LIMIT = BigInt(9_000_000)
-    static let GAS_PRICE = BigInt(4_100_000_000)
+    static let GAS_LIMIT = BigUInt(9_000_000)
+    static let GAS_PRICE = BigUInt(4_100_000_000)
     
     override func setUpWithError() throws {
         if !ContractTest.contractAddress.isEmpty {

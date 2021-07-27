@@ -47,17 +47,17 @@ class ContractImproveFuncTest: XCTestCase {
         ContractImproveFuncTest.ownerKeyring = try! KeyringFactory.createFromPrivateKey(ContractImproveFuncTest.ownerPrivateKey)
         _ = try ContractImproveFuncTest.caver.wallet.add(ContractImproveFuncTest.ownerKeyring)
         ContractImproveFuncTest.contract = try! Contract(ContractImproveFuncTest.caver, ContractImproveFuncTest.ABI)
-        ContractImproveFuncTest.contract.setDefaultSendOptions(SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigInt(8000000)))
+        ContractImproveFuncTest.contract.setDefaultSendOptions(SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigUInt(8000000)))
         
         let deployParams = try ContractDeployParams(ContractImproveFuncTest.BINARY, ["CONTRACT_TEST"])
-        _ = try ContractImproveFuncTest.contract.deploy(deployParams, SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigInt(6500000)))
+        _ = try ContractImproveFuncTest.contract.deploy(deployParams, SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigUInt(6500000)))
         
         _ = storeStringData("Contract", "Call")
         _ = storeUintData("Age", 2)
     }
     
     func storeStringData(_ key: String, _ value: String) -> TransactionReceiptData? {
-        let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigInt(500000))
+        let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigUInt(500000))
         let receiptData = try? ContractImproveFuncTest.contract.send(sendOptions, ContractImproveFuncTest.FUNC_SET_STRING, key, value)
         
         if(receiptData?.status != "0x1") {
@@ -68,7 +68,7 @@ class ContractImproveFuncTest: XCTestCase {
     }
     
     func storeUintData(_ key: String, _ value: Int) -> TransactionReceiptData? {
-        let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigInt(500000))
+        let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigUInt(500000))
         let receiptData = try? ContractImproveFuncTest.contract.send(sendOptions, ContractImproveFuncTest.FUNC_SET_UINT, key, value)
         
         if(receiptData?.status != "0x1") {
@@ -83,7 +83,7 @@ class ContractImproveFuncTest: XCTestCase {
         _ = try caver.wallet.add(ContractImproveFuncTest.ownerKeyring)
 
         let contract = try Contract(caver, ContractImproveFuncTest.ABI)
-        let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigInt(6500000))
+        let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigUInt(6500000))
         _ = try contract.deploy(sendOptions, ContractImproveFuncTest.BINARY, "TEST")
         XCTAssertNotNil(contract.contractAddress)
     }
@@ -170,7 +170,7 @@ class ContractImproveFuncTest: XCTestCase {
     }
     
     func test_sendRawTx_throwException_send() throws {
-        let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigInt(500))
+        let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigUInt(500))
         
         XCTAssertThrowsError(try ContractImproveFuncTest.contract.send(sendOptions, ContractImproveFuncTest.FUNC_SET_STRING, "GAS", "ENOUGH")) {
             XCTAssertEqual($0 as? CaverError, CaverError.JSONRPCError("intrinsic gas too low"))
@@ -182,7 +182,7 @@ class ContractImproveFuncTest: XCTestCase {
         _ = try caver.wallet.add(ContractImproveFuncTest.ownerKeyring)
 
         let contract = try Contract(caver, ContractImproveFuncTest.ABI)
-        let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigInt(6500))
+        let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigUInt(6500))
         
         XCTAssertThrowsError(try contract.deploy(sendOptions, ContractImproveFuncTest.BINARY, "TEST")) {
             XCTAssertEqual($0 as? CaverError, CaverError.JSONRPCError("intrinsic gas too low"))
