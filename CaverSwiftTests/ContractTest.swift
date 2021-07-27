@@ -148,7 +148,8 @@ class ContractTest: XCTestCase {
             ContractTest.contractAddress)
         
         guard let result = try contract.getMethod("symbol").call(nil, callObject)
-        else { XCTAssert(false); return }
+        else { XCTAssert(false)
+            return }
         let symbol = result[0].value as! String
         XCTAssertEqual("KCT", symbol)
     }
@@ -158,7 +159,8 @@ class ContractTest: XCTestCase {
         let contract = try Contract(caver, ContractTest.jsonObj, ContractTest.contractAddress)
         
         guard let result = try contract.getMethod("symbol").call(nil)
-        else { XCTAssert(false); return }
+        else { XCTAssert(false)
+            return }
         let symbol = result[0].value as! String
         XCTAssertEqual("KCT", symbol)
     }
@@ -171,14 +173,16 @@ class ContractTest: XCTestCase {
         
         let callParams = [TestAccountInfo.BRANDON.address]
         guard let list = try contract.getMethod("balanceOf").call(callParams, CallObject.createCallObject())
-        else { XCTAssert(false); return }
+        else { XCTAssert(false)
+            return }
         let balance = list[0].value as! BigUInt
         let amount = BigUInt(1) * BigUInt(10).power(17)
         let functionParams: [Any] = [TestAccountInfo.BRANDON.address, amount]
         
         let _ = try contract.getMethod("transfer").send(functionParams, sendOptions)
         guard let result = try contract.getMethod("balanceOf").call(callParams, CallObject.createCallObject())
-        else { XCTAssert(false); return }
+        else { XCTAssert(false)
+            return }
         XCTAssertEqual(balance + amount, result[0].value as! BigUInt)
     }
     
@@ -274,7 +278,8 @@ class ContractTest: XCTestCase {
         guard let log = logResults[0] as? KlayLogs.Log,
               let data = log.data,
               let topics = log.topics
-        else { XCTAssert(false); return }
+        else { XCTAssert(false)
+            return }
         
         let eventValues = try ABI.decodeLog(try contract.getEvent("Transfer").inputs, data, topics)
         
@@ -313,7 +318,7 @@ class ContractTest: XCTestCase {
         let container = KeyringContainer()
         _ = try container.generate(3)
         
-        contract.setWallet(container)
+        contract.wallet = container
         XCTAssertEqual(3, (contract.wallet as? KeyringContainer)?.count)
     }
 }

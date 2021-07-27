@@ -9,9 +9,9 @@ import Foundation
 import BigInt
 
 open class SendOptions {
-    var from: String?
-    var gas: String?
-    var value = "0x0"
+    private(set) var from: String?
+    private(set) var gas: String?
+    private(set) var value = "0x0"
     
     public init(_ from: String? = nil, _ gas: String? = nil, _ value: String = "0x0") {
         try? setFrom(from)

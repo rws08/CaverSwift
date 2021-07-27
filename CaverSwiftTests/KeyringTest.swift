@@ -111,7 +111,8 @@ class generateTest: XCTestCase {
 
 class createFromPrivateKeyTest: XCTestCase {
     func testCreateFromPrivateKey() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let expectedAddress = keyring.address
         let expectedPrivateKey = keyring.key.privateKey
         
@@ -120,7 +121,8 @@ class createFromPrivateKeyTest: XCTestCase {
     }
     
     func testCreateFromPrivateKeyWithoutHexPrefix() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let expectedAddress = keyring.address
         let expectedPrivateKey = keyring.key.privateKey
         
@@ -289,7 +291,8 @@ class createWithSingleKeyTest: XCTestCase {
     }
     
     func testCreateWithSingleKey_throwException_KlaytnWalletKeyFormat() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let klaytnWalletKey = keyring.getKlaytnWalletKey()
         
         XCTAssertThrowsError(try KeyringFactory.createWithSingleKey(keyring.address, klaytnWalletKey)) {
@@ -300,7 +303,8 @@ class createWithSingleKeyTest: XCTestCase {
 
 class createWithMultipleKeyTest: XCTestCase {
     func testCreateWithMultipleKey() throws {
-        guard let expectedAddress = KeyringFactory.generate()?.address else { XCTAssert(false); return }
+        guard let expectedAddress = KeyringFactory.generate()?.address else { XCTAssert(false)
+            return }
         let expectedPrivateKeyArr = [
             PrivateKey.generate().privateKey,
             PrivateKey.generate().privateKey,
@@ -311,7 +315,8 @@ class createWithMultipleKeyTest: XCTestCase {
     }
     
     func testCreateWithMultipleKey_throwException_invalidKey() throws {
-        guard let expectedAddress = KeyringFactory.generate()?.address else { XCTAssert(false); return }
+        guard let expectedAddress = KeyringFactory.generate()?.address else { XCTAssert(false)
+            return }
         let expectedPrivateKeyArr = [
             Utils.generateRandomBytes(31).hexString,
             PrivateKey.generate().privateKey]
@@ -324,7 +329,8 @@ class createWithMultipleKeyTest: XCTestCase {
 
 class createWithRoleBasedKeyTest: XCTestCase {
     func testCreateWithRoleBasedKey() throws {
-        guard let expectedAddress = KeyringFactory.generate()?.address else { XCTAssert(false); return }
+        guard let expectedAddress = KeyringFactory.generate()?.address else { XCTAssert(false)
+            return }
         let expectedPrivateKeyArr = [
             [PrivateKey.generate().privateKey,
              PrivateKey.generate().privateKey],
@@ -375,7 +381,8 @@ class createWithRoleBasedKeyTest: XCTestCase {
 
 class copyTest: XCTestCase {
     func testCopy_coupled() throws {
-        guard let expectedKeyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let expectedKeyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let expectedPrivateKey = expectedKeyring.key.privateKey
         let actualKeyring = expectedKeyring.copy()
         
@@ -406,7 +413,8 @@ class copyTest: XCTestCase {
     }
     
     func testCopy_roleBasedKey() throws {
-        guard let expectedAddress = KeyringFactory.generate()?.address else { XCTAssert(false); return }
+        guard let expectedAddress = KeyringFactory.generate()?.address else { XCTAssert(false)
+            return }
         let expectedPrivateKeyArr = [
             [PrivateKey.generate().privateKey,
              PrivateKey.generate().privateKey],
@@ -426,7 +434,8 @@ class signWithKeyTest: XCTestCase {
     
     func testCoupleKey() throws {
         guard let keyring = KeyringFactory.generate(),
-              let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 0) else { XCTAssert(false); return }
+              let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertFalse(signatureData.r.isEmpty)
         XCTAssertFalse(signatureData.s.isEmpty)
@@ -436,7 +445,8 @@ class signWithKeyTest: XCTestCase {
     func testCoupledKey_with_NotExistedRole() throws {
         guard let keyring = KeyringFactory.generate(),
               let expectedSignatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 0),
-              let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue, 0) else { XCTAssert(false); return }
+              let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertFalse(signatureData.r.isEmpty)
         XCTAssertFalse(signatureData.s.isEmpty)
@@ -448,7 +458,8 @@ class signWithKeyTest: XCTestCase {
     }
     
     func testCoupleKey_throwException_negativeKeyIndex() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         
         XCTAssertThrowsError(try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, -1)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid index : index cannot be negative"))
@@ -456,7 +467,8 @@ class signWithKeyTest: XCTestCase {
     }
     
     func testCoupleKey_throwException_outOfBoundKeyIndex() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         
         XCTAssertThrowsError(try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 1)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid index : index must be less than the length of the key."))
@@ -467,7 +479,8 @@ class signWithKeyTest: XCTestCase {
         let address = PrivateKey.generate().getDerivedAddress()
         let privateKey = PrivateKey.generate().privateKey
         let keyring = try KeyringFactory.create(address, privateKey)
-        guard let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 0) else { XCTAssert(false); return }
+        guard let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertFalse(signatureData.r.isEmpty)
         XCTAssertFalse(signatureData.s.isEmpty)
@@ -479,7 +492,8 @@ class signWithKeyTest: XCTestCase {
         let privateKey = PrivateKey.generate().privateKey
         let keyring = try KeyringFactory.create(address, privateKey)
         guard let expectedSignatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 0),
-              let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue, 0) else { XCTAssert(false); return }
+              let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertFalse(signatureData.r.isEmpty)
         XCTAssertFalse(signatureData.s.isEmpty)
@@ -512,7 +526,8 @@ class signWithKeyTest: XCTestCase {
     
     func testMultipleKey() throws {
         let keyring = try generateMultipleKeyring(3)
-        guard let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 1) else { XCTAssert(false); return }
+        guard let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 1) else { XCTAssert(false)
+            return }
         
         XCTAssertFalse(signatureData.r.isEmpty)
         XCTAssertFalse(signatureData.s.isEmpty)
@@ -522,7 +537,8 @@ class signWithKeyTest: XCTestCase {
     func testMultipleKey_With_NotExistedRole() throws {
         let keyring = try generateMultipleKeyring(3)
         guard let expectedSignatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 0),
-              let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue, 0) else { XCTAssert(false); return }
+              let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertFalse(signatureData.r.isEmpty)
         XCTAssertFalse(signatureData.s.isEmpty)
@@ -551,7 +567,8 @@ class signWithKeyTest: XCTestCase {
     
     func testRoleBasedKey() throws {
         let keyring = try generateRoleBaseKeyring([2, 3, 4])
-        guard let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 1) else { XCTAssert(false); return }
+        guard let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 1) else { XCTAssert(false)
+            return }
         
         XCTAssertFalse(signatureData.r.isEmpty)
         XCTAssertFalse(signatureData.s.isEmpty)
@@ -561,7 +578,8 @@ class signWithKeyTest: XCTestCase {
     func testRoleBasedKey_With_NotExistedRole() throws {
         let keyring = try generateRoleBaseKeyring([2, 0, 4])
         guard let expectedSignatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue, 0),
-              let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue, 0) else { XCTAssert(false); return }
+              let signatureData = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertFalse(signatureData.r.isEmpty)
         XCTAssertFalse(signatureData.s.isEmpty)
@@ -605,7 +623,8 @@ class signWithKeysTest: XCTestCase {
     
     func testCoupleKey() throws {
         guard let keyring = KeyringFactory.generate(),
-              let signatureDataList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue) else { XCTAssert(false); return }
+              let signatureDataList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(1, signatureDataList.count)
         XCTAssertFalse(signatureDataList[0].r.isEmpty)
@@ -616,7 +635,8 @@ class signWithKeysTest: XCTestCase {
     func testCoupleKey_with_NotExistedRole() throws {
         guard let keyring = KeyringFactory.generate(),
               let expectedList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue),
-              let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue) else { XCTAssert(false); return }
+              let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(1, actualList.count)
         XCTAssertFalse(actualList[0].r.isEmpty)
@@ -630,7 +650,8 @@ class signWithKeysTest: XCTestCase {
         let address = PrivateKey.generate().getDerivedAddress()
         let privateKey = PrivateKey.generate().privateKey
         let keyring = try KeyringFactory.create(address, privateKey)
-        guard let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue) else { XCTAssert(false); return }
+        guard let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(1, actualList.count)
         XCTAssertFalse(actualList[0].r.isEmpty)
@@ -643,7 +664,8 @@ class signWithKeysTest: XCTestCase {
         let privateKey = PrivateKey.generate().privateKey
         let keyring = try KeyringFactory.create(address, privateKey)
         guard let expectedList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue),
-              let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue) else { XCTAssert(false); return }
+              let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(1, actualList.count)
         try checkSignature(expectedList, actualList)
@@ -651,7 +673,8 @@ class signWithKeysTest: XCTestCase {
     
     func testMultipleKey() throws {
         let keyring = try generateMultipleKeyring(3)
-        guard let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue) else { XCTAssert(false); return }
+        guard let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(3, actualList.count)
         actualList.forEach {
@@ -664,7 +687,8 @@ class signWithKeysTest: XCTestCase {
     func testMultipleKey_With_NotExistedRole() throws {
         let keyring = try generateMultipleKeyring(3)
         guard let expectedList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue),
-              let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue) else { XCTAssert(false); return }
+              let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(3, actualList.count)
         try checkSignature(expectedList, actualList)
@@ -672,7 +696,8 @@ class signWithKeysTest: XCTestCase {
     
     func testRoleBasedKey() throws {
         let keyring = try generateRoleBaseKeyring([3, 3, 4])
-        guard let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue) else { XCTAssert(false); return }
+        guard let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(3, actualList.count)
         actualList.forEach {
@@ -685,7 +710,8 @@ class signWithKeysTest: XCTestCase {
     func testRoleBasedKey_With_NotExistedRole() throws {
         let keyring = try generateRoleBaseKeyring([3, 0, 4])
         guard let expectedList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue),
-              let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue) else { XCTAssert(false); return }
+              let actualList = try keyring.sign(HASH, CHAIN_ID, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(3, actualList.count)
         try checkSignature(expectedList, actualList)
@@ -698,7 +724,8 @@ class signMessageTest: XCTestCase {
     func testCoupledKey_NoIndex() throws {
         guard let keyring = KeyringFactory.generate(),
               let expect = try? keyring.signMessage(data, 0, 0),
-              let actual = try? keyring.signMessage(data, 0) else { XCTAssert(false); return }
+              let actual = try? keyring.signMessage(data, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(expect.message, actual.message)
         XCTAssertEqual(expect.messageHash, actual.messageHash)
@@ -710,7 +737,8 @@ class signMessageTest: XCTestCase {
     
     func testCoupleKey_WithIndex() throws {
         guard let keyring = KeyringFactory.generate(),
-              let actual = try? keyring.signMessage(data, 0, 0) else { XCTAssert(false); return }
+              let actual = try? keyring.signMessage(data, 0, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(Utils.hashMessage(data), actual.messageHash)
         XCTAssertFalse(actual.signatures[0].r.isEmpty)
@@ -721,7 +749,8 @@ class signMessageTest: XCTestCase {
     func testCoupleKey_NotExistedRoleIndex() throws {
         guard let keyring = KeyringFactory.generate(),
               let expect = try? keyring.signMessage(data, 0, 0),
-              let actual = try? keyring.signMessage(data, AccountKeyRoleBased.RoleGroup.FEE_PAYER.rawValue, 0) else { XCTAssert(false); return }
+              let actual = try? keyring.signMessage(data, AccountKeyRoleBased.RoleGroup.FEE_PAYER.rawValue, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(expect.message, actual.message)
         XCTAssertEqual(expect.messageHash, actual.messageHash)
@@ -732,7 +761,8 @@ class signMessageTest: XCTestCase {
     }
     
     func testRoleBasedKey_throwException_outOfBoundKeyIndex() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         
         XCTAssertThrowsError(try keyring.signMessage(data, 0, 3)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid index : index must be less than the length of the key."))
@@ -740,7 +770,8 @@ class signMessageTest: XCTestCase {
     }
     
     func testCoupleKey_throwException_WithNegativeKeyIndex() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         
         XCTAssertThrowsError(try keyring.signMessage(data, 0, -1)) {
             XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid index : index cannot be negative"))
@@ -752,7 +783,8 @@ class signMessageTest: XCTestCase {
         let privateKey = PrivateKey.generate().privateKey
         let decoupled = try KeyringFactory.create(address, privateKey)
         guard let expect = try? decoupled.signMessage(data, 0, 0),
-              let actual = try? decoupled.signMessage(data, 0) else { XCTAssert(false); return }
+              let actual = try? decoupled.signMessage(data, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(expect.message, actual.message)
         XCTAssertEqual(expect.messageHash, actual.messageHash)
@@ -766,7 +798,8 @@ class signMessageTest: XCTestCase {
         let address = PrivateKey.generate().getDerivedAddress()
         let privateKey = PrivateKey.generate().privateKey
         let decoupled = try KeyringFactory.create(address, privateKey)
-        guard let actual = try? decoupled.signMessage(data, 0, 0) else { XCTAssert(false); return }
+        guard let actual = try? decoupled.signMessage(data, 0, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(Utils.hashMessage(data), actual.messageHash)
         XCTAssertFalse(actual.signatures[0].r.isEmpty)
@@ -779,7 +812,8 @@ class signMessageTest: XCTestCase {
         let privateKey = PrivateKey.generate().privateKey
         let decoupled = try KeyringFactory.create(address, privateKey)
         guard let expect = try? decoupled.signMessage(data, 0, 0),
-              let actual = try? decoupled.signMessage(data, AccountKeyRoleBased.RoleGroup.FEE_PAYER.rawValue, 0) else { XCTAssert(false); return }
+              let actual = try? decoupled.signMessage(data, AccountKeyRoleBased.RoleGroup.FEE_PAYER.rawValue, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(expect.message, actual.message)
         XCTAssertEqual(expect.messageHash, actual.messageHash)
@@ -812,7 +846,8 @@ class signMessageTest: XCTestCase {
     func testMultipleKey_NoIndex() throws {
         let keyring = try generateMultipleKeyring(3)
         guard let expect = try? keyring.signMessage(data, 0, 0),
-              let actual = try? keyring.signMessage(data, 0) else { XCTAssert(false); return }
+              let actual = try? keyring.signMessage(data, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(expect.message, actual.message)
         XCTAssertEqual(expect.messageHash, actual.messageHash)
@@ -824,7 +859,8 @@ class signMessageTest: XCTestCase {
     
     func testMultipleKey_WithIndex() throws {
         let keyring = try generateMultipleKeyring(3)
-        guard let actual = try? keyring.signMessage(data, 0, 0) else { XCTAssert(false); return }
+        guard let actual = try? keyring.signMessage(data, 0, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(Utils.hashMessage(data), actual.messageHash)
         XCTAssertFalse(actual.signatures[0].r.isEmpty)
@@ -835,7 +871,8 @@ class signMessageTest: XCTestCase {
     func testMultipleKey_NotExistedRoleIndex() throws {
         let keyring = try generateMultipleKeyring(3)
         guard let expect = try? keyring.signMessage(data, 0, 2),
-              let actual = try? keyring.signMessage(data, AccountKeyRoleBased.RoleGroup.FEE_PAYER.rawValue, 2) else { XCTAssert(false); return }
+              let actual = try? keyring.signMessage(data, AccountKeyRoleBased.RoleGroup.FEE_PAYER.rawValue, 2) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(expect.message, actual.message)
         XCTAssertEqual(expect.messageHash, actual.messageHash)
@@ -863,7 +900,8 @@ class signMessageTest: XCTestCase {
     
     func testRoleBasedKey_WithIndex() throws {
         let keyring = try generateRoleBaseKeyring([3, 4, 5])
-        guard let actual = try? keyring.signMessage(data, 0, 0) else { XCTAssert(false); return }
+        guard let actual = try? keyring.signMessage(data, 0, 0) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(Utils.hashMessage(data), actual.messageHash)
         XCTAssertFalse(actual.signatures[0].r.isEmpty)
@@ -874,7 +912,8 @@ class signMessageTest: XCTestCase {
     func testRoleBasedKey_NotExistedRoleKey() throws {
         let keyring = try generateRoleBaseKeyring([3, 0, 5])
         guard let expect = try? keyring.signMessage(data, 0, 2),
-              let actual = try? keyring.signMessage(data, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue, 2) else { XCTAssert(false); return }
+              let actual = try? keyring.signMessage(data, AccountKeyRoleBased.RoleGroup.ACCOUNT_UPDATE.rawValue, 2) else { XCTAssert(false)
+            return }
         
         XCTAssertEqual(expect.message, actual.message)
         XCTAssertEqual(expect.messageHash, actual.messageHash)
@@ -912,7 +951,8 @@ class recoverTest: XCTestCase {
             
     func testWithMessageAndSignature() throws {
         guard let keyring = KeyringFactory.generate(),
-              let signed = try keyring.signMessage(data, 0, 0) else { XCTAssert(false); return }
+              let signed = try keyring.signMessage(data, 0, 0) else { XCTAssert(false)
+            return }
         
         let actualAddr = try Utils.recover(signed.message, signed.signatures[0])
         
@@ -921,7 +961,8 @@ class recoverTest: XCTestCase {
     
     func testAlreadyPrefix() throws {
         guard let keyring = KeyringFactory.generate(),
-              let signed = try keyring.signMessage(data, 0, 0) else { XCTAssert(false); return }
+              let signed = try keyring.signMessage(data, 0, 0) else { XCTAssert(false)
+            return }
         
         let actualAddr = try Utils.recover(signed.messageHash, signed.signatures[0], true)
         
@@ -1041,7 +1082,8 @@ class decryptTest: XCTestCase {
         let expect = try KeyringFactory.createFromPrivateKey(privateKey)
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.Pbkdf2KdfParams.NAME)
         
-        guard let keyStore = try expect.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try expect.encrypt(password, option) else { XCTAssert(false)
+            return }
         let actual = try KeyringFactory.decrypt(keyStore, password)
         
         try checkValidKeyring(expect, actual)
@@ -1053,7 +1095,8 @@ class decryptTest: XCTestCase {
         let expect = try KeyringFactory.create(address, privateKey)
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.Pbkdf2KdfParams.NAME)
         
-        guard let keyStore = try expect.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try expect.encrypt(password, option) else { XCTAssert(false)
+            return }
         let actual = try KeyringFactory.decrypt(keyStore, password)
         
         try checkValidKeyring(expect, actual)
@@ -1063,7 +1106,8 @@ class decryptTest: XCTestCase {
         let expect = try generateMultipleKeyring(3)
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.Pbkdf2KdfParams.NAME)
         
-        guard let keyStore = try expect.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try expect.encrypt(password, option) else { XCTAssert(false)
+            return }
         let actual = try KeyringFactory.decrypt(keyStore, password)
         
         try checkValidKeyring(expect, actual)
@@ -1073,7 +1117,8 @@ class decryptTest: XCTestCase {
         let expect = try generateRoleBaseKeyring([3, 4, 5])
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.Pbkdf2KdfParams.NAME)
         
-        guard let keyStore = try expect.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try expect.encrypt(password, option) else { XCTAssert(false)
+            return }
         let actual = try KeyringFactory.decrypt(keyStore, password)
         
         try checkValidKeyring(expect, actual)
@@ -1083,7 +1128,8 @@ class decryptTest: XCTestCase {
         let expect = try generateRoleBaseKeyring([3, 0, 5])
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.Pbkdf2KdfParams.NAME)
         
-        guard let keyStore = try expect.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try expect.encrypt(password, option) else { XCTAssert(false)
+            return }
         let actual = try KeyringFactory.decrypt(keyStore, password)
         
         try checkValidKeyring(expect, actual)
@@ -1135,28 +1181,34 @@ class encryptTest: XCTestCase {
     }
     
     func testKeyStoreV4_scrypt() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME)
         
-        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false)
+            return }
                 
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
     
     func testKeyStoreV4_pbkdf2() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.Pbkdf2KdfParams.NAME)
         
-        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false)
+            return }
                 
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
     
     func testKeyring_single() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME, keyring.address)
         
-        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false); return }              
+        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false)
+            return }              
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
     
@@ -1164,7 +1216,8 @@ class encryptTest: XCTestCase {
         let keyring = try generateMultipleKeyring(3)
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME, keyring.address)
         
-        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false)
+            return }
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
     
@@ -1172,15 +1225,18 @@ class encryptTest: XCTestCase {
         let keyring = try generateRoleBaseKeyring([3, 4, 5])
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME, keyring.address)
         
-        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false)
+            return }
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
     
     func testAbstractKeyring_singleKey() throws {
-        guard let keyring: AbstractKeyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring: AbstractKeyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME, keyring.address)
         
-        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false)
+            return }
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
     
@@ -1188,7 +1244,8 @@ class encryptTest: XCTestCase {
         let keyring: AbstractKeyring = try generateMultipleKeyring(3)
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME, keyring.address)
         
-        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false)
+            return }
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
     
@@ -1196,25 +1253,30 @@ class encryptTest: XCTestCase {
         let keyring: AbstractKeyring = try generateRoleBaseKeyring([3, 4, 5])
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME, keyring.address)
         
-        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encrypt(password, option) else { XCTAssert(false)
+            return }
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
     
     func testSingleKeyring_noOptions() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
-        guard let keyStore = try keyring.encrypt(password) else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
+        guard let keyStore = try keyring.encrypt(password) else { XCTAssert(false)
+            return }
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
     
     func testMultipleKeyring_noOptions() throws {
         let keyring = try generateMultipleKeyring(3)
-        guard let keyStore = try keyring.encrypt(password) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encrypt(password) else { XCTAssert(false)
+            return }
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
     
     func testRoleBasedKeyring_noOptions() throws {
         let keyring = try generateRoleBaseKeyring([3, 4, 5])
-        guard let keyStore = try keyring.encrypt(password) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encrypt(password) else { XCTAssert(false)
+            return }
         try checkValidateKeyStore(keyStore, password, keyring, 4)
     }
 }
@@ -1231,17 +1293,21 @@ class encryptV3Test: XCTestCase {
     }
     
     func testKeyring_single() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME, keyring.address)
         
-        guard let keyStore = try keyring.encryptV3(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encryptV3(password, option) else { XCTAssert(false)
+            return }
         
         try checkValidateKeyStore(keyStore, password, keyring, 3)
     }
     
     func testKeyring_single_noOption() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
-        guard let keyStore = try keyring.encryptV3(password) else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
+        guard let keyStore = try keyring.encryptV3(password) else { XCTAssert(false)
+            return }
         
         try checkValidateKeyStore(keyStore, password, keyring, 3)
     }
@@ -1265,17 +1331,21 @@ class encryptV3Test: XCTestCase {
     }
     
     func testAbstractKeyring_single() throws {
-        guard let keyring: AbstractKeyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring: AbstractKeyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let option = try KeyStoreOption.getDefaultOptionWithKDF(KeyStore.ScryptKdfParams.NAME, keyring.address)
         
-        guard let keyStore = try keyring.encryptV3(password, option) else { XCTAssert(false); return }
+        guard let keyStore = try keyring.encryptV3(password, option) else { XCTAssert(false)
+            return }
         
         try checkValidateKeyStore(keyStore, password, keyring, 3)
     }
     
     func testAbstractKeyring_single_noOption() throws {
-        guard let keyring: AbstractKeyring = KeyringFactory.generate() else { XCTAssert(false); return }
-        guard let keyStore = try keyring.encryptV3(password) else { XCTAssert(false); return }
+        guard let keyring: AbstractKeyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
+        guard let keyStore = try keyring.encryptV3(password) else { XCTAssert(false)
+            return }
         
         try checkValidateKeyStore(keyStore, password, keyring, 3)
     }
@@ -1333,7 +1403,8 @@ class getKeyByRoleTest: XCTestCase {
 
 class getKlaytnWalletKeyTest: XCTestCase {
     func testGetKlaytnWalletKey_coupled() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let expectedKeyStr = keyring.key.privateKey + "0x00" + keyring.address
         
         XCTAssertEqual(expectedKeyStr, keyring.getKlaytnWalletKey())
@@ -1367,7 +1438,8 @@ class getKlaytnWalletKeyTest: XCTestCase {
 
 class getPublicKeyTest: XCTestCase {
     func testGetPublicKey_single() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let publicKeys = try keyring.getPublicKey()
         
         XCTAssertEqual(try keyring.key.getPublicKey(false), publicKeys)
@@ -1411,7 +1483,8 @@ class getPublicKeyTest: XCTestCase {
     }
     
     func testGetPublicKey_single_compressed() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let publicKeys = try keyring.getPublicKey(true)
         
         XCTAssertEqual(try keyring.key.getPublicKey(true), publicKeys)
@@ -1457,7 +1530,8 @@ class getPublicKeyTest: XCTestCase {
 
 class isDecoupledTest: XCTestCase {
     func testIsDecoupled_coupled() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
                 
         XCTAssertFalse(keyring.isDecoupled)
     }
@@ -1513,7 +1587,8 @@ class toAccountTest: XCTestCase {
     }
     
     func testSingleKeyTest() throws {
-        guard let keyring = KeyringFactory.generate() else { XCTAssert(false); return }
+        guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
+            return }
         let account = try keyring.toAccount()
         
         try checkAccountKeyPublic(keyring, account)

@@ -25,7 +25,16 @@ open class Contract {
     private(set) public var events: [String:ContractEvent] = [:]
     private(set) public var constructor: ContractMethod?
     private(set) public var defaultSendOptions: SendOptions?
-    var wallet: IWallet?
+    var _wallet: IWallet?
+    var wallet: IWallet? {
+        get { _wallet }
+        set(v) {
+            _wallet = v
+            methods.values.forEach {
+                $0.wallet = wallet
+            }
+        }
+    }
     
     public init(_ caver: Caver, _ abi: String, _ contractAddress: String? = nil) throws {
         self.caver = caver
@@ -34,7 +43,7 @@ open class Contract {
         setCaver(caver)
         self.contractAddress = contractAddress
         setDefaultSendOptions(SendOptions())
-        setWallet(caver.wallet)
+        self.wallet = caver.wallet
     }
     
     public func deploy(_ sendOptions: SendOptions, _ contractBinaryData: String, _ constructorParams: Any...) throws -> Contract {
@@ -90,13 +99,6 @@ open class Contract {
         self.defaultSendOptions = defaultSendOptions
         methods.values.forEach {
             $0.defaultSendOptions = defaultSendOptions
-        }
-    }
-    
-    func setWallet(_ wallet: IWallet) {
-        self.wallet = wallet
-        methods.values.forEach {
-            $0.wallet = wallet
         }
     }
     

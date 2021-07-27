@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol IWallet {
+public protocol IWallet {
     func generate(_ num: Int) throws -> [String]
     func isExisted(_ address: String) throws -> Bool
     func remove(_ address: String) throws -> Bool

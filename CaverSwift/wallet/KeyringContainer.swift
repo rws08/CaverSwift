@@ -18,7 +18,7 @@ public class KeyringContainer: IWallet {
         try keyrings.forEach { _ = try add($0) }
     }
     
-    func generate(_ num: Int) throws -> [String] {
+    public func generate(_ num: Int) throws -> [String] {
         return try generate(num, "")
     }
     
@@ -67,11 +67,11 @@ public class KeyringContainer: IWallet {
         return added
     }
     
-    func isExisted(_ address: String) throws -> Bool {
+    public func isExisted(_ address: String) throws -> Bool {
         return try getKeyring(address) != nil
     }
     
-    func remove(_ address: String) throws -> Bool {
+    public func remove(_ address: String) throws -> Bool {
         if !Utils.isAddress(address) {
             throw CaverError.IllegalArgumentException("To remove keyring, the first parameter should be an address string")
         }
@@ -91,7 +91,7 @@ public class KeyringContainer: IWallet {
         return try getKeyring(address)?.signMessage(data, role, index)
     }
     
-    func sign(_ address: String, _ transaction: AbstractTransaction) throws -> AbstractTransaction {
+    public func sign(_ address: String, _ transaction: AbstractTransaction) throws -> AbstractTransaction {
         return try sign(address, transaction, TransactionHasher.getHashForSignature(_:))
     }
     
@@ -111,7 +111,7 @@ public class KeyringContainer: IWallet {
         return try transaction.sign(try getKeyring(address)!, index, hasher)
     }
     
-    func signAsFeePayer(_ address: String, _ transaction: AbstractFeeDelegatedTransaction) throws -> AbstractFeeDelegatedTransaction {
+    public func signAsFeePayer(_ address: String, _ transaction: AbstractFeeDelegatedTransaction) throws -> AbstractFeeDelegatedTransaction {
         return try signAsFeePayer(address, transaction, TransactionHasher.getHashForFeePayerSignature(_:))
     }
     

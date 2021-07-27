@@ -78,6 +78,12 @@
 		E37E74AD26AA3DDB0019B06D /* ContractImproveFuncTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */; };
 		E382FEDF26AE31130094AF2A /* ContractOverloadFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEDE26AE31130094AF2A /* ContractOverloadFunctionsTest.swift */; };
 		E382FEE126AE31210094AF2A /* ContractOverloadFunctionsTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */; };
+		E382FEE526AE4A790094AF2A /* KIP7DeployParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEE426AE4A790094AF2A /* KIP7DeployParams.swift */; };
+		E382FEE726AE4AFA0094AF2A /* KIP7ConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEE626AE4AFA0094AF2A /* KIP7ConstantData.swift */; };
+		E382FEE926AE4B520094AF2A /* KIP7.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEE826AE4B520094AF2A /* KIP7.swift */; };
+		E382FEEB26AE4B940094AF2A /* KIP7ConstantData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEEA26AE4B940094AF2A /* KIP7ConstantData.json */; };
+		E382FEED26AE76070094AF2A /* KIP7Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEEC26AE76070094AF2A /* KIP7Test.swift */; };
+		E382FEEF26AF98740094AF2A /* KIP7TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEEE26AF98740094AF2A /* KIP7TestData.json */; };
 		E38FA0BC26896B6800F532D0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A626896B6800F532D0 /* Random.swift */; };
 		E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A726896B6800F532D0 /* GCD.swift */; };
 		E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A826896B6800F532D0 /* Hashable.swift */; };
@@ -367,6 +373,12 @@
 		E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ContractImproveFuncTestData.json; sourceTree = "<group>"; };
 		E382FEDE26AE31130094AF2A /* ContractOverloadFunctionsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractOverloadFunctionsTest.swift; sourceTree = "<group>"; };
 		E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ContractOverloadFunctionsTestData.json; sourceTree = "<group>"; };
+		E382FEE426AE4A790094AF2A /* KIP7DeployParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP7DeployParams.swift; sourceTree = "<group>"; };
+		E382FEE626AE4AFA0094AF2A /* KIP7ConstantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP7ConstantData.swift; sourceTree = "<group>"; };
+		E382FEE826AE4B520094AF2A /* KIP7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP7.swift; sourceTree = "<group>"; };
+		E382FEEA26AE4B940094AF2A /* KIP7ConstantData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KIP7ConstantData.json; sourceTree = "<group>"; };
+		E382FEEC26AE76070094AF2A /* KIP7Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP7Test.swift; sourceTree = "<group>"; };
+		E382FEEE26AF98740094AF2A /* KIP7TestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KIP7TestData.json; sourceTree = "<group>"; };
 		E38FA0A626896B6800F532D0 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E38FA0A726896B6800F532D0 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		E38FA0A826896B6800F532D0 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
@@ -692,6 +704,25 @@
 			path = include;
 			sourceTree = "<group>";
 		};
+		E382FEE226AE4A600094AF2A /* kct */ = {
+			isa = PBXGroup;
+			children = (
+				E382FEE326AE4A680094AF2A /* KIP7 */,
+			);
+			path = kct;
+			sourceTree = "<group>";
+		};
+		E382FEE326AE4A680094AF2A /* KIP7 */ = {
+			isa = PBXGroup;
+			children = (
+				E382FEE426AE4A790094AF2A /* KIP7DeployParams.swift */,
+				E382FEE626AE4AFA0094AF2A /* KIP7ConstantData.swift */,
+				E382FEE826AE4B520094AF2A /* KIP7.swift */,
+				E382FEEA26AE4B940094AF2A /* KIP7ConstantData.json */,
+			);
+			path = KIP7;
+			sourceTree = "<group>";
+		};
 		E38FA0A526896B6800F532D0 /* BigInt */ = {
 			isa = PBXGroup;
 			children = (
@@ -826,6 +857,7 @@
 		E39F2CCB262EA4EF003FA426 /* CaverSwift */ = {
 			isa = PBXGroup;
 			children = (
+				E382FEE226AE4A600094AF2A /* kct */,
 				E36D8376269801F100D4D5B2 /* transaction */,
 				E3B8E6B626859C110069A223 /* crypto */,
 				E3A5C8B82682AEC6002A0A2D /* account */,
@@ -846,26 +878,28 @@
 		E39F2CD6262EA4EF003FA426 /* CaverSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */,
+				E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */,
+				E37E749826A6A01E0019B06D /* ContractTestData.json */,
+				E37E74A226A909100019B06D /* StructContractTestData.json */,
+				E3E02388264CB16500791E00 /* testFunction.json */,
+				E39F2CD9262EA4EF003FA426 /* Info.plist */,
 				E3A21D3526564CCA006C560D /* ABITests.swift */,
 				E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */,
 				E3917529268ECFFB006BB332 /* AccountTest.swift */,
 				E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */,
 				E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */,
-				E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */,
+				E382FEDE26AE31130094AF2A /* ContractOverloadFunctionsTest.swift */,
 				E36B78A026A56F3400FF2FD4 /* ContractTest.swift */,
-				E37E749826A6A01E0019B06D /* ContractTestData.json */,
-				E39F2CD9262EA4EF003FA426 /* Info.plist */,
 				E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */,
 				E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */,
 				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
 				E37E74A626A90CC70019B06D /* StructContractTest.swift */,
-				E37E74A226A909100019B06D /* StructContractTestData.json */,
 				E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */,
-				E3E02388264CB16500791E00 /* testFunction.json */,
-				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
-				E382FEDE26AE31130094AF2A /* ContractOverloadFunctionsTest.swift */,
-				E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */,
+				E363D38B269C062B0077F6D2 /* transaction */,
+				E382FEEC26AE76070094AF2A /* KIP7Test.swift */,
+				E382FEEE26AF98740094AF2A /* KIP7TestData.json */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -1346,6 +1380,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E382FEEB26AE4B940094AF2A /* KIP7ConstantData.json in Resources */,
 				E3A21E86265F9321006C560D /* CaverSwift.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1356,6 +1391,7 @@
 			files = (
 				E37E74AD26AA3DDB0019B06D /* ContractImproveFuncTestData.json in Resources */,
 				E3E02389264CB16500791E00 /* testFunction.json in Resources */,
+				E382FEEF26AF98740094AF2A /* KIP7TestData.json in Resources */,
 				E37E74A326A909110019B06D /* StructContractTestData.json in Resources */,
 				E382FEE126AE31210094AF2A /* ContractOverloadFunctionsTestData.json in Resources */,
 				E37E749926A6A0E50019B06D /* ContractTestData.json in Resources */,
@@ -1448,6 +1484,7 @@
 				E363D3B3269D1F7D0077F6D2 /* FeeDelegatedValueTransferMemo.swift in Sources */,
 				E38FA1182689A6CB00F532D0 /* Point.swift in Sources */,
 				E3A21E82265F8705006C560D /* IWallet.swift in Sources */,
+				E382FEE926AE4B520094AF2A /* KIP7.swift in Sources */,
 				E3A21E57265CC247006C560D /* Array.swift in Sources */,
 				E3A21E1B265654A7006C560D /* ERC20.swift in Sources */,
 				E38FA10D2689A6CB00F532D0 /* ECBCipher.swift in Sources */,
@@ -1573,6 +1610,7 @@
 				E390DAB0268C68AF00D05479 /* AccountKeyWeightedMultiSig.swift in Sources */,
 				E363D391269C2AA30077F6D2 /* FeeDelegatedAccountUpdate.swift in Sources */,
 				E3DBBD5526982B9100BAFE27 /* TransactionType.swift in Sources */,
+				E382FEE726AE4AFA0094AF2A /* KIP7ConstantData.swift in Sources */,
 				E3A21E09265654A7006C560D /* ENSContracts.swift in Sources */,
 				E3B8E6B826859C270069A223 /* File.swift in Sources */,
 				E363D3A3269D149F0077F6D2 /* FeeDelegatedCancelWithRatio.swift in Sources */,
@@ -1605,6 +1643,7 @@
 				E38FA0C126896B6800F532D0 /* Data Conversion.swift in Sources */,
 				E363D3B7269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift in Sources */,
 				E38FA0CC26896B6800F532D0 /* Floating Point Conversion.swift in Sources */,
+				E382FEE526AE4A790094AF2A /* KIP7DeployParams.swift in Sources */,
 				E38FA0C626896B6800F532D0 /* Division.swift in Sources */,
 				E3A21E32265654A7006C560D /* EthereumAccount+SignTransaction.swift in Sources */,
 				E363D399269C3D1B0077F6D2 /* SmartContractDeploy.swift in Sources */,
@@ -1644,6 +1683,7 @@
 				E394F0CA26A033F800371199 /* FeeDelegatedCancelTest.swift in Sources */,
 				E394F0C4269FEB0C00371199 /* ValueTransferTest.swift in Sources */,
 				E394F0DC26A1937B00371199 /* FeeDelegatedValueTransferTest.swift in Sources */,
+				E382FEED26AE76070094AF2A /* KIP7Test.swift in Sources */,
 				E39FBC8F269FCAB800E2E893 /* SmartContractExecutionTest.swift in Sources */,
 				E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */,
 				E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */,
