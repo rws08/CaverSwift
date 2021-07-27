@@ -32,4 +32,3 @@ open class KIP7ConstantData {
         }
     }
 }
-

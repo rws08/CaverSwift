@@ -476,11 +476,65 @@ class KIP7Test_DetectInterfaceTest: XCTestCase {
         kip7contract = KIP7Test.kip7contract
     }
     
-    func detectInterface() throws {
-//        guard let result = kip7contract?.detectInterface() else {
-//            XCTAssert(false)
-//            return
-//        }
-//        XCTAssertTrue(try kip7contract?.isMinter(TestAccountInfo.LUMAN.address) ?? false)
+    func test_detectInterface() throws {
+        guard let result = try kip7contract?.detectInterface() else {
+            XCTAssert(false)
+            return
+        }
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7.getName()] ?? false)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_BURNABLE.getName()] ?? false)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_METADATA.getName()] ?? false)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_MINTABLE.getName()] ?? false)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_PAUSABLE.getName()] ?? false)
+    }
+    
+    func test_detectInterface_staticMethod() throws {
+        guard let kip7contract = kip7contract,
+              let result = try? KIP7.detectInterface(kip7contract.caver, kip7contract.contractAddress!) else {
+            XCTAssert(false)
+            return
+        }
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7.getName()] ?? false)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_BURNABLE.getName()] ?? false)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_METADATA.getName()] ?? false)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_MINTABLE.getName()] ?? false)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_PAUSABLE.getName()] ?? false)
+    }
+    
+    func test_only_mintable() throws {
+        let contract = try Contract(caver!, abi_mintable)
+        _ = try contract.deploy(SendOptions(TestAccountInfo.LUMAN.address, BigInt(10000000)), byteCodeWithMintable, BigUInt(100000000000))
+        guard let result = try? KIP7.detectInterface(caver!, contract.contractAddress!) else {
+            XCTAssert(false)
+            return
+        }
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7.getName()] ?? false)
+        XCTAssertFalse(result[KIP7.INTERFACE.IKIP7_BURNABLE.getName()] ?? true)
+        XCTAssertFalse(result[KIP7.INTERFACE.IKIP7_METADATA.getName()] ?? true)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_MINTABLE.getName()] ?? false)
+        XCTAssertFalse(result[KIP7.INTERFACE.IKIP7_PAUSABLE.getName()] ?? true)
+    }
+    
+    func test_withoutBurnable_Pausable() throws {
+        let contract = try Contract(caver!, abi_without_pausable_burnable)
+        _ = try contract.deploy(SendOptions(TestAccountInfo.LUMAN.address, BigInt(10000000)), byteCodeWithoutBurnablePausable, "Test", "TST", 18, BigUInt(100000000000))
+        guard let result = try? KIP7.detectInterface(caver!, contract.contractAddress!) else {
+            XCTAssert(false)
+            return
+        }
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7.getName()] ?? false)
+        XCTAssertFalse(result[KIP7.INTERFACE.IKIP7_BURNABLE.getName()] ?? true)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_METADATA.getName()] ?? false)
+        XCTAssertTrue(result[KIP7.INTERFACE.IKIP7_MINTABLE.getName()] ?? false)
+        XCTAssertFalse(result[KIP7.INTERFACE.IKIP7_PAUSABLE.getName()] ?? true)
+    }
+    
+    func test_notSupportedKIP13() throws {
+        let contract = try Contract(caver!, abi_not_supported_kip13)
+        _ = try contract.deploy(SendOptions(TestAccountInfo.LUMAN.address, BigInt(10000000)), byteCodeNotSupportedKIP13)
+                
+        XCTAssertThrowsError(try KIP7.detectInterface(caver!, contract.contractAddress!)) {
+            XCTAssertEqual($0 as? CaverError, CaverError.RuntimeException("This contract does not support KIP-13."))
+        }
     }
 }

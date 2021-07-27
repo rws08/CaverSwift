@@ -84,6 +84,9 @@
 		E382FEEB26AE4B940094AF2A /* KIP7ConstantData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEEA26AE4B940094AF2A /* KIP7ConstantData.json */; };
 		E382FEED26AE76070094AF2A /* KIP7Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEEC26AE76070094AF2A /* KIP7Test.swift */; };
 		E382FEEF26AF98740094AF2A /* KIP7TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEEE26AF98740094AF2A /* KIP7TestData.json */; };
+		E382FEF226AF9E500094AF2A /* KIP13.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEF126AF9E500094AF2A /* KIP13.swift */; };
+		E382FEF426AF9E5B0094AF2A /* KIP13ConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEF326AF9E5B0094AF2A /* KIP13ConstantData.swift */; };
+		E382FEF626AF9E960094AF2A /* KIP13ConstantData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEF526AF9E960094AF2A /* KIP13ConstantData.json */; };
 		E38FA0BC26896B6800F532D0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A626896B6800F532D0 /* Random.swift */; };
 		E38FA0BD26896B6800F532D0 /* GCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A726896B6800F532D0 /* GCD.swift */; };
 		E38FA0BE26896B6800F532D0 /* Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38FA0A826896B6800F532D0 /* Hashable.swift */; };
@@ -379,6 +382,9 @@
 		E382FEEA26AE4B940094AF2A /* KIP7ConstantData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KIP7ConstantData.json; sourceTree = "<group>"; };
 		E382FEEC26AE76070094AF2A /* KIP7Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP7Test.swift; sourceTree = "<group>"; };
 		E382FEEE26AF98740094AF2A /* KIP7TestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KIP7TestData.json; sourceTree = "<group>"; };
+		E382FEF126AF9E500094AF2A /* KIP13.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP13.swift; sourceTree = "<group>"; };
+		E382FEF326AF9E5B0094AF2A /* KIP13ConstantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP13ConstantData.swift; sourceTree = "<group>"; };
+		E382FEF526AF9E960094AF2A /* KIP13ConstantData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KIP13ConstantData.json; sourceTree = "<group>"; };
 		E38FA0A626896B6800F532D0 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E38FA0A726896B6800F532D0 /* GCD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCD.swift; sourceTree = "<group>"; };
 		E38FA0A826896B6800F532D0 /* Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hashable.swift; sourceTree = "<group>"; };
@@ -707,6 +713,7 @@
 		E382FEE226AE4A600094AF2A /* kct */ = {
 			isa = PBXGroup;
 			children = (
+				E382FEF026AF9E200094AF2A /* KIP13 */,
 				E382FEE326AE4A680094AF2A /* KIP7 */,
 			);
 			path = kct;
@@ -721,6 +728,16 @@
 				E382FEEA26AE4B940094AF2A /* KIP7ConstantData.json */,
 			);
 			path = KIP7;
+			sourceTree = "<group>";
+		};
+		E382FEF026AF9E200094AF2A /* KIP13 */ = {
+			isa = PBXGroup;
+			children = (
+				E382FEF126AF9E500094AF2A /* KIP13.swift */,
+				E382FEF326AF9E5B0094AF2A /* KIP13ConstantData.swift */,
+				E382FEF526AF9E960094AF2A /* KIP13ConstantData.json */,
+			);
+			path = KIP13;
 			sourceTree = "<group>";
 		};
 		E38FA0A526896B6800F532D0 /* BigInt */ = {
@@ -1381,6 +1398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E382FEEB26AE4B940094AF2A /* KIP7ConstantData.json in Resources */,
+				E382FEF626AF9E960094AF2A /* KIP13ConstantData.json in Resources */,
 				E3A21E86265F9321006C560D /* CaverSwift.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1454,6 +1472,7 @@
 			files = (
 				E3E023552648C00D00791E00 /* ContractIOType.swift in Sources */,
 				E38FA12F2689A6CB00F532D0 /* Base64.swift in Sources */,
+				E382FEF226AF9E500094AF2A /* KIP13.swift in Sources */,
 				E38FA1272689A6CB00F532D0 /* EC521.swift in Sources */,
 				E36EEA472696B05900C1B599 /* crypto_scrypt-hexconvert.c in Sources */,
 				E363D39B269D0CDD0077F6D2 /* SmartContractExecution.swift in Sources */,
@@ -1491,6 +1510,7 @@
 				E3A21E35265654A7006C560D /* TypedData.swift in Sources */,
 				E38FA0D126896B6800F532D0 /* String Conversion.swift in Sources */,
 				E3A21E0C265654A7006C560D /* ABIRawType.swift in Sources */,
+				E382FEF426AF9E5B0094AF2A /* KIP13ConstantData.swift in Sources */,
 				E3A21E24265654A7006C560D /* KeyDerivation.swift in Sources */,
 				E3DBBD57269834CE00BAFE27 /* LegacyTransaction.swift in Sources */,
 				E38FA1132689A6CB00F532D0 /* GCMCipher.swift in Sources */,

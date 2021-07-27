@@ -33,7 +33,7 @@ open class KIP7: Contract {
     static let FUNCTION_TRANSFER_FROM = "transferFrom"
     static let FUNCTION_UNPAUSE = "unpause"
     
-    public enum INTERFACE: String {
+    public enum INTERFACE: String, CaseIterable {
         case IKIP7 = "IKIP7"
         case IKIP7_METADATA = "IKIP7Metatdata"
         case IKIP7_MINTABLE = "IKIP7Mintable"
@@ -82,8 +82,18 @@ open class KIP7: Contract {
         return kip7
     }
     
-    public static func detectInterface(_ caver: Caver, _ contractAddress: String) throws -> [String: Bool] {
-        return [:]
+    public static func detectInterface(_ caver: Caver, _ contractAddress: String) throws -> [String:Bool] {
+        let kip13 = try KIP13(caver, contractAddress)
+        
+        if !kip13.isImplementedKIP13Interface() {
+            throw CaverError.RuntimeException("This contract does not support KIP-13.")
+        }
+        
+        var result: [String:Bool] = [:]
+        INTERFACE.allCases.forEach {
+            result[$0.getName()] = kip13.sendQuery($0.getId())
+        }
+        return result
     }
         
     public func clone(_ tokenAddress: String = "") -> KIP7? {
@@ -95,6 +105,13 @@ open class KIP7: Contract {
         }
         kip7?.wallet = wallet
         return kip7
+    }
+    
+    public func detectInterface() throws -> [String:Bool] {
+        guard let contractAddress = contractAddress else {
+            throw CaverError.invalidValue
+        }
+        return try KIP7.detectInterface(caver, contractAddress)
     }
     
     public func supportInterface(_ interfaceId: String) throws -> Bool? {
