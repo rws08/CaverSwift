@@ -172,13 +172,13 @@ open class KIP17: Contract {
     public func ownerOf(_ tokenId: BigUInt) throws -> String? {
         let callObject = CallObject.createCallObject()
         let result = try getMethod(KIP17.FUNCTION_OWNER_OF).call([tokenId], callObject)
-        return result?[0].value as? String
+        return (result?[0].value as? Address)?.toValue
     }
     
     public func getApproved(_ tokenId: BigUInt) throws -> String? {
         let callObject = CallObject.createCallObject()
         let result = try getMethod(KIP17.FUNCTION_GET_APPROVED).call([tokenId], callObject)
-        return result?[0].value as? String
+        return (result?[0].value as? Address)?.toValue
     }
     
     public func isApprovedForAll(_ owner: String, _ operate: String) throws -> Bool? {

@@ -22,7 +22,7 @@ open class KIP17ConstantData {
                 let data  = try Data(contentsOf: file)
                 let json = try JSONDecoder().decode(JSON.self, from:data)
                 KIP17ConstantData.BINARY = json["BINARY"]?.stringValue ?? ""
-                let jsonObj = try JSONEncoder().encode(json["jsonObj"])
+                let jsonObj = try JSONEncoder().encode(json["ABI"])
                 KIP17ConstantData.ABI = String(data: jsonObj, encoding: .utf8)!
             }else{
                 print("no file")
