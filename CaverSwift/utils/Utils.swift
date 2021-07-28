@@ -383,10 +383,11 @@ public class Utils {
     }
     
     public static func toHexStringZeroPadded(_ number: BigUInt, _ size: Int, _ isPrefix: Bool = true) -> String {
+        let maxSize = size / 2
         let bytes = number.bytes
-        if size - bytes.count > 0 {
-            let encoded = [UInt8](repeating: 0x00, count: size - bytes.count) + bytes
-            return isPrefix ? String(bytes: encoded).addHexPrefix : String(bytes: encoded)
+        if maxSize - bytes.count > 0 {
+            let encoded = [UInt8](repeating: 0x00, count: maxSize - bytes.count) + bytes
+            return isPrefix ? String(bytes: encoded).addHexPrefix : String(bytes: encoded).cleanHexPrefix
         }
         
         return isPrefix ? number.hexa : number.hexa.cleanHexPrefix

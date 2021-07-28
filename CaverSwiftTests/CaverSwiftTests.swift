@@ -19,6 +19,30 @@ class CaverSwiftTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    public func testttt() throws {
+        let tokenID = BigUInt(1)
+        let toArr = [TestAccountInfo.WAYNE.address, TestAccountInfo.BRANDON.address]
+        let mintAmountArr = [BigUInt(10), BigUInt(10)]
+        
+        let valueList = mintAmountArr.map { Uint256($0) }
+        let addressList = toArr.map { Address($0) }
+        
+        let tokenIdSol = Uint256(tokenID)
+        let toListSol = DynamicArray(addressList)
+        let valuesSol = DynamicArray(valueList)
+        _ = try ABI.encodeParameters([tokenIdSol, toListSol, valuesSol])
+    }
+            
+    public func temp(_ methodArguments: Any...) -> [Any] {
+        print("1", methodArguments)
+        return temp2(methodArguments.flatCompactMapForVariadicParameters())
+    }
+    
+    public func temp2(_ methodArguments: Any...) -> [Any] {
+        print("2", methodArguments)
+        return methodArguments.flatCompactMapForVariadicParameters()
+    }
 
     func testExample() throws {        
         let expectation = XCTestExpectation(description: "Some description")

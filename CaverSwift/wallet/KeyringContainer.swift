@@ -95,7 +95,7 @@ public class KeyringContainer: IWallet {
         return try sign(address, transaction, TransactionHasher.getHashForSignature(_:))
     }
     
-    func sign(_ address: String, _ transaction: AbstractTransaction, _ hasher: (AbstractTransaction) throws ->String) throws -> AbstractTransaction {
+    func sign(_ address: String, _ transaction: AbstractTransaction, _ hasher: (AbstractTransaction) throws -> String) throws -> AbstractTransaction {
         if !(try isExisted(address)) {
             throw CaverError.NullPointerException("Failed to find keyring from wallet with address")
         }
@@ -103,7 +103,7 @@ public class KeyringContainer: IWallet {
         return try transaction.sign(try getKeyring(address)!, hasher)
     }
     
-    func sign(_ address: String, _ transaction: AbstractTransaction, _ index: Int, _ hasher: ((AbstractTransaction) throws ->String) = TransactionHasher.getHashForSignature(_:)) throws -> AbstractTransaction {
+    func sign(_ address: String, _ transaction: AbstractTransaction, _ index: Int, _ hasher: ((AbstractTransaction) throws -> String) = TransactionHasher.getHashForSignature(_:)) throws -> AbstractTransaction {
         if !(try isExisted(address)) {
             throw CaverError.NullPointerException("Failed to find keyring from wallet with address")
         }
@@ -115,7 +115,7 @@ public class KeyringContainer: IWallet {
         return try signAsFeePayer(address, transaction, TransactionHasher.getHashForFeePayerSignature(_:))
     }
     
-    func signAsFeePayer(_ address: String, _ transaction: AbstractFeeDelegatedTransaction, _ hasher: (AbstractFeeDelegatedTransaction) throws ->String) throws -> AbstractFeeDelegatedTransaction {
+    func signAsFeePayer(_ address: String, _ transaction: AbstractFeeDelegatedTransaction, _ hasher: (AbstractFeeDelegatedTransaction) throws -> String) throws -> AbstractFeeDelegatedTransaction {
         if !(try isExisted(address)) {
             throw CaverError.NullPointerException("Failed to find keyring from wallet with address")
         }
@@ -123,7 +123,7 @@ public class KeyringContainer: IWallet {
         return try transaction.signAsFeePayer(try getKeyring(address)!, hasher)
     }
     
-    func signAsFeePayer(_ address: String, _ transaction: AbstractFeeDelegatedTransaction, _ index: Int, _ hasher: ((AbstractFeeDelegatedTransaction) throws ->String) = TransactionHasher.getHashForFeePayerSignature(_:)) throws -> AbstractFeeDelegatedTransaction {
+    func signAsFeePayer(_ address: String, _ transaction: AbstractFeeDelegatedTransaction, _ index: Int, _ hasher: ((AbstractFeeDelegatedTransaction) throws -> String) = TransactionHasher.getHashForFeePayerSignature(_:)) throws -> AbstractFeeDelegatedTransaction {
         if !(try isExisted(address)) {
             throw CaverError.NullPointerException("Failed to find keyring from wallet with address")
         }

@@ -84,7 +84,7 @@ open class KIP17: Contract {
         let sendOption = SendOptions(deployer, BigUInt(6500000))
         
         let kip17 = try KIP17(caver)
-        kip17.wallet = wallet
+        kip17.wallet = wallet ?? caver.wallet
         _ = try kip17.deploy(contractDeployParams, sendOption)
         return kip17
     }

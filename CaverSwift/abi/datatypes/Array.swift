@@ -9,7 +9,6 @@ import Foundation
 
 public class TypeArray: Type, ABIType {
     public var values: [ABIType]
-    override var typeName: String { return String(describing: type(of: self)).lowercased() }
     override var size: Int { Int(self.typeName.filter { "0"..."9" ~= $0 }) ?? 0 }
     
     public init(_ values: [ABIType], _ solidityType: String? = nil) {

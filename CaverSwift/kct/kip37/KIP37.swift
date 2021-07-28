@@ -65,10 +65,10 @@ open class KIP37: Contract {
         let contractDeployParams = try ContractDeployParams(KIP37ConstantData.BINARY, uri)
         let sendOption = SendOptions(deployer, BigUInt(8000000))
         
-        let kip17 = try KIP37(caver)
-        kip17.wallet = wallet
-        _ = try kip17.deploy(contractDeployParams, sendOption)
-        return kip17
+        let kip37 = try KIP37(caver)
+        kip37.wallet = wallet ?? caver.wallet
+        _ = try kip37.deploy(contractDeployParams, sendOption)
+        return kip37
     }
     
     public static func detectInterface(_ caver: Caver, _ contractAddress: String) throws -> [String:Bool] {
@@ -86,14 +86,14 @@ open class KIP37: Contract {
     }
         
     public func clone(_ tokenAddress: String = "") -> KIP37? {
-        var kip17: KIP37?
+        var kip37: KIP37?
         if tokenAddress.isEmpty {
-            kip17 = try? KIP37(caver, contractAddress)
+            kip37 = try? KIP37(caver, contractAddress)
         } else {
-            kip17 = try? KIP37(caver, tokenAddress)
+            kip37 = try? KIP37(caver, tokenAddress)
         }
-        kip17?.wallet = wallet
-        return kip17
+        kip37?.wallet = wallet
+        return kip37
     }
     
     public func detectInterface() throws -> [String:Bool] {
@@ -101,6 +101,11 @@ open class KIP37: Contract {
             throw CaverError.invalidValue
         }
         return try KIP37.detectInterface(caver, contractAddress)
+    }
+    
+    public func uri(_ tokenId: String) throws -> String? {
+        guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
+        return try uri(tokenId)
     }
     
     public func uri(_ tokenId: BigUInt) throws -> String? {
@@ -142,6 +147,16 @@ open class KIP37: Contract {
         return batchList.values as? [BigUInt]
     }
     
+    public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: String, _ value: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+        guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
+        
+        return try safeTransferFrom(from, to, tokenId, value, "", sendParam)
+    }
+    
+    public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: BigUInt, _ value: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {        
+        return try safeTransferFrom(from, to, tokenId, value, "", sendParam)
+    }
+    
     public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: String, _ value: BigUInt, _ data: String = "",_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
         guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
         
@@ -154,6 +169,18 @@ open class KIP37: Contract {
         
         let receiptData = try send(sendOption, KIP37.FUNCTION_SAFE_TRANSFER_FROM, from, to, tokenId, value, data)
         return receiptData
+    }
+    
+    public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [String], _ amounts: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+        let tokenIdArr: [BigUInt] = try tokenIds.map {
+            guard let val = BigUInt(hex: $0) else { throw CaverError.invalidValue }
+            return val
+        }
+        return try safeBatchTransferFrom(from, to, tokenIdArr, amounts, "", sendParam)
+    }
+    
+    public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [BigUInt], _ amounts: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+        return try safeBatchTransferFrom(from, to, tokenIds, amounts, "", sendParam)
     }
     
     public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [String], _ amounts: [BigUInt], _ data: String = "", _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
@@ -220,6 +247,11 @@ open class KIP37: Contract {
         
         let receiptData = try sendWithSolidityType(sendOption, KIP37.FUNCTION_MINT, Uint256(tokenId), Address(to), Uint256(value))
         return receiptData
+    }
+    
+    public func mint(_ toList: [String], _ tokenId: String, _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+        guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
+        return try mint(toList, tokenId, values, sendParam)
     }
     
     public func mint(_ toList: [String], _ tokenId: BigUInt, _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
@@ -400,10 +432,10 @@ open class KIP37: Contract {
         return result?[0].value as? Bool
     }
         
-    private static func determineSendOptions(_ kip17: KIP37, _ sendOptions: SendOptions, _ functionName: String, _ argument: [Any] = []) throws -> SendOptions {
-        var from = kip17.defaultSendOptions?.from
-        var gas = kip17.defaultSendOptions?.gas
-        var value = kip17.defaultSendOptions?.value
+    private static func determineSendOptions(_ kip37: KIP37, _ sendOptions: SendOptions, _ functionName: String, _ argument: [Any] = []) throws -> SendOptions {
+        var from = kip37.defaultSendOptions?.from
+        var gas = kip37.defaultSendOptions?.gas
+        var value = kip37.defaultSendOptions?.value
         
         if sendOptions.from != nil {
             from = sendOptions.from
@@ -412,7 +444,7 @@ open class KIP37: Contract {
         if sendOptions.gas == nil {
             if gas == nil {
                 let callObject = CallObject.createCallObject(sendOptions.from)
-                let estimateGas = try estimateGas(kip17, functionName, callObject, argument)
+                let estimateGas = try estimateGas(kip37, functionName, callObject, argument)
                 gas = estimateGas.hexa
             }
         } else {
@@ -426,10 +458,10 @@ open class KIP37: Contract {
         return SendOptions(from, gas, value!)
     }
     
-    private static func determineSendOptionsWithSolidityType(_ kip17: KIP37, _ sendOptions: SendOptions, _ functionName: String, _ argument: [Type] = []) throws -> SendOptions {
-        var from = kip17.defaultSendOptions?.from
-        var gas = kip17.defaultSendOptions?.gas
-        var value = kip17.defaultSendOptions?.value
+    private static func determineSendOptionsWithSolidityType(_ kip37: KIP37, _ sendOptions: SendOptions, _ functionName: String, _ argument: [Type] = []) throws -> SendOptions {
+        var from = kip37.defaultSendOptions?.from
+        var gas = kip37.defaultSendOptions?.gas
+        var value = kip37.defaultSendOptions?.value
         
         if sendOptions.from != nil {
             from = sendOptions.from
@@ -438,7 +470,7 @@ open class KIP37: Contract {
         if sendOptions.gas == nil {
             if gas == nil {
                 let callObject = CallObject.createCallObject(sendOptions.from)
-                let estimateGas = try estimateGasWithSolidityType(kip17, functionName, callObject, argument)
+                let estimateGas = try estimateGasWithSolidityType(kip37, functionName, callObject, argument)
                 gas = estimateGas.hexa
             }
         } else {
@@ -452,8 +484,8 @@ open class KIP37: Contract {
         return SendOptions(from, gas, value!)
     }
     
-    private static func estimateGas(_ kip17: KIP37, _ functionName: String, _ callObject: CallObject, _ argument: [Any]) throws -> BigUInt {
-        guard let gas = try? kip17.getMethod(functionName).estimateGas(argument, callObject),
+    private static func estimateGas(_ kip37: KIP37, _ functionName: String, _ callObject: CallObject, _ argument: [Any]) throws -> BigUInt {
+        guard let gas = try? kip37.getMethod(functionName).estimateGas(argument, callObject),
               let gas = BigUInt(hex: gas),
               let bigDecimal = BDouble(gas.decimal),
               let result = BigUInt((bigDecimal * 1.7).rounded().description) else {
@@ -463,8 +495,8 @@ open class KIP37: Contract {
         return result
     }
     
-    private static func estimateGasWithSolidityType(_ kip17: KIP37, _ functionName: String, _ callObject: CallObject, _ argument: [Type]) throws -> BigUInt {
-        guard let gas = try? kip17.getMethod(functionName).estimateGasWithSolidityWrapper(argument, callObject),
+    private static func estimateGasWithSolidityType(_ kip37: KIP37, _ functionName: String, _ callObject: CallObject, _ argument: [Type]) throws -> BigUInt {
+        guard let gas = try? kip37.getMethod(functionName).estimateGasWithSolidityWrapper(argument, callObject),
               let gas = BigUInt(hex: gas),
               let bigDecimal = BDouble(gas.decimal),
               let result = BigUInt((bigDecimal * 1.7).rounded().description) else {

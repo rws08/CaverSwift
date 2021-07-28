@@ -11,6 +11,12 @@ public class Bytes: Type {
     public init(_ value: Data) {
         super.init(value, .DynamicBytes)
     }
+    
+    public var toValue: String {
+        get {
+            return String(bytes: (value as! Data).bytes)
+        }
+    }
 }
 
 public class Bytes1: Bytes {

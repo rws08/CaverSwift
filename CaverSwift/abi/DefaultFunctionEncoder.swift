@@ -80,6 +80,16 @@ public class DefaultFunctionEncoder {
         case let value as TypeStruct:
             let encodedValues = try encodeDynamicStructValues(value)
             return .container(values: encodedValues, isDynamic: type.isDynamic, size: nil)
+        case let value as Uint:
+            return try encodeRaw(value.toValue, forType: type, padded: !packed)
+        case let value as Utf8String:
+            return try encodeRaw(value.toValue, forType: type, padded: !packed)
+        case let data as Bytes:
+            if let staticSize = staticSize {
+                return try encodeRaw(data.toValue, forType: .FixedBytes(staticSize), padded: !packed)
+            } else {
+                return try encodeRaw(data.toValue, forType: type, padded: !packed)
+            }
         case let value as Int:
             return try encodeRaw(String(value), forType: type, padded: !packed)
         case let value as UInt:

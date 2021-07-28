@@ -25,6 +25,18 @@ public class Uint: Type, ABIType {
             return try ABIDecoder.decode(first, to: Uint.self)
         }
     }
+    
+    public var toValue: String {
+        get {
+            if value is Int {
+                return String(value as! Int)
+            } else if value is BigUInt {
+                return String(value as! BigUInt)
+            }
+            
+            return ""
+        }
+    }
 }
 
 public class Uint8: Uint {
