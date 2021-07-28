@@ -23,7 +23,7 @@ public class Type: Any, Equatable {
             case .FixedInt(_):
                 ret = (lhs.value as? BigInt) == (rhs.value as? BigInt)
             case .FixedAddress:
-                ret = (lhs.value as? Address) == (rhs.value as? Address)
+                ret = (lhs.value as? Address)?.val == (rhs.value as? Address)?.val
             case .FixedBool:
                 ret = (lhs.value as? Bool) == (rhs.value as? Bool)
             case .DynamicBytes, .FixedBytes(_):

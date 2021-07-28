@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Uint: Type {
+public class Uint: Type, ABIType {
     public init(_ value: Int) {
         super.init(value)
         self.rawType = .FixedUInt(self.size)
@@ -16,6 +16,14 @@ public class Uint: Type {
     public init(_ value: BigUInt) {
         super.init(value)
         self.rawType = .FixedUInt(self.size)
+    }
+    
+    public static var rawType: ABIRawType { .FixedUInt(256) }
+    public static var parser: ParserFunction {
+        return { data in
+            let first = data.first ?? ""
+            return try ABIDecoder.decode(first, to: Uint.self)
+        }
     }
 }
 

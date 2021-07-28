@@ -85,7 +85,7 @@ public class ABI {
             return try encodeParameter(type)
         case .FixedAddress:
             guard let value = param as? String else { throw CaverError.invalidValue }
-            return try encodeParameter(Type(Address(value)))
+            return try encodeParameter(Address(value))
         case .FixedBool:
             return try encodeParameter(type)
         case .FixedBytes(_):

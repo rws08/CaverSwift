@@ -175,112 +175,128 @@ open class KIP7: Contract {
     }
     
     public func approve(_ spender: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_APPROVE, [spender, amount])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_APPROVE, [spender, amount])
         
         let receiptData = try getMethod(KIP7.FUNCTION_APPROVE).send([spender, amount], sendOption)
         return receiptData
     }
     
     public func transfer(_ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_TRANSFER, [recipient, amount])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_TRANSFER, [recipient, amount])
         
         let receiptData = try getMethod(KIP7.FUNCTION_TRANSFER).send([recipient, amount], sendOption)
         return receiptData
     }
     
     public func transferFrom(_ sender: String, _ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_TRANSFER_FROM, [sender, recipient, amount])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_TRANSFER_FROM, [sender, recipient, amount])
         
         let receiptData = try getMethod(KIP7.FUNCTION_TRANSFER_FROM).send([sender, recipient, amount], sendOption)
         return receiptData
     }
     
     public func safeTransfer(_ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_SAFE_TRANSFER, [recipient, amount])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_SAFE_TRANSFER, [recipient, amount])
         
         let receiptData = try getMethod(KIP7.FUNCTION_SAFE_TRANSFER).send([recipient, amount], sendOption)
         return receiptData
     }
     
     public func safeTransfer(_ recipient: String, _ amount: BigUInt, _ data: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_SAFE_TRANSFER, [recipient, amount, data])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_SAFE_TRANSFER, [recipient, amount, data])
         
         let receiptData = try getMethod(KIP7.FUNCTION_SAFE_TRANSFER).send([recipient, amount, data], sendOption)
         return receiptData
     }
     
     public func safeTransferFrom(_ sender: String, _ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_SAFE_TRANSFER_FROM, [sender, recipient, amount])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_SAFE_TRANSFER_FROM, [sender, recipient, amount])
         
         let receiptData = try getMethod(KIP7.FUNCTION_SAFE_TRANSFER_FROM).send([sender, recipient, amount], sendOption)
         return receiptData
     }
     
     public func safeTransferFrom(_ sender: String, _ recipient: String, _ amount: BigUInt, _ data: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_SAFE_TRANSFER_FROM, [sender, recipient, amount, data])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_SAFE_TRANSFER_FROM, [sender, recipient, amount, data])
         
         let receiptData = try getMethod(KIP7.FUNCTION_SAFE_TRANSFER_FROM).send([sender, recipient, amount, data], sendOption)
         return receiptData
     }
     
     public func mint(_ account: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_MINT, [account, amount])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_MINT, [account, amount])
         
         let receiptData = try getMethod(KIP7.FUNCTION_MINT).send([account, amount], sendOption)
         return receiptData
     }
     
     public func addMinter(_ account: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_ADD_MINTER, [account])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_ADD_MINTER, [account])
         
         let receiptData = try getMethod(KIP7.FUNCTION_ADD_MINTER).send([account], sendOption)
         return receiptData
     }
     
     public func renounceMinter(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_RENOUNCE_MINTER)
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_RENOUNCE_MINTER)
         
         let receiptData = try getMethod(KIP7.FUNCTION_RENOUNCE_MINTER).send(nil, sendOption)
         return receiptData
     }
     
     public func burn(_ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_BURN, [amount])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_BURN, [amount])
         
         let receiptData = try getMethod(KIP7.FUNCTION_BURN).send([amount], sendOption)
         return receiptData
     }
     
     public func burnFrom(_ account: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_BURN_FROM, [account, amount])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_BURN_FROM, [account, amount])
         
         let receiptData = try getMethod(KIP7.FUNCTION_BURN_FROM).send([account, amount], sendOption)
         return receiptData
     }
     
     public func addPauser(_ account: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_ADD_PAUSER, [account])
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_ADD_PAUSER, [account])
         
         let receiptData = try getMethod(KIP7.FUNCTION_ADD_PAUSER).send([account], sendOption)
         return receiptData
     }
     
     public func pause(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_PAUSE)
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_PAUSE)
         
         let receiptData = try getMethod(KIP7.FUNCTION_PAUSE).send(nil, sendOption)
         return receiptData
     }
     
     public func unpause(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_UNPAUSE)
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_UNPAUSE)
         
         let receiptData = try getMethod(KIP7.FUNCTION_UNPAUSE).send(nil, sendOption)
         return receiptData
     }
     
     public func renouncePauser(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
-        let sendOption = try KIP7.determineSendOptions(self, sendParam ?? defaultSendOptions!, KIP7.FUNCTION_RENOUNCE_PAUSER)
+        guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
+        let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_RENOUNCE_PAUSER)
         
         let receiptData = try getMethod(KIP7.FUNCTION_RENOUNCE_PAUSER).send(nil, sendOption)
         return receiptData

@@ -50,7 +50,7 @@ class StructContractTest: XCTestCase {
             return }
         let dynamicStruct = result[0].value as! DynamicStruct
         XCTAssertEqual(dynamicStruct.values[0] as! String, "name")
-        XCTAssertEqual(dynamicStruct.values[1] as! TypeArray, TypeArray([BigUInt(1), BigUInt(2), BigUInt(3)], BigUInt.rawType))
+        XCTAssertEqual(dynamicStruct.values[1] as! TypeArray, StaticArray3([BigUInt(1), BigUInt(2), BigUInt(3)]))
     }
     
     func testSs() throws {

@@ -7,17 +7,13 @@
 
 import Foundation
 
-public class TypeStruct: Equatable, ABIType {
-    public static func == (lhs: TypeStruct, rhs: TypeStruct) -> Bool {
-        return lhs.values.elementsEqual(rhs.values) { lhsItem, rhsItem in
-            Type(lhsItem) == Type(rhsItem)
-        }
-    }
-    
+public class TypeStruct: Type, ABIType {
     public var values: [ABIType]
     
     public init(_ values: [ABIType], _ subRawType:[ABIRawType] = []) {
-        self.values = values
+        self.values = values        
+        super.init(values.isEmpty ? TypeArray([""]) : values.first!)
+        
         if subRawType.isEmpty {
             self.subRawType = values.map {
                 Type($0).rawType
@@ -25,6 +21,8 @@ public class TypeStruct: Equatable, ABIType {
         } else {
             self.subRawType = subRawType
         }
+        self.value = self
+        self.rawType = .Tuple(self.subRawType)
     }
     public var subRawType: [ABIRawType] = []
     var subParser: ParserFunction = String.parser
@@ -37,8 +35,6 @@ public class TypeStruct: Equatable, ABIType {
         String.parser
     }
     
-    public var value: ABIType { self }
-    public var rawType: ABIRawType { .Tuple(self.subRawType) }
     public var parser: ParserFunction {
         return self.subParser
     }

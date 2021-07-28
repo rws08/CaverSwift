@@ -7,20 +7,15 @@
 
 import Foundation
 
-public class TypeArray: Equatable, ABIType {
-    public static func == (lhs: TypeArray, rhs: TypeArray) -> Bool {
-        return lhs.values.elementsEqual(rhs.values) { lhsItem, rhsItem in
-            Type(lhsItem) == Type(rhsItem)
-        }
-    }
-    
-    public var rawType = ABIRawType.DynamicArray(.DynamicString)
+public class TypeArray: Type, ABIType {
     public var values: [ABIType]
-    var typeName: String { return String(describing: type(of: self)).lowercased() }
-    var size: Int { Int(self.typeName.filter { "0"..."9" ~= $0 }) ?? 0 }
+    override var typeName: String { return String(describing: type(of: self)).lowercased() }
+    override var size: Int { Int(self.typeName.filter { "0"..."9" ~= $0 }) ?? 0 }
     
     public init(_ values: [ABIType], _ solidityType: String? = nil) {
         self.values = values
+        super.init(values.isEmpty ? TypeArray([""]) : values.first!)
+        
         if solidityType != nil {
             self.rawType = ABIRawType(rawValue: solidityType!) ?? .DynamicArray(.DynamicString)
             guard let components = solidityType?.components(separatedBy: CharacterSet(charactersIn: "[]")) else { return }
@@ -32,12 +27,17 @@ public class TypeArray: Equatable, ABIType {
         } else if let val = values.first {
             self.rawType = .DynamicArray(type(of: val).rawType)
         }
+        self.value = self
     }
     
     public init(_ values: [ABIType], _ rawType: ABIRawType) {
         self.values = values
+        super.init(values.isEmpty ? TypeArray([""]) : values.first!)
+        
         self.rawType = rawType
         self.subRawType = rawType.subType ?? .DynamicString
+        
+        self.value = self
     }
     
     public var subRawType: ABIRawType = .DynamicString
@@ -51,7 +51,6 @@ public class TypeArray: Equatable, ABIType {
         String.parser
     }
     
-    public var value: ABIType { self }
     public var parser: ParserFunction {
         return self.subParser
     }
@@ -64,7 +63,11 @@ public class DynamicArray: TypeArray {
     
     public override init(_ values: [ABIType], _ solidityType: String? = nil) {
         if solidityType == nil {
-            super.init(values, ABIRawType.DynamicArray(type(of: values.first!).rawType).rawValue)
+            if let val = (values.first as? Type) {
+                super.init(values, ABIRawType.DynamicArray(val.rawType).rawValue)
+            } else {
+                super.init(values, ABIRawType.DynamicArray(type(of: values.first!).rawType).rawValue)
+            }
         } else {
             super.init(values, solidityType)
         }

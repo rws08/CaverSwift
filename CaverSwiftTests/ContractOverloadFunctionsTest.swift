@@ -57,13 +57,13 @@ class ContractOverloadFunctionsTest: XCTestCase {
         
         let contract = try Contract(caver, ContractOverloadFunctionsTest.ABIJson, ContractOverloadFunctionsTest.contractAddress)
         _ = try contract.getMethod(methodName).sendWithSolidityWrapper(
-            [Type(Address(ContractOverloadFunctionsTest.ownerData.address)), Utf8String("LUMAN")], options)
+            [Address(ContractOverloadFunctionsTest.ownerData.address), Utf8String("LUMAN")], options)
         var result = try contract.getMethod("getOwnerName").call(nil, CallObject.createCallObject())
         
         XCTAssertEqual("LUMAN", result?[0].value as? String)
         
         _ = try contract.getMethod(methodName).sendWithSolidityWrapper(
-            [Type(Address(ContractOverloadFunctionsTest.ownerData.address)), Uint256(1234)], options)
+            [Address(ContractOverloadFunctionsTest.ownerData.address), Uint256(1234)], options)
         result = try contract.getMethod("getOwnerName").call(nil, CallObject.createCallObject())
         print(result?[0].value ?? "")
         
@@ -103,7 +103,7 @@ class ContractOverloadFunctionsTest: XCTestCase {
         
         let contract = try Contract(caver, ContractOverloadFunctionsTest.ABIJson, ContractOverloadFunctionsTest.contractAddress)
         let expected = try contract.getMethod(methodName).encodeABI([ContractOverloadFunctionsTest.ownerData.address])
-        let actual = try contract.getMethod(methodName).encodeABIWithSolidityWrapper([Type(Address(ContractOverloadFunctionsTest.ownerData.address))])
+        let actual = try contract.getMethod(methodName).encodeABIWithSolidityWrapper([Address(ContractOverloadFunctionsTest.ownerData.address)])
         
         XCTAssertEqual(expected, actual)
     }

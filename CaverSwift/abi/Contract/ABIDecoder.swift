@@ -52,10 +52,12 @@ public class ABIDecoder {
             guard data.count > 0 else {
                 return [""]
             }
-            guard let offsetHex = (try decode(data, forType: ABIRawType.FixedUInt(256), offset: offset)).first, let newOffset = Int(hex: offsetHex) else {
+            guard let offsetHex = (try decode(data, forType: ABIRawType.FixedUInt(256), offset: offset)).first,
+                  let newOffset = Int(hex: offsetHex) else {
                 throw ABIError.invalidValue
             }
-            guard let sizeHex = (try decode(data, forType: ABIRawType.FixedUInt(256), offset: newOffset)).first, let bint = BigInt(hex: sizeHex.cleanHexPrefix) else {
+            guard let sizeHex = (try decode(data, forType: ABIRawType.FixedUInt(256), offset: newOffset)).first,
+                  let bint = BigInt(hex: sizeHex.cleanHexPrefix) else {
                 throw ABIError.invalidValue
             }
             let size = Int(bint)
@@ -172,5 +174,12 @@ public class ABIDecoder {
         }
         
         return address
+    }
+    
+    public static func decode(_ data: String, to: Uint.Type) throws -> Uint {
+        guard let val = BigUInt(hex: data) else {
+            throw ABIError.invalidValue
+        }
+        return Uint(val)
     }
 }

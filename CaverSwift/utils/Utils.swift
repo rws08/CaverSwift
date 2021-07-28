@@ -381,6 +381,16 @@ public class Utils {
         
         return DOMAIN.contains(point)
     }
+    
+    public static func toHexStringZeroPadded(_ number: BigUInt, _ size: Int, _ isPrefix: Bool = true) -> String {
+        let bytes = number.bytes
+        if size - bytes.count > 0 {
+            let encoded = [UInt8](repeating: 0x00, count: size - bytes.count) + bytes
+            return isPrefix ? String(bytes: encoded).addHexPrefix : String(bytes: encoded)
+        }
+        
+        return isPrefix ? number.hexa : number.hexa.cleanHexPrefix
+    }
 }
 
 public struct KlayUnit {
