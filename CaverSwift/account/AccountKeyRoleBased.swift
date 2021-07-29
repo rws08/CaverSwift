@@ -22,6 +22,7 @@ open class AccountKeyRoleBased: IAccountKey {
     private(set) public var accountKeys: [IAccountKey] = []
     
     init(_ accountKeys: [IAccountKey]) throws {
+        super.init()
         try setAccountKeys(accountKeys)
     }
     
@@ -96,7 +97,7 @@ open class AccountKeyRoleBased: IAccountKey {
         self.accountKeys = accountKeys
     }
     
-    public func getRLPEncoding() throws -> String {
+    public override func getRLPEncoding() throws -> String {
         let rlpTypeList = try accountKeys.map {
             try $0.getRLPEncoding()
         }

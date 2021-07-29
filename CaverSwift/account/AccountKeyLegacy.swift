@@ -26,7 +26,7 @@ open class AccountKeyLegacy: IAccountKey {
         return AccountKeyLegacy()
     }
     
-    public func getRLPEncoding() -> String {
+    public override func getRLPEncoding() -> String {
         return AccountKeyLegacy.RLP.hexString
     }
 }

@@ -17,6 +17,7 @@ open class AccountKeyPublic: IAccountKey {
     public static let OFFSET_Y_POINT = 1
     
     init(_ publicKey: String) {
+        super.init()
         try? self.setPublicKey(publicKey)
     }
     
@@ -27,7 +28,7 @@ open class AccountKeyPublic: IAccountKey {
         self.publicKey = publicKey
     }
     
-    public func getRLPEncoding() throws -> String {
+    public override func getRLPEncoding() throws -> String {
         let compressedKey = try Utils.compressPublicKey(publicKey)
         guard let encodedPubKey = Rlp.encode(compressedKey) else { return "" }        
         var type = Data([AccountKeyPublic.RLP])

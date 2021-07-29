@@ -22,7 +22,7 @@ open class AccountKeyFail: IAccountKey {
         return AccountKeyFail()
     }
     
-    public func getRLPEncoding() -> String {
+    public override func getRLPEncoding() -> String {
         return AccountKeyFail.RLP.hexString
     }
 }

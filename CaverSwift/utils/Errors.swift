@@ -30,4 +30,6 @@ public enum CaverError: Error, Equatable {
     case CipherException(String)
     case TransactionException(String, String)
     case JSONRPCError(String)
+    case encodingError
+    case invalidParam
 }

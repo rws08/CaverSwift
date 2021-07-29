@@ -38,6 +38,7 @@
 		E363D3BA269D37380077F6D2 /* Addresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B9269D37380077F6D2 /* Addresses.swift */; };
 		E368F94D26B116A000890812 /* KIP37Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F94C26B116A000890812 /* KIP37Test.swift */; };
 		E368F94F26B116AD00890812 /* KIP37TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E368F94E26B116AD00890812 /* KIP37TestData.json */; };
+		E368F95126B22FA900890812 /* RpcTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F95026B22FA900890812 /* RpcTest.swift */; };
 		E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A026A56F3400FF2FD4 /* ContractTest.swift */; };
 		E36B78A326A5734C00FF2FD4 /* ContractDeployParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A226A5734C00FF2FD4 /* ContractDeployParams.swift */; };
 		E36B78A526A575CC00FF2FD4 /* EventFilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A426A575CC00FF2FD4 /* EventFilterOptions.swift */; };
@@ -339,6 +340,7 @@
 		E363D3B9269D37380077F6D2 /* Addresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Addresses.swift; sourceTree = "<group>"; };
 		E368F94C26B116A000890812 /* KIP37Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP37Test.swift; sourceTree = "<group>"; };
 		E368F94E26B116AD00890812 /* KIP37TestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KIP37TestData.json; sourceTree = "<group>"; };
+		E368F95026B22FA900890812 /* RpcTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RpcTest.swift; sourceTree = "<group>"; };
 		E36B78A026A56F3400FF2FD4 /* ContractTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractTest.swift; sourceTree = "<group>"; };
 		E36B78A226A5734C00FF2FD4 /* ContractDeployParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractDeployParams.swift; sourceTree = "<group>"; };
 		E36B78A426A575CC00FF2FD4 /* EventFilterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilterOptions.swift; sourceTree = "<group>"; };
@@ -955,6 +957,8 @@
 				E382FEEE26AF98740094AF2A /* KIP7TestData.json */,
 				E382FF0026AFC5360094AF2A /* KIP17Test.swift */,
 				E382FF0226AFC57A0094AF2A /* KIP17TestData.json */,
+				E368F94C26B116A000890812 /* KIP37Test.swift */,
+				E368F94E26B116AD00890812 /* KIP37TestData.json */,
 				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
 				E37E74A626A90CC70019B06D /* StructContractTest.swift */,
 				E37E74A226A909100019B06D /* StructContractTestData.json */,
@@ -962,8 +966,7 @@
 				E3E02388264CB16500791E00 /* testFunction.json */,
 				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
-				E368F94C26B116A000890812 /* KIP37Test.swift */,
-				E368F94E26B116AD00890812 /* KIP37TestData.json */,
+				E368F95026B22FA900890812 /* RpcTest.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -1780,6 +1783,7 @@
 				E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */,
 				E394F0C2269FD79700371199 /* ValueTransferMemoTest.swift in Sources */,
 				E394F0CE26A10AF000371199 /* FeeDelegatedChainDataAnchoringTest.swift in Sources */,
+				E368F95126B22FA900890812 /* RpcTest.swift in Sources */,
 				E382FF0126AFC5360094AF2A /* KIP17Test.swift in Sources */,
 				E382FEDF26AE31130094AF2A /* ContractOverloadFunctionsTest.swift in Sources */,
 				E394F0CC26A104B900371199 /* FeeDelegatedCancelWithRatioTest.swift in Sources */,

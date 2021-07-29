@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Bytes: Type {
+public class Bytes: Type, Decodable {
     public init(_ value: Data) {
         super.init(value, .DynamicBytes)
     }
@@ -17,11 +17,22 @@ public class Bytes: Type {
             return String(bytes: (value as! Data).bytes)
         }
     }
+    
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let val = (try? container.decode(String.self)) ?? ""        
+        super.init(val.hexData!, .DynamicBytes)
+    }
 }
 
 public class Bytes1: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -31,11 +42,21 @@ public class Bytes2: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes3: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -45,11 +66,21 @@ public class Bytes4: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes5: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -59,11 +90,21 @@ public class Bytes6: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes7: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -73,11 +114,21 @@ public class Bytes8: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes9: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -87,11 +138,21 @@ public class Bytes10: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes11: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -101,11 +162,21 @@ public class Bytes12: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes13: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -115,11 +186,21 @@ public class Bytes14: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes15: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -129,11 +210,21 @@ public class Bytes16: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes17: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -143,11 +234,21 @@ public class Bytes18: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes19: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -157,11 +258,21 @@ public class Bytes20: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes21: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -171,11 +282,21 @@ public class Bytes22: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes23: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -185,11 +306,21 @@ public class Bytes24: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes25: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -199,11 +330,21 @@ public class Bytes26: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes27: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -213,11 +354,21 @@ public class Bytes28: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes29: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }
@@ -227,6 +378,11 @@ public class Bytes30: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes31: Bytes {
@@ -234,11 +390,21 @@ public class Bytes31: Bytes {
         super.init(value)
         self.rawType = .FixedBytes(self.size)
     }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        self.rawType = .FixedBytes(self.size)
+    }
 }
 
 public class Bytes32: Bytes {
     public override init(_ value: Data) {
         super.init(value)
+        self.rawType = .FixedBytes(self.size)
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
         self.rawType = .FixedBytes(self.size)
     }
 }

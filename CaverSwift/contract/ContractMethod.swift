@@ -240,7 +240,7 @@ open class ContractMethod: Codable {
         _ = try wallet?.sign(sendOptions.from!, smartContractExecution)
         let (error, response) = klay.sendRawTransaction(smartContractExecution)
         if let resDataString = response {
-            let receipt = try processor.waitForTransactionReceipt(resDataString.val)
+            let receipt = try processor.waitForTransactionReceipt(resDataString.toValue)
             return receipt
         } else if let error = error {
             throw error

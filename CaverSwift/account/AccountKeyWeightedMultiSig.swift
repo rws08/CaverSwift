@@ -68,7 +68,7 @@ open class AccountKeyWeightedMultiSig: IAccountKey {
         return AccountKeyWeightedMultiSig(options.threshold, weightedPublicKeyList)
     }
     
-    public func getRLPEncoding() throws -> String {
+    public override func getRLPEncoding() throws -> String {
         guard let threshold = threshold else {
             throw CaverError.NullPointerException("threshold or weightedPublicKeys must be exists for multisig.")
         }

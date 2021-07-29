@@ -74,7 +74,7 @@ open class Contract {
         _ = try wallet?.sign(from, smartContractDeploy)
         let (error, response) = caver.rpc.klay.sendRawTransaction(try smartContractDeploy.getRawTransaction())
         if let resDataString = response {
-            let receipt = try processor.waitForTransactionReceipt(resDataString.val)
+            let receipt = try processor.waitForTransactionReceipt(resDataString.toValue)
             self.contractAddress = receipt.contractAddress
             return self
         } else if let error = error {

@@ -7,6 +7,6 @@
 
 import Foundation
 
-public protocol IAccountKey {
-    func getRLPEncoding() throws -> String
+open class IAccountKey: Encodable {
+    func getRLPEncoding() throws -> String { return "" }
 }
