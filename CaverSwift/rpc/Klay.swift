@@ -18,53 +18,58 @@ public class Klay {
         self.url = url
     }
     
-    public func accountCreated(_ address: String) -> (CaverError?, Bool?) {
+    public func accountCreated(_ address: String) -> (CaverError?, result: Bool?) {
         accountCreated(address, DefaultBlockParameterName.Latest)
     }
     
-    public func accountCreated(_ address: String, _ blockNumber: Int) -> (CaverError?, Bool?) {
+    public func accountCreated(_ address: String, _ blockNumber: Int) -> (CaverError?, result: Bool?) {
         accountCreated(address, DefaultBlockParameterName.Number(blockNumber))
     }
     
-    public func accountCreated(_ address: String, _ blockTag: DefaultBlockParameterName = .Latest) -> (CaverError?, Bool?) {
+    public func accountCreated(_ address: String, _ blockTag: DefaultBlockParameterName = .Latest) -> (CaverError?, result: Bool?) {
         let(error, response) = RPC.Request("klay_accountCreated", [address, blockTag.stringValue], rpc, Bool.self)!.send()
         return parseReturn(error, response)
     }
     
-    public func getAccounts() -> (CaverError?, Addresses?) {
+    public func getAccounts() -> (CaverError?, result: Addresses?) {
         let(error, response) = RPC.Request("klay_accounts", Array<String>(), rpc, Addresses.self)!.send()
         return parseReturn(error, response)
     }
     
-    public func encodeAccountKey(_ accountKey: IAccountKey) -> (CaverError?, Bytes?) {
+    public func encodeAccountKey(_ accountKey: IAccountKey) -> (CaverError?, result: Bytes?) {
         let(error, response) = RPC.Request("klay_encodeAccountKey", [accountKey], rpc, Bytes.self)!.send()
         return parseReturn(error, response)
     }
     
-    public func getTransactionCount(_ address: String) -> (CaverError?, Quantity?) {
+    public func decodeAccountKey(_ encodedAccountKey: String) -> (CaverError?, result: AccountKey?) {
+        let(error, response) = RPC.Request("klay_decodeAccountKey", [encodedAccountKey], rpc, AccountKey.self)!.send()
+        return parseReturn(error, response)
+    }
+    
+    public func getTransactionCount(_ address: String) -> (CaverError?, result: Quantity?) {
         getTransactionCount(address, DefaultBlockParameterName.Latest)
     }
     
-    public func getTransactionCount(_ address: String, _ blockNumber: Int) -> (CaverError?, Quantity?) {
+    public func getTransactionCount(_ address: String, _ blockNumber: Int) -> (CaverError?, result: Quantity?) {
         getTransactionCount(address, DefaultBlockParameterName.Number(blockNumber))
     }
     
-    public func getTransactionCount(_ address: String, _ blockTag: DefaultBlockParameterName = .Latest) -> (CaverError?, Quantity?) {
+    public func getTransactionCount(_ address: String, _ blockTag: DefaultBlockParameterName = .Latest) -> (CaverError?, result: Quantity?) {
         let(error, response) = RPC.Request("klay_getTransactionCount", [address, blockTag.stringValue], rpc, Quantity.self)!.send()
         return parseReturn(error, response)
     }
     
-    public func getChainID() -> (CaverError?, Quantity?) {
+    public func getChainID() -> (CaverError?, result: Quantity?) {
         let(error, response) = RPC.Request("klay_chainID", Array<String>(), rpc, Quantity.self)!.send()
         return parseReturn(error, response)
     }
     
-    public func getGasPrice() -> (CaverError?, Quantity?) {
+    public func getGasPrice() -> (CaverError?, result: Quantity?) {
         let(error, response) = RPC.Request("klay_gasPrice", Array<String>(), rpc, Quantity.self)!.send()
         return parseReturn(error, response)
     }
     
-    public func getBlockNumber() -> (CaverError?, String?) {
+    public func getBlockNumber() -> (CaverError?, result: String?) {
         struct CallParams: Encodable {
             func encode(to encoder: Encoder) throws {
             }
@@ -74,48 +79,57 @@ public class Klay {
         return parseReturn(error, response)
     }
     
-    public func getBalance(_ address: String) -> (CaverError?, Quantity?) {
+    public func getBalance(_ address: String) -> (CaverError?, result: Quantity?) {
         let(error, response) = RPC.Request("klay_getBalance", [address, DefaultBlockParameterName.Latest.stringValue], rpc, Quantity.self)!.send()
         return parseReturn(error, response)
     }
     
-    func call(_ callObject: CallObject, _ blockNumber: DefaultBlockParameterName = .Latest) throws -> (CaverError?, String?) {
+    func call(_ callObject: CallObject, _ blockNumber: DefaultBlockParameterName = .Latest) throws -> (CaverError?, result: String?) {
         let params = CallParams(callObject, blockNumber.stringValue)
 //        let te = rpc.request(url: url, method: "klay_call", params: [callObject, blockNumber.stringValue], receive: String.self)
         let(error, response) = RPC.Request("klay_call", params, rpc, String.self)!.send()
         return parseReturn(error, response)
     }
     
-    func estimateGas(_ callObject: CallObject) throws -> (CaverError?, Quantity?) {
+    func estimateGas(_ callObject: CallObject) throws -> (CaverError?, result: Quantity?) {
         let params = CallParams(callObject)
         let(error, response) = RPC.Request("klay_estimateGas", params, rpc, Quantity.self)!.send()
         return parseReturn(error, response)
     }
     
-    public func sendRawTransaction(_ signedTransactionData: String) -> (CaverError?, Bytes32?) {
+    public func sendRawTransaction(_ signedTransactionData: String) -> (CaverError?, result: Bytes32?) {
         let (error, response) = RPC.Request("klay_sendRawTransaction", [signedTransactionData], rpc, Bytes32.self)!.send()
         return parseReturn(error, response)
     }
     
-    public func sendRawTransaction(_ transaction: AbstractTransaction) -> (CaverError?, Bytes32?) {
+    public func sendRawTransaction(_ transaction: AbstractTransaction) -> (CaverError?, result: Bytes32?) {
         let rawTransaction = try? transaction.getRLPEncoding()
         let (error, response) = RPC.Request("klay_sendRawTransaction", [rawTransaction], rpc, Bytes32.self)!.send()
         return parseReturn(error, response)
     }
     
-    public func getTransactionReceipt(_ transactionHash: String) -> (CaverError?, TransactionReceiptData?) {
+    public func signTransaction(_ transaction: AbstractTransaction) -> (CaverError?, result: SignTransaction?) {
+        if Utils.isEmptySig(transaction.signatures) {
+            transaction.signatures.remove(at: 0)
+        }
+        
+        let (error, response) = RPC.Request("klay_signTransaction", [transaction], rpc, SignTransaction.self)!.send()
+        return parseReturn(error, response)
+    }
+    
+    public func getTransactionReceipt(_ transactionHash: String) -> (CaverError?, result: TransactionReceiptData?) {
         let (error, response) = RPC.Request("klay_getTransactionReceipt", [transactionHash], rpc, TransactionReceiptData.self)!.send()
         return parseReturn(error, response)
     }
     
-    public func getLogs(_ filterOption: KlayLogFilter) -> (CaverError?, KlayLogs?) {
+    public func getLogs(_ filterOption: KlayLogFilter) -> (CaverError?, result: KlayLogs?) {
         let params = KlayLogFilterParams(filterOption)
         let (error, response) = RPC.Request("klay_getLogs", params, rpc, KlayLogs.self)!.send()
         
         return parseReturn(error, response)
     }
     
-    private func parseReturn<T: Any>(_ error: JSONRPCError?, _ response: Any?) -> (CaverError?, T?) {
+    private func parseReturn<T: Any>(_ error: JSONRPCError?, _ response: Any?) -> (CaverError?, result: T?) {
         if let resDataString = response as? T {
             return (nil, resDataString)
         } else if let error = error {

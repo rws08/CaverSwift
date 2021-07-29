@@ -121,4 +121,53 @@ open class AccountKeyRoleBased: IAccountKey {
     public var roleFeePayerKey: IAccountKey {
         accountKeys[RoleGroup.FEE_PAYER.rawValue]
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case keyType
+        case key
+    }
+    
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(Int(hex: AccountKeyRoleBased.TYPE), forKey: .keyType)
+        try container.encode(accountKeys, forKey: .key)
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        super.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let keyType = (try? container.decode(UInt8.self, forKey: .keyType)) ?? 0
+        let type = Data([keyType]).hexString
+        if type != AccountKeyRoleBased.TYPE {
+            throw CaverError.decodeIssue
+        }
+        var sub = try container.nestedUnkeyedContainer(forKey: .key)
+        
+        while !sub.isAtEnd {
+            var accountKey: IAccountKey
+            
+            if let decode = try? sub.decode(AccountKeyPublic.self) {
+                accountKey = decode
+            } else if let decode = try? sub.decode(AccountKeyWeightedMultiSig.self) {
+                accountKey = decode
+            } else if let decode = try? sub.decode(AccountKeyRoleBased.self) {
+                accountKey = decode
+            } else {
+                let subContainer = try sub.nestedContainer(keyedBy: CodingKeys.self)
+                let keyType = (try? subContainer.decode(UInt8.self, forKey: .keyType)) ?? 0
+                let type = Data([keyType]).hexString
+                switch type {
+                case AccountKeyLegacy.TYPE:
+                    accountKey = AccountKeyLegacy()
+                case AccountKeyFail.TYPE:
+                    accountKey = AccountKeyFail()
+                default:
+                    accountKey = AccountKeyNil()
+                }
+            }
+                        
+            self.accountKeys.append(accountKey)
+        }
+    }
 }

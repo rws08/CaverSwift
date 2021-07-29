@@ -32,10 +32,8 @@ open class AccountKeyNil: IAccountKey {
     }
     
     public override func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
+        var container = encoder.container(keyedBy: CodingKeys.self)        
         try container.encode(0, forKey: .keyType)
-        let key: [String:String] = [:]
-        try container.encode(key, forKey: .key)
+        _ = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .key)
     }
 }

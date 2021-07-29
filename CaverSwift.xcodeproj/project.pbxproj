@@ -39,6 +39,9 @@
 		E368F94D26B116A000890812 /* KIP37Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F94C26B116A000890812 /* KIP37Test.swift */; };
 		E368F94F26B116AD00890812 /* KIP37TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E368F94E26B116AD00890812 /* KIP37TestData.json */; };
 		E368F95126B22FA900890812 /* RpcTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F95026B22FA900890812 /* RpcTest.swift */; };
+		E368F95326B27C4500890812 /* AccountKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F95226B27C4500890812 /* AccountKey.swift */; };
+		E368F95526B29B5900890812 /* SignTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F95426B29B5900890812 /* SignTransaction.swift */; };
+		E368F95726B29BBE00890812 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F95626B29BBE00890812 /* Transaction.swift */; };
 		E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A026A56F3400FF2FD4 /* ContractTest.swift */; };
 		E36B78A326A5734C00FF2FD4 /* ContractDeployParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A226A5734C00FF2FD4 /* ContractDeployParams.swift */; };
 		E36B78A526A575CC00FF2FD4 /* EventFilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A426A575CC00FF2FD4 /* EventFilterOptions.swift */; };
@@ -341,6 +344,9 @@
 		E368F94C26B116A000890812 /* KIP37Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KIP37Test.swift; sourceTree = "<group>"; };
 		E368F94E26B116AD00890812 /* KIP37TestData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = KIP37TestData.json; sourceTree = "<group>"; };
 		E368F95026B22FA900890812 /* RpcTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RpcTest.swift; sourceTree = "<group>"; };
+		E368F95226B27C4500890812 /* AccountKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKey.swift; sourceTree = "<group>"; };
+		E368F95426B29B5900890812 /* SignTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTransaction.swift; sourceTree = "<group>"; };
+		E368F95626B29BBE00890812 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		E36B78A026A56F3400FF2FD4 /* ContractTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractTest.swift; sourceTree = "<group>"; };
 		E36B78A226A5734C00FF2FD4 /* ContractDeployParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractDeployParams.swift; sourceTree = "<group>"; };
 		E36B78A426A575CC00FF2FD4 /* EventFilterOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFilterOptions.swift; sourceTree = "<group>"; };
@@ -1333,6 +1339,9 @@
 				E37E748C26A6631A0019B06D /* KlayLogs.swift */,
 				E3E0237F264A26F600791E00 /* Quantity.swift */,
 				E37E748A26A65F500019B06D /* TransactionReceipt.swift */,
+				E368F95226B27C4500890812 /* AccountKey.swift */,
+				E368F95426B29B5900890812 /* SignTransaction.swift */,
+				E368F95626B29BBE00890812 /* Transaction.swift */,
 			);
 			path = response;
 			sourceTree = "<group>";
@@ -1612,6 +1621,7 @@
 				E390DAAE268C60FC00D05479 /* WeightedMultiSigOptions.swift in Sources */,
 				E37E748F26A671800019B06D /* TransactionReceiptProcessor.swift in Sources */,
 				E3A21E4E265654B5006C560D /* keccak-tiny.c in Sources */,
+				E368F95726B29BBE00890812 /* Transaction.swift in Sources */,
 				E38FA11C2689A6CB00F532D0 /* EC233.swift in Sources */,
 				E3892E0926AFF0B0006B2A30 /* KIP37.swift in Sources */,
 				E3B8E6AD2685782B0069A223 /* KeyringFactory.swift in Sources */,
@@ -1658,6 +1668,7 @@
 				E3A21E1D265654A7006C560D /* Address.swift in Sources */,
 				E3B8E6B5268593D90069A223 /* AccountKeyRoleBased.swift in Sources */,
 				E38FA1192689A6CB00F532D0 /* Domain.swift in Sources */,
+				E368F95526B29B5900890812 /* SignTransaction.swift in Sources */,
 				E390DAB8268DAFC500D05479 /* AccountKeyNil.swift in Sources */,
 				E3DBBD532698294E00BAFE27 /* Cancel.swift in Sources */,
 				E3A21E36265654A7006C560D /* RecursiveLogCollector.swift in Sources */,
@@ -1707,6 +1718,7 @@
 				E3A21E2D265654A7006C560D /* ERC165.swift in Sources */,
 				E38FA10F2689A6CB00F532D0 /* CFBCipher.swift in Sources */,
 				E3E023522648BE4200791E00 /* Contract.swift in Sources */,
+				E368F95326B27C4500890812 /* AccountKey.swift in Sources */,
 				E3A21E22265654A7006C560D /* KeyUtil.swift in Sources */,
 				E3A21E34265654A7006C560D /* EthereumKeyStorage.swift in Sources */,
 				E38FA0C426896B6800F532D0 /* Words and Bits.swift in Sources */,

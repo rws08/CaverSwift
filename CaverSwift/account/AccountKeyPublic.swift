@@ -86,4 +86,37 @@ open class AccountKeyPublic: IAccountKey {
         
         return AccountKeyPublic(publicKey)
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case keyType
+        case key
+        case x
+        case y
+    }
+    
+    public override func encode(to encoder: Encoder) throws {
+        let xy = getXYPoint()
+        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(Int(hex: AccountKeyPublic.TYPE), forKey: .keyType)
+        
+        var sub = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .key)
+        try sub.encode(xy[AccountKeyPublic.OFFSET_X_POINT].addHexPrefix, forKey: .x)
+        try sub.encode(xy[AccountKeyPublic.OFFSET_Y_POINT].addHexPrefix, forKey: .y)
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        super.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let keyType = (try? container.decode(UInt8.self, forKey: .keyType)) ?? 0
+        let type = Data([keyType]).hexString
+        if type != AccountKeyPublic.TYPE {
+            throw CaverError.decodeIssue
+        }
+        let sub = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .key)
+        let x = (try? sub.decode(String.self, forKey: .x)) ?? ""
+        let y = (try? sub.decode(String.self, forKey: .y)) ?? ""
+        
+        self.publicKey = x.hexData!.hexString + y.hexData!.hexString.cleanHexPrefix
+    }
 }

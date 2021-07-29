@@ -7,6 +7,6 @@
 
 import Foundation
 
-open class IAccountKey: Encodable {
+open class IAccountKey: Codable {
     func getRLPEncoding() throws -> String { return "" }
 }

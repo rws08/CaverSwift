@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class SignatureData: Equatable, Decodable {    
+open class SignatureData: Equatable, Codable {    
     var v = ""
     var r = ""
     var s = ""

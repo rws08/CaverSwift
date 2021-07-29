@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class AbstractTransaction {
+open class AbstractTransaction: Encodable {
     private(set) public var klaytnCall: Klay?
     private(set) public var type = ""
     private(set) public var from = ""
@@ -15,7 +15,11 @@ open class AbstractTransaction {
     private(set) public var gas = ""
     private(set) public var gasPrice = "0x"
     private(set) public var chainId = "0x"
-    private(set) public var signatures: [SignatureData] = []
+    public var signatures: [SignatureData] = []
+    
+    private enum CodingKeys: String, CodingKey {
+        case from, nonce, gas, gasPrice, chainId, signatures
+    }
     
     public class Builder {
         private(set) public var klaytnCall: Klay? = nil

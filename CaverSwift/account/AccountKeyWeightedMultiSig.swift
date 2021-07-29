@@ -16,6 +16,7 @@ open class AccountKeyWeightedMultiSig: IAccountKey {
     var weightedPublicKeys: [WeightedPublicKey] = []
     
     init(_ threshold: BigInt?, _ weightedPublicKeys: [WeightedPublicKey]) {
+        super.init()
         self.threshold = threshold
         self.weightedPublicKeys = weightedPublicKeys
     }
@@ -100,5 +101,34 @@ open class AccountKeyWeightedMultiSig: IAccountKey {
         var type = Data([AccountKeyWeightedMultiSig.RLP])
         type.append(encodedWeightedKey)        
         return type.hexString
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case keyType
+        case key
+        case threshold
+        case keys
+    }
+    
+    public override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(Int(hex: AccountKeyWeightedMultiSig.TYPE), forKey: .keyType)
+        
+        var sub = container.nestedContainer(keyedBy: CodingKeys.self, forKey: .key)
+        try sub.encode(Int(threshold!.decimal), forKey: .threshold)
+        try sub.encode(weightedPublicKeys, forKey: .keys)
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        super.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let keyType = (try? container.decode(UInt8.self, forKey: .keyType)) ?? 0
+        let type = Data([keyType]).hexString
+        if type != AccountKeyWeightedMultiSig.TYPE {
+            throw CaverError.decodeIssue
+        }
+        let sub = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .key)
+        threshold = BigInt(try sub.decode(Int.self, forKey: .threshold))
+        weightedPublicKeys = try sub.decode([WeightedPublicKey].self, forKey: .keys)
     }
 }
