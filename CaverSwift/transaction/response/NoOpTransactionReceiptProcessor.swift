@@ -8,8 +8,8 @@
 import Foundation
 
 open class NoOpTransactionReceiptProcessor: TransactionReceiptProcessor {
-    public override func waitForTransactionReceipt(_ transactionHash: String) throws -> TransactionReceiptData {
-        let transactionReceiptData = TransactionReceiptData()
+    public override func waitForTransactionReceipt(_ transactionHash: String) throws -> TransactionReceipt {
+        let transactionReceiptData = TransactionReceipt()
         transactionReceiptData.transactionHash = transactionHash
         return transactionReceiptData
     }

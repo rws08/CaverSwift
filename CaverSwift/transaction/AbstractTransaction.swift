@@ -18,7 +18,19 @@ open class AbstractTransaction: Encodable {
     public var signatures: [SignatureData] = []
     
     private enum CodingKeys: String, CodingKey {
-        case from, nonce, gas, gasPrice, chainId, signatures
+        case from, nonce, gas, gasPrice, chainId, typeInt, signatures
+    }
+    
+    open func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(from, forKey: .from)
+        try container.encode(nonce, forKey: .nonce)
+        try container.encode(gas, forKey: .gas)
+        try container.encode(gasPrice, forKey: .gasPrice)
+        try container.encode(chainId, forKey: .chainId)
+        try container.encode(getKeyType(), forKey: .typeInt)
+        try container.encode(signatures, forKey: .signatures)
     }
     
     public class Builder {

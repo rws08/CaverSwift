@@ -56,7 +56,7 @@ class ContractImproveFuncTest: XCTestCase {
         _ = storeUintData("Age", 2)
     }
     
-    func storeStringData(_ key: String, _ value: String) -> TransactionReceiptData? {
+    func storeStringData(_ key: String, _ value: String) -> TransactionReceipt? {
         let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigUInt(500000))
         let receiptData = try? ContractImproveFuncTest.contract.send(sendOptions, ContractImproveFuncTest.FUNC_SET_STRING, key, value)
         
@@ -67,7 +67,7 @@ class ContractImproveFuncTest: XCTestCase {
         return receiptData
     }
     
-    func storeUintData(_ key: String, _ value: Int) -> TransactionReceiptData? {
+    func storeUintData(_ key: String, _ value: Int) -> TransactionReceipt? {
         let sendOptions = SendOptions(ContractImproveFuncTest.ownerKeyring.address, BigUInt(500000))
         let receiptData = try? ContractImproveFuncTest.contract.send(sendOptions, ContractImproveFuncTest.FUNC_SET_UINT, key, value)
         

@@ -163,32 +163,32 @@ open class Contract {
         return try? contractMethod.callWithSolidityWrapper(methodArguments, callObject)
     }
         
-    public func send(_ methodName: String, _ methodArguments: Any...) throws -> TransactionReceiptData {
+    public func send(_ methodName: String, _ methodArguments: Any...) throws -> TransactionReceipt {
         return try send(nil, methodName, methodArguments.flatCompactMapForVariadicParameters())
     }
     
-    public func send(_ options: SendOptions? = nil, _ methodName: String, _ methodArguments: Any...) throws -> TransactionReceiptData {
+    public func send(_ options: SendOptions? = nil, _ methodName: String, _ methodArguments: Any...) throws -> TransactionReceipt {
         return try send(options, PollingTransactionReceiptProcessor(caver, 1000, 15), methodName, methodArguments.flatCompactMapForVariadicParameters())
     }
     
-    public func send(_ options: SendOptions? = nil, _ receiptProcessor: TransactionReceiptProcessor, _ methodName: String, _ methodArguments: Any...) throws -> TransactionReceiptData {
+    public func send(_ options: SendOptions? = nil, _ receiptProcessor: TransactionReceiptProcessor, _ methodName: String, _ methodArguments: Any...) throws -> TransactionReceipt {
         let contractMethod = try getMethod(methodName)
         return try contractMethod.send(methodArguments.flatCompactMapForVariadicParameters(), options, receiptProcessor)
     }
     
-    public func sendWithSolidityType(_ methodName: String, _ methodArguments: Type...) throws -> TransactionReceiptData {
+    public func sendWithSolidityType(_ methodName: String, _ methodArguments: Type...) throws -> TransactionReceipt {
         return try sendWithSolidityType(nil, PollingTransactionReceiptProcessor(caver, 1000, 15), methodName, methodArguments)
     }
     
-    public func sendWithSolidityType(_ options: SendOptions? = nil, _ methodName: String, _ methodArguments: Type...) throws -> TransactionReceiptData {
+    public func sendWithSolidityType(_ options: SendOptions? = nil, _ methodName: String, _ methodArguments: Type...) throws -> TransactionReceipt {
         return try sendWithSolidityType(options, PollingTransactionReceiptProcessor(caver, 1000, 15), methodName, methodArguments)
     }
     
-    public func sendWithSolidityType(_ options: SendOptions? = nil, _ receiptProcessor: TransactionReceiptProcessor, _ methodName: String, _ methodArguments: Type...) throws -> TransactionReceiptData {
+    public func sendWithSolidityType(_ options: SendOptions? = nil, _ receiptProcessor: TransactionReceiptProcessor, _ methodName: String, _ methodArguments: Type...) throws -> TransactionReceipt {
         return try sendWithSolidityType(options, receiptProcessor, methodName, methodArguments)
     }
     
-    public func sendWithSolidityType(_ options: SendOptions? = nil, _ receiptProcessor: TransactionReceiptProcessor, _ methodName: String, _ methodArguments: [Type]) throws -> TransactionReceiptData {
+    public func sendWithSolidityType(_ options: SendOptions? = nil, _ receiptProcessor: TransactionReceiptProcessor, _ methodName: String, _ methodArguments: [Type]) throws -> TransactionReceipt {
         let contractMethod = try getMethod(methodName)
         return try contractMethod.sendWithSolidityWrapper(methodArguments, options, receiptProcessor)
     }

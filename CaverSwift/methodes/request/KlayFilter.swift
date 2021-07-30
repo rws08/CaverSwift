@@ -48,12 +48,15 @@ public class KlayFilter: Filter {
     
     public override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
-        var container = encoder.unkeyedContainer()
-        var nested = container.nestedContainer(keyedBy: CodingKeys.self)
-        try nested.encode(self.fromBlock.stringValue, forKey: .fromBlock)
-        try nested.encode(self.toBlock.stringValue, forKey: .toBlock)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.fromBlock.stringValue, forKey: .fromBlock)
+        try container.encode(self.toBlock.stringValue, forKey: .toBlock)
         if !self.address.isEmpty {
-            try nested.encode(self.address, forKey: .address)
+            if self.address.count == 1 {
+                try container.encode(self.address.first, forKey: .address)
+            } else {
+                try container.encode(self.address, forKey: .address)
+            }
         }        
     }
     

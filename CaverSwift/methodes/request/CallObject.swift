@@ -15,6 +15,43 @@ public struct CallObject: Codable {
     var gasPrice: BigInt?
     var value: BigInt?
     var data: String?
+    var block: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case from
+        case to
+        case gasLimit
+        case gasPrice
+        case value
+        case data
+        case block
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        var nested = container.nestedContainer(keyedBy: CodingKeys.self)
+        if let from = from {
+            try nested.encode(from, forKey: .from)
+        }
+        if let to = to {
+            try nested.encode(to, forKey: .to)
+        }
+        if let gasLimit = gasLimit {
+            try nested.encode(gasLimit.hexa, forKey: .gasLimit)
+        }
+        if let gasPrice = gasPrice {
+            try nested.encode(gasPrice.hexa, forKey: .gasPrice)
+        }
+        if let value = value {
+            try nested.encode(value.hexa, forKey: .value)
+        }
+        if let data = data {
+            try nested.encode(data, forKey: .data)
+        }
+        if let block = block {
+            try container.encode(block)
+        }
+    }
     
     public init(_ from: String? = nil, _ to: String? = nil, _ gasLimit: BigInt? = nil, _ gasPrice: BigInt? = nil, _ value: BigInt? = nil, _ data: String? = nil) {
         self.from = from

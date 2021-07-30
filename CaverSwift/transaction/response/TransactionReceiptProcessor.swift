@@ -14,11 +14,11 @@ open class TransactionReceiptProcessor {
         self.caver = caver
     }
     
-    public func waitForTransactionReceipt(_ transactionHash: String) throws -> TransactionReceiptData {
+    public func waitForTransactionReceipt(_ transactionHash: String) throws -> TransactionReceipt {
         throw CaverError.unexpectedReturnValue
     }
     
-    public func sendTransactionReceiptRequest(_ transactionHash: String) throws -> TransactionReceiptData {
+    public func sendTransactionReceiptRequest(_ transactionHash: String) throws -> TransactionReceipt {
         let (error, response) = caver.rpc.klay.getTransactionReceipt(transactionHash)
         if let response = response {
             return response

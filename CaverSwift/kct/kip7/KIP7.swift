@@ -174,7 +174,7 @@ open class KIP7: Contract {
         return result?[0].value as? Bool
     }
     
-    public func approve(_ spender: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func approve(_ spender: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_APPROVE, [spender, amount])
         
@@ -182,7 +182,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func transfer(_ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func transfer(_ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_TRANSFER, [recipient, amount])
         
@@ -190,7 +190,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func transferFrom(_ sender: String, _ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func transferFrom(_ sender: String, _ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_TRANSFER_FROM, [sender, recipient, amount])
         
@@ -198,7 +198,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func safeTransfer(_ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeTransfer(_ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_SAFE_TRANSFER, [recipient, amount])
         
@@ -206,7 +206,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func safeTransfer(_ recipient: String, _ amount: BigUInt, _ data: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeTransfer(_ recipient: String, _ amount: BigUInt, _ data: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_SAFE_TRANSFER, [recipient, amount, data])
         
@@ -214,7 +214,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func safeTransferFrom(_ sender: String, _ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeTransferFrom(_ sender: String, _ recipient: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_SAFE_TRANSFER_FROM, [sender, recipient, amount])
         
@@ -222,7 +222,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func safeTransferFrom(_ sender: String, _ recipient: String, _ amount: BigUInt, _ data: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeTransferFrom(_ sender: String, _ recipient: String, _ amount: BigUInt, _ data: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_SAFE_TRANSFER_FROM, [sender, recipient, amount, data])
         
@@ -230,7 +230,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func mint(_ account: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func mint(_ account: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_MINT, [account, amount])
         
@@ -238,7 +238,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func addMinter(_ account: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func addMinter(_ account: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_ADD_MINTER, [account])
         
@@ -246,7 +246,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func renounceMinter(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func renounceMinter(_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_RENOUNCE_MINTER)
         
@@ -254,7 +254,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func burn(_ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func burn(_ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_BURN, [amount])
         
@@ -262,7 +262,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func burnFrom(_ account: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func burnFrom(_ account: String, _ amount: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_BURN_FROM, [account, amount])
         
@@ -270,7 +270,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func addPauser(_ account: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func addPauser(_ account: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_ADD_PAUSER, [account])
         
@@ -278,7 +278,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func pause(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func pause(_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_PAUSE)
         
@@ -286,7 +286,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func unpause(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func unpause(_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_UNPAUSE)
         
@@ -294,7 +294,7 @@ open class KIP7: Contract {
         return receiptData
     }
     
-    public func renouncePauser(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func renouncePauser(_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP7.determineSendOptions(self, sendParam, KIP7.FUNCTION_RENOUNCE_PAUSER)
         

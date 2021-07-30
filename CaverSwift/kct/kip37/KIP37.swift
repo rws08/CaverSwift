@@ -147,23 +147,23 @@ open class KIP37: Contract {
         return batchList.values as? [BigUInt]
     }
     
-    public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: String, _ value: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: String, _ value: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
         
         return try safeTransferFrom(from, to, tokenId, value, "", sendParam)
     }
     
-    public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: BigUInt, _ value: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {        
+    public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: BigUInt, _ value: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {        
         return try safeTransferFrom(from, to, tokenId, value, "", sendParam)
     }
     
-    public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: String, _ value: BigUInt, _ data: String = "",_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: String, _ value: BigUInt, _ data: String = "",_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
         
         return try safeTransferFrom(from, to, tokenId, value, data, sendParam)
     }
     
-    public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: BigUInt, _ value: BigUInt, _ data: String = "",_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeTransferFrom(_ from: String, _ to: String, _ tokenId: BigUInt, _ value: BigUInt, _ data: String = "",_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_SAFE_TRANSFER_FROM, [from, to, tokenId, value, data])
         
@@ -171,7 +171,7 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [String], _ amounts: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [String], _ amounts: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         let tokenIdArr: [BigUInt] = try tokenIds.map {
             guard let val = BigUInt(hex: $0) else { throw CaverError.invalidValue }
             return val
@@ -179,11 +179,11 @@ open class KIP37: Contract {
         return try safeBatchTransferFrom(from, to, tokenIdArr, amounts, "", sendParam)
     }
     
-    public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [BigUInt], _ amounts: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [BigUInt], _ amounts: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         return try safeBatchTransferFrom(from, to, tokenIds, amounts, "", sendParam)
     }
     
-    public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [String], _ amounts: [BigUInt], _ data: String = "", _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [String], _ amounts: [BigUInt], _ data: String = "", _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         let tokenIdArr: [BigUInt] = try tokenIds.map {
             guard let val = BigUInt(hex: $0) else { throw CaverError.invalidValue }
             return val
@@ -191,7 +191,7 @@ open class KIP37: Contract {
         return try safeBatchTransferFrom(from, to, tokenIdArr, amounts, data, sendParam)
     }
     
-    public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [BigUInt], _ amounts: [BigUInt], _ data: String = "", _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func safeBatchTransferFrom(_ from: String, _ to: String, _ tokenIds: [BigUInt], _ amounts: [BigUInt], _ data: String = "", _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_SAFE_BATCH_TRANSFER_FROM, [from, to, tokenIds, amounts, data])
         
@@ -199,7 +199,7 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func setApprovalForAll(_ operate: String, _ approved: Bool, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func setApprovalForAll(_ operate: String, _ approved: Bool, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_SET_APPROVED_FOR_ALL, [operate, approved])
         
@@ -222,13 +222,13 @@ open class KIP37: Contract {
         return result?[0].value as? BigUInt
     }
     
-    public func create(_ tokenId: String, _ initialSupply: BigUInt, _ uri: String = "",_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func create(_ tokenId: String, _ initialSupply: BigUInt, _ uri: String = "",_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
         
         return try create(tokenId, initialSupply, uri, sendParam)
     }
     
-    public func create(_ tokenId: BigUInt, _ initialSupply: BigUInt, _ uri: String = "",_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func create(_ tokenId: BigUInt, _ initialSupply: BigUInt, _ uri: String = "",_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_CREATE, [tokenId, initialSupply, uri])
         
@@ -236,12 +236,12 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func mint(_ to: String, _ tokenId: String, _ value: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func mint(_ to: String, _ tokenId: String, _ value: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
         return try mint(to, tokenId, value, sendParam)
     }
     
-    public func mint(_ to: String, _ tokenId: BigUInt, _ value: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func mint(_ to: String, _ tokenId: BigUInt, _ value: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptionsWithSolidityType(self, sendParam, KIP37.FUNCTION_MINT, [Uint256(tokenId), Address(to), Uint256(value)])
         
@@ -249,12 +249,12 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func mint(_ toList: [String], _ tokenId: String, _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func mint(_ toList: [String], _ tokenId: String, _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
         return try mint(toList, tokenId, values, sendParam)
     }
     
-    public func mint(_ toList: [String], _ tokenId: BigUInt, _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func mint(_ toList: [String], _ tokenId: BigUInt, _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         let valueList = values.map { Uint256($0) }
         let addressList = toList.map { Address($0) }
         
@@ -269,7 +269,7 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func mintBatch(_ to: String, _ tokenIds: [String], _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func mintBatch(_ to: String, _ tokenIds: [String], _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         let tokenIdArr: [BigUInt] = try tokenIds.map {
             guard let val = BigUInt(hex: $0) else { throw CaverError.invalidValue }
             return val
@@ -277,7 +277,7 @@ open class KIP37: Contract {
         return try mintBatch(to, tokenIdArr, values, sendParam)
     }
     
-    public func mintBatch(_ to: String, _ tokenIds: [BigUInt], _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func mintBatch(_ to: String, _ tokenIds: [BigUInt], _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         let tokenIdList = tokenIds.map { Uint256($0) }
         let valueList = values.map { Uint256($0) }
         
@@ -298,7 +298,7 @@ open class KIP37: Contract {
         return result?[0].value as? Bool
     }
     
-    public func addMinter(_ account: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func addMinter(_ account: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_ADD_MINTER, [account])
         
@@ -306,7 +306,7 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func renounceMinter(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func renounceMinter(_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_RENOUNCE_MINTER)
         
@@ -314,13 +314,13 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func burn(_ address: String, _ tokenId: String, _ value: BigUInt,_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func burn(_ address: String, _ tokenId: String, _ value: BigUInt,_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
         
         return try burn(address, tokenId, value, sendParam)
     }
     
-    public func burn(_ address: String, _ tokenId: BigUInt, _ value: BigUInt,_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func burn(_ address: String, _ tokenId: BigUInt, _ value: BigUInt,_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_BURN, [address, tokenId, value])
         
@@ -328,7 +328,7 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func burnBatch(_ address: String, _ tokenIds: [String], _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func burnBatch(_ address: String, _ tokenIds: [String], _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         let tokenIdArr: [BigUInt] = try tokenIds.map {
             guard let val = BigUInt(hex: $0) else { throw CaverError.invalidValue }
             return val
@@ -336,7 +336,7 @@ open class KIP37: Contract {
         return try burnBatch(address, tokenIdArr, values, sendParam)
     }
     
-    public func burnBatch(_ address: String, _ tokenIds: [BigUInt], _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func burnBatch(_ address: String, _ tokenIds: [BigUInt], _ values: [BigUInt], _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_BURN_BATCH, [address, tokenIds, values])
         
@@ -360,7 +360,7 @@ open class KIP37: Contract {
         return result?[0].value as? Bool
     }
     
-    public func pause(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func pause(_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_PAUSE)
         
@@ -368,7 +368,7 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func unpause(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func unpause(_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_UNPAUSE)
         
@@ -376,13 +376,13 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func pause(_ tokenId: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func pause(_ tokenId: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
         
         return try pause(tokenId, sendParam)
     }
     
-    public func pause(_ tokenId: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func pause(_ tokenId: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_PAUSE, [tokenId])
         
@@ -390,13 +390,13 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func unpause(_ tokenId: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func unpause(_ tokenId: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let tokenId = BigUInt(hex: tokenId) else { throw CaverError.invalidValue }
         
         return try unpause(tokenId, sendParam)
     }
     
-    public func unpause(_ tokenId: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func unpause(_ tokenId: BigUInt, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_UNPAUSE, [tokenId])
         
@@ -410,7 +410,7 @@ open class KIP37: Contract {
         return result?[0].value as? Bool
     }
     
-    public func addPauser(_ account: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func addPauser(_ account: String, _ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_ADD_PAUSER, [account])
         
@@ -418,7 +418,7 @@ open class KIP37: Contract {
         return receiptData
     }
     
-    public func renouncePauser(_ sendParam: SendOptions? = nil) throws -> TransactionReceiptData {
+    public func renouncePauser(_ sendParam: SendOptions? = nil) throws -> TransactionReceipt {
         guard let sendParam = sendParam ?? defaultSendOptions else { throw CaverError.invalidValue }
         let sendOption = try KIP37.determineSendOptions(self, sendParam, KIP37.FUNCTION_RENOUNCE_PAUSER)
         

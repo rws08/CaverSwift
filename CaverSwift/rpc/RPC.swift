@@ -10,8 +10,10 @@ import Foundation
 public class RPC {
     private(set) public var session: URLSession
     private(set) public var url: URL
+    private var id: Int = 0
     
     public lazy var klay = Klay(self, url)
+    public lazy var net = Net(self, url)
     
     public init(_ session: URLSession, _ url: URL) {
         self.session = session
@@ -76,8 +78,9 @@ public class RPC {
             self.urlRequest = urlRequest
         }
         
-        init?(_ method: String, _ params: T, _ rpc: RPC, _ receive: U.Type, _ id: Int = 1) {
+        init?(_ method: String, _ params: T, _ rpc: RPC, _ receive: U.Type) {
             self.rpc = rpc
+            self.rpc.id += 1
             self.urlRequest = URLRequest(url: self.rpc.url, cachePolicy: .reloadIgnoringLocalCacheData)
             
             if type(of: params) == [Any].self {
@@ -89,7 +92,7 @@ public class RPC {
             self.urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             self.urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
 //            print("network request : \(method) - \(params)")
-            let rpcRequest = JSONRPCRequest(jsonrpc: "2.0", method: method, params: params, id: id)
+            let rpcRequest = JSONRPCRequest(jsonrpc: "2.0", method: method, params: params, id: self.rpc.id)
             guard let encoded = try? JSONEncoder().encode(rpcRequest) else {
                 print(CaverError.encodingError)
                 return nil

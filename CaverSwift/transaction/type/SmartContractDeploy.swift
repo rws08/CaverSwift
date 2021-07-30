@@ -14,6 +14,21 @@ open class SmartContractDeploy: AbstractTransaction {
     private(set) public var humanReadable = false
     private(set) public var codeFormat = CodeFormat.EVM.hexa
     
+    private enum CodingKeys: String, CodingKey {
+        case to, input, value, humanReadable, codeFormat
+    }
+    
+    open override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(to, forKey: .to)
+        try container.encode(input, forKey: .input)
+        try container.encode(value, forKey: .value)
+        try container.encode(humanReadable, forKey: .humanReadable)
+        try container.encode(codeFormat, forKey: .codeFormat)
+    }
+    
     public class Builder: AbstractTransaction.Builder {
         private(set) public var to = "0x"
         private(set) public var input = ""

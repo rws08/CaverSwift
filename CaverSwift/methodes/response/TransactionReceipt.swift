@@ -7,7 +7,7 @@
 
 import Foundation
 
-open class TransactionReceiptData: Decodable {
+open class TransactionReceipt: Decodable {
     public var blockHash: String?
     public var blockNumber: String?
     public var codeFormat: String?

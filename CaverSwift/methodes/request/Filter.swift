@@ -21,11 +21,13 @@ public class Filter: Codable {
     init() {}
     
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.unkeyedContainer()
-        var nested = container.nestedContainer(keyedBy: CodingKeys.self)
+        var container = encoder.container(keyedBy: CodingKeys.self)
         
         if !self.topics.isEmpty {
-            try nested.encode(self.topics, forKey: .topics)
+            let topics = self.topics.map {
+                $0.getValue()
+            }
+            try container.encode(topics, forKey: .topics)
         }                
     }
     

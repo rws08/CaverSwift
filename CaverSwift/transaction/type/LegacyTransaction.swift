@@ -12,6 +12,19 @@ open class LegacyTransaction: AbstractTransaction {
     private(set) public var input = "0x"
     private(set) public var value = ""
     
+    private enum CodingKeys: String, CodingKey {
+        case to, input, value
+    }
+    
+    open override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(to, forKey: .to)
+        try container.encode(input, forKey: .input)
+        try container.encode(value, forKey: .value)
+    }
+    
     public class Builder: AbstractTransaction.Builder {
         private(set) public var to = "0x"
         private(set) public var input = "0x"

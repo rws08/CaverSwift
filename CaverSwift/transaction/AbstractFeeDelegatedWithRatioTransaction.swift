@@ -10,6 +10,17 @@ import Foundation
 open class AbstractFeeDelegatedWithRatioTransaction: AbstractFeeDelegatedTransaction {
     private(set) public var feeRatio = ""
     
+    private enum CodingKeys: String, CodingKey {
+        case feeRatio
+    }
+    
+    open override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(BigInt(hex: feeRatio)?.int, forKey: .feeRatio)
+    }
+    
     public class Builder: AbstractFeeDelegatedTransaction.Builder {
         private(set) public var feeRatio = ""
         

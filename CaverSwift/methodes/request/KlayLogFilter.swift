@@ -32,10 +32,9 @@ public class KlayLogFilter: KlayFilter {
     
     public override func encode(to encoder: Encoder) throws {
         try super.encode(to: encoder)
-        var container = encoder.unkeyedContainer()
-        var nested = container.nestedContainer(keyedBy: CodingKeys.self)
-        if self.blockHash != nil {
-            try nested.encode(self.blockHash, forKey: .blockHash)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        if !(self.blockHash?.isEmpty ?? true) {
+            try container.encode(self.blockHash, forKey: .blockHash)
         }
     }
     

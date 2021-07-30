@@ -95,7 +95,7 @@ open class ContractMethod: Codable {
         return try callFunction(matchedMethod, encodedFunction, callObject)
     }
     
-    public func send(_ arguments: [Any]? = nil, _ options: SendOptions? = nil, _ processor: TransactionReceiptProcessor? = nil) throws -> TransactionReceiptData {
+    public func send(_ arguments: [Any]? = nil, _ options: SendOptions? = nil, _ processor: TransactionReceiptProcessor? = nil) throws -> TransactionReceipt {
         var functionParams: [Any] = []
         if arguments != nil {
             functionParams.append(contentsOf: arguments!)
@@ -107,7 +107,7 @@ open class ContractMethod: Codable {
         return try sendTransaction(matchedMethod, options, encodedFunction, processor ?? PollingTransactionReceiptProcessor(caver!, 1000, 15))
     }
     
-    public func sendWithSolidityWrapper(_ wrapperArguments: [Type]? = nil, _ options: SendOptions? = nil, _ processor: TransactionReceiptProcessor? = nil) throws -> TransactionReceiptData {
+    public func sendWithSolidityWrapper(_ wrapperArguments: [Type]? = nil, _ options: SendOptions? = nil, _ processor: TransactionReceiptProcessor? = nil) throws -> TransactionReceipt {
         var functionParams: [Type] = []
         if wrapperArguments != nil {
             functionParams.append(contentsOf: wrapperArguments!)
@@ -221,7 +221,7 @@ open class ContractMethod: Codable {
         }
     }
     
-    private func sendTransaction(_ method: ContractMethod, _ options: SendOptions?, _ encodedInput: String, _ processor: TransactionReceiptProcessor) throws -> TransactionReceiptData {
+    private func sendTransaction(_ method: ContractMethod, _ options: SendOptions?, _ encodedInput: String, _ processor: TransactionReceiptProcessor) throws -> TransactionReceipt {
         guard let klay = caver?.rpc.klay else {
             throw CaverError.invalidValue
         }

@@ -14,14 +14,29 @@ public class Bytes: Type, Decodable {
     
     public var toValue: String {
         get {
-            return String(bytes: (value as! Data).bytes)
+            if let value = value as? Data {
+                return String(bytes: value.bytes)
+            } else if let value = value as? Int{
+                return String(value)
+            } else {
+                return ""
+            }
         }
     }
     
     required public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        let val = (try? container.decode(String.self)) ?? ""        
-        super.init(val.hexData!, .DynamicBytes)
+        if let val = (try? container.decode(String.self)) {
+            if let hexData = val.hexData {
+                super.init(hexData, .DynamicBytes)
+            } else {
+                super.init(val.data(using: .utf8) ?? Data(), .DynamicBytes)
+            }
+        }else if let val = (try? container.decode(Int.self)) {
+            super.init(val, .DynamicBytes)
+        } else {
+            super.init(Data(), .DynamicBytes)
+        }
     }
 }
 

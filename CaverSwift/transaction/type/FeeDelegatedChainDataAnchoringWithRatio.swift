@@ -10,6 +10,17 @@ import Foundation
 open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRatioTransaction {
     private(set) public var input: String?
     
+    private enum CodingKeys: String, CodingKey {
+        case input
+    }
+    
+    open override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(input, forKey: .input)
+    }
+    
     public class Builder: AbstractFeeDelegatedWithRatioTransaction.Builder {
         private(set) public var input: String?
         

@@ -11,6 +11,17 @@ open class AbstractFeeDelegatedTransaction: AbstractTransaction {
     private(set) public var feePayer = ""
     private(set) public var feePayerSignatures: [SignatureData] = []
     
+    private enum CodingKeys: String, CodingKey {
+        case feePayer
+    }
+    
+    open override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(feePayer, forKey: .feePayer)
+    }
+    
     public class Builder: AbstractTransaction.Builder {
         private(set) public var feePayer = ""
         private(set) public var feePayerSignatures: [SignatureData] = []

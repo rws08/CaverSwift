@@ -1,13 +1,13 @@
 //
-//  Transaction.swift
+//  TransactionData.swift
 //  CaverSwift
 //
-//  Created by won on 2021/07/29.
+//  Created by won on 2021/07/30.
 //
 
 import Foundation
 
-open class Transaction: Decodable {
+open class TransactionData: Codable {
     public var blockHash: String?
     public var blockNumber: String?
     public var codeFormat: String?
@@ -32,6 +32,7 @@ open class Transaction: Decodable {
     
     init() {
     }
+    
     
     internal init(blockHash: String? = nil, blockNumber: String? = nil, codeFormat: String? = nil, feePayer: String? = nil, feePayerSignatures: [SignatureData]? = nil, feeRatio: String? = nil, from: String? = nil, gas: String? = nil, gasPrice: String? = nil, hash: String? = nil, humanReadable: Bool? = nil, key: String? = nil, input: String? = nil, nonce: String? = nil, senderTxHash: String? = nil, signatures: [SignatureData]? = nil, to: String? = nil, transactionIndex: String? = nil, type: String? = nil, typeInt: String? = nil, value: String? = nil) {
         self.blockHash = blockHash
@@ -60,8 +61,7 @@ open class Transaction: Decodable {
     enum CodingKeys: String, CodingKey {
         case blockHash, blockNumber, codeFormat, feePayer, feePayerSignatures,
         feeRatio, from, gas, gasPrice, hash, humanReadable,
-        key, input,
-        nonce, senderTxHash, signatures,
+        key, input, nonce, senderTxHash, signatures,
         to, transactionIndex, type, typeInt, value
     }
     
@@ -90,3 +90,4 @@ open class Transaction: Decodable {
         self.value = try? container.decode(String.self, forKey: .value)
     }
 }
+
