@@ -708,9 +708,9 @@
 		E363D3B8269D24260077F6D2 /* response */ = {
 			isa = PBXGroup;
 			children = (
-				E37E748E26A671800019B06D /* TransactionReceiptProcessor.swift */,
 				E37E749026A673A20019B06D /* NoOpTransactionReceiptProcessor.swift */,
 				E37E749226A674740019B06D /* PollingTransactionReceiptProcessor.swift */,
+				E37E748E26A671800019B06D /* TransactionReceiptProcessor.swift */,
 			);
 			path = response;
 			sourceTree = "<group>";
@@ -990,13 +990,13 @@
 				E368F94C26B116A000890812 /* KIP37Test.swift */,
 				E368F94E26B116AD00890812 /* KIP37TestData.json */,
 				E390DAB3268D94BE00D05479 /* RlpTest.swift */,
+				E368F95026B22FA900890812 /* RpcTest.swift */,
 				E37E74A626A90CC70019B06D /* StructContractTest.swift */,
 				E37E74A226A909100019B06D /* StructContractTestData.json */,
 				E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */,
 				E3E02388264CB16500791E00 /* testFunction.json */,
 				E363D38B269C062B0077F6D2 /* transaction */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
-				E368F95026B22FA900890812 /* RpcTest.swift */,
 			);
 			path = CaverSwiftTests;
 			sourceTree = "<group>";
@@ -1301,14 +1301,14 @@
 			children = (
 				E3E0234D2648BB6C00791E00 /* AbstractKeyring.swift */,
 				E3B8E6AC2685782B0069A223 /* KeyringFactory.swift */,
+				E36EEA1526957D6200C1B599 /* KeyStore.swift */,
+				E36EEA1326957D0F00C1B599 /* KeyStoreOption.swift */,
 				E3B8E6B22685918A0069A223 /* MessageSigned.swift */,
 				E36EEA0F2693DCEE00C1B599 /* MultipleKeyring.swift */,
 				E3A5C8C32683079E002A0A2D /* PrivateKey.swift */,
 				E36EEA112693FEC900C1B599 /* RoleBasedKeyring.swift */,
 				E3B8E6B02685903F0069A223 /* SignatureData.swift */,
 				E3B8E6AE2685783E0069A223 /* SingleKeyring.swift */,
-				E36EEA1326957D0F00C1B599 /* KeyStoreOption.swift */,
-				E36EEA1526957D6200C1B599 /* KeyStore.swift */,
 			);
 			path = keyring;
 			sourceTree = "<group>";
@@ -1360,24 +1360,24 @@
 		E3E0237E264A26E500791E00 /* response */ = {
 			isa = PBXGroup;
 			children = (
-				E363D3B9269D37380077F6D2 /* Addresses.swift */,
-				E37E748C26A6631A0019B06D /* KlayLogs.swift */,
-				E3E0237F264A26F600791E00 /* Quantity.swift */,
-				E37E748A26A65F500019B06D /* TransactionReceipt.swift */,
-				E368F95226B27C4500890812 /* AccountKey.swift */,
-				E368F95426B29B5900890812 /* SignTransaction.swift */,
-				E368F95626B29BBE00890812 /* Transaction.swift */,
-				E3C6F88B26B39CD5002CCF35 /* IAccountType.swift */,
 				E3C6F88D26B39EB2002CCF35 /* AccountData.swift */,
-				E3C6F88F26B39FC4002CCF35 /* AccountTypeSCA.swift */,
+				E368F95226B27C4500890812 /* AccountKey.swift */,
 				E3C6F89126B3B160002CCF35 /* AccountTypeEOA.swift */,
+				E3C6F88F26B39FC4002CCF35 /* AccountTypeSCA.swift */,
+				E363D3B9269D37380077F6D2 /* Addresses.swift */,
+				E3C6F89F26B3D271002CCF35 /* AnchoredChainData.swift */,
 				E3C6F89326B3B673002CCF35 /* BlockData.swift */,
-				E3C6F89526B3BA1D002CCF35 /* TransactionData.swift */,
 				E3C6F89726B3C679002CCF35 /* BlockTransactionReceipts.swift */,
 				E3C6F89926B3C7BB002CCF35 /* BlockWithConsensusInfo.swift */,
-				E3C6F89D26B3CBCB002CCF35 /* KlaySyncing.swift */,
-				E3C6F89F26B3D271002CCF35 /* AnchoredChainData.swift */,
+				E3C6F88B26B39CD5002CCF35 /* IAccountType.swift */,
+				E37E748C26A6631A0019B06D /* KlayLogs.swift */,
 				E3C6F8A326B3F407002CCF35 /* KlayPeerCount.swift */,
+				E3C6F89D26B3CBCB002CCF35 /* KlaySyncing.swift */,
+				E3E0237F264A26F600791E00 /* Quantity.swift */,
+				E368F95426B29B5900890812 /* SignTransaction.swift */,
+				E368F95626B29BBE00890812 /* Transaction.swift */,
+				E3C6F89526B3BA1D002CCF35 /* TransactionData.swift */,
+				E37E748A26A65F500019B06D /* TransactionReceipt.swift */,
 			);
 			path = response;
 			sourceTree = "<group>";
