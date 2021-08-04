@@ -83,6 +83,63 @@ open class Contract {
         throw CaverError.unexpectedReturnValue
     }
     
+    @available(iOS 13.0, *)
+    public func once(_ eventName: String, _ paramsOption: EventFilterOptions? = nil, _ callback: @escaping ((KlayLogs?)) -> Void) throws {
+        var options: [String:Any] = [:]
+        var topics: [Any]? = nil
+        
+        if eventName == "allEvents" {
+            if paramsOption != nil {
+                WARNING(message: "If eventName has 'allEvent', passed paramOption will be ignored.")
+            }
+        } else if let paramsOption = paramsOption {
+            let event = try getEvent(eventName)
+            if paramsOption.topics.isEmpty {
+                topics = try EventFilterOptions.convertsTopic(event, paramsOption)
+            } else {
+                topics = paramsOption.topics
+            }
+        }
+        
+        options["address"] = contractAddress
+        options["topics"] = topics
+        
+        try RPC.Request("klay_subscribe", OnceParam(options), caver.rpc, (KlayLogs?).self)!.subscribe {
+            callback($0)
+        }
+    }
+    
+    struct OnceParam: Encodable {
+        internal init(_ options: [String:Any]) {
+            self.address = options["address"] as? String ?? ""
+            self.topics = options["topics"] as? [Any]
+        }
+        
+        let address: String
+        let topics: [Any]?
+        
+        enum CodingKeys: String, CodingKey {
+            case address, topics, fromBlock, toBlock
+        }
+        
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.unkeyedContainer()
+            try container.encode("logs")
+            var sub = container.nestedContainer(keyedBy: CodingKeys.self)
+            try sub.encode(address, forKey: .address)
+            var topicsContainer = sub.nestedUnkeyedContainer(forKey: .topics)
+            try topics?.forEach({
+                if let strVal = $0 as? String {
+                    try topicsContainer.encode(strVal)
+                } else if let arrVal = $0 as? [String] {
+                    try topicsContainer.encode(arrVal)
+                } else {
+                    try topicsContainer.encodeNil()
+                }
+            })
+        }
+    }
+    
     func setCaver(_ caver: Caver) {
         self.caver = caver
         methods.values.forEach {

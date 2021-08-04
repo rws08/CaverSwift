@@ -12,6 +12,7 @@
 		E31BEDF6269EC6F800196C0A /* CancelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF5269EC6F800196C0A /* CancelTest.swift */; };
 		E31BEDF8269EDC3400196C0A /* ChainDataAnchoringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */; };
 		E31BEDFA269EE34400196C0A /* SmartContractDeployTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF9269EE34400196C0A /* SmartContractDeployTest.swift */; };
+		E351613126B8C9BE002E2FE8 /* WebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351613026B8C9BE002E2FE8 /* WebSocketService.swift */; };
 		E363D38A269BBE0E0077F6D2 /* AccountUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D389269BBE0E0077F6D2 /* AccountUpdate.swift */; };
 		E363D38D269C063F0077F6D2 /* LegacyTransactionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */; };
 		E363D38F269C27930077F6D2 /* ChainDataAnchoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D38E269C27930077F6D2 /* ChainDataAnchoring.swift */; };
@@ -329,6 +330,7 @@
 		E31BEDF5269EC6F800196C0A /* CancelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelTest.swift; sourceTree = "<group>"; };
 		E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDataAnchoringTest.swift; sourceTree = "<group>"; };
 		E31BEDF9269EE34400196C0A /* SmartContractDeployTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartContractDeployTest.swift; sourceTree = "<group>"; };
+		E351613026B8C9BE002E2FE8 /* WebSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketService.swift; sourceTree = "<group>"; };
 		E363D389269BBE0E0077F6D2 /* AccountUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUpdate.swift; sourceTree = "<group>"; };
 		E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyTransactionTest.swift; sourceTree = "<group>"; };
 		E363D38E269C27930077F6D2 /* ChainDataAnchoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDataAnchoring.swift; sourceTree = "<group>"; };
@@ -1282,6 +1284,7 @@
 				E3E023482648B8EF00791E00 /* RPC.swift */,
 				E3E0234F2648BCD800791E00 /* Klay.swift */,
 				E3C6F8A126B3F36A002CCF35 /* Net.swift */,
+				E351613026B8C9BE002E2FE8 /* WebSocketService.swift */,
 			);
 			path = rpc;
 			sourceTree = "<group>";
@@ -1711,6 +1714,7 @@
 				E3A21E1D265654A7006C560D /* Address.swift in Sources */,
 				E3B8E6B5268593D90069A223 /* AccountKeyRoleBased.swift in Sources */,
 				E38FA1192689A6CB00F532D0 /* Domain.swift in Sources */,
+				E351613126B8C9BE002E2FE8 /* WebSocketService.swift in Sources */,
 				E368F95526B29B5900890812 /* SignTransaction.swift in Sources */,
 				E390DAB8268DAFC500D05479 /* AccountKeyNil.swift in Sources */,
 				E3DBBD532698294E00BAFE27 /* Cancel.swift in Sources */,
@@ -2057,6 +2061,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H6HXM54M49;
 				INFOPLIST_FILE = CaverSwiftTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2077,6 +2082,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H6HXM54M49;
 				INFOPLIST_FILE = CaverSwiftTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

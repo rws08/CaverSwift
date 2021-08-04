@@ -272,7 +272,7 @@ open class ContractMethod: Codable {
         
         callObject.data = encodedFunctionCall
         callObject.to = contractAddress
-        let(error, response) = try caver!.rpc.klay.estimateGas(callObject)
+        let(error, response) = caver!.rpc.klay.estimateGas(callObject)
         if error == nil {
             return (response?.val.hexa)!
         } else {

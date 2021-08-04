@@ -11,11 +11,18 @@ public class KlayLogs: Codable {
     public var value: [KlayLogs.LogResult] = []
     
     required public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if let array = try? container.decode([KlayLogs.Log].self) {
-            value = array
-        } else if let val = try? container.decode(Hash.self) {
-            value.append(val)
+        if let container = try? decoder.singleValueContainer() {
+            if let array = try? container.decode([KlayLogs.Log].self) {
+                value = array
+            } else if let val = try? container.decode(KlayLogs.Log.self) {
+                value.append(val)
+            } else if let val = try? container.decode(Hash.self) {
+                value.append(val)
+            }
+        }
+        
+        if value.isEmpty {
+            throw CaverError.notCurrentlySupported
         }
     }
     
@@ -29,6 +36,16 @@ public class KlayLogs: Codable {
     
     public class Hash: LogResult, Equatable {
         public var value: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case value
+        }
+        
+        public required init(from decoder: Decoder) throws {
+            super.init()
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            self.value = try? container.decode(String.self, forKey: .value)
+        }
         
         public static func == (lhs: KlayLogs.Hash, rhs: KlayLogs.Hash) -> Bool {
             return lhs.value != nil ? lhs.value == rhs.value : rhs.value == nil

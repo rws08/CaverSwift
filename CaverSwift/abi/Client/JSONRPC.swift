@@ -21,6 +21,17 @@ public struct JSONRPCResult<T: Decodable>: Decodable {
     var result: T
 }
 
+public struct JSONRPCSubscribeDetail<T: Decodable>: Decodable {
+    var subscription: String
+    var result: T
+}
+
+public struct JSONRPCSubscribeResult<T: Decodable>: Decodable {
+    var method: String
+    var jsonrpc: String
+    var params: JSONRPCSubscribeDetail<T>
+}
+
 public struct JSONRPCErrorDetail: Decodable {
     var code: Int
     var message: String

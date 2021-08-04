@@ -9,9 +9,9 @@ import Foundation
 
 open class EventFilterOptions {
     var filterOptions: [IndexedParameter] = []
-    var topics: [String] = []
+    var topics: [Any] = []
     
-    init(_ filterOptions: [IndexedParameter], _ topics: [String]) {
+    init(_ filterOptions: [IndexedParameter], _ topics: [Any]) {
         self.filterOptions = filterOptions
         self.topics = topics
     }

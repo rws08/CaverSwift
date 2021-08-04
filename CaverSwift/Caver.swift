@@ -9,6 +9,7 @@ import Foundation
 
 public class Caver {
     public static var DEFAULT_URL = "http://localhost:8551"
+    public static var DEFAULT_URL_SOCKET = "ws://localhost:8552"
 //    public static var DEFAULT_URL = "https://api.baobab.klaytn.net:8651"
     
     public var rpc: RPC
@@ -16,12 +17,12 @@ public class Caver {
     public var wallet: KeyringContainer
     
     public init(_ url: String = DEFAULT_URL) {
-        rpc = RPC(URLSession(configuration: URLSession.shared.configuration), URL.init(string: url)!)
+        rpc = RPC(WebService(url))
         wallet = KeyringContainer()
     }
     
-    public init(_ urlSession: URLSession, _ url: URL) {
-        rpc = RPC(urlSession, url)
+    public init(_ service: WebService) {
+        rpc = RPC(service)
         wallet = KeyringContainer()
     }
 }

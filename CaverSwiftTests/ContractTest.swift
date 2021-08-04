@@ -16,7 +16,7 @@ class ContractTest: XCTestCase {
     static var contractAddress = ""
     static let ownerPrivateKey = "0x2359d1ae7317c01532a58b01452476b796a3ac713336e97d8d3c9651cc0aecc3"
             
-    static let ownerData = TestAccountInfo.TEST
+    static let ownerData = TestAccountInfo.LUMAN
     
     static let GAS_LIMIT = BigUInt(9_000_000)
     static let GAS_PRICE = BigUInt(4_100_000_000)
@@ -292,21 +292,257 @@ class ContractTest: XCTestCase {
         XCTAssertEqual(eventValues.nonIndexedValues[0].value as? BigUInt, value)
     }
     
-    func onceTest() throws {
-        let session = URLSession(configuration: URLSession.shared.configuration)
-        let caver = Caver(session, URL.init(string: Caver.DEFAULT_URL)!)
-        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey(ContractTest.ownerData.privateKey))
-        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey(TestAccountInfo.BRANDON.privateKey))
+    @available(iOS 13.0, *)
+    func test_onceTest() throws {
+        let expectation = XCTestExpectation(description: "timeout")
+        
+        let webSocketService = WebSocketService(Caver.DEFAULT_URL_SOCKET)
+        let caver = Caver(webSocketService)
+        webSocketService.connect()
+        
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x2359d1ae7317c01532a58b01452476b796a3ac713336e97d8d3c9651cc0aecc3"))
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x734aa75ef35fd4420eea2965900e90040b8b9f9f7484219b1a06d06394330f4e"))
         
         let contract = try Contract(caver, ContractTest.jsonObj, ContractTest.contractAddress)
-        
-        let options = [
-            [Address(TestAccountInfo.BRANDON.address), Address(TestAccountInfo.LUMAN.address)]
-        ]
-        
+                
         let indexedParameter = EventFilterOptions.IndexedParameter("from", [TestAccountInfo.LUMAN.address])
         let eventFilterOptions = EventFilterOptions([indexedParameter], [])
         
+        var log: KlayLogs.Log?
+        try contract.once("Transfer", eventFilterOptions) {
+            guard let logResults = $0?.getLogs()
+            else { XCTAssert(false)
+                return }
+            
+            log = logResults[0] as? KlayLogs.Log
+            expectation.fulfill()
+        }
+        
+        let amount = BigUInt(1) * BigUInt(10).power(18)
+        let sendParams: [Any] = [TestAccountInfo.BRANDON.address, amount]
+        let sendOptions = SendOptions(TestAccountInfo.LUMAN.address, ContractTest.GAS_LIMIT)
+        _ = try contract.getMethod("transfer").send(sendParams, sendOptions)
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 60.0)
+        XCTAssertEqual(result, .completed)
+        
+        XCTAssertEqual(3, log?.topics?.count)
+        XCTAssertEqual("0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef", log?.topics?[0])
+        XCTAssertEqual("0x0000000000000000000000002c8ad0ea2e0781db8b8c9242e07de3a5beabb71a", log?.topics?[1])
+        XCTAssertEqual("0x000000000000000000000000e97f27e9a5765ce36a7b919b1cb6004c7209217e", log?.topics?[2])
+        
+        webSocketService.close()
+    }
+    
+    @available(iOS 13.0, *)
+    func test_onceTest2() throws {
+        let expectation = XCTestExpectation(description: "timeout")
+        
+        let webSocketService = WebSocketService(Caver.DEFAULT_URL_SOCKET)
+        let caver = Caver(webSocketService)
+        webSocketService.connect()
+        
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x2359d1ae7317c01532a58b01452476b796a3ac713336e97d8d3c9651cc0aecc3"))
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x734aa75ef35fd4420eea2965900e90040b8b9f9f7484219b1a06d06394330f4e"))
+        
+        let contract = try Contract(caver, ContractTest.jsonObj, ContractTest.contractAddress)
+        
+        let indexedParameter = EventFilterOptions.IndexedParameter("to", [TestAccountInfo.BRANDON.address])
+        let eventFilterOptions = EventFilterOptions([indexedParameter], [])
+        
+        var log: KlayLogs.Log?
+        try contract.once("Transfer", eventFilterOptions) {
+            guard let logResults = $0?.getLogs()
+            else { XCTAssert(false)
+                return }
+            
+            log = logResults[0] as? KlayLogs.Log
+            expectation.fulfill()
+        }
+        
+        let amount = BigUInt(1) * BigUInt(10).power(18)
+        let sendParams: [Any] = [TestAccountInfo.BRANDON.address, amount]
+        let sendOptions = SendOptions(TestAccountInfo.LUMAN.address, ContractTest.GAS_LIMIT)
+        _ = try contract.getMethod("transfer").send(sendParams, sendOptions)
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 60.0)
+        XCTAssertEqual(result, .completed)
+        
+        XCTAssertEqual(3, log?.topics?.count)
+        XCTAssertEqual("0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef", log?.topics?[0])
+        XCTAssertEqual("0x0000000000000000000000002c8ad0ea2e0781db8b8c9242e07de3a5beabb71a", log?.topics?[1])
+        XCTAssertEqual("0x000000000000000000000000e97f27e9a5765ce36a7b919b1cb6004c7209217e", log?.topics?[2])
+        
+        webSocketService.close()
+    }
+    
+    @available(iOS 13.0, *)
+    func test_onceTest_multiOptions() throws {
+        let expectation = XCTestExpectation(description: "timeout")
+        
+        let webSocketService = WebSocketService(Caver.DEFAULT_URL_SOCKET)
+        let caver = Caver(webSocketService)
+        webSocketService.connect()
+        
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x2359d1ae7317c01532a58b01452476b796a3ac713336e97d8d3c9651cc0aecc3"))
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x734aa75ef35fd4420eea2965900e90040b8b9f9f7484219b1a06d06394330f4e"))
+        
+        let contract = try Contract(caver, ContractTest.jsonObj, ContractTest.contractAddress)
+        
+        let indexedParameter = EventFilterOptions.IndexedParameter("from", [TestAccountInfo.LUMAN.address])
+        let indexedParameter1 = EventFilterOptions.IndexedParameter("to", [TestAccountInfo.BRANDON.address])
+        let eventFilterOptions = EventFilterOptions([indexedParameter, indexedParameter1], [])
+        
+        var log: KlayLogs.Log?
+        try contract.once("Transfer", eventFilterOptions) {
+            guard let logResults = $0?.getLogs()
+            else { XCTAssert(false)
+                return }
+            
+            log = logResults[0] as? KlayLogs.Log
+            expectation.fulfill()
+        }
+        
+        let amount = BigUInt(1) * BigUInt(10).power(18)
+        let sendParams: [Any] = [TestAccountInfo.BRANDON.address, amount]
+        let sendOptions = SendOptions(TestAccountInfo.LUMAN.address, ContractTest.GAS_LIMIT)
+        _ = try contract.getMethod("transfer").send(sendParams, sendOptions)
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 60.0)
+        XCTAssertEqual(result, .completed)
+        
+        XCTAssertEqual(3, log?.topics?.count)
+        XCTAssertEqual("0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef", log?.topics?[0])
+        XCTAssertEqual("0x0000000000000000000000002c8ad0ea2e0781db8b8c9242e07de3a5beabb71a", log?.topics?[1])
+        XCTAssertEqual("0x000000000000000000000000e97f27e9a5765ce36a7b919b1cb6004c7209217e", log?.topics?[2])
+        
+        webSocketService.close()
+    }
+    
+    @available(iOS 13.0, *)
+    func test_onceTest4_OR_Options() throws {
+        let expectation = XCTestExpectation(description: "timeout")
+        
+        let webSocketService = WebSocketService(Caver.DEFAULT_URL_SOCKET)
+        let caver = Caver(webSocketService)
+        webSocketService.connect()
+        
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x2359d1ae7317c01532a58b01452476b796a3ac713336e97d8d3c9651cc0aecc3"))
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x734aa75ef35fd4420eea2965900e90040b8b9f9f7484219b1a06d06394330f4e"))
+        
+        let contract = try Contract(caver, ContractTest.jsonObj, ContractTest.contractAddress)
+        
+        let indexedParameter = EventFilterOptions.IndexedParameter("from", [TestAccountInfo.LUMAN.address, TestAccountInfo.BRANDON.address])
+        let eventFilterOptions = EventFilterOptions([indexedParameter, indexedParameter], [])
+        
+        var log: KlayLogs.Log?
+        try contract.once("Transfer", eventFilterOptions) {
+            guard let logResults = $0?.getLogs()
+            else { XCTAssert(false)
+                return }
+            
+            log = logResults[0] as? KlayLogs.Log
+            expectation.fulfill()
+        }
+        
+        let amount = BigUInt(1) * BigUInt(10).power(18)
+        let sendParams: [Any] = [TestAccountInfo.BRANDON.address, amount]
+        let sendOptions = SendOptions(TestAccountInfo.LUMAN.address, ContractTest.GAS_LIMIT)
+        _ = try contract.getMethod("transfer").send(sendParams, sendOptions)
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 60.0)
+        XCTAssertEqual(result, .completed)
+        
+        XCTAssertEqual(3, log?.topics?.count)
+        XCTAssertEqual("0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef", log?.topics?[0])
+        XCTAssertEqual("0x0000000000000000000000002c8ad0ea2e0781db8b8c9242e07de3a5beabb71a", log?.topics?[1])
+        XCTAssertEqual("0x000000000000000000000000e97f27e9a5765ce36a7b919b1cb6004c7209217e", log?.topics?[2])
+        
+        webSocketService.close()
+    }
+    
+    @available(iOS 13.0, *)
+    func test_onceTest5_OR_Options2() throws {
+        let expectation = XCTestExpectation(description: "timeout")
+        
+        let webSocketService = WebSocketService(Caver.DEFAULT_URL_SOCKET)
+        let caver = Caver(webSocketService)
+        webSocketService.connect()
+        
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x2359d1ae7317c01532a58b01452476b796a3ac713336e97d8d3c9651cc0aecc3"))
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x734aa75ef35fd4420eea2965900e90040b8b9f9f7484219b1a06d06394330f4e"))
+        
+        let contract = try Contract(caver, ContractTest.jsonObj, ContractTest.contractAddress)
+        
+        let indexedParameter = EventFilterOptions.IndexedParameter("to", [TestAccountInfo.WAYNE.address, TestAccountInfo.BRANDON.address])
+        let eventFilterOptions = EventFilterOptions([indexedParameter, indexedParameter], [])
+        
+        var log: KlayLogs.Log?
+        try contract.once("Transfer", eventFilterOptions) {
+            guard let logResults = $0?.getLogs()
+            else { XCTAssert(false)
+                return }
+            
+            log = logResults[0] as? KlayLogs.Log
+            expectation.fulfill()
+        }
+        
+        let amount = BigUInt(1) * BigUInt(10).power(18)
+        let sendParams: [Any] = [TestAccountInfo.WAYNE.address, amount]
+        let sendOptions = SendOptions(TestAccountInfo.LUMAN.address, ContractTest.GAS_LIMIT)
+        _ = try contract.getMethod("transfer").send(sendParams, sendOptions)
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 60.0)
+        XCTAssertEqual(result, .completed)
+        
+        XCTAssertEqual(3, log?.topics?.count)
+        XCTAssertEqual("0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef", log?.topics?[0])
+        XCTAssertEqual("0x0000000000000000000000002c8ad0ea2e0781db8b8c9242e07de3a5beabb71a", log?.topics?[1])
+        XCTAssertEqual("0x0000000000000000000000003cd93ba290712e6d28ac98f2b820faf799ae8fdb", log?.topics?[2])
+        
+        webSocketService.close()
+    }
+    
+    @available(iOS 13.0, *)
+    func test_onceTest_allEvents() throws {
+        let expectation = XCTestExpectation(description: "timeout")
+        
+        let webSocketService = WebSocketService(Caver.DEFAULT_URL_SOCKET)
+        let caver = Caver(webSocketService)
+        webSocketService.connect()
+        
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x2359d1ae7317c01532a58b01452476b796a3ac713336e97d8d3c9651cc0aecc3"))
+        _ = try caver.wallet.add(KeyringFactory.createFromPrivateKey("0x734aa75ef35fd4420eea2965900e90040b8b9f9f7484219b1a06d06394330f4e"))
+        
+        let contract = try Contract(caver, ContractTest.jsonObj, ContractTest.contractAddress)
+        
+        let indexedParameter = EventFilterOptions.IndexedParameter("to", [TestAccountInfo.WAYNE.address, TestAccountInfo.BRANDON.address])
+        let eventFilterOptions = EventFilterOptions([indexedParameter, indexedParameter], [])
+        
+        var log: KlayLogs.Log?
+        try contract.once("allEvents", eventFilterOptions) {
+            guard let logResults = $0?.getLogs()
+            else { XCTAssert(false)
+                return }
+            
+            log = logResults[0] as? KlayLogs.Log
+            expectation.fulfill()
+        }
+        
+        let amount = BigUInt(1) * BigUInt(10).power(18)
+        let sendParams: [Any] = [TestAccountInfo.WAYNE.address, amount]
+        let sendOptions = SendOptions(TestAccountInfo.LUMAN.address, ContractTest.GAS_LIMIT)
+        _ = try contract.getMethod("transfer").send(sendParams, sendOptions)
+        
+        let result = XCTWaiter.wait(for: [expectation], timeout: 60.0)
+        XCTAssertEqual(result, .completed)
+        
+        XCTAssertEqual(3, log?.topics?.count)
+        XCTAssertEqual("0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef", log?.topics?[0])
+        XCTAssertEqual("0x0000000000000000000000002c8ad0ea2e0781db8b8c9242e07de3a5beabb71a", log?.topics?[1])
+        XCTAssertEqual("0x0000000000000000000000003cd93ba290712e6d28ac98f2b820faf799ae8fdb", log?.topics?[2])
+        
+        webSocketService.close()
     }
     
     func test_setWallet() throws {
