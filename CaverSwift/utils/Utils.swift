@@ -126,7 +126,7 @@ public class Utils {
     
     public static func checkAddressChecksum(address: String) -> Bool {
         let address = address.replacingOccurrences(of: "0X", with: "0x")        
-        return KeyUtil.toChecksumAddress(address) == address.addHexPrefix
+        return Utils.toChecksumAddress(address) == address.addHexPrefix
     }
     
     public static func isValidPrivateKey(_ privateKey: String) -> Bool {
@@ -391,6 +391,26 @@ public class Utils {
         }
         
         return isPrefix ? number.hexa : number.hexa.cleanHexPrefix
+    }
+    
+    public static func toChecksumAddress(_ address: String) -> String {
+        let lowercaseAddress = address.cleanHexPrefix.lowercased()
+        let addressHash = lowercaseAddress.data(using: .utf8)!.keccak256.hexString.cleanHexPrefix
+        
+        var result = "0x"
+        
+        var i = 0
+        lowercaseAddress.forEach { char in
+            if Int(String(addressHash[i]), radix: 16) ?? 0 >= 8 {
+                result.append(String(char).uppercased())
+            } else {
+                result.append(String(char))
+            }
+            
+            i += 1
+        }
+        
+        return result
     }
 }
 

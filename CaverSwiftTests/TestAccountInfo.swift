@@ -28,11 +28,6 @@ public class TestAccountInfo {
         "0x1e558ea00698990d875cb69d3c8f9a234fe8eab5c6bd898488d851669289e178"
     )
     
-    static let TEST = TestAccount(
-        "0x5458d5a35b901fe09270655bea8ffa67f37010b3",
-        "0x0b2791a154bce37238d18f0b8681a513a2cd8a15ce316a1e7843b34e46c43a0a"
-    )
-    
     struct TestAccount {
         var address = ""
         var privateKey = ""

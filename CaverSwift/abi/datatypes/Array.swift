@@ -9,7 +9,17 @@ import Foundation
 
 public class TypeArray: Type, ABIType {
     public var values: [ABIType]
-    override var size: Int { Int(self.typeName.filter { "0"..."9" ~= $0 }) ?? 0 }
+    override var size: Int {
+        let rawValue = self.typeName
+        let components = rawValue.components(separatedBy: CharacterSet(charactersIn: "[]"))
+        if components.count >= 3 {
+            if !components[components.count - 2].isEmpty {
+                let num = String(components[components.count - 2].filter { "0"..."9" ~= $0 })
+                return Int(num) ?? 0
+            }
+        }
+        return 0
+    }
     
     public init(_ values: [ABIType], _ solidityType: String? = nil) {
         self.values = values

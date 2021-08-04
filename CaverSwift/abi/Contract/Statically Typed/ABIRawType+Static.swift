@@ -37,15 +37,6 @@ extension Bool: ABIType {
     }
 }
 
-extension EthereumAddress: ABIType {
-    public static var rawType: ABIRawType { .FixedAddress }
-    public static var parser: ParserFunction {
-        return { data in
-            let first = data.first ?? ""
-            return try ABIDecoder.decode(first, to: EthereumAddress.self)
-        }
-      }
-}
 extension BigInt: ABIType {
     public static var rawType: ABIRawType { .FixedInt(256) }
     public static var parser: ParserFunction {

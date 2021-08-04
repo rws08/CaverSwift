@@ -13,7 +13,7 @@ class ContractOverloadFunctionsTest: XCTestCase {
     static var BYTECODE = ""
     static var ABIJson = ""
     
-    static let ownerData = TestAccountInfo.TEST
+    static let ownerData = TestAccountInfo.LUMAN
     static let ownerPrivateKey = ownerData.privateKey
     static var contractAddress = ""
     
