@@ -37,10 +37,9 @@ open class WebSocketService: WebService, URLSessionWebSocketDelegate {
     }
     var subscribeId = ""
     
-    var events: [Any] = []
     var callbacks: [((KlayLogs?) -> Void)] = []
     
-    var queue: [String:Any] = [:]
+    var receiveTasks: [String:Any] = [:]
     
     override init(_ urlString: String) {
         self.timeoutQueue = DispatchQueue(label: "timeout", attributes: .concurrent)
@@ -100,13 +99,13 @@ open class WebSocketService: WebService, URLSessionWebSocketDelegate {
         dispatchGroup.enter()
         
         let reqestId = getRequestId(requestData)
-        queue[reqestId] = ReceiveTask(reqestId, dispatchGroup)
+        receiveTasks[reqestId] = ReceiveTask(reqestId, dispatchGroup)
         
         dispatchGroup.wait()
         
-        if let receiveTask = queue[reqestId] as? ReceiveTask,
+        if let receiveTask = receiveTasks[reqestId] as? ReceiveTask,
            let subscribeId = receiveTask.getResult(String.self).result as? String{
-            queue.removeValue(forKey: reqestId)
+            receiveTasks.removeValue(forKey: reqestId)
             self.subscribeId = subscribeId
         }
     }
@@ -143,12 +142,12 @@ open class WebSocketService: WebService, URLSessionWebSocketDelegate {
             }
             
             let reqestId = getRequestId(requestData)
-            queue[reqestId] = ReceiveTask(reqestId, dispatchGroup)
+            receiveTasks[reqestId] = ReceiveTask(reqestId, dispatchGroup)
             
             dispatchGroup.wait()
             
-            if let receiveTask = queue[reqestId] as? ReceiveTask {
-                queue.removeValue(forKey: reqestId)
+            if let receiveTask = receiveTasks[reqestId] as? ReceiveTask {
+                receiveTasks.removeValue(forKey: reqestId)
                 return receiveTask.getResult(T.self)
             }
         }
@@ -204,7 +203,7 @@ open class WebSocketService: WebService, URLSessionWebSocketDelegate {
                         if let json = try? JSONDecoder().decode(JSON.self, from:data) {
                             let reqestId = self.getRequestId(json)
                             if self.isReply(reqestId) {
-                                let receiveTask = self.queue[reqestId] as? ReceiveTask
+                                let receiveTask = self.receiveTasks[reqestId] as? ReceiveTask
                                 receiveTask?.setResult(text)
                             } else if self.isBatchReply(json) {
                                 // TODO: not supported
@@ -225,7 +224,7 @@ open class WebSocketService: WebService, URLSessionWebSocketDelegate {
                 self.callbacks.forEach {
                     $0(callbackData)
                 }
-                if self.queue.isEmpty {
+                if self.receiveTasks.isEmpty {
                     self.unsubscribe()
                 }                
             }
