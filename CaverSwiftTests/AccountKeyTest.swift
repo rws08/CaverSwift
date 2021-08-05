@@ -9,7 +9,7 @@ import XCTest
 @testable import CaverSwift
 @testable import BigInt
 
-class AccountKeyFailTests: XCTestCase {
+class AccountKeyTest_FailTests: XCTestCase {
     func testDecodeWithString() throws {
         let encodedString = "0x03c0"
         let accountKeyFail = try? AccountKeyFail.decode(encodedString)
@@ -41,7 +41,7 @@ class AccountKeyFailTests: XCTestCase {
     }
 }
 
-class AccountKeyLegacyTest: XCTestCase {
+class AccountKeyTest_LegacyTest: XCTestCase {
     func testDecodeWithString() throws {
         let encodedString = "0x01c0"
         let accountKeyFail = try? AccountKeyLegacy.decode(encodedString)
@@ -73,7 +73,7 @@ class AccountKeyLegacyTest: XCTestCase {
     }
 }
 
-class AccountKeyPublicTest: XCTestCase {
+class AccountKeyTest_PublicTest: XCTestCase {
     func testDecodeWithString() throws {
         let expectedAccountKey = "0xc10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9803a1898f45b2770eda7abce70e8503b5e82b748ec0ce557ac9f4f4796965e4e"
         let actualEncodedKey = "0x02a102c10b598a1a3ba252acc21349d61c2fbd9bc8c15c50a5599f420cccc3291f9bf9"
@@ -165,7 +165,7 @@ class AccountKeyPublicTest: XCTestCase {
     }
 }
 
-class AccountKeyWeightedMultiSigTest: XCTestCase {
+class AccountKeyTest_WeightedMultiSigTest: XCTestCase {
     func checkWeightedPublicKey(_ expectedPublicKey: [String], _ expectedOptions: WeightedMultiSigOptions, _ actualAccount: AccountKeyWeightedMultiSig) {
         //check Threshold
         XCTAssertEqual(expectedOptions.threshold, actualAccount.threshold)
@@ -307,7 +307,7 @@ class AccountKeyWeightedMultiSigTest: XCTestCase {
     }
 }
 
-class AccountKeyRoleBasedTest: XCTestCase {
+class AccountKeyTest_RoleBasedTest: XCTestCase {
     func checkValid(_ expectedPublicKeyArr: [[String]], _ expectedOptionsList: [WeightedMultiSigOptions], _ actualRoleBasedKey: AccountKeyRoleBased) throws {
         let actualKeys = actualRoleBasedKey.accountKeys
         for i in [0..<AccountKeyRoleBased.ROLE_GROUP_COUNT] {

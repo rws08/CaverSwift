@@ -9,7 +9,7 @@ import XCTest
 @testable import CaverSwift
 @testable import ASN1
 
-class isAddressTest: XCTestCase {
+class UtilsTest_isAddressTest: XCTestCase {
     func testLowerCaseAddressTest() throws {
         let lowercase = ["0xff6916ea19a50878e39c41aaadfeb0cab1b41dad",
                          "0x4834113481fbbac68565987d30f5216bc5719d3b",
@@ -50,7 +50,7 @@ class isAddressTest: XCTestCase {
     }
 }
 
-class isValidPrivateKeyTest: XCTestCase {
+class UtilsTest_isValidPrivateKeyTest: XCTestCase {
     func testValidPrivateKey() throws {
         let key = PrivateKey.generate().privateKey
         XCTAssertTrue(Utils.isValidPrivateKey(key))
@@ -66,7 +66,7 @@ class isValidPrivateKeyTest: XCTestCase {
     }
 }
 
-class isKlaytnWalletKeyTest: XCTestCase {
+class UtilsTest_isKlaytnWalletKeyTest: XCTestCase {
     func testValidWalletKey() throws {
         guard let walletKey = KeyringFactory.generate()?.getKlaytnWalletKey() else { XCTAssert(false)
             return }
@@ -86,7 +86,7 @@ class isKlaytnWalletKeyTest: XCTestCase {
     }
 }
 
-class isValidPublicKeyTest: XCTestCase {
+class UtilsTest_isValidPublicKeyTest: XCTestCase {
     func testUncompressedKey() throws {
         guard let key = try? KeyringFactory.generate()?.getPublicKey() else { XCTAssert(false)
             return }
@@ -127,7 +127,7 @@ class isValidPublicKeyTest: XCTestCase {
     }
 }
 
-class decompressPublicKeyTest: XCTestCase {
+class UtilsTest_decompressPublicKeyTest: XCTestCase {
     func testDecompressPublicKey() throws {
         let compressed = "03434dedfc2eceed1e98fddfde3ebc57512c57f017195988cd5de62b722656b943"
         guard let uncompressed = try? Utils.decompressPublicKey(compressed) else { XCTAssert(false)
@@ -154,7 +154,7 @@ class decompressPublicKeyTest: XCTestCase {
     }
 }
 
-class compressPublicKeyTest: XCTestCase {
+class UtilsTest_compressPublicKeyTest: XCTestCase {
     func testCompressPublicKey() throws {
         guard let uncompressed = try? PrivateKey.generate().getPublicKey(false),
               let compressed = try? Utils.compressPublicKey(uncompressed) else { XCTAssert(false)
@@ -182,14 +182,14 @@ class compressPublicKeyTest: XCTestCase {
     }
 }
 
-class hashMessageTest: XCTestCase {
+class UtilsTest_hashMessageTest: XCTestCase {
     func testHashMessage() throws {
         let data = "0xdeadbeaf"
         XCTAssertEqual(66, Utils.hashMessage(data).count)
     }
 }
 
-class parseKlaytnWalletKeyTest: XCTestCase {
+class UtilsTest_parseKlaytnWalletKeyTest: XCTestCase {
     func testParseKlaytnWalletKey() throws {
         let keyring = KeyringFactory.generate()
         guard let walletKey = keyring?.getKlaytnWalletKey(),
@@ -223,7 +223,7 @@ class parseKlaytnWalletKeyTest: XCTestCase {
     }
 }
 
-class isHexTest: XCTestCase {
+class UtilsTest_isHexTest: XCTestCase {
     func testValidHex() throws {
         let hex = ["0x1234",
                    "ffff",
@@ -240,7 +240,7 @@ class isHexTest: XCTestCase {
     }
 }
 
-class isHexStrictTest: XCTestCase {
+class UtilsTest_isHexStrictTest: XCTestCase {
     func testValidHex() throws {
         let hex = ["0x1234",
                    "0xaaaa",
@@ -259,7 +259,7 @@ class isHexStrictTest: XCTestCase {
     }
 }
 
-class addHexPrefixTest: XCTestCase {
+class UtilsTest_addHexPrefixTest: XCTestCase {
     func testAddHexPrefix() throws {
         let hex = "1234"
         let expected = "0x1234"
@@ -274,7 +274,7 @@ class addHexPrefixTest: XCTestCase {
     }
 }
 
-class stripHexPrefixTest: XCTestCase {
+class UtilsTest_stripHexPrefixTest: XCTestCase {
     func testStripHexPrefix() throws {
         let hex = "0x1234"
         let expected = "1234"
@@ -289,7 +289,7 @@ class stripHexPrefixTest: XCTestCase {
     }
 }
 
-class convertToPebTest: XCTestCase {
+class UtilsTest_convertToPebTest: XCTestCase {
     func testFrom_peb() throws {
         let expected = "1"
         var converted = Utils.convertToPeb(BigInt(1), "peb")
@@ -507,7 +507,7 @@ class convertToPebTest: XCTestCase {
     }
 }
 
-class convertFromPebTest: XCTestCase {
+class UtilsTest_convertFromPebTest: XCTestCase {
     func testTo_peb() throws {
         let amount = "1000000000000000000000000000"
         let expected = amount
@@ -749,7 +749,7 @@ class convertFromPebTest: XCTestCase {
     }
 }
 
-class isNumberTest: XCTestCase {
+class UtilsTest_isNumberTest: XCTestCase {
     func testValidHexNumber() throws {
         let valid = ["0x1234",
                      "1234",
@@ -769,7 +769,7 @@ class isNumberTest: XCTestCase {
     }
 }
 
-class isEmptySigTest: XCTestCase {
+class UtilsTest_isEmptySigTest: XCTestCase {
     func testValidEmptySig() throws {
         let emptySig = SignatureData("0x01", "0x", "0x")
         XCTAssertTrue(Utils.isEmptySig(emptySig))
@@ -799,7 +799,7 @@ class isEmptySigTest: XCTestCase {
     }
 }
 
-class generateRandomBytesTest: XCTestCase {
+class UtilsTest_generateRandomBytesTest: XCTestCase {
     func testGenerateRandomBytes() throws {
         let arr = Utils.generateRandomBytes(32)
         

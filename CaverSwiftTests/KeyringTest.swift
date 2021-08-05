@@ -96,7 +96,7 @@ func generateRoleBaseKeyring(_ numArr: [Int]) throws -> RoleBasedKeyring {
     return try KeyringFactory.createWithRoleBasedKey(address, keyArr)
 }
 
-class generateTest: XCTestCase {
+class KeyringTest_generateTest: XCTestCase {
     func testGenerate() throws {
         let keyring = KeyringFactory.generate()
         XCTAssertTrue(Utils.isAddress(keyring!.address))
@@ -109,7 +109,7 @@ class generateTest: XCTestCase {
     }
 }
 
-class createFromPrivateKeyTest: XCTestCase {
+class KeyringTest_createFromPrivateKeyTest: XCTestCase {
     func testCreateFromPrivateKey() throws {
         guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
             return }
@@ -148,7 +148,7 @@ class createFromPrivateKeyTest: XCTestCase {
     }
 }
 
-class createFromKlaytnWalletKeyTest: XCTestCase {
+class KeyringTest_createFromKlaytnWalletKeyTest: XCTestCase {
     func testCreateFromKlaytnWalletKey() throws {
         let klaytnWalletKey = "0x45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d80x000xa94f5374fce5edbc8e2a8697c15331677e6ebf0b"
         let expectedPrivateKey = "0x45a915e4d060149eb4365960e6a7a45f334393093061116b197e3240065ff2d8"
@@ -167,7 +167,7 @@ class createFromKlaytnWalletKeyTest: XCTestCase {
     }
 }
 
-class createTest: XCTestCase {
+class KeyringTest_createTest: XCTestCase {
     func testCreate_SingleKey() throws {
         let expectedPrivateKey = PrivateKey.generate()
         
@@ -271,7 +271,7 @@ class createTest: XCTestCase {
     }
 }
 
-class createWithSingleKeyTest: XCTestCase {
+class KeyringTest_createWithSingleKeyTest: XCTestCase {
     func testCreateWithSingleKey_coupled() throws {
         let key = PrivateKey.generate()
         let expectedAddress = key.getDerivedAddress()
@@ -301,7 +301,7 @@ class createWithSingleKeyTest: XCTestCase {
     }
 }
 
-class createWithMultipleKeyTest: XCTestCase {
+class KeyringTest_createWithMultipleKeyTest: XCTestCase {
     func testCreateWithMultipleKey() throws {
         guard let expectedAddress = KeyringFactory.generate()?.address else { XCTAssert(false)
             return }
@@ -327,7 +327,7 @@ class createWithMultipleKeyTest: XCTestCase {
     }
 }
 
-class createWithRoleBasedKeyTest: XCTestCase {
+class KeyringTest_createWithRoleBasedKeyTest: XCTestCase {
     func testCreateWithRoleBasedKey() throws {
         guard let expectedAddress = KeyringFactory.generate()?.address else { XCTAssert(false)
             return }
@@ -379,7 +379,7 @@ class createWithRoleBasedKeyTest: XCTestCase {
     }
 }
 
-class copyTest: XCTestCase {
+class KeyringTest_copyTest: XCTestCase {
     func testCopy_coupled() throws {
         guard let expectedKeyring = KeyringFactory.generate() else { XCTAssert(false)
             return }
@@ -428,7 +428,7 @@ class copyTest: XCTestCase {
     }
 }
 
-class signWithKeyTest: XCTestCase {
+class KeyringTest_signWithKeyTest: XCTestCase {
     let HASH = "0xe9a11d9ef95fb437f75d07ce768d43e74f158dd54b106e7d3746ce29d545b550"
     let CHAIN_ID = 1
     
@@ -607,7 +607,7 @@ class signWithKeyTest: XCTestCase {
     }
 }
 
-class signWithKeysTest: XCTestCase {
+class KeyringTest_signWithKeysTest: XCTestCase {
     let HASH = "0xe9a11d9ef95fb437f75d07ce768d43e74f158dd54b106e7d3746ce29d545b550"
     let CHAIN_ID = 1
     
@@ -718,7 +718,7 @@ class signWithKeysTest: XCTestCase {
     }
 }
 
-class signMessageTest: XCTestCase {
+class KeyringTest_signMessageTest: XCTestCase {
     let data = "some data"
             
     func testCoupledKey_NoIndex() throws {
@@ -940,7 +940,7 @@ class signMessageTest: XCTestCase {
     }
 }
 
-class recoverTest: XCTestCase {
+class KeyringTest_recoverTest: XCTestCase {
     let data = "some data"
     
     func checkAddress(_ expect: String, _ actual: String) throws {
@@ -970,7 +970,7 @@ class recoverTest: XCTestCase {
     }
 }
 
-class decryptTest: XCTestCase {
+class KeyringTest_decryptTest: XCTestCase {
     let jsonV3 = "{" +
         "  \"version\":3," +
         "  \"id\":\"7a0a8557-22a5-4c90-b554-d6f3b13783ea\"," +
@@ -1160,7 +1160,7 @@ class decryptTest: XCTestCase {
     }
 }
 
-class encryptTest: XCTestCase {
+class KeyringTest_encryptTest: XCTestCase {
     let password = "password"
     
     func checkValidateKeyStore(_ actualData: KeyStore, _ password: String, _ expectedKeyring: AbstractKeyring, _ version: Int) throws {
@@ -1281,7 +1281,7 @@ class encryptTest: XCTestCase {
     }
 }
 
-class encryptV3Test: XCTestCase {
+class KeyringTest_encryptV3Test: XCTestCase {
     let password = "password"
     
     func checkValidateKeyStore(_ actualData: KeyStore, _ password: String, _ expectedKeyring: AbstractKeyring, _ version: Int) throws {
@@ -1369,7 +1369,7 @@ class encryptV3Test: XCTestCase {
     }
 }
 
-class getKeyByRoleTest: XCTestCase {
+class KeyringTest_getKeyByRoleTest: XCTestCase {
     func testGetKeyByRole() throws {
         let roleKeyring = try generateRoleBaseKeyring([2, 3, 4])
         let keys = try roleKeyring.getKeyByRole(AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue)
@@ -1401,7 +1401,7 @@ class getKeyByRoleTest: XCTestCase {
     }
 }
 
-class getKlaytnWalletKeyTest: XCTestCase {
+class KeyringTest_getKlaytnWalletKeyTest: XCTestCase {
     func testGetKlaytnWalletKey_coupled() throws {
         guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
             return }
@@ -1436,7 +1436,7 @@ class getKlaytnWalletKeyTest: XCTestCase {
     }
 }
 
-class getPublicKeyTest: XCTestCase {
+class KeyringTest_getPublicKeyTest: XCTestCase {
     func testGetPublicKey_single() throws {
         guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
             return }
@@ -1528,7 +1528,7 @@ class getPublicKeyTest: XCTestCase {
     }
 }
 
-class isDecoupledTest: XCTestCase {
+class KeyringTest_isDecoupledTest: XCTestCase {
     func testIsDecoupled_coupled() throws {
         guard let keyring = KeyringFactory.generate() else { XCTAssert(false)
             return }
@@ -1555,7 +1555,7 @@ class isDecoupledTest: XCTestCase {
     }
 }
 
-class toAccountTest: XCTestCase {
+class KeyringTest_toAccountTest: XCTestCase {
     func checkAccountKeyPublic(_ keyring: SingleKeyring, _ account: Account) throws {
         let expectedPublicKey = try keyring.getKeyByRole(AccountKeyRoleBased.RoleGroup.TRANSACTION.rawValue).getPublicKey()
         guard let accountKey = account.accountKey as? AccountKeyPublic else {
