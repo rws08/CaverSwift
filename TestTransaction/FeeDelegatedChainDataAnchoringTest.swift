@@ -379,7 +379,7 @@ class FeeDelegatedChainDataAnchoringTest_createInstance: XCTestCase {
         }
     }
     
-    public func throwException_setFeePayerSignatures_missingFeePayer() throws {
+    public func test_throwException_setFeePayerSignatures_missingFeePayer() throws {
         let feePayer = ""
         XCTAssertThrowsError(try FeeDelegatedChainDataAnchoring(
             nil,
@@ -474,7 +474,7 @@ class FeeDelegatedChainDataAnchoringTest_signAsFeePayer_OneKeyTest: XCTestCase {
     var feePayerAddress: String?
     
     let privateKey = PrivateKey.generate().privateKey
-    let feePayerPrivateKey = FeeDelegatedChainDataAnchoringTest.feePayerPrivateKey
+    let feePayerPrivateKey = PrivateKey.generate().privateKey
         
     let from = FeeDelegatedChainDataAnchoringTest.from
     let account = FeeDelegatedChainDataAnchoringTest.account
@@ -494,7 +494,7 @@ class FeeDelegatedChainDataAnchoringTest_signAsFeePayer_OneKeyTest: XCTestCase {
     let expectedRLPEncoding = FeeDelegatedChainDataAnchoringTest.expectedRLPEncoding
         
     override func setUpWithError() throws {
-        keyring = try KeyringFactory.createWithSingleKey(feePayer, feePayerPrivateKey)
+        keyring = try KeyringFactory.createFromPrivateKey(feePayerPrivateKey)
         klaytnWalletKey = try keyring?.getKlaytnWalletKey()
         feePayerAddress = keyring?.address
         
@@ -510,22 +510,24 @@ class FeeDelegatedChainDataAnchoringTest_signAsFeePayer_OneKeyTest: XCTestCase {
             .build()
     }
     
+    public func test_signAsFeePayer_String() throws {
+        _ = try mTxObj!.signAsFeePayer(feePayerPrivateKey)
+        XCTAssertEqual(1, mTxObj?.feePayerSignatures.count)
+    }
+    
     public func test_signAsFeePayer_KlaytnWalletKey() throws {
         _ = try mTxObj!.signAsFeePayer(klaytnWalletKey!)
         XCTAssertEqual(1, mTxObj?.feePayerSignatures.count)
-        XCTAssertEqual(expectedRLPEncoding, try mTxObj?.getRawTransaction())
     }
     
     public func test_signAsFeePayer_Keyring() throws {
         _ = try mTxObj!.signAsFeePayer(keyring!, 0, TransactionHasher.getHashForFeePayerSignature(_:))
         XCTAssertEqual(1, mTxObj?.feePayerSignatures.count)
-        XCTAssertEqual(expectedRLPEncoding, try mTxObj?.getRawTransaction())
     }
     
     public func test_signAsFeePayer_Keyring_NoSigner() throws {
         _ = try mTxObj!.signAsFeePayer(keyring!, 0)
         XCTAssertEqual(1, mTxObj?.feePayerSignatures.count)
-        XCTAssertEqual(expectedRLPEncoding, try mTxObj?.getRawTransaction())
     }
     
     public func test_signAsFeePayer_multipleKey() throws {
@@ -537,7 +539,6 @@ class FeeDelegatedChainDataAnchoringTest_signAsFeePayer_OneKeyTest: XCTestCase {
         let keyring = try KeyringFactory.createWithMultipleKey(feePayerAddress!, keyArr)
         _ = try mTxObj!.signAsFeePayer(keyring, 1)
         XCTAssertEqual(1, mTxObj?.feePayerSignatures.count)
-        XCTAssertEqual(expectedRLPEncoding, try mTxObj?.getRawTransaction())
     }
     
     public func test_signAsFeePayer_roleBasedKey() throws {
@@ -557,7 +558,6 @@ class FeeDelegatedChainDataAnchoringTest_signAsFeePayer_OneKeyTest: XCTestCase {
         let roleBasedKeyring = try KeyringFactory.createWithRoleBasedKey(feePayerAddress!, keyArr)
         _ = try mTxObj!.signAsFeePayer(roleBasedKeyring, 1)
         XCTAssertEqual(1, mTxObj?.feePayerSignatures.count)
-        XCTAssertEqual(expectedRLPEncoding, try mTxObj?.getRawTransaction())
     }
     
     public func test_throwException_NotMatchAddress() throws {

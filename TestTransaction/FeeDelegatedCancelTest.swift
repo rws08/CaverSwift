@@ -296,7 +296,7 @@ class FeeDelegatedCancelTest_createInstance: XCTestCase {
         }
     }
     
-    public func throwException_setFeePayerSignatures_missingFeePayer() throws {
+    public func test_throwException_setFeePayerSignatures_missingFeePayer() throws {
         let feePayer = ""
         XCTAssertThrowsError(try FeeDelegatedCancel(
             nil,
@@ -418,6 +418,23 @@ class FeeDelegatedCancelTest_signAsFeePayer_OneKeyTest: XCTestCase {
         
         keyring = try KeyringFactory.createWithSingleKey(feePayer, feePayerPrivateKey)
         klaytnWalletKey = try keyring?.getKlaytnWalletKey()
+    }
+    
+    public func test_signAsFeePayer_String() throws {
+        let feePayer = try PrivateKey(privateKey).getDerivedAddress()
+        
+        mTxObj = try FeeDelegatedCancel.Builder()
+            .setNonce(nonce)
+            .setGas(gas)
+            .setGasPrice(gasPrice)
+            .setChainId(chainID)
+            .setFrom(from)
+            .setFeePayer(feePayer)
+            .setSignatures(senderSignatureData)
+            .build()
+        
+        _ = try mTxObj!.signAsFeePayer(privateKey)
+        XCTAssertEqual(1, mTxObj?.feePayerSignatures.count)
     }
     
     public func test_signAsFeePayer_KlaytnWalletKey() throws {

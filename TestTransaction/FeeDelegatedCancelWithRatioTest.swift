@@ -363,6 +363,23 @@ class FeeDelegatedCancelWithRatioTest_createInstance: XCTestCase {
         }
     }
     
+    public func test_throwException_setFeePayerSignatures_missingFeePayer() throws {
+        let feePayer = ""
+        XCTAssertThrowsError(try FeeDelegatedCancelWithRatio(
+                                nil,
+                                from,
+                                nonce,
+                                gas,
+                                gasPrice,
+                                chainID,
+                                [senderSignatureData],
+                                feePayer,
+                                [feePayerSignatureData],
+                                feeRatio)) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("feePayer is missing: feePayer must be defined with feePayerSignatures."))
+        }
+    }
+    
     public func test_throwException_FeeRatio_invalid() throws {
         let feeRatio = "invalid fee ratio"
         XCTAssertThrowsError(try FeeDelegatedCancelWithRatio(

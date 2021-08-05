@@ -717,6 +717,16 @@ class AccountUpdateTest_appendSignaturesTest: XCTestCase {
         klaytnWalletKey = privateKey + "0x00" + coupledKeyring!.address
     }
     
+    public func test_appendSignature() throws {
+        let signatureData = SignatureData(
+            "0x0fea",
+            "0xade9480f584fe481bf070ab758ecc010afa15debc33e1bd75af637d834073a6e",
+            "0x38160105d78cef4529d765941ad6637d8dcf6bd99310e165fee1c39fff2aa27e"
+        )
+        try mTxObj!.appendSignatures(signatureData)
+        XCTAssertEqual(signatureData, mTxObj?.signatures[0])
+    }
+    
     public func test_appendSignatureList() throws {
         let signatureData = SignatureData(
             "0x0fea",
@@ -977,6 +987,61 @@ class AccountUpdateTest_getTransactionHashTest: XCTestCase {
             .setAccount(account)
             .build()
                 
+        XCTAssertThrowsError(try mTxObj!.getSenderTxHash()) {
+            XCTAssertEqual($0 as? CaverError, CaverError.RuntimeException("gasPrice is undefined. Define gasPrice in transaction or use 'transaction.fillTransaction' to fill values."))
+        }
+    }
+}
+
+class AccountUpdateTest_getSenderTxHashTest: XCTestCase {
+    var mTxObj: AccountUpdate?
+    
+    let from = "0x40efcb7d744fdc881f698a8ec573999fe6383545"
+    let gas = "0x15f90"
+    let nonce = "0x1"
+    let gasPrice = "0x5d21dba00"
+    let chainID = "0x7e3"
+    
+    let account = Account.createWithAccountKeyLegacy("0x40efcb7d744fdc881f698a8ec573999fe6383545")
+    
+    public func test_getSenderTransactionHash() throws {
+        let updateList = try AccountUpdateTest.getAccountUpdateList()
+        let expectedDataList = AccountUpdateTest.getExpectedDataList()
+        
+        try zip(updateList, expectedDataList).forEach {
+            XCTAssertEqual($1.expectedTxHash, try $0.getSenderTxHash())
+        }
+    }
+    
+    public func test_throwException_NotDefined_Nonce() throws {
+        let nonce = ""
+        
+        mTxObj = try AccountUpdate.Builder()
+            .setFrom(from)
+            .setGas(gas)
+            .setNonce(nonce)
+            .setChainId(chainID)
+            .setAccount(account)
+            .setGasPrice(gasPrice)
+            .build()
+        
+        XCTAssertThrowsError(try mTxObj!.getSenderTxHash()) {
+            XCTAssertEqual($0 as? CaverError, CaverError.RuntimeException("nonce is undefined. Define nonce in transaction or use 'transaction.fillTransaction' to fill values."))
+        }
+    }
+    
+    public func test_throwException_NotDefined_gasPrice() throws {
+        let gasPrice = ""
+        
+        mTxObj = try AccountUpdate.Builder()
+            .setFrom(from)
+            .setGas(gas)
+            .setNonce(nonce)
+            .setChainId(chainID)
+            .setAccount(account)
+            .setGasPrice(gasPrice)
+            .build()
+        
         XCTAssertThrowsError(try mTxObj!.getSenderTxHash()) {
             XCTAssertEqual($0 as? CaverError, CaverError.RuntimeException("gasPrice is undefined. Define gasPrice in transaction or use 'transaction.fillTransaction' to fill values."))
         }

@@ -491,7 +491,7 @@ class FeeDelegatedValueTransferMemoTest_createInstance: XCTestCase {
         }
     }
     
-    public func throwException_setFeePayerSignatures_missingFeePayer() throws {
+    public func test_throwException_setFeePayerSignatures_missingFeePayer() throws {
         let feePayer = ""
         XCTAssertThrowsError(try FeeDelegatedValueTransferMemo(
             nil,

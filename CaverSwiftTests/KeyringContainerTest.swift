@@ -271,6 +271,7 @@ class KeyringContainerTest_updateKeyringTest: XCTestCase {
         try KeyringContainerTest.validateRoleBasedKeyring(updated, origin.address, expectPrivateKeyArr)
         try KeyringContainerTest.validateRoleBasedKeyring(fromContainer, origin.address, expectPrivateKeyArr)
     }
+    
     func test_throwException_NotExistedKeyring() throws {
         let container = KeyringContainer()
         guard let keyring = KeyringFactory.generate()
@@ -309,6 +310,15 @@ class KeyringContainerTest_getKeyringTest: XCTestCase {
 
         let actual = try container.getKeyring(keyring.address)
         XCTAssertNil(actual)
+    }
+    
+    func test_throwException_InvalidAddress() throws {
+        let container = KeyringContainer()
+        let invalidAddress = "invalid"
+        
+        XCTAssertThrowsError(try container.getKeyring(invalidAddress)) {
+            XCTAssertEqual($0 as? CaverError, CaverError.IllegalArgumentException("Invalid address. To get keyring from wallet, you need to pass a valid address string as a parameter."))
+        }
     }
     
     func test_upperCaseAddress() throws {
