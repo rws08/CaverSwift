@@ -22,7 +22,6 @@ public struct Point: CustomStringConvertible, Equatable {
     /// The point at infinity
     public static let INFINITY = Point()
     
-    public var isValid = false
     
     // MARK: - Initializers
 
@@ -30,7 +29,6 @@ public struct Point: CustomStringConvertible, Equatable {
         self.x = BInt.ZERO
         self.y = BInt.ZERO
         self.infinity = true
-        self.isValid = true
     }
     
     /// Creates a Point from its x- and y-coordinates
@@ -42,7 +40,6 @@ public struct Point: CustomStringConvertible, Equatable {
         self.x = x
         self.y = y
         self.infinity = false
-        self.isValid = false
     }
 
     

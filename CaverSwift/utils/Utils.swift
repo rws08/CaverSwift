@@ -13,7 +13,7 @@ public class Utils {
     public static let LENGTH_PRIVATE_KEY_STRING = 64
     public static let LENGTH_KLAYTN_WALLET_KEY_STRING = 110
     public static let DEFAULT_ZERO_ADDRESS = "0x0000000000000000000000000000000000000000"
-    static let DOMAIN = Domain.instance(curve: .EC256k1)
+    static let DOMAIN = Sign.DOMAIN
         
     private static let baseAddrPattern = "^(0x)?[0-9a-f]{40}$"
     private static let lowerCasePattern = "^(0x|0X)?[0-9a-f]{40}$"
@@ -224,14 +224,12 @@ public class Utils {
     }
     
     public static func validateXYPoint(_ compressedPubKey: String) -> Bool {
-        guard var point = try? getECPoint(compressedPubKey) else { return false }
-        point.isValid = DOMAIN.contains(point)
+        guard let point = try? getECPoint(compressedPubKey) else { return false }
         return point.isValid
     }
     
     public static func validateXYPoint(_ x: String, _ y: String) -> Bool {
-        var point = getECPoint(x, y)
-        point.isValid = DOMAIN.contains(point)
+        let point = getECPoint(x, y)
         return point.isValid
     }
     

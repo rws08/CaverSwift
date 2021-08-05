@@ -32,9 +32,7 @@ open class Sign {
             privKey = privKey.mod(DOMAIN.order)
         }
         
-        var point = DOMAIN.multiplyG(privKey)
-        point.isValid = DOMAIN.contains(point)
-        return point
+        return DOMAIN.multiplyG(privKey)
     }
     
     public static func signMessage(_ msg: [UInt8], _ privateKey: String, _ needToHash: Bool) throws -> SignatureData {
@@ -120,5 +118,13 @@ open class Sign {
         let publicKey = Data(bytes: outputPtr, count: publicKeyLength).subdata(in: 1..<publicKeyLength)
         
         return publicKey
+    }
+}
+
+extension Point {
+    var isValid: Bool {
+        get{
+            return Sign.DOMAIN.contains(self)
+        }
     }
 }

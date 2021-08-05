@@ -46,9 +46,9 @@ public class Domain: CustomStringConvertible {
     // MARK: - Constants
 
     /// Prime characteristic domain OID
-    public static let OID_P = ASN1ObjectIdentifier("1.2.840.10045.1.1")
+    public static let OID_P = ASN1ObjectIdentifier("1.2.840.10045.1.1")!
     /// Characteristic 2 domain OID
-    public static let OID_2 = ASN1ObjectIdentifier("1.2.840.10045.1.2")
+    public static let OID_2 = ASN1ObjectIdentifier("1.2.840.10045.1.2")!
 
     
     // MARK: Static Methods
@@ -299,7 +299,11 @@ public class Domain: CustomStringConvertible {
     /// - Parameters:
     ///   - p: A curve point
     /// - Returns: p + p
-    public func double(_ p: Point) -> Point {
+    /// - Throws: A *notOnCurve* exception if *p* is not on the curve
+    public func doublePoint(_ p: Point) throws -> Point {
+        guard self.contains(p) else {
+            throw ECException.notOnCurve
+        }
         return self.characteristic2 ? self.domain2!.double(Point2.fromPoint(domain2!.rp, p)).toPoint() : self.domainP!.double(p)
     }
 
@@ -309,7 +313,11 @@ public class Domain: CustomStringConvertible {
     ///   - p1: The first curve point
     ///   - p2: The second curve point
     /// - Returns: p1 + p2
-    public func add(_ p1: Point, _ p2: Point) -> Point {
+    /// - Throws: A *notOnCurve* exception if *p1* or *p2* is not on the curve
+    public func addPoints(_ p1: Point, _ p2: Point) throws -> Point {
+        guard self.contains(p1) && self.contains(p2) else {
+            throw ECException.notOnCurve
+        }
         return self.characteristic2 ? self.domain2!.add(Point2.fromPoint(domain2!.rp, p1), Point2.fromPoint(domain2!.rp, p2)).toPoint() : self.domainP!.add(p1, p2)
     }
     
@@ -319,7 +327,11 @@ public class Domain: CustomStringConvertible {
     ///   - p1: The first curve point
     ///   - p2: The second curve point
     /// - Returns: p1 - p2
-    public func subtract(_ p1: Point, _ p2: Point) -> Point {
+    /// - Throws: A *notOnCurve* exception if *p1* or *p2* is not on the curve
+    public func subtractPoints(_ p1: Point, _ p2: Point) throws -> Point {
+        guard self.contains(p1) && self.contains(p2) else {
+            throw ECException.notOnCurve
+        }
         return self.characteristic2 ? self.domain2!.subtract(Point2.fromPoint(domain2!.rp, p1), Point2.fromPoint(domain2!.rp, p2)).toPoint() : self.domainP!.subtract(p1, p2)
     }
 
@@ -328,7 +340,11 @@ public class Domain: CustomStringConvertible {
     /// - Parameters:
     ///   - p: A curve point
     /// - Returns: -p
-    public func negate(_ p: Point) -> Point {
+    /// - Throws: A *notOnCurve* exception if *p* is not on the curve
+    public func negatePoint(_ p: Point) throws -> Point {
+        guard self.contains(p) else {
+            throw ECException.notOnCurve
+        }
         return self.characteristic2 ? self.domain2!.negate(Point2.fromPoint(domain2!.rp, p)).toPoint() : self.domainP!.negate(p)
     }
 
@@ -338,8 +354,13 @@ public class Domain: CustomStringConvertible {
     ///   - p: The curve point to multiply
     ///   - n: The integer to multiply with
     /// - Returns: n * p
-    public func multiply(_ p: Point, _ n: BInt) -> Point {
-        return self.characteristic2 ? self.domain2!.multiply(Point2.fromPoint(domain2!.rp, p), n).toPoint() : self.domainP!.multiply(p, n)
+    /// - Throws: A *notOnCurve* exception if *p* is not on the curve
+    public func multiplyPoint(_ p: Point, _ n: BInt) throws -> Point {
+        guard self.contains(p) else {
+            throw ECException.notOnCurve
+        }
+        let multiplier = n.mod(self.order)
+        return self.characteristic2 ? self.domain2!.multiply(Point2.fromPoint(domain2!.rp, p), multiplier).toPoint() : self.domainP!.multiply(p, multiplier)
     }
 
     /// Tests if point is on curve

@@ -1,5 +1,5 @@
 //
-//  PrivateKey.swift
+//  ECPrivateKey.swift
 //  SwiftECC
 //
 //  Created by Leif Ibsen on 18/02/2020.
@@ -81,7 +81,7 @@ public class ECPrivateKey: CustomStringConvertible {
     // MARK: Computed Properties
     
     /// The ASN1 encoding of *self*
-    public var asn1: ASN1 { get { do { return ASN1Sequence().add(ASN1.ONE).add(ASN1OctetString(self.domain.align(self.s.asMagnitudeBytes()))).add(ASN1Ctx(0, [self.domain.asn1])).add(ASN1Ctx(1, [ASN1BitString(try self.domain.encodePoint(self.domain.multiplyG(self.s)), 0)])) } catch { return ASN1.NULL } } }
+    public var asn1: ASN1 { get { do { return ASN1Sequence().add(ASN1.ONE).add(ASN1OctetString(self.domain.align(self.s.asMagnitudeBytes()))).add(ASN1Ctx(0, [self.domain.asn1])).add(ASN1Ctx(1, [try ASN1BitString(self.domain.encodePoint(self.domain.multiplyG(self.s)), 0)])) } catch { return ASN1.NULL } } }
     /// The PEM base 64 encoding of *self*
     public var pem: String { get { return Base64.pemEncode(self.asn1.encode(), "EC PRIVATE KEY") } }
     /// A textual representation of the ASN1 encoding of *self*
@@ -138,7 +138,7 @@ public class ECPrivateKey: CustomStringConvertible {
             throw ECException.notEnoughInput
         }
         let R = [UInt8](msg[0 ..< bwl])
-        let S = try self.domain.multiply(self.domain.decodePoint(R), self.s).x
+        let S = try self.domain.multiplyPoint(self.domain.decodePoint(R), self.s).x
         let tag1 = [UInt8](msg[msg.count - tagLength ..< msg.count])
         var result = [UInt8](msg[bwl ..< msg.count - tagLength])
         let cipher = Cipher.instance(cipher, mode, self.domain.align(S.asMagnitudeBytes()), R)

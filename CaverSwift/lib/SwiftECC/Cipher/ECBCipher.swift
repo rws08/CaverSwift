@@ -15,8 +15,8 @@ class ECBCipher: Cipher {
         var buffer = [UInt8](repeating: 0, count: AES.blockSize)
         if self.encrypt {
             if remaining < AES.blockSize {
-                let padByte = UInt8(AES.blockSize - remaining)
-                input.append(contentsOf: [UInt8](repeating: padByte, count: AES.blockSize - remaining))
+                let padUInt8 = UInt8(AES.blockSize - remaining)
+                input.append(contentsOf: [UInt8](repeating: padUInt8, count: AES.blockSize - remaining))
             }
             buffer[0 ..< AES.blockSize] = input[index ..< index + AES.blockSize]
             self.aes.encrypt(&buffer)
