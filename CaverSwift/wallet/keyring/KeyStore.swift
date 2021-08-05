@@ -241,8 +241,6 @@ open class KeyStore: Decodable, Encodable {
             AES_CTR_xcrypt_buffer(ctx, outputPtr, UInt32(length))
 
             return Data(bytes: outputPtr, count: length).bytes
-            
-//            return try CryptoSwift.AES(key: encryptKey, blockMode: CTR(iv: iv), padding: .noPadding)
         }
         
         private static func generateMac(_ derivedKey: [UInt8], _ cipherText: [UInt8]) -> Data {
@@ -267,8 +265,6 @@ open class KeyStore: Decodable, Encodable {
             )
             
             let key = Data(bytes: bufptr, count: dkKen).bytes
-            
-//            let key = try Scrypt(password: password.bytes, salt: salt.bytes, dkLen: dkKen, N: n, r: r, p: p).calculate()
             return key
         }
         
@@ -412,6 +408,4 @@ open class KeyStore: Decodable, Encodable {
             self.prf = try values.decode(String.self, forKey: .prf)
         }
     }
-    
-    
 }

@@ -1013,12 +1013,12 @@
 		E3A21E42265654B5006C560D /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				E36EEA1A2696A39A00C1B599 /* libscrypt */,
-				E38FA0D82689A6CB00F532D0 /* SwiftECC */,
-				E38FA0A526896B6800F532D0 /* BigInt */,
-				E3A21E8726607458006C560D /* SwiftBigNumberCore.swift */,
-				E3A21E43265654B5006C560D /* keccak-tiny */,
 				E3A21E48265654B5006C560D /* aes */,
+				E38FA0A526896B6800F532D0 /* BigInt */,
+				E3A21E43265654B5006C560D /* keccak-tiny */,
+				E36EEA1A2696A39A00C1B599 /* libscrypt */,
+				E3A21E8726607458006C560D /* SwiftBigNumberCore.swift */,
+				E38FA0D82689A6CB00F532D0 /* SwiftECC */,
 			);
 			path = lib;
 			sourceTree = "<group>";
