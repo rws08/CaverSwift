@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7AFFF8073AD1370A6A8E5500 /* Pods_CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */; };
+		E30473DB26BB7BAA00501239 /* FeeDelegatedSmartContractExecutionWithRatioTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30473DA26BB7BAA00501239 /* FeeDelegatedSmartContractExecutionWithRatioTest.swift */; };
 		E31BEDF4269D92E700196C0A /* AccountUpdateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */; };
 		E31BEDF6269EC6F800196C0A /* CancelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF5269EC6F800196C0A /* CancelTest.swift */; };
 		E31BEDF8269EDC3400196C0A /* ChainDataAnchoringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */; };
@@ -292,6 +293,7 @@
 		631563655308D9DE35E0434B /* Pods-CaverSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift/Pods-CaverSwift.release.xcconfig"; sourceTree = "<group>"; };
 		9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D117BAAE088D8DB011A1C1A5 /* Pods-CaverSwift-CaverSwiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift-CaverSwiftTests/Pods-CaverSwift-CaverSwiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		E30473DA26BB7BAA00501239 /* FeeDelegatedSmartContractExecutionWithRatioTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedSmartContractExecutionWithRatioTest.swift; sourceTree = "<group>"; };
 		E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUpdateTest.swift; sourceTree = "<group>"; };
 		E31BEDF5269EC6F800196C0A /* CancelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelTest.swift; sourceTree = "<group>"; };
 		E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDataAnchoringTest.swift; sourceTree = "<group>"; };
@@ -630,11 +632,6 @@
 				E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */,
 				E31BEDF5269EC6F800196C0A /* CancelTest.swift */,
 				E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */,
-				E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */,
-				E31BEDF9269EE34400196C0A /* SmartContractDeployTest.swift */,
-				E39FBC8E269FCAB800E2E893 /* SmartContractExecutionTest.swift */,
-				E394F0C1269FD79700371199 /* ValueTransferMemoTest.swift */,
-				E394F0C3269FEB0C00371199 /* ValueTransferTest.swift */,
 				E394F0C5269FEEF800371199 /* FeeDelegatedAccountUpdateTest.swift */,
 				E394F0C726A028F400371199 /* FeeDelegatedAccountUpdateWithRatioTest.swift */,
 				E394F0C926A033F800371199 /* FeeDelegatedCancelTest.swift */,
@@ -648,6 +645,12 @@
 				E394F0D926A18B4900371199 /* FeeDelegatedValueTransferMemoWithRatioTest.swift */,
 				E394F0DB26A1937B00371199 /* FeeDelegatedValueTransferTest.swift */,
 				E394F0DD26A1938500371199 /* FeeDelegatedValueTransferWithRatioTest.swift */,
+				E363D38C269C063F0077F6D2 /* LegacyTransactionTest.swift */,
+				E31BEDF9269EE34400196C0A /* SmartContractDeployTest.swift */,
+				E39FBC8E269FCAB800E2E893 /* SmartContractExecutionTest.swift */,
+				E394F0C1269FD79700371199 /* ValueTransferMemoTest.swift */,
+				E394F0C3269FEB0C00371199 /* ValueTransferTest.swift */,
+				E30473DA26BB7BAA00501239 /* FeeDelegatedSmartContractExecutionWithRatioTest.swift */,
 			);
 			path = transaction;
 			sourceTree = "<group>";
@@ -1617,6 +1620,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3A21D3626564CCA006C560D /* ABITests.swift in Sources */,
+				E30473DB26BB7BAA00501239 /* FeeDelegatedSmartContractExecutionWithRatioTest.swift in Sources */,
 				E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */,
 				E31BEDF6269EC6F800196C0A /* CancelTest.swift in Sources */,
 				E394F0C826A028F400371199 /* FeeDelegatedAccountUpdateWithRatioTest.swift in Sources */,
