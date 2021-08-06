@@ -8,7 +8,7 @@
 import Foundation
 
 open class BlockWithConsensusInfo: Codable {
-    internal init(blockScore: String = "", totalBlockScore: String = "", committee: [String] = [], gasLimit: String = "", gasUsed: String = "", hash: String = "", miner: String = "", nonce: String = "", number: String = "", parentHash: String = "", proposer: String = "", receiptsRoot: String = "", size: String = "", stateRoot: String = "", timestamp: String = "", timestampFoS: String = "", transactions: [TransactionData] = [], transactionsRoot: String = "") {
+    internal init(blockScore: String = "", totalBlockScore: String = "", committee: [String] = [], gasLimit: String = "", gasUsed: String = "", hash: String = "", miner: String = "", nonce: String = "", number: String = "", parentHash: String = "", proposer: String = "", receiptsRoot: String = "", size: String = "", stateRoot: String = "", timestamp: String = "", timestampFoS: String = "", transactions: [Transaction] = [], transactionsRoot: String = "") {
         self.blockScore = blockScore
         self.totalBlockScore = totalBlockScore
         self.committee = committee
@@ -73,7 +73,7 @@ open class BlockWithConsensusInfo: Codable {
         self.stateRoot = (try? container.decode(String.self, forKey: .stateRoot)) ?? ""
         self.timestamp = (try? container.decode(String.self, forKey: .timestamp)) ?? ""
         self.timestampFoS = (try? container.decode(String.self, forKey: .timestampFoS)) ?? ""
-        self.transactions = (try? container.decode([TransactionData].self, forKey: .transactions)) ?? []
+        self.transactions = (try? container.decode([Transaction].self, forKey: .transactions)) ?? []
         self.transactionsRoot = (try? container.decode(String.self, forKey: .transactionsRoot)) ?? ""
     }
     
@@ -161,7 +161,7 @@ open class BlockWithConsensusInfo: Codable {
     /**
      * Array of transaction objects
      */
-    var transactions: [TransactionData] = []
+    var transactions: [Transaction] = []
 
     /**
      * The root of the transaction trie of the block

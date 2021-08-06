@@ -147,7 +147,7 @@ open class BlockData: Codable {
         
         if let decode = try? container.decode([String].self, forKey: .transactions) {
             self.transactions = decode
-        } else if let decode = try? container.decode([TransactionData].self, forKey: .transactions) {
+        } else if let decode = try? container.decode([Transaction].self, forKey: .transactions) {
             self.transactions = decode
         }
     }

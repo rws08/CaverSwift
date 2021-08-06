@@ -249,8 +249,7 @@
 		E3C6F88E26B39EB2002CCF35 /* AccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C6F88D26B39EB2002CCF35 /* AccountData.swift */; };
 		E3C6F89026B39FC4002CCF35 /* AccountTypeSCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C6F88F26B39FC4002CCF35 /* AccountTypeSCA.swift */; };
 		E3C6F89226B3B160002CCF35 /* AccountTypeEOA.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C6F89126B3B160002CCF35 /* AccountTypeEOA.swift */; };
-		E3C6F89426B3B673002CCF35 /* BlockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C6F89326B3B673002CCF35 /* BlockData.swift */; };
-		E3C6F89626B3BA1D002CCF35 /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C6F89526B3BA1D002CCF35 /* TransactionData.swift */; };
+		E3C6F89426B3B673002CCF35 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C6F89326B3B673002CCF35 /* Block.swift */; };
 		E3C6F89826B3C679002CCF35 /* BlockTransactionReceipts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C6F89726B3C679002CCF35 /* BlockTransactionReceipts.swift */; };
 		E3C6F89A26B3C7BB002CCF35 /* BlockWithConsensusInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C6F89926B3C7BB002CCF35 /* BlockWithConsensusInfo.swift */; };
 		E3C6F89E26B3CBCB002CCF35 /* KlaySyncing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C6F89D26B3CBCB002CCF35 /* KlaySyncing.swift */; };
@@ -547,8 +546,7 @@
 		E3C6F88D26B39EB2002CCF35 /* AccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountData.swift; sourceTree = "<group>"; };
 		E3C6F88F26B39FC4002CCF35 /* AccountTypeSCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTypeSCA.swift; sourceTree = "<group>"; };
 		E3C6F89126B3B160002CCF35 /* AccountTypeEOA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTypeEOA.swift; sourceTree = "<group>"; };
-		E3C6F89326B3B673002CCF35 /* BlockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockData.swift; sourceTree = "<group>"; };
-		E3C6F89526B3BA1D002CCF35 /* TransactionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
+		E3C6F89326B3B673002CCF35 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		E3C6F89726B3C679002CCF35 /* BlockTransactionReceipts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTransactionReceipts.swift; sourceTree = "<group>"; };
 		E3C6F89926B3C7BB002CCF35 /* BlockWithConsensusInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWithConsensusInfo.swift; sourceTree = "<group>"; };
 		E3C6F89D26B3CBCB002CCF35 /* KlaySyncing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlaySyncing.swift; sourceTree = "<group>"; };
@@ -1220,7 +1218,7 @@
 				E3C6F88F26B39FC4002CCF35 /* AccountTypeSCA.swift */,
 				E363D3B9269D37380077F6D2 /* Addresses.swift */,
 				E3C6F89F26B3D271002CCF35 /* AnchoredChainData.swift */,
-				E3C6F89326B3B673002CCF35 /* BlockData.swift */,
+				E3C6F89326B3B673002CCF35 /* Block.swift */,
 				E3C6F89726B3C679002CCF35 /* BlockTransactionReceipts.swift */,
 				E3C6F89926B3C7BB002CCF35 /* BlockWithConsensusInfo.swift */,
 				E3C6F88B26B39CD5002CCF35 /* IAccountType.swift */,
@@ -1230,7 +1228,6 @@
 				E3E0237F264A26F600791E00 /* Quantity.swift */,
 				E368F95426B29B5900890812 /* SignTransaction.swift */,
 				E368F95626B29BBE00890812 /* Transaction.swift */,
-				E3C6F89526B3BA1D002CCF35 /* TransactionData.swift */,
 				E37E748A26A65F500019B06D /* TransactionReceipt.swift */,
 			);
 			path = response;
@@ -1594,7 +1591,6 @@
 				E3E0234E2648BB6C00791E00 /* AbstractKeyring.swift in Sources */,
 				E3B8E6B12685903F0069A223 /* SignatureData.swift in Sources */,
 				E351614126BA85D2002E2FE8 /* ABIFunction.swift in Sources */,
-				E3C6F89626B3BA1D002CCF35 /* TransactionData.swift in Sources */,
 				E304741626BBA58600501239 /* CFBCipher.swift in Sources */,
 				E304741226BBA58600501239 /* Cipher.swift in Sources */,
 				E37E749126A673A20019B06D /* NoOpTransactionReceiptProcessor.swift in Sources */,
@@ -1653,7 +1649,7 @@
 				E38FA0C726896B6800F532D0 /* Prime Test.swift in Sources */,
 				E304741026BBA58600501239 /* AES.swift in Sources */,
 				E304741526BBA58600501239 /* CTRCipher.swift in Sources */,
-				E3C6F89426B3B673002CCF35 /* BlockData.swift in Sources */,
+				E3C6F89426B3B673002CCF35 /* Block.swift in Sources */,
 				E351613D26BA8595002E2FE8 /* ABITuple.swift in Sources */,
 				E363D3B1269D1B670077F6D2 /* FeeDelegatedValueTransfer.swift in Sources */,
 				E37E74A126A7F96B0019B06D /* EventValues.swift in Sources */,
