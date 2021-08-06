@@ -25,7 +25,7 @@ class KIP17Test: XCTestCase {
     }
 }
 
-class KIP17Test_ConstructorTest: XCTestCase {
+class KIP17Test_A_ConstructorTest: XCTestCase {
     public var kip17Contract: KIP17?
     
     override func setUpWithError() throws {
@@ -73,7 +73,7 @@ class KIP17Test_ConstructorTest: XCTestCase {
     }
 }
 
-class KIP17Test_PausableTest: XCTestCase {
+class KIP17Test_B_PausableTest: XCTestCase {
     public var kip17Contract: KIP17?
     
     override func setUpWithError() throws {
@@ -158,7 +158,7 @@ class KIP17Test_PausableTest: XCTestCase {
     }
 }
 
-class KIP17Test_BurnableTest: XCTestCase {
+class KIP17Test_C_BurnableTest: XCTestCase {
     public var kip17Contract: KIP17?
     
     override func setUpWithError() throws {
@@ -185,7 +185,7 @@ class KIP17Test_BurnableTest: XCTestCase {
     }
 }
 
-class KIP17Test_MintableTest: XCTestCase {
+class KIP17Test_D_MintableTest: XCTestCase {
     public var kip17Contract: KIP17?
     
     override func setUpWithError() throws {
@@ -253,7 +253,7 @@ class KIP17Test_MintableTest: XCTestCase {
     
 }
 
-class KIP17Test_EnumerableTest: XCTestCase {
+class KIP17Test_E_EnumerableTest: XCTestCase {
     public var kip17Contract: KIP17?
     
     override func setUpWithError() throws {
@@ -322,7 +322,7 @@ class KIP17Test_EnumerableTest: XCTestCase {
     }
 }
 
-class KIP17Test_CommonTest: XCTestCase {
+class KIP17Test_F_CommonTest: XCTestCase {
     public var kip17Contract: KIP17?
     
     override func setUpWithError() throws {
@@ -528,7 +528,7 @@ class KIP17Test_CommonTest: XCTestCase {
     }
 }
 
-class KIP17Test_DetectInterfaceTest: XCTestCase {
+class KIP17Test_G_DetectInterfaceTest: XCTestCase {
     public var kip17Contract: KIP17?
     public var caver: Caver?
     

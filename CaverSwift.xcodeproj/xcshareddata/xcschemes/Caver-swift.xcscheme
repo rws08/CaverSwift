@@ -28,9 +28,23 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E39F2CD1262EA4EF003FA426"
-               BuildableName = "CaverSwiftTests.xctest"
-               BlueprintName = "CaverSwiftTests"
+               BlueprintIdentifier = "E304746426BCBC6000501239"
+               BuildableName = "Common.xctest"
+               BlueprintName = "Common"
+               ReferencedContainer = "container:CaverSwift.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E304743A26BBB6BF00501239"
+               BuildableName = "Transaction.xctest"
+               BlueprintName = "Transaction"
                ReferencedContainer = "container:CaverSwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -52,16 +66,6 @@
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E39F2CD1262EA4EF003FA426"
-               BuildableName = "CaverSwiftTests.xctest"
-               BlueprintName = "CaverSwiftTests"
-               ReferencedContainer = "container:CaverSwift.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -72,6 +72,32 @@
 		E304745926BBB6D600501239 /* FeeDelegatedAccountUpdateWithRatioTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0C726A028F400371199 /* FeeDelegatedAccountUpdateWithRatioTest.swift */; };
 		E304745A26BBB6D600501239 /* FeeDelegatedSmartContractDeployWithRatioTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E394F0D326A127F700371199 /* FeeDelegatedSmartContractDeployWithRatioTest.swift */; };
 		E304745B26BBB6D600501239 /* AccountUpdateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */; };
+		E304746A26BCBC6000501239 /* CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */; platformFilter = ios; };
+		E304747026BCBCDA00501239 /* ContractOverloadFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEDE26AE31130094AF2A /* ContractOverloadFunctionsTest.swift */; };
+		E304747126BCBCDA00501239 /* KIP37Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F94C26B116A000890812 /* KIP37Test.swift */; };
+		E304747226BCBCDA00501239 /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */; };
+		E304747326BCBCDA00501239 /* AccountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3917529268ECFFB006BB332 /* AccountTest.swift */; };
+		E304747426BCBCDA00501239 /* ContractOverloadFunctionsTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */; };
+		E304747526BCBCDA00501239 /* StructContractTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E74A226A909100019B06D /* StructContractTestData.json */; };
+		E304747626BCBCDA00501239 /* KIP7TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEEE26AF98740094AF2A /* KIP7TestData.json */; };
+		E304747726BCBCDA00501239 /* KeyringContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */; };
+		E304747826BCBCDA00501239 /* ContractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A026A56F3400FF2FD4 /* ContractTest.swift */; };
+		E304747926BCBCDA00501239 /* AccountKeyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */; };
+		E304747B26BCBCDA00501239 /* RpcTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F95026B22FA900890812 /* RpcTest.swift */; };
+		E304747C26BCBCDA00501239 /* testFunction.json in Resources */ = {isa = PBXBuildFile; fileRef = E3E02388264CB16500791E00 /* testFunction.json */; };
+		E304747D26BCBCDA00501239 /* KIP17Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FF0026AFC5360094AF2A /* KIP17Test.swift */; };
+		E304747E26BCBCDA00501239 /* ContractImproveFuncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */; };
+		E304747F26BCBCDA00501239 /* ContractImproveFuncTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */; };
+		E304748026BCBCDA00501239 /* KIP7Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEEC26AE76070094AF2A /* KIP7Test.swift */; };
+		E304748126BCBCDA00501239 /* KIP37TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E368F94E26B116AD00890812 /* KIP37TestData.json */; };
+		E304748226BCBCDA00501239 /* KeyringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */; };
+		E304748326BCBCDA00501239 /* ABITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21D3526564CCA006C560D /* ABITests.swift */; };
+		E304748426BCBCDA00501239 /* StructContractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A626A90CC70019B06D /* StructContractTest.swift */; };
+		E304748526BCBCDA00501239 /* ContractTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E749826A6A01E0019B06D /* ContractTestData.json */; };
+		E304748626BCBCDA00501239 /* TestAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */; };
+		E304748726BCBCDA00501239 /* CaverSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */; };
+		E304748826BCBCDA00501239 /* KIP17TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FF0226AFC57A0094AF2A /* KIP17TestData.json */; };
+		E304748926BCBCDA00501239 /* RlpTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB3268D94BE00D05479 /* RlpTest.swift */; };
 		E351613126B8C9BE002E2FE8 /* WebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351613026B8C9BE002E2FE8 /* WebSocketService.swift */; };
 		E351613726BA8547002E2FE8 /* ABIRawType+Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351613626BA8547002E2FE8 /* ABIRawType+Static.swift */; };
 		E351613A26BA857B002E2FE8 /* ABIDecoder+Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351613826BA857B002E2FE8 /* ABIDecoder+Static.swift */; };
@@ -102,21 +128,15 @@
 		E363D3B5269D21E60077F6D2 /* FeeDelegatedValueTransferWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B4269D21E60077F6D2 /* FeeDelegatedValueTransferWithRatio.swift */; };
 		E363D3B7269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B6269D22500077F6D2 /* FeeDelegatedValueTransferMemoWithRatio.swift */; };
 		E363D3BA269D37380077F6D2 /* Addresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E363D3B9269D37380077F6D2 /* Addresses.swift */; };
-		E368F94D26B116A000890812 /* KIP37Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F94C26B116A000890812 /* KIP37Test.swift */; };
-		E368F94F26B116AD00890812 /* KIP37TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E368F94E26B116AD00890812 /* KIP37TestData.json */; };
-		E368F95126B22FA900890812 /* RpcTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F95026B22FA900890812 /* RpcTest.swift */; };
 		E368F95326B27C4500890812 /* AccountKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F95226B27C4500890812 /* AccountKey.swift */; };
 		E368F95526B29B5900890812 /* SignTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F95426B29B5900890812 /* SignTransaction.swift */; };
 		E368F95726B29BBE00890812 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E368F95626B29BBE00890812 /* Transaction.swift */; };
-		E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A026A56F3400FF2FD4 /* ContractTest.swift */; };
 		E36B78A326A5734C00FF2FD4 /* ContractDeployParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A226A5734C00FF2FD4 /* ContractDeployParams.swift */; };
 		E36B78A526A575CC00FF2FD4 /* EventFilterOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36B78A426A575CC00FF2FD4 /* EventFilterOptions.swift */; };
 		E36D344C26AA634300F0F679 /* Utf8String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D344B26AA634300F0F679 /* Utf8String.swift */; };
 		E36D344E26AA644A00F0F679 /* Uint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D344D26AA644A00F0F679 /* Uint.swift */; };
 		E36D345026AA912700F0F679 /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D344F26AA912700F0F679 /* Struct.swift */; };
-		E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83742697F06200D4D5B2 /* KeyringContainerTest.swift */; };
 		E36D83782698020400D4D5B2 /* AbstractTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36D83772698020400D4D5B2 /* AbstractTransaction.swift */; };
-		E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA0D2693DBF400C1B599 /* KeyringTest.swift */; };
 		E36EEA102693DCEE00C1B599 /* MultipleKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA0F2693DCEE00C1B599 /* MultipleKeyring.swift */; };
 		E36EEA122693FEC900C1B599 /* RoleBasedKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA112693FEC900C1B599 /* RoleBasedKeyring.swift */; };
 		E36EEA1426957D0F00C1B599 /* KeyStoreOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA1326957D0F00C1B599 /* KeyStoreOption.swift */; };
@@ -137,24 +157,14 @@
 		E37E748F26A671800019B06D /* TransactionReceiptProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E748E26A671800019B06D /* TransactionReceiptProcessor.swift */; };
 		E37E749126A673A20019B06D /* NoOpTransactionReceiptProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749026A673A20019B06D /* NoOpTransactionReceiptProcessor.swift */; };
 		E37E749326A674740019B06D /* PollingTransactionReceiptProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749226A674740019B06D /* PollingTransactionReceiptProcessor.swift */; };
-		E37E749926A6A0E50019B06D /* ContractTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E749826A6A01E0019B06D /* ContractTestData.json */; };
 		E37E749B26A7C89E0019B06D /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749A26A7C89E0019B06D /* Filter.swift */; };
 		E37E749D26A7EB0B0019B06D /* KlayFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749C26A7EB0B0019B06D /* KlayFilter.swift */; };
 		E37E749F26A7EC310019B06D /* KlayLogFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E749E26A7EC310019B06D /* KlayLogFilter.swift */; };
 		E37E74A126A7F96B0019B06D /* EventValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A026A7F96B0019B06D /* EventValues.swift */; };
-		E37E74A326A909110019B06D /* StructContractTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E74A226A909100019B06D /* StructContractTestData.json */; };
-		E37E74A526A90AAF0019B06D /* TestAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A426A90AAF0019B06D /* TestAccountInfo.swift */; };
-		E37E74A726A90CC70019B06D /* StructContractTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74A626A90CC70019B06D /* StructContractTest.swift */; };
-		E37E74AB26AA3DC60019B06D /* ContractImproveFuncTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E37E74AA26AA3DC60019B06D /* ContractImproveFuncTest.swift */; };
-		E37E74AD26AA3DDB0019B06D /* ContractImproveFuncTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E37E74AC26AA3DDB0019B06D /* ContractImproveFuncTestData.json */; };
-		E382FEDF26AE31130094AF2A /* ContractOverloadFunctionsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEDE26AE31130094AF2A /* ContractOverloadFunctionsTest.swift */; };
-		E382FEE126AE31210094AF2A /* ContractOverloadFunctionsTestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEE026AE31210094AF2A /* ContractOverloadFunctionsTestData.json */; };
 		E382FEE526AE4A790094AF2A /* KIP7DeployParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEE426AE4A790094AF2A /* KIP7DeployParams.swift */; };
 		E382FEE726AE4AFA0094AF2A /* KIP7ConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEE626AE4AFA0094AF2A /* KIP7ConstantData.swift */; };
 		E382FEE926AE4B520094AF2A /* KIP7.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEE826AE4B520094AF2A /* KIP7.swift */; };
 		E382FEEB26AE4B940094AF2A /* KIP7ConstantData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEEA26AE4B940094AF2A /* KIP7ConstantData.json */; };
-		E382FEED26AE76070094AF2A /* KIP7Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEEC26AE76070094AF2A /* KIP7Test.swift */; };
-		E382FEEF26AF98740094AF2A /* KIP7TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEEE26AF98740094AF2A /* KIP7TestData.json */; };
 		E382FEF226AF9E500094AF2A /* KIP13.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEF126AF9E500094AF2A /* KIP13.swift */; };
 		E382FEF426AF9E5B0094AF2A /* KIP13ConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEF326AF9E5B0094AF2A /* KIP13ConstantData.swift */; };
 		E382FEF626AF9E960094AF2A /* KIP13ConstantData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEF526AF9E960094AF2A /* KIP13ConstantData.json */; };
@@ -162,8 +172,6 @@
 		E382FEFB26AFBEC70094AF2A /* KIP17ConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEFA26AFBEC70094AF2A /* KIP17ConstantData.swift */; };
 		E382FEFD26AFBED10094AF2A /* KIP17ConstantData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FEFC26AFBED10094AF2A /* KIP17ConstantData.json */; };
 		E382FEFF26AFBEDF0094AF2A /* KIP17DeployParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FEFE26AFBEDF0094AF2A /* KIP17DeployParams.swift */; };
-		E382FF0126AFC5360094AF2A /* KIP17Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = E382FF0026AFC5360094AF2A /* KIP17Test.swift */; };
-		E382FF0326AFC57A0094AF2A /* KIP17TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = E382FF0226AFC57A0094AF2A /* KIP17TestData.json */; };
 		E3892E0926AFF0B0006B2A30 /* KIP37.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3892E0826AFF0B0006B2A30 /* KIP37.swift */; };
 		E3892E0B26AFF0BA006B2A30 /* KIP37ConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3892E0A26AFF0BA006B2A30 /* KIP37ConstantData.swift */; };
 		E3892E0D26AFF0C9006B2A30 /* KIP37ConstantData.json in Resources */ = {isa = PBXBuildFile; fileRef = E3892E0C26AFF0C9006B2A30 /* KIP37ConstantData.json */; };
@@ -195,18 +203,13 @@
 		E390DAAE268C60FC00D05479 /* WeightedMultiSigOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAAD268C60FC00D05479 /* WeightedMultiSigOptions.swift */; };
 		E390DAB0268C68AF00D05479 /* AccountKeyWeightedMultiSig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAAF268C68AF00D05479 /* AccountKeyWeightedMultiSig.swift */; };
 		E390DAB2268C68DD00D05479 /* WeightedPublicKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB1268C68DD00D05479 /* WeightedPublicKey.swift */; };
-		E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB3268D94BE00D05479 /* RlpTest.swift */; };
 		E390DAB6268DAE3000D05479 /* AccountKeyDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB5268DAE3000D05479 /* AccountKeyDecoder.swift */; };
 		E390DAB8268DAFC500D05479 /* AccountKeyNil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390DAB7268DAFC500D05479 /* AccountKeyNil.swift */; };
-		E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3917529268ECFFB006BB332 /* AccountTest.swift */; };
 		E391752C268ED56C006BB332 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E391752B268ED56C006BB332 /* Account.swift */; };
-		E39F2CD3262EA4EF003FA426 /* CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */; };
-		E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */; };
 		E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E39F2CCC262EA4EF003FA426 /* CaverSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E39F2CE6262EAAD3003FA426 /* Caver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39F2CE5262EAAD3003FA426 /* Caver.swift */; };
 		E39FBC92269FD57D00E2E893 /* GenericJSON in Frameworks */ = {isa = PBXBuildFile; productRef = E39FBC91269FD57D00E2E893 /* GenericJSON */; };
 		E39FBC95269FD5E800E2E893 /* secp256k1 in Frameworks */ = {isa = PBXBuildFile; productRef = E39FBC94269FD5E800E2E893 /* secp256k1 */; };
-		E3A21D3626564CCA006C560D /* ABITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21D3526564CCA006C560D /* ABITests.swift */; };
 		E3A21E0C265654A7006C560D /* ABIRawType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC6265654A7006C560D /* ABIRawType.swift */; };
 		E3A21E0D265654A7006C560D /* ABIEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC7265654A7006C560D /* ABIEncoder.swift */; };
 		E3A21E0E265654A7006C560D /* ABIDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21DC8265654A7006C560D /* ABIDecoder.swift */; };
@@ -228,12 +231,10 @@
 		E3A21E57265CC247006C560D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E56265CC247006C560D /* Array.swift */; };
 		E3A21E82265F8705006C560D /* IWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E81265F8705006C560D /* IWallet.swift */; };
 		E3A21E8826607458006C560D /* SwiftBigNumberCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A21E8726607458006C560D /* SwiftBigNumberCore.swift */; };
-		E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8B62682AE5F002A0A2D /* AccountKeyTest.swift */; };
 		E3A5C8BA2682AED7002A0A2D /* IAccountKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8B92682AED7002A0A2D /* IAccountKey.swift */; };
 		E3A5C8BC2682AF29002A0A2D /* AccountKeyFail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8BB2682AF29002A0A2D /* AccountKeyFail.swift */; };
 		E3A5C8BE2682F23B002A0A2D /* AccountKeyLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8BD2682F23B002A0A2D /* AccountKeyLegacy.swift */; };
 		E3A5C8C02682F2CC002A0A2D /* AccountKeyPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8BF2682F2CC002A0A2D /* AccountKeyPublic.swift */; };
-		E3A5C8C22682F4A2002A0A2D /* UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */; };
 		E3A5C8C42683079E002A0A2D /* PrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A5C8C32683079E002A0A2D /* PrivateKey.swift */; };
 		E3B8E6AD2685782B0069A223 /* KeyringFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B8E6AC2685782B0069A223 /* KeyringFactory.swift */; };
 		E3B8E6AF2685783E0069A223 /* SingleKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B8E6AE2685783E0069A223 /* SingleKeyring.swift */; };
@@ -271,7 +272,6 @@
 		E3E023712648F5E900791E00 /* CallObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023702648F5E900791E00 /* CallObject.swift */; };
 		E3E0237B264A059A00791E00 /* ContractEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0237A264A059A00791E00 /* ContractEvent.swift */; };
 		E3E02380264A26F600791E00 /* Quantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0237F264A26F600791E00 /* Quantity.swift */; };
-		E3E02389264CB16500791E00 /* testFunction.json in Resources */ = {isa = PBXBuildFile; fileRef = E3E02388264CB16500791E00 /* testFunction.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -282,12 +282,12 @@
 			remoteGlobalIDString = E39F2CC8262EA4EF003FA426;
 			remoteInfo = CaverSwift;
 		};
-		E39F2CD4262EA4EF003FA426 /* PBXContainerItemProxy */ = {
+		E304746B26BCBC6000501239 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E39F2CC0262EA4EF003FA426 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E39F2CC8262EA4EF003FA426;
-			remoteInfo = "Caver-swift";
+			remoteInfo = CaverSwift;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -337,8 +337,9 @@
 		E304740A26BBA58600501239 /* BP384.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BP384.swift; sourceTree = "<group>"; };
 		E304740B26BBA58600501239 /* EC384.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EC384.swift; sourceTree = "<group>"; };
 		E304740C26BBA58600501239 /* Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base64.swift; sourceTree = "<group>"; };
-		E304743B26BBB6BF00501239 /* TestTransaction.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestTransaction.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E304743B26BBB6BF00501239 /* Transaction.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Transaction.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E304743F26BBB6C000501239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E304746526BCBC6000501239 /* Common.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Common.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountUpdateTest.swift; sourceTree = "<group>"; };
 		E31BEDF5269EC6F800196C0A /* CancelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelTest.swift; sourceTree = "<group>"; };
 		E31BEDF7269EDC3400196C0A /* ChainDataAnchoringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainDataAnchoringTest.swift; sourceTree = "<group>"; };
@@ -495,7 +496,6 @@
 		E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CCC262EA4EF003FA426 /* CaverSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaverSwift.h; sourceTree = "<group>"; };
 		E39F2CCD262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E39F2CD2262EA4EF003FA426 /* CaverSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaverSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E39F2CD7262EA4EF003FA426 /* CaverSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaverSwiftTests.swift; sourceTree = "<group>"; };
 		E39F2CD9262EA4EF003FA426 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E39F2CE5262EAAD3003FA426 /* Caver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caver.swift; sourceTree = "<group>"; };
@@ -579,6 +579,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E304746226BCBC6000501239 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E304746A26BCBC6000501239 /* CaverSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E39F2CC6262EA4EF003FA426 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -587,14 +595,6 @@
 				E39FBC95269FD5E800E2E893 /* secp256k1 in Frameworks */,
 				E39FBC92269FD57D00E2E893 /* GenericJSON in Frameworks */,
 				E38FA0D42689A6AF00F532D0 /* ASN1 in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E39F2CCF262EA4EF003FA426 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E39F2CD3262EA4EF003FA426 /* CaverSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,7 +683,7 @@
 			path = DomainP;
 			sourceTree = "<group>";
 		};
-		E304743C26BBB6C000501239 /* TestTransaction */ = {
+		E304743C26BBB6C000501239 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
 				E31BEDF3269D92E700196C0A /* AccountUpdateTest.swift */,
@@ -710,7 +710,16 @@
 				E394F0C1269FD79700371199 /* ValueTransferMemoTest.swift */,
 				E394F0C3269FEB0C00371199 /* ValueTransferTest.swift */,
 			);
-			path = TestTransaction;
+			path = Transaction;
+			sourceTree = "<group>";
+		};
+		E304745C26BCAF3B00501239 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				E39F2CD6262EA4EF003FA426 /* Common */,
+				E304743C26BBB6C000501239 /* Transaction */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 		E351614226BA8693002E2FE8 /* Statically Typed */ = {
@@ -877,8 +886,7 @@
 			isa = PBXGroup;
 			children = (
 				E39F2CCB262EA4EF003FA426 /* CaverSwift */,
-				E39F2CD6262EA4EF003FA426 /* CaverSwiftTests */,
-				E304743C26BBB6C000501239 /* TestTransaction */,
+				E304745C26BCAF3B00501239 /* Test */,
 				E39F2CCA262EA4EF003FA426 /* Products */,
 				7C211DA2C810D6E71CF0A65B /* Frameworks */,
 			);
@@ -888,8 +896,8 @@
 			isa = PBXGroup;
 			children = (
 				E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */,
-				E39F2CD2262EA4EF003FA426 /* CaverSwiftTests.xctest */,
-				E304743B26BBB6BF00501239 /* TestTransaction.xctest */,
+				E304743B26BBB6BF00501239 /* Transaction.xctest */,
+				E304746526BCBC6000501239 /* Common.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -915,7 +923,7 @@
 			path = CaverSwift;
 			sourceTree = "<group>";
 		};
-		E39F2CD6262EA4EF003FA426 /* CaverSwiftTests */ = {
+		E39F2CD6262EA4EF003FA426 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				E3A21D3526564CCA006C560D /* ABITests.swift */,
@@ -945,7 +953,7 @@
 				E3E02388264CB16500791E00 /* testFunction.json */,
 				E3A5C8C12682F4A2002A0A2D /* UtilsTest.swift */,
 			);
-			path = CaverSwiftTests;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		E3A21DBF265654A7006C560D /* abi */ = {
@@ -1236,9 +1244,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		E304743A26BBB6BF00501239 /* TestTransaction */ = {
+		E304743A26BBB6BF00501239 /* Transaction */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E304744326BBB6C000501239 /* Build configuration list for PBXNativeTarget "TestTransaction" */;
+			buildConfigurationList = E304744326BBB6C000501239 /* Build configuration list for PBXNativeTarget "Transaction" */;
 			buildPhases = (
 				E304743726BBB6BF00501239 /* Sources */,
 				E304743826BBB6BF00501239 /* Frameworks */,
@@ -1249,9 +1257,27 @@
 			dependencies = (
 				E304744226BBB6C000501239 /* PBXTargetDependency */,
 			);
-			name = TestTransaction;
+			name = Transaction;
 			productName = TestTransaction;
-			productReference = E304743B26BBB6BF00501239 /* TestTransaction.xctest */;
+			productReference = E304743B26BBB6BF00501239 /* Transaction.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E304746426BCBC6000501239 /* Common */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E304746D26BCBC6000501239 /* Build configuration list for PBXNativeTarget "Common" */;
+			buildPhases = (
+				E304746126BCBC6000501239 /* Sources */,
+				E304746226BCBC6000501239 /* Frameworks */,
+				E304746326BCBC6000501239 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E304746C26BCBC6000501239 /* PBXTargetDependency */,
+			);
+			name = Common;
+			productName = Common;
+			productReference = E304746526BCBC6000501239 /* Common.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		E39F2CC8262EA4EF003FA426 /* CaverSwift */ = {
@@ -1278,24 +1304,6 @@
 			productReference = E39F2CC9262EA4EF003FA426 /* CaverSwift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E39F2CD1262EA4EF003FA426 /* CaverSwiftTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E39F2CE0262EA4EF003FA426 /* Build configuration list for PBXNativeTarget "CaverSwiftTests" */;
-			buildPhases = (
-				E39F2CCE262EA4EF003FA426 /* Sources */,
-				E39F2CCF262EA4EF003FA426 /* Frameworks */,
-				E39F2CD0262EA4EF003FA426 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E39F2CD5262EA4EF003FA426 /* PBXTargetDependency */,
-			);
-			name = CaverSwiftTests;
-			productName = "Caver-swiftTests";
-			productReference = E39F2CD2262EA4EF003FA426 /* CaverSwiftTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1308,12 +1316,12 @@
 					E304743A26BBB6BF00501239 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
+					E304746426BCBC6000501239 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					E39F2CC8262EA4EF003FA426 = {
 						CreatedOnToolsVersion = 12.4;
 						LastSwiftMigration = 1240;
-					};
-					E39F2CD1262EA4EF003FA426 = {
-						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
@@ -1337,8 +1345,8 @@
 			projectRoot = "";
 			targets = (
 				E39F2CC8262EA4EF003FA426 /* CaverSwift */,
-				E39F2CD1262EA4EF003FA426 /* CaverSwiftTests */,
-				E304743A26BBB6BF00501239 /* TestTransaction */,
+				E304746426BCBC6000501239 /* Common */,
+				E304743A26BBB6BF00501239 /* Transaction */,
 			);
 		};
 /* End PBXProject section */
@@ -1351,6 +1359,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E304746326BCBC6000501239 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E304747526BCBCDA00501239 /* StructContractTestData.json in Resources */,
+				E304747F26BCBCDA00501239 /* ContractImproveFuncTestData.json in Resources */,
+				E304748126BCBCDA00501239 /* KIP37TestData.json in Resources */,
+				E304747C26BCBCDA00501239 /* testFunction.json in Resources */,
+				E304748826BCBCDA00501239 /* KIP17TestData.json in Resources */,
+				E304748526BCBCDA00501239 /* ContractTestData.json in Resources */,
+				E304747426BCBCDA00501239 /* ContractOverloadFunctionsTestData.json in Resources */,
+				E304747626BCBCDA00501239 /* KIP7TestData.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E39F2CC7262EA4EF003FA426 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1359,21 +1382,6 @@
 				E382FEEB26AE4B940094AF2A /* KIP7ConstantData.json in Resources */,
 				E382FEF626AF9E960094AF2A /* KIP13ConstantData.json in Resources */,
 				E382FEFD26AFBED10094AF2A /* KIP17ConstantData.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E39F2CD0262EA4EF003FA426 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E37E74AD26AA3DDB0019B06D /* ContractImproveFuncTestData.json in Resources */,
-				E3E02389264CB16500791E00 /* testFunction.json in Resources */,
-				E368F94F26B116AD00890812 /* KIP37TestData.json in Resources */,
-				E382FF0326AFC57A0094AF2A /* KIP17TestData.json in Resources */,
-				E382FEEF26AF98740094AF2A /* KIP7TestData.json in Resources */,
-				E37E74A326A909110019B06D /* StructContractTestData.json in Resources */,
-				E382FEE126AE31210094AF2A /* ContractOverloadFunctionsTestData.json in Resources */,
-				E37E749926A6A0E50019B06D /* ContractTestData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1406,6 +1414,30 @@
 				E304744926BBB6D600501239 /* FeeDelegatedValueTransferMemoWithRatioTest.swift in Sources */,
 				E304745226BBB6D600501239 /* ChainDataAnchoringTest.swift in Sources */,
 				E304745B26BBB6D600501239 /* AccountUpdateTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E304746126BCBC6000501239 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E304748026BCBCDA00501239 /* KIP7Test.swift in Sources */,
+				E304747126BCBCDA00501239 /* KIP37Test.swift in Sources */,
+				E304748726BCBCDA00501239 /* CaverSwiftTests.swift in Sources */,
+				E304748426BCBCDA00501239 /* StructContractTest.swift in Sources */,
+				E304747826BCBCDA00501239 /* ContractTest.swift in Sources */,
+				E304747326BCBCDA00501239 /* AccountTest.swift in Sources */,
+				E304747D26BCBCDA00501239 /* KIP17Test.swift in Sources */,
+				E304747026BCBCDA00501239 /* ContractOverloadFunctionsTest.swift in Sources */,
+				E304747926BCBCDA00501239 /* AccountKeyTest.swift in Sources */,
+				E304748626BCBCDA00501239 /* TestAccountInfo.swift in Sources */,
+				E304748226BCBCDA00501239 /* KeyringTest.swift in Sources */,
+				E304747226BCBCDA00501239 /* UtilsTest.swift in Sources */,
+				E304747E26BCBCDA00501239 /* ContractImproveFuncTest.swift in Sources */,
+				E304748926BCBCDA00501239 /* RlpTest.swift in Sources */,
+				E304747726BCBCDA00501239 /* KeyringContainerTest.swift in Sources */,
+				E304748326BCBCDA00501239 /* ABITests.swift in Sources */,
+				E304747B26BCBCDA00501239 /* RpcTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1620,30 +1652,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E39F2CCE262EA4EF003FA426 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E3A21D3626564CCA006C560D /* ABITests.swift in Sources */,
-				E36D83752697F06200D4D5B2 /* KeyringContainerTest.swift in Sources */,
-				E382FEED26AE76070094AF2A /* KIP7Test.swift in Sources */,
-				E36EEA0E2693DBF400C1B599 /* KeyringTest.swift in Sources */,
-				E391752A268ECFFB006BB332 /* AccountTest.swift in Sources */,
-				E368F94D26B116A000890812 /* KIP37Test.swift in Sources */,
-				E37E74A526A90AAF0019B06D /* TestAccountInfo.swift in Sources */,
-				E39F2CD8262EA4EF003FA426 /* CaverSwiftTests.swift in Sources */,
-				E3A5C8B72682AE5F002A0A2D /* AccountKeyTest.swift in Sources */,
-				E37E74AB26AA3DC60019B06D /* ContractImproveFuncTest.swift in Sources */,
-				E37E74A726A90CC70019B06D /* StructContractTest.swift in Sources */,
-				E390DAB4268D94BE00D05479 /* RlpTest.swift in Sources */,
-				E36B78A126A56F3400FF2FD4 /* ContractTest.swift in Sources */,
-				E368F95126B22FA900890812 /* RpcTest.swift in Sources */,
-				E382FF0126AFC5360094AF2A /* KIP17Test.swift in Sources */,
-				E382FEDF26AE31130094AF2A /* ContractOverloadFunctionsTest.swift in Sources */,
-				E3A5C8C22682F4A2002A0A2D /* UtilsTest.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1653,10 +1661,11 @@
 			target = E39F2CC8262EA4EF003FA426 /* CaverSwift */;
 			targetProxy = E304744126BBB6C000501239 /* PBXContainerItemProxy */;
 		};
-		E39F2CD5262EA4EF003FA426 /* PBXTargetDependency */ = {
+		E304746C26BCBC6000501239 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = E39F2CC8262EA4EF003FA426 /* CaverSwift */;
-			targetProxy = E39F2CD4262EA4EF003FA426 /* PBXContainerItemProxy */;
+			targetProxy = E304746B26BCBC6000501239 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1665,7 +1674,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = TestTransaction/Info.plist;
+				INFOPLIST_FILE = Test/Transaction/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1683,7 +1692,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = TestTransaction/Info.plist;
+				INFOPLIST_FILE = Test/Transaction/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1691,6 +1700,40 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.TestTransaction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E304746E26BCBC6000501239 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Test/Common/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.Common;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E304746F26BCBC6000501239 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Test/Common/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.Common;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1880,52 +1923,23 @@
 			};
 			name = Release;
 		};
-		E39F2CE1262EA4EF003FA426 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H6HXM54M49;
-				INFOPLIST_FILE = CaverSwiftTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.CaverSwiftTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		E39F2CE2262EA4EF003FA426 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H6HXM54M49;
-				INFOPLIST_FILE = CaverSwiftTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.CaverSwiftTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E304744326BBB6C000501239 /* Build configuration list for PBXNativeTarget "TestTransaction" */ = {
+		E304744326BBB6C000501239 /* Build configuration list for PBXNativeTarget "Transaction" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E304744426BBB6C000501239 /* Debug */,
 				E304744526BBB6C000501239 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E304746D26BCBC6000501239 /* Build configuration list for PBXNativeTarget "Common" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E304746E26BCBC6000501239 /* Debug */,
+				E304746F26BCBC6000501239 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1944,15 +1958,6 @@
 			buildConfigurations = (
 				E39F2CDE262EA4EF003FA426 /* Debug */,
 				E39F2CDF262EA4EF003FA426 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E39F2CE0262EA4EF003FA426 /* Build configuration list for PBXNativeTarget "CaverSwiftTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E39F2CE1262EA4EF003FA426 /* Debug */,
-				E39F2CE2262EA4EF003FA426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
