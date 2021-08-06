@@ -22,14 +22,14 @@ open class AccountKeyPublic: IAccountKey {
     }
     
     public func setPublicKey(_ publicKey: String) throws {
-        if !Utils.isValidPublicKey(publicKey) {
+        if !AccountKeyPublicUtils.isValidPublicKey(publicKey) {
             throw CaverError.RuntimeException("Invalid Public Key format")
         }
         self.publicKey = publicKey
     }
     
     public override func getRLPEncoding() throws -> String {
-        let compressedKey = try Utils.compressPublicKey(publicKey)
+        let compressedKey = try AccountKeyPublicUtils.compressPublicKey(publicKey)
         guard let encodedPubKey = Rlp.encode(compressedKey) else { return "" }        
         var type = Data([AccountKeyPublic.RLP])
         type.append(encodedPubKey)
@@ -39,8 +39,8 @@ open class AccountKeyPublic: IAccountKey {
     public func getXYPoint() -> [String] {
         var key = publicKey
         do {
-            if try Utils.isCompressedPublicKey(publicKey) {
-                key = try Utils.decompressPublicKey(publicKey)
+            if try AccountKeyPublicUtils.isCompressedPublicKey(publicKey) {
+                key = try AccountKeyPublicUtils.decompressPublicKey(publicKey)
             }
             
             let noPrefixKeyStr = key.cleanHexPrefix
@@ -80,7 +80,7 @@ open class AccountKeyPublic: IAccountKey {
         //remove Tag
         let encodedPublicKey = rlpEncodedKey[1..<rlpEncodedKey.count]
         guard let compressedPubKey = Rlp.decode(Array(encodedPublicKey)) as? String,
-              let publicKey = try? Utils.decompressPublicKey(compressedPubKey)
+              let publicKey = try? AccountKeyPublicUtils.decompressPublicKey(compressedPubKey)
         else { throw CaverError.RuntimeException("There is an error while decoding process.")}
         
         

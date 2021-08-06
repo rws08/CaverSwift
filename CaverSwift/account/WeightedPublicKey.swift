@@ -18,7 +18,7 @@ open class WeightedPublicKey: Codable {
     }
     
     public func setPublicKey(_ publicKey: String) throws {
-        if !Utils.isValidPublicKey(publicKey) {
+        if !AccountKeyPublicUtils.isValidPublicKey(publicKey) {
             throw CaverError.IllegalArgumentException("Invalid Public key format")
         }
         
@@ -34,7 +34,7 @@ open class WeightedPublicKey: Codable {
             throw CaverError.RuntimeException("weight should be specified for a multisig account")
         }
         
-        guard let compressedKey = try? Utils.compressPublicKey(publicKey) else { return [] }
+        guard let compressedKey = try? AccountKeyPublicUtils.compressPublicKey(publicKey) else { return [] }
         return [weight.hexa, compressedKey]
     }
     
@@ -46,7 +46,7 @@ open class WeightedPublicKey: Codable {
     }
     
     public func encode(to encoder: Encoder) throws {
-        let decompressedKey = try Utils.decompressPublicKey(publicKey).cleanHexPrefix
+        let decompressedKey = try AccountKeyPublicUtils.decompressPublicKey(publicKey).cleanHexPrefix
         
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(Int(weight!.decimal), forKey: .weight)

@@ -56,7 +56,7 @@ open class PrivateKey {
     public func getPublicKey(_ compressed: Bool = false) throws -> String {
         let publicKey = Sign.publicKeyFromPrivate(privateKey)
         if compressed {
-            return try Utils.compressPublicKey(publicKey)
+            return try AccountKeyPublicUtils.compressPublicKey(publicKey)
         }
         
         return publicKey

@@ -89,7 +89,7 @@ open class AccountKeyWeightedMultiSig: IAccountKey {
                 throw CaverError.RuntimeException("weight should be specified for a multisig account")
             }
             
-            let compressedKey = try Utils.compressPublicKey($0.publicKey)
+            let compressedKey = try AccountKeyPublicUtils.compressPublicKey($0.publicKey)
             return [weight.description, compressedKey]
         }
         
