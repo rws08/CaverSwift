@@ -144,7 +144,6 @@
 		E36EEA122693FEC900C1B599 /* RoleBasedKeyring.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA112693FEC900C1B599 /* RoleBasedKeyring.swift */; };
 		E36EEA1426957D0F00C1B599 /* KeyStoreOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA1326957D0F00C1B599 /* KeyStoreOption.swift */; };
 		E36EEA1626957D6200C1B599 /* KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA1526957D6200C1B599 /* KeyStore.swift */; };
-		E36EEA232696A3ED00C1B599 /* libscrypt.h in Headers */ = {isa = PBXBuildFile; fileRef = E36EEA1F2696A3ED00C1B599 /* libscrypt.h */; };
 		E36EEA252696B01100C1B599 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA242696B01100C1B599 /* main.c */; };
 		E36EEA392696B05900C1B599 /* crypto_scrypt-nosse.c in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA262696B05800C1B599 /* crypto_scrypt-nosse.c */; };
 		E36EEA3A2696B05900C1B599 /* slowequals.c in Sources */ = {isa = PBXBuildFile; fileRef = E36EEA272696B05800C1B599 /* slowequals.c */; };
@@ -274,6 +273,7 @@
 		E3E023712648F5E900791E00 /* CallObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E023702648F5E900791E00 /* CallObject.swift */; };
 		E3E0237B264A059A00791E00 /* ContractEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0237A264A059A00791E00 /* ContractEvent.swift */; };
 		E3E02380264A26F600791E00 /* Quantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E0237F264A26F600791E00 /* Quantity.swift */; };
+		E84DB0205A1F50270D1348D6 /* Pods_CaverSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -294,8 +294,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		057E2B369368C165BC83573F /* Pods-CaverSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift.release.xcconfig"; path = "Target Support Files/Pods-CaverSwift/Pods-CaverSwift.release.xcconfig"; sourceTree = "<group>"; };
 		462BA56D0418EBB7FC5EB2C4 /* Pods_CaverSwift_CaverSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaverSwift_CaverSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C76F9E36F8B9B3D2E1618D1 /* Pods_CaverSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaverSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE322ED0D09D519C6A78AB5B /* Pods-CaverSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaverSwift.debug.xcconfig"; path = "Target Support Files/Pods-CaverSwift/Pods-CaverSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		E30473DA26BB7BAA00501239 /* FeeDelegatedSmartContractExecutionWithRatioTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeDelegatedSmartContractExecutionWithRatioTest.swift; sourceTree = "<group>"; };
 		E30473E026BBA58600501239 /* RP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RP.swift; sourceTree = "<group>"; };
 		E30473E126BBA58600501239 /* Curve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Curve.swift; sourceTree = "<group>"; };
@@ -399,8 +401,7 @@
 		E36EEA112693FEC900C1B599 /* RoleBasedKeyring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleBasedKeyring.swift; sourceTree = "<group>"; };
 		E36EEA1326957D0F00C1B599 /* KeyStoreOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreOption.swift; sourceTree = "<group>"; };
 		E36EEA1526957D6200C1B599 /* KeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStore.swift; sourceTree = "<group>"; };
-		E36EEA1D2696A3ED00C1B599 /* libscrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libscrypt.h; sourceTree = "<group>"; };
-		E36EEA1F2696A3ED00C1B599 /* libscrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libscrypt.h; sourceTree = "<group>"; };
+		E36EEA1D2696A3ED00C1B599 /* libscrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libscrypt.h; path = ../libscrypt.h; sourceTree = "<group>"; };
 		E36EEA202696A3ED00C1B599 /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
 		E36EEA242696B01100C1B599 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E36EEA262696B05800C1B599 /* crypto_scrypt-nosse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto_scrypt-nosse.c"; sourceTree = "<group>"; };
@@ -599,12 +600,22 @@
 				E39FBC95269FD5E800E2E893 /* secp256k1 in Frameworks */,
 				E39FBC92269FD57D00E2E893 /* GenericJSON in Frameworks */,
 				E38FA0D42689A6AF00F532D0 /* ASN1 in Frameworks */,
+				E84DB0205A1F50270D1348D6 /* Pods_CaverSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A12F96B06D14FA6449B5BD2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CE322ED0D09D519C6A78AB5B /* Pods-CaverSwift.debug.xcconfig */,
+				057E2B369368C165BC83573F /* Pods-CaverSwift.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7C211DA2C810D6E71CF0A65B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -782,7 +793,6 @@
 				E36EEA332696B05900C1B599 /* sysendian.h */,
 				E36EEA242696B01100C1B599 /* main.c */,
 				E36EEA202696A3ED00C1B599 /* module.map */,
-				E36EEA1D2696A3ED00C1B599 /* libscrypt.h */,
 				E36EEA1E2696A3ED00C1B599 /* include */,
 			);
 			path = libscrypt;
@@ -791,7 +801,7 @@
 		E36EEA1E2696A3ED00C1B599 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				E36EEA1F2696A3ED00C1B599 /* libscrypt.h */,
+				E36EEA1D2696A3ED00C1B599 /* libscrypt.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -893,6 +903,7 @@
 				E304745C26BCAF3B00501239 /* Test */,
 				E39F2CCA262EA4EF003FA426 /* Products */,
 				7C211DA2C810D6E71CF0A65B /* Frameworks */,
+				7A12F96B06D14FA6449B5BD2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1240,7 +1251,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E36EEA232696A3ED00C1B599 /* libscrypt.h in Headers */,
 				E39F2CDA262EA4EF003FA426 /* CaverSwift.h in Headers */,
 				E3A21E50265654B5006C560D /* aes.h in Headers */,
 				E3A21E4D265654B5006C560D /* keccak-tiny.h in Headers */,
@@ -1290,6 +1300,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E39F2CDD262EA4EF003FA426 /* Build configuration list for PBXNativeTarget "CaverSwift" */;
 			buildPhases = (
+				D001784668971C0AEA46F560 /* [CP] Check Pods Manifest.lock */,
 				E39F2CC4262EA4EF003FA426 /* Headers */,
 				E39F2CC5262EA4EF003FA426 /* Sources */,
 				E39F2CC6262EA4EF003FA426 /* Frameworks */,
@@ -1392,6 +1403,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D001784668971C0AEA46F560 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CaverSwift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E304743726BBB6BF00501239 /* Sources */ = {
@@ -1872,6 +1908,7 @@
 		};
 		E39F2CDE262EA4EF003FA426 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE322ED0D09D519C6A78AB5B /* Pods-CaverSwift.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1889,7 +1926,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.caver;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1903,6 +1940,7 @@
 		};
 		E39F2CDF262EA4EF003FA426 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 057E2B369368C165BC83573F /* Pods-CaverSwift.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1920,7 +1958,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.groundx.caver;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

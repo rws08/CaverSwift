@@ -173,7 +173,7 @@ class AccountKeyTest_WeightedMultiSigTest: XCTestCase {
         //check WeightedPublicKey
         zip(expectedPublicKey, zip(expectedOptions.weights, actualAccount.weightedPublicKeys)).forEach {
             XCTAssertEqual($1.0, $1.1.weight)
-            guard let publicKey = try? Utils.decompressPublicKey($1.1.publicKey) else { XCTAssert(false)
+            guard let publicKey = try? AccountKeyPublicUtils.decompressPublicKey($1.1.publicKey) else { XCTAssert(false)
             return }
             XCTAssertEqual($0, publicKey)
         }
@@ -323,8 +323,8 @@ class AccountKeyTest_RoleBasedTest: XCTestCase {
     }
     
     func checkPublicKey(_ expected: String, _ actual: String) throws {
-        var expected = try Utils.compressPublicKey(expected)
-        var actual = try Utils.compressPublicKey(actual)
+        var expected = try AccountKeyPublicUtils.compressPublicKey(expected)
+        var actual = try AccountKeyPublicUtils.compressPublicKey(actual)
 
         expected = expected.cleanHexPrefix
         actual = actual.cleanHexPrefix

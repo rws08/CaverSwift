@@ -11,8 +11,8 @@ import XCTest
 
 class AccountTest: XCTestCase {
     func checkPublicKey(_ expected: String, _ actual: String) throws {
-        var expected = try Utils.compressPublicKey(expected)
-        var actual = try Utils.compressPublicKey(actual)
+        var expected = try AccountKeyPublicUtils.compressPublicKey(expected)
+        var actual = try AccountKeyPublicUtils.compressPublicKey(actual)
 
         expected = expected.cleanHexPrefix
         actual = actual.cleanHexPrefix

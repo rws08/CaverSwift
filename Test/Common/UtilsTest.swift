@@ -90,64 +90,64 @@ class UtilsTest_isValidPublicKeyTest: XCTestCase {
     func testUncompressedKey() throws {
         guard let key = try? KeyringFactory.generate()?.getPublicKey() else { XCTAssert(false)
             return }
-        XCTAssertTrue(Utils.isValidPublicKey(key))
+        XCTAssertTrue(AccountKeyPublicUtils.isValidPublicKey(key))
     }
     
     func testUncompressedKeyWithTag() throws {
         let key = "0x04019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"
-        XCTAssertTrue(Utils.isValidPublicKey(key))
+        XCTAssertTrue(AccountKeyPublicUtils.isValidPublicKey(key))
     }
     
     func testCompressedKey() throws {
         guard let key = try? KeyringFactory.generate()?.getPublicKey(),
-              let key = try? Utils.compressPublicKey(key) else { XCTAssert(false)
+              let key = try? AccountKeyPublicUtils.compressPublicKey(key) else { XCTAssert(false)
             return }
         
-        XCTAssertTrue(Utils.isValidPublicKey(key))
+        XCTAssertTrue(AccountKeyPublicUtils.isValidPublicKey(key))
     }
     
     func testInvalidLength_UncompressedKey() throws {
         let key = "0a7694872b7f0862d896780c476eefe5dcbcab6145853401f95a610bbbb0f726c1013a286500f3b524834eaeb383d1a882e16f4923cef8a5316c33772b3437"
-        XCTAssertFalse(Utils.isValidPublicKey(key))
+        XCTAssertFalse(AccountKeyPublicUtils.isValidPublicKey(key))
     }
     
     func testInvalidLength_CompressedKey() throws {
         let key = "0x03434dedfc2eceed1e98fddfde3ebc57512c57f017195988cd5de62b722656b93"
-        XCTAssertFalse(Utils.isValidPublicKey(key))
+        XCTAssertFalse(AccountKeyPublicUtils.isValidPublicKey(key))
     }
     
     func testInvalidIndicator_CompressedKey() throws {
         let key = "0x05434dedfc2eceed1e98fddfde3ebc57512c57f017195988cd5de62b722656b943"
-        XCTAssertFalse(Utils.isValidPublicKey(key))
+        XCTAssertFalse(AccountKeyPublicUtils.isValidPublicKey(key))
     }
     
     func testInvalidPoint() throws {
         let key = "0x4be11ff42d8fc1954fb9ed52296db1657564c5e38517764664fb7cf4306a1e163a2686aa755dd0291aa2f291c3560ef4bf4b46c671983ff3e23f11a1b744ff4a"
-        XCTAssertFalse(Utils.isValidPublicKey(key))
+        XCTAssertFalse(AccountKeyPublicUtils.isValidPublicKey(key))
     }
 }
 
 class UtilsTest_decompressPublicKeyTest: XCTestCase {
     func testDecompressPublicKey() throws {
         let compressed = "03434dedfc2eceed1e98fddfde3ebc57512c57f017195988cd5de62b722656b943"
-        guard let uncompressed = try? Utils.decompressPublicKey(compressed) else { XCTAssert(false)
+        guard let uncompressed = try? AccountKeyPublicUtils.decompressPublicKey(compressed) else { XCTAssert(false)
             return }
         
-        XCTAssertTrue(Utils.isValidPublicKey(uncompressed))
+        XCTAssertTrue(AccountKeyPublicUtils.isValidPublicKey(uncompressed))
     }
     
     func testAlreadyDecompressedKey() throws {
         guard let expectedUncompressed = try? PrivateKey.generate().getPublicKey(false),
-              let actualUncompressed = try? Utils.decompressPublicKey(expectedUncompressed) else { XCTAssert(false)
+              let actualUncompressed = try? AccountKeyPublicUtils.decompressPublicKey(expectedUncompressed) else { XCTAssert(false)
             return }
         
-        XCTAssertTrue(Utils.isValidPublicKey(actualUncompressed))
+        XCTAssertTrue(AccountKeyPublicUtils.isValidPublicKey(actualUncompressed))
         XCTAssertEqual(expectedUncompressed, actualUncompressed)
     }
     
     func testAlreadyDecompressedKeyWithTag() throws {
         let expected = "0x04019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"
-        guard let uncompressed = try? Utils.decompressPublicKey(expected) else { XCTAssert(false)
+        guard let uncompressed = try? AccountKeyPublicUtils.decompressPublicKey(expected) else { XCTAssert(false)
             return }
         
         XCTAssertEqual(expected, uncompressed)
@@ -157,25 +157,25 @@ class UtilsTest_decompressPublicKeyTest: XCTestCase {
 class UtilsTest_compressPublicKeyTest: XCTestCase {
     func testCompressPublicKey() throws {
         guard let uncompressed = try? PrivateKey.generate().getPublicKey(false),
-              let compressed = try? Utils.compressPublicKey(uncompressed) else { XCTAssert(false)
+              let compressed = try? AccountKeyPublicUtils.compressPublicKey(uncompressed) else { XCTAssert(false)
             return }
         
-        XCTAssertTrue(Utils.isValidPublicKey(compressed))
+        XCTAssertTrue(AccountKeyPublicUtils.isValidPublicKey(compressed))
     }
     
     func testAlreadyCompressedKey() throws {
         guard let expectedCompressed = try? PrivateKey.generate().getPublicKey(true),
-              let actualCompressed = try? Utils.compressPublicKey(expectedCompressed) else { XCTAssert(false)
+              let actualCompressed = try? AccountKeyPublicUtils.compressPublicKey(expectedCompressed) else { XCTAssert(false)
             return }
         
-        XCTAssertTrue(Utils.isValidPublicKey(actualCompressed))
+        XCTAssertTrue(AccountKeyPublicUtils.isValidPublicKey(actualCompressed))
         XCTAssertEqual(expectedCompressed, actualCompressed)
     }
     
     func testAlreadyCompressedKeyWithTag() throws {
         let key = "0x04019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"
-        guard let expected = try? Utils.compressPublicKey("019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"),
-              let compressed = try? Utils.compressPublicKey(key) else { XCTAssert(false)
+        guard let expected = try? AccountKeyPublicUtils.compressPublicKey("019b186993b620455077b6bc37bf61666725d8d87ab33eb113ac0414cd48d78ff46e5ea48c6f22e8f19a77e5dbba9d209df60cbcb841b7e3e81fe444ba829831"),
+              let compressed = try? AccountKeyPublicUtils.compressPublicKey(key) else { XCTAssert(false)
             return }
         
         XCTAssertEqual(expected, compressed)
