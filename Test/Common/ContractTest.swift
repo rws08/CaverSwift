@@ -27,7 +27,7 @@ class ContractTest: XCTestCase {
         }
         
         do {
-            if let file  = Bundle(for: type(of: self)).url(forResource: "ContractTestData", withExtension: "json"){
+            if let file  = Bundle.module.url(forResource: "ContractTestData", withExtension: "json"){
                 let data  = try Data(contentsOf: file)
                 let json = try JSONDecoder().decode(JSON.self, from:data)
                 ContractTest.BINARY = json["BINARY"]?.stringValue ?? ""

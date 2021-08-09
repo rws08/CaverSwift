@@ -837,7 +837,7 @@ class ABITests: XCTestCase {
     
     func testBuildFunctionStringTest() throws {
         let caver = Caver("https://kaikas.cypress.klaytn.net:8651")
-        if let file  = Bundle(for: type(of: self)).url(forResource: "testFunction", withExtension: "json"){
+        if let file  = Bundle.module.url(forResource: "testFunction", withExtension: "json"){
             let data  = try Data(contentsOf: file)
             let contract = try Contract(caver, String(data: data, encoding: .utf8)!)
      
@@ -855,7 +855,7 @@ class ABITests: XCTestCase {
     
     func testBuildEventStringTest() throws {
         let caver = Caver("https://kaikas.cypress.klaytn.net:8651")
-        if let file  = Bundle(for: type(of: self)).url(forResource: "testFunction", withExtension: "json"){
+        if let file  = Bundle.module.url(forResource: "testFunction", withExtension: "json"){
             let data  = try Data(contentsOf: file)
             let contract = try Contract(caver, String(data: data, encoding: .utf8)!)
      

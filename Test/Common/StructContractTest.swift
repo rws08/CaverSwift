@@ -23,7 +23,7 @@ class StructContractTest: XCTestCase {
         }
         
         do {
-            if let file  = Bundle(for: type(of: self)).url(forResource: "StructContractTestData", withExtension: "json"){
+            if let file  = Bundle.module.url(forResource: "StructContractTestData", withExtension: "json"){
                 let data  = try Data(contentsOf: file)
                 let json = try JSONDecoder().decode(JSON.self, from:data)
                 StructContractTest.BYTECODE = json["BYTECODE"]?.stringValue ?? ""

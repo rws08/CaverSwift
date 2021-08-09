@@ -546,7 +546,7 @@ class KIP17Test_G_DetectInterfaceTest: XCTestCase {
         }
         
         do {
-            if let file  = Bundle(for: type(of: self)).url(forResource: "KIP17TestData", withExtension: "json"){
+            if let file  = Bundle.module.url(forResource: "KIP17TestData", withExtension: "json"){
                 let data  = try Data(contentsOf: file)
                 let json = try JSONDecoder().decode(JSON.self, from:data)
                 bytecodeWithFullMetadataMintable = json["bytecodeWithFullMetadataMintable"]?.stringValue ?? ""

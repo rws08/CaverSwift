@@ -58,21 +58,27 @@ let package = Package(
             exclude: ["module.map", "./LICENSE", "./Makefile", "./README.md", "libscrypt.version", "main.c"]
         ),
         .testTarget(
-            name: "CaverSwiftTests",
+            name: "Common",
             dependencies: ["CaverSwift"],
-            path:"Test",
-            exclude: ["./Common/Info.plist", "./Transaction/Info.plist"],
+            path:"Test/Common",
+            exclude: ["./Info.plist"],
             resources: [
-                .copy("./Common/ContractImproveFuncTestData.json"),
-                .copy("./Common/ContractOverloadFunctionsTestData.json"),
-                .copy("./Common/ContractTestData.json"),
-                .copy("./Common/DelegationContract.json"),
-                .copy("./Common/KIP7TestData.json"),
-                .copy("./Common/KIP17TestData.json"),
-                .copy("./Common/KIP37TestData.json"),
-                .copy("./Common/StructContractTestData.json"),
-                .copy("./Common/testFunction.json")
+                .process("./ContractImproveFuncTestData.json"),
+                .process("./ContractOverloadFunctionsTestData.json"),
+                .process("./ContractTestData.json"),
+                .process("./DelegationContract.json"),
+                .process("./KIP7TestData.json"),
+                .process("./KIP17TestData.json"),
+                .process("./KIP37TestData.json"),
+                .process("./StructContractTestData.json"),
+                .process("./testFunction.json")
             ]
+        ),
+        .testTarget(
+            name: "Transaction",
+            dependencies: ["CaverSwift"],
+            path:"Test/Transaction",
+            exclude: ["./Info.plist"]
         ),
     ]
 )

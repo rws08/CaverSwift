@@ -23,7 +23,7 @@ class ContractOverloadFunctionsTest: XCTestCase {
         }
         
         do {
-            if let file  = Bundle(for: type(of: self)).url(forResource: "ContractOverloadFunctionsTestData", withExtension: "json"){
+            if let file  = Bundle.module.url(forResource: "ContractOverloadFunctionsTestData", withExtension: "json"){
                 let data  = try Data(contentsOf: file)
                 let json = try JSONDecoder().decode(JSON.self, from:data)
                ContractOverloadFunctionsTest.BYTECODE = json["BYTECODE"]?.stringValue ?? ""

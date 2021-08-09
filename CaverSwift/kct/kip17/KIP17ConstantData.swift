@@ -18,7 +18,7 @@ open class KIP17ConstantData {
         }
         
         do {
-            if let file  = Bundle(for: type(of: self)).url(forResource: "KIP17ConstantData", withExtension: "json"){
+            if let file  = Bundle.module.url(forResource: "KIP17ConstantData", withExtension: "json"){
                 let data  = try Data(contentsOf: file)
                 let json = try JSONDecoder().decode(JSON.self, from:data)
                 KIP17ConstantData.BINARY = json["BINARY"]?.stringValue ?? ""

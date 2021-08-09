@@ -17,7 +17,7 @@ open class KIP13ConstantData {
         }
         
         do {
-            if let file  = Bundle(for: type(of: self)).url(forResource: "KIP13ConstantData", withExtension: "json"){
+            if let file  = Bundle.module.url(forResource: "KIP13ConstantData", withExtension: "json"){
                 let data  = try Data(contentsOf: file)
                 let json = try JSONDecoder().decode(JSON.self, from:data)
                 let jsonObj = try JSONEncoder().encode(json["ABI"])

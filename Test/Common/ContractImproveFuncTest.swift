@@ -30,7 +30,7 @@ class ContractImproveFuncTest: XCTestCase {
         }
         
         do {
-            if let file  = Bundle(for: type(of: self)).url(forResource: "ContractImproveFuncTestData", withExtension: "json"){
+            if let file  = Bundle.module.url(forResource: "ContractImproveFuncTestData", withExtension: "json"){
                 let data  = try Data(contentsOf: file)
                 let json = try JSONDecoder().decode(JSON.self, from:data)
                ContractImproveFuncTest.BINARY = json["BINARY"]?.stringValue ?? ""
