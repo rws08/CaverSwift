@@ -1,0 +1,5 @@
+module libscrypt [system][extern_c] {
+    header "include/libscrypt.h"
+    link "libscrypt"
+    export *
+}
