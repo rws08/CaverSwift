@@ -24,7 +24,7 @@ open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRati
     public class Builder: AbstractFeeDelegatedWithRatioTransaction.Builder {
         private(set) public var input: String?
         
-        init() {
+        public init() {
             super.init(TransactionType.TxTypeFeeDelegatedChainDataAnchoringWithRatio.string)
         }
         
@@ -38,12 +38,12 @@ open class FeeDelegatedChainDataAnchoringWithRatio: AbstractFeeDelegatedWithRati
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         try super.init(builder)
         try setInput(builder.input)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures: [SignatureData]?, _ feeRatio: String, _ input: String) throws {
+    public init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures: [SignatureData]?, _ feeRatio: String, _ input: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedCancelWithRatio.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures, feeRatio)
         try setInput(input)
     }

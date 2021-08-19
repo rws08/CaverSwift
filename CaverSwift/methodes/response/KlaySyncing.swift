@@ -47,7 +47,7 @@ open class KlaySyncing: Codable, Equatable {
         }
     }
     
-    init() {
+    public init() {
     }
     
     public var hash: Int {

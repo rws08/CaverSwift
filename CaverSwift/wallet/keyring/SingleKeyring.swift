@@ -10,7 +10,7 @@ import Foundation
 open class SingleKeyring: AbstractKeyring {
     private(set) public var key: PrivateKey
     
-    init(_ address: String, _ key: PrivateKey) {
+    public init(_ address: String, _ key: PrivateKey) {
         self.key = key
         super.init(address)
     }

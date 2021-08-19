@@ -20,7 +20,7 @@ open class KeyStore: Decodable, Encodable {
     public var id: String?
     public var version: Int?
     
-    init() {
+    public init() {
     }
     
     enum CodingKeys: String, CodingKey {
@@ -83,7 +83,7 @@ open class KeyStore: Decodable, Encodable {
         public var kdfparams: IKdfParams?
         public var mac: String?
         
-        init() {            
+        public init() {            
         }
         
         enum CodingKeys: String, CodingKey {
@@ -307,11 +307,11 @@ open class KeyStore: Decodable, Encodable {
                 }
             }
         }
-        init() {
+        public init() {
             self.iv = Utils.generateRandomBytes(16).hexString.cleanHexPrefix
         }
         
-        init(_ iv: String?) {
+        public init(_ iv: String?) {
             self.iv = iv
         }
     }
@@ -334,14 +334,14 @@ open class KeyStore: Decodable, Encodable {
             salt = Utils.generateRandomBytes(32).hexString.cleanHexPrefix
         }
         
-        init(_ dklen: Int, _ n: Int, _ p: Int, _ r: Int, _ salt: String) {
+        public init(_ dklen: Int, _ n: Int, _ p: Int, _ r: Int, _ salt: String) {
             super.init()
             self.n = n
             self.p = p
             self.r = r
         }
         
-        init(_ salt: String) {
+        public init(_ salt: String) {
             super.init()
             self.dklen = 32
             self.salt = salt
@@ -378,7 +378,7 @@ open class KeyStore: Decodable, Encodable {
             salt = Utils.generateRandomBytes(32).hexString.cleanHexPrefix
         }
         
-        init(_ dklen: Int, _ c: Int, _ prf: String, _ salt: String) {
+        public init(_ dklen: Int, _ c: Int, _ prf: String, _ salt: String) {
             super.init()
             self.dklen = dklen
             self.c = c
@@ -386,7 +386,7 @@ open class KeyStore: Decodable, Encodable {
             self.salt = salt
         }
         
-        init(_ salt: String) {
+        public init(_ salt: String) {
             super.init()
             self.salt = salt
         }

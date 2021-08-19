@@ -11,7 +11,7 @@ import GenericJSON
 open class KIP13ConstantData {
     static var ABI = ""
     
-    init() {
+    public init() {
         if !KIP13ConstantData.ABI.isEmpty {
             return
         }

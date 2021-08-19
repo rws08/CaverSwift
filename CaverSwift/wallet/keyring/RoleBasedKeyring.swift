@@ -10,7 +10,7 @@ import Foundation
 open class RoleBasedKeyring: AbstractKeyring {
     private(set) public var keys: [[PrivateKey]]
     
-    init(_ address: String, _ keys: [[PrivateKey]]) {
+    public init(_ address: String, _ keys: [[PrivateKey]]) {
         self.keys = keys
         super.init(address)
     }

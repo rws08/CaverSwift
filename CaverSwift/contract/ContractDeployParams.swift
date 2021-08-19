@@ -21,16 +21,16 @@ open class ContractDeployParams {
     }
     var deployParams: [Any] = []
     
-    init(_ bytecode: String) throws {
+    public init(_ bytecode: String) throws {
         self.bytecode = bytecode
     }
     
-    init(_ bytecode: String, _ deployParams: Any...) throws {
+    public init(_ bytecode: String, _ deployParams: Any...) throws {
         self.bytecode = bytecode
         setDeployParams(deployParams.flatCompactMapForVariadicParameters())
     }
     
-    init(_ bytecode: String, _ deployParams: [Any]) throws {
+    public init(_ bytecode: String, _ deployParams: [Any]) throws {
         self.bytecode = bytecode
         setDeployParams(deployParams)
     }

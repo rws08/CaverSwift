@@ -8,7 +8,7 @@
 import Foundation
 
 open class BlockData: Codable {
-    init() {
+    public init() {
     }
     
     internal init(_ number: String, _ hash: String, _ parentHash: String, _ logsBloom: String, _ transactionsRoot: String, _ stateRoot: String, _ receiptsRoot: String, _ reward: String, _ blockScore: String, _ totalBlockScore: String, _ extraData: String, _ size: String, _ gasUsed: String, _ timestamp: String, _ timestampFoS: String, _ governanceData: String, _ voteData: String) {

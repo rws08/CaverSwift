@@ -13,7 +13,7 @@ open class AccountUpdate: AbstractTransaction {
     public class Builder: AbstractTransaction.Builder {
         private(set) public var account: Account?
         
-        init() {
+        public init() {
             super.init(TransactionType.TxTypeAccountUpdate.string)
         }
         public override func build() throws -> AccountUpdate {
@@ -26,12 +26,12 @@ open class AccountUpdate: AbstractTransaction {
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         try super.init(builder)
         try setAccount(builder.account)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ account: Account) throws {
+    public init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ account: Account) throws {
         try super.init(klaytnCall, TransactionType.TxTypeAccountUpdate.string, from, nonce, gas, gasPrice, chainId, signatures)
         try setAccount(account)
     }    

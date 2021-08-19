@@ -36,7 +36,7 @@ open class SmartContractDeploy: AbstractTransaction {
         private(set) public var humanReadable = false
         private(set) public var codeFormat = CodeFormat.EVM.hexa
         
-        init() {
+        public init() {
             super.init(TransactionType.TxTypeSmartContractDeploy.string)
         }
         
@@ -78,7 +78,7 @@ open class SmartContractDeploy: AbstractTransaction {
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         try super.init(builder)
         try setTo(builder.to)
         try setValue(builder.value)
@@ -87,7 +87,7 @@ open class SmartContractDeploy: AbstractTransaction {
         try setCodeFormat(builder.codeFormat)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ to: String?, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
+    public init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ to: String?, _ value: String, _ input: String, _ humanReadable: Bool, _ codeFormat: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeSmartContractDeploy.string, from, nonce, gas, gasPrice, chainId, signatures)
         try setTo(to ?? "0x")
         try setValue(value)

@@ -13,11 +13,11 @@ open class WeightedMultiSigOptions {
     private(set) public var threshold: BigInt?
     private(set) public var weights: [BigInt] = []
     
-    init() {
+    public init() {
         
     }
     
-    init(_ threshold: BigInt?, _ weights: [BigInt]) throws {
+    public init(_ threshold: BigInt?, _ weights: [BigInt]) throws {
         if (!isValidateOptions(threshold, weights)) {
             throw CaverError.IllegalArgumentException("Invalid argument in passing params.")
         }

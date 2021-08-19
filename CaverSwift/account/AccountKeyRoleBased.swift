@@ -21,7 +21,7 @@ open class AccountKeyRoleBased: IAccountKey {
     
     private(set) public var accountKeys: [IAccountKey] = []
     
-    init(_ accountKeys: [IAccountKey]) throws {
+    public init(_ accountKeys: [IAccountKey]) throws {
         super.init()
         try setAccountKeys(accountKeys)
     }

@@ -13,7 +13,7 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
     public class Builder: AbstractFeeDelegatedTransaction.Builder {
         private(set) public var account: Account?
         
-        init() {
+        public init() {
             super.init(TransactionType.TxTypeFeeDelegatedAccountUpdate.string)
         }
         public override func build() throws -> FeeDelegatedAccountUpdate {
@@ -26,12 +26,12 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         try super.init(builder)
         try setAccount(builder.account)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]?, _ account: Account?) throws {
+    public init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures:[SignatureData]?, _ account: Account?) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedAccountUpdate.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures)
         try setAccount(account)
     }

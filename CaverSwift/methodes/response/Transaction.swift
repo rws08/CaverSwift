@@ -30,7 +30,7 @@ open class Transaction: Codable {
     public var typeInt: String?
     public var value: String?
     
-    init() {
+    public init() {
     }
     
     internal init(blockHash: String? = nil, blockNumber: String? = nil, codeFormat: String? = nil, feePayer: String? = nil, feePayerSignatures: [SignatureData]? = nil, feeRatio: String? = nil, from: String? = nil, gas: String? = nil, gasPrice: String? = nil, hash: String? = nil, humanReadable: Bool? = nil, key: String? = nil, input: String? = nil, nonce: String? = nil, senderTxHash: String? = nil, signatures: [SignatureData]? = nil, to: String? = nil, transactionIndex: String? = nil, type: String? = nil, typeInt: String? = nil, value: String? = nil) {

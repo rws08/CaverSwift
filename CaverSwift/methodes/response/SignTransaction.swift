@@ -11,7 +11,7 @@ public class SignTransaction: Decodable {
     public var raw: String = ""
     public var tx: Transaction?
     
-    init() {
+    public init() {
     }
     
     internal init(raw: String = "", tx: Transaction) {

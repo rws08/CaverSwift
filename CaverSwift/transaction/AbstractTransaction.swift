@@ -43,7 +43,7 @@ open class AbstractTransaction: Encodable {
         private(set) public var chainId = "0x"
         private(set) public var signatures: [SignatureData] = []
         
-        init(_ type: String) {
+        public init(_ type: String) {
             self.type = type
         }
         
@@ -113,7 +113,7 @@ open class AbstractTransaction: Encodable {
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         self.klaytnCall = builder.klaytnCall
         self.type = builder.type
         try setFrom(builder.from)
@@ -124,7 +124,7 @@ open class AbstractTransaction: Encodable {
         try setSignatures(builder.signatures)
     }
     
-    init(_ klaytnCall: Klay?, _ type: String, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?) throws {
+    public init(_ klaytnCall: Klay?, _ type: String, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?) throws {
         self.klaytnCall = klaytnCall
         self.type = type
         try setFrom(from)

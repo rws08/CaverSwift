@@ -8,7 +8,7 @@
 import Foundation
 
 public class Utf8String: Type {
-    init(_ value: String) {
+    public init(_ value: String) {
         super.init(value, String.rawType)
     }
     

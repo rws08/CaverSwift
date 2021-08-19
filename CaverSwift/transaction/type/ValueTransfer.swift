@@ -27,7 +27,7 @@ open class ValueTransfer: AbstractTransaction {
         private(set) public var to = ""
         private(set) public var value = ""
         
-        init() {
+        public init() {
             super.init(TransactionType.TxTypeValueTransfer.string)
         }
         
@@ -50,13 +50,13 @@ open class ValueTransfer: AbstractTransaction {
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         try super.init(builder)
         try setTo(builder.to)
         try setValue(builder.value)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ to: String, _ value: String) throws {
+    public init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ to: String, _ value: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeValueTransfer.string, from, nonce, gas, gasPrice, chainId, signatures)
         try setTo(to)
         try setValue(value)

@@ -15,7 +15,7 @@ open class AccountKeyWeightedMultiSig: IAccountKey {
     
     var weightedPublicKeys: [WeightedPublicKey] = []
     
-    init(_ threshold: BigInt?, _ weightedPublicKeys: [WeightedPublicKey]) {
+    public init(_ threshold: BigInt?, _ weightedPublicKeys: [WeightedPublicKey]) {
         super.init()
         self.threshold = threshold
         self.weightedPublicKeys = weightedPublicKeys
