@@ -80,7 +80,7 @@ public class RPC {
     
     public struct Request<T: Encodable, U: Decodable> {
         private var rpc: RPC
-        var urlRequest: URLRequest
+        public var urlRequest: URLRequest
         var requestData: Data
         var receiveType: U?
         

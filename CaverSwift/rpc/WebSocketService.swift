@@ -19,7 +19,7 @@ open class WebService: NSObject {
         super.init()
     }
     
-    func addHeader(_ key: String, _ value: String) {
+    public func addHeader(_ key: String, _ value: String) {
         headers[key] = value
     }
 }
