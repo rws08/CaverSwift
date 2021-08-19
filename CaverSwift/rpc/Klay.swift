@@ -12,7 +12,7 @@ import GenericJSON
 public class Klay {
     var rpc: RPC
     var url: URL
-    
+
     public init(_ rpc: RPC, _ url: URL) {
         self.rpc = rpc
         self.url = url

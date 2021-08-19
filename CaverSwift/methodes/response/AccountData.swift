@@ -15,7 +15,7 @@ open class AccountData: Codable {
         case accType, account
     }
     
-    init() {
+    public init() {
     }
     
     public required init(from decoder: Decoder) throws {

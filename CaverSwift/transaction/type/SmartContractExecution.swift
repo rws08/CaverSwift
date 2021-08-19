@@ -30,7 +30,7 @@ open class SmartContractExecution: AbstractTransaction {
         private(set) public var input = ""
         private(set) public var value = "0x00"
         
-        init() {
+        public init() {
             super.init(TransactionType.TxTypeSmartContractDeploy.string)
         }
         
@@ -58,14 +58,14 @@ open class SmartContractExecution: AbstractTransaction {
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         try super.init(builder)
         try setTo(builder.to)
         try setValue(builder.value)
         try setInput(builder.input)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ to: String, _ value: String, _ input: String) throws {
+    public init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ to: String, _ value: String, _ input: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeSmartContractExecution.string, from, nonce, gas, gasPrice, chainId, signatures)
         try setTo(to)
         try setValue(value)

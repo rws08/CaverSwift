@@ -18,7 +18,7 @@ public class Filter: Codable {
         case topics
     }
     
-    init() {}
+    public init() {}
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -56,7 +56,7 @@ public class Filter: Codable {
     public struct SingleTopic: FilterTopic, Codable {
         private var topic: String?
         
-        init(_ topic: String? = nil) {
+        public init(_ topic: String? = nil) {
             self.topic = topic
         }
         
@@ -68,13 +68,13 @@ public class Filter: Codable {
     public struct ListTopic: FilterTopic, Codable {
         private var topics: [SingleTopic]?
                 
-        init(_ optionalTopics: String?...) {
+        public init(_ optionalTopics: String?...) {
             self.topics = optionalTopics.map({
                 SingleTopic($0)
             })
         }
         
-        init(_ optionalTopics: [String?]) {
+        public init(_ optionalTopics: [String?]) {
             self.topics = optionalTopics.map({
                 SingleTopic($0)
             })

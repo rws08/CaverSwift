@@ -13,7 +13,7 @@ open class ChainDataAnchoring: AbstractTransaction {
     public class Builder: AbstractTransaction.Builder {
         private(set) public var input: String?
         
-        init() {
+        public init() {
             super.init(TransactionType.TxTypeChainDataAnchoring.string)
         }
         
@@ -27,12 +27,12 @@ open class ChainDataAnchoring: AbstractTransaction {
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         try super.init(builder)
         try setInput(builder.input)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ input: String) throws {
+    public init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ input: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeChainDataAnchoring.string, from, nonce, gas, gasPrice, chainId, signatures)
         try setInput(input)
     }

@@ -10,7 +10,7 @@ import Foundation
 open class TransactionReceiptProcessor {
     private let caver: Caver
     
-    init(_ caver: Caver) {
+    public init(_ caver: Caver) {
         self.caver = caver
     }
     

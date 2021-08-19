@@ -10,7 +10,7 @@ import Foundation
 open class AbstractKeyring {
     var address: String = ""
     
-    init(_ address: String) {
+    public init(_ address: String) {
         self.address = address
     }
     

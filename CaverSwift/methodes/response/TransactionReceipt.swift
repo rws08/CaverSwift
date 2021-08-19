@@ -36,7 +36,7 @@ open class TransactionReceipt: Codable {
     public var typeInt: String?
     public var value: String?
     
-    init() {
+    public init() {
     }
     
     internal init(blockHash: String? = nil, blockNumber: String? = nil, codeFormat: String? = nil, contractAddress: String? = nil, feePayer: String? = nil, feePayerSignatures: [SignatureData]? = nil, feeRatio: String? = nil, from: String? = nil, gas: String? = nil, gasPrice: String? = nil, gasUsed: String? = nil, humanReadable: Bool? = nil, key: String? = nil, input: String? = nil, logs: [KlayLogs.Log], logsBloom: String? = nil, nonce: String? = nil, senderTxHash: String? = nil, signatures: [SignatureData]? = nil, status: String? = nil, to: String? = nil, transactionIndex: String? = nil, transactionHash: String? = nil, txError: String? = nil, type: String? = nil, typeInt: String? = nil, value: String? = nil) {

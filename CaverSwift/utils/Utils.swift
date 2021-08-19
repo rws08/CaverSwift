@@ -311,7 +311,7 @@ public struct KlayUnit {
     
     private var unit: String
     private var pebFactor: BDouble
-    init(_ unit: String, _ pebFactor: Int) {
+    public init(_ unit: String, _ pebFactor: Int) {
         self.unit = unit
         self.pebFactor = pow(BDouble(10), pebFactor)
     }

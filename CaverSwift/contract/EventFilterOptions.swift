@@ -11,7 +11,7 @@ open class EventFilterOptions {
     var filterOptions: [IndexedParameter] = []
     var topics: [Any] = []
     
-    init(_ filterOptions: [IndexedParameter], _ topics: [Any]) {
+    public init(_ filterOptions: [IndexedParameter], _ topics: [Any]) {
         self.filterOptions = filterOptions
         self.topics = topics
     }
@@ -53,7 +53,7 @@ open class EventFilterOptions {
         var indexedParamName: String
         var filterValue: [Any] = []
         
-        init(_ indexedParamName: String, _ filterValue: [Any]) {
+        public init(_ indexedParamName: String, _ filterValue: [Any]) {
             self.indexedParamName = indexedParamName
             self.filterValue = filterValue
         }

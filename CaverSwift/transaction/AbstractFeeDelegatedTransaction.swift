@@ -55,13 +55,13 @@ open class AbstractFeeDelegatedTransaction: AbstractTransaction {
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         try super.init(builder)
         try setFeePayer(builder.feePayer)
         try setFeePayerSignatures(builder.feePayerSignatures)
     }
     
-    init(_ klaytnCall: Klay?, _ type: String, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures: [SignatureData]?) throws {
+    public init(_ klaytnCall: Klay?, _ type: String, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures: [SignatureData]?) throws {
         try super.init(klaytnCall, type, from, nonce, gas, gasPrice, chainId, signatures)
         try setFeePayer(feePayer)
         try setFeePayerSignatures(feePayerSignatures ?? [])

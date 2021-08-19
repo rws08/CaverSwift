@@ -19,7 +19,7 @@ open class IAccountType: Codable {
         self.accType = AccType(rawValue: (try? container.decode(Int.self, forKey: .accType)) ?? 0) ?? .EOA
     }
     
-    init() {
+    public init() {
     }
     
     public func encode(to encoder: Encoder) throws {

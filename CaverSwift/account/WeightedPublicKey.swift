@@ -12,7 +12,7 @@ open class WeightedPublicKey: Codable {
     
     var weight: BigInt?
     
-    init(_ publicKey: String, _ weight: BigInt?) throws {
+    public init(_ publicKey: String, _ weight: BigInt?) throws {
         try setPublicKey(publicKey)
         self.weight = weight
     }

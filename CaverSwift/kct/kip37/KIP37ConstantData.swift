@@ -12,7 +12,7 @@ open class KIP37ConstantData {
     static var BINARY = ""
     static var ABI = ""
     
-    init() {
+    public init() {
         if !KIP37ConstantData.BINARY.isEmpty {
             return
         }

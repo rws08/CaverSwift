@@ -12,7 +12,7 @@ open class KeyStoreOption {
     let kdfParams: KeyStore.IKdfParams
     let address: String?
     
-    init(_ cipherParams: KeyStore.CipherParams, _ kdfParams: KeyStore.IKdfParams, _ address: String?) {
+    public init(_ cipherParams: KeyStore.CipherParams, _ kdfParams: KeyStore.IKdfParams, _ address: String?) {
         self.cipherParams = cipherParams
         self.kdfParams = kdfParams
         self.address = address

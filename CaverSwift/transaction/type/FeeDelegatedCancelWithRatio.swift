@@ -10,7 +10,7 @@ import Foundation
 open class FeeDelegatedCancelWithRatio: AbstractFeeDelegatedWithRatioTransaction {
     
     public class Builder: AbstractFeeDelegatedWithRatioTransaction.Builder {
-        init() {
+        public init() {
             super.init(TransactionType.TxTypeFeeDelegatedCancelWithRatio.string)
         }
         public override func build() throws -> FeeDelegatedCancelWithRatio {
@@ -18,11 +18,11 @@ open class FeeDelegatedCancelWithRatio: AbstractFeeDelegatedWithRatioTransaction
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         try super.init(builder)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures: [SignatureData]?, _ feeRatio: String) throws {
+    public init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?, _ feePayer: String, _ feePayerSignatures: [SignatureData]?, _ feeRatio: String) throws {
         try super.init(klaytnCall, TransactionType.TxTypeFeeDelegatedCancelWithRatio.string, from, nonce, gas, gasPrice, chainId, signatures, feePayer, feePayerSignatures, feeRatio)
     }
     

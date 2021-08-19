@@ -16,7 +16,7 @@ open class AccountKeyPublic: IAccountKey {
     public static let OFFSET_X_POINT = 0
     public static let OFFSET_Y_POINT = 1
     
-    init(_ publicKey: String) {
+    public init(_ publicKey: String) {
         super.init()
         try? self.setPublicKey(publicKey)
     }

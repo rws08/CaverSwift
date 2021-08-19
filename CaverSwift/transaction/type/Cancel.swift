@@ -9,7 +9,7 @@ import Foundation
 
 open class Cancel: AbstractTransaction {
     public class Builder: AbstractTransaction.Builder {
-        init() {
+        public init() {
             super.init(TransactionType.TxTypeCancel.string)
         }
         public override func build() throws -> Cancel {
@@ -17,11 +17,11 @@ open class Cancel: AbstractTransaction {
         }
     }
     
-    init(_ builder: Builder) throws {
+    public init(_ builder: Builder) throws {
         try super.init(builder)
     }
     
-    init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?) throws {
+    public init(_ klaytnCall: Klay?, _ from: String, _ nonce: String = "0x", _ gas: String, _ gasPrice: String = "0x", _ chainId: String = "0x", _ signatures: [SignatureData]?) throws {
         try super.init(klaytnCall, TransactionType.TxTypeCancel.string, from, nonce, gas, gasPrice, chainId, signatures)
     }
     

@@ -12,13 +12,13 @@ open class SignatureData: Equatable, Codable {
     var r = ""
     var s = ""
     
-    init(_ v: String, _ r: String, _ s: String) {
+    public init(_ v: String, _ r: String, _ s: String) {
         self.v = v.addHexPrefix
         self.r = r.addHexPrefix
         self.s = s.addHexPrefix
     }
     
-    init(_ v: [UInt8], _ r: [UInt8], _ s: [UInt8]) {
+    public init(_ v: [UInt8], _ r: [UInt8], _ s: [UInt8]) {
         self.v = Data(v).hexString
         self.r = Data(r).hexString
         self.s = Data(s).hexString

@@ -14,7 +14,7 @@ open class WebService: NSObject {
     public var session = URLSession(configuration: .default)
     public var headers: [String:String] = [:]
     
-    init(_ urlString: String) {
+    public init(_ urlString: String) {
         self.url = URL(string: urlString)!
         super.init()
     }
@@ -46,7 +46,7 @@ open class WebSocketService: WebService, URLSessionWebSocketDelegate {
     
     var receiveTasks: [String:Any] = [:]
     
-    override init(_ urlString: String) {
+    override public init(_ urlString: String) {
         self.timeoutQueue = DispatchQueue(label: "timeout", attributes: .concurrent)
         super.init(urlString)
         self.session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
