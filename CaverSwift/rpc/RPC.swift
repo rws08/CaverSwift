@@ -103,6 +103,10 @@ public class RPC {
             self.urlRequest.httpMethod = "POST"
             self.urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             self.urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+            for key in self.rpc.service.headers.keys {
+                self.urlRequest.addValue(self.rpc.service.headers[key] ?? "", forHTTPHeaderField: key)
+            }
+            
 //            print("network request : \(method) - \(params)")
             let rpcRequest = JSONRPCRequest(jsonrpc: "2.0", method: method, params: params, id: RPC.id)
             guard let encoded = try? JSONEncoder().encode(rpcRequest) else {

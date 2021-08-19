@@ -12,10 +12,15 @@ import GenericJSON
 open class WebService: NSObject {
     public var url: URL
     public var session = URLSession(configuration: .default)
+    public var headers: [String:String] = [:]
     
     init(_ urlString: String) {
         self.url = URL(string: urlString)!
         super.init()
+    }
+    
+    func addHeader(_ key: String, _ value: String) {
+        headers[key] = value
     }
 }
 
