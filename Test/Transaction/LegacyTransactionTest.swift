@@ -403,7 +403,8 @@ class LegacyTransactionTest_signWithKeysTest: XCTestCase {
     
     public func testSignWithKeys_KeyString_KlaytnWalletKeyFormat() throws {
         let legacyTransaction = try createLegacyTransaction()
-        let klaytnKey = privateKey + "0x00" + (try KeyringFactory.createFromPrivateKey(privateKey).address)
+        let keyring = try KeyringFactory.createFromPrivateKey(privateKey)
+        let klaytnKey = privateKey + "0x00" + keyring.address
         let tx = try legacyTransaction.sign(klaytnKey, TransactionHasher.getHashForSignature(_:))
         XCTAssertEqual(expectedRawTransaction, try tx.getRawTransaction())
     }

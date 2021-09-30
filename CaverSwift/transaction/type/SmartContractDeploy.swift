@@ -117,8 +117,8 @@ open class SmartContractDeploy: AbstractTransaction {
               let value = values[4] as? String,
               let from = values[5] as? String,
               let input = values[6] as? String,
-              let humanReadable = values[7] as? String,
-              let humanReadable = humanReadable.count == 0 ? false : Bool(humanReadable),
+              let humanReadableStr = values[7] as? String,
+              let humanReadable = humanReadableStr.count == 0 ? false : Bool(humanReadableStr),
               let codeFormat = values[8] as? String,
               let senderSignatures = values[9] as? [[String]] else {
             throw CaverError.RuntimeException("There is an error while decoding process.")
