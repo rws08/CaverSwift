@@ -54,8 +54,8 @@ open class FeeDelegatedAccountUpdate: AbstractFeeDelegatedTransaction {
               let gasPrice = values[1] as? String,
               let gas = values[2] as? String,
               let from = values[3] as? String,
-              let account = values[4] as? String,
-              let account = try? Account.createFromRLPEncoding(from, account),
+              let accountStr = values[4] as? String,
+              let account = try? Account.createFromRLPEncoding(from, accountStr),
               let senderSignatures = values[5] as? [[String]],
               let feePayer = values[6] as? String,
               let feePayerSignatures = values[7] as? [[String]] else {

@@ -28,7 +28,7 @@ let package = Package(
                            "GenericJSON",
                            "secp256k1"],
 	        path:"CaverSwift",
-            exclude: ["Info.plist", "./lib/aes", "./lib/keccak-tiny", "./lib/libscrypt", "Pods"],
+            exclude: ["Info.plist", "./lib/aes", "./lib/keccak-tiny", "./lib/libscrypt"],
             resources: [
                 .process("./kct/kip7/KIP7ConstantData.json"),
                 .process("./kct/kip13/KIP13ConstantData.json"),
