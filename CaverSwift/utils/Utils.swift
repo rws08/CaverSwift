@@ -130,6 +130,7 @@ public class Utils {
     }
     
     public static func isValidPrivateKey(_ privateKey: String) -> Bool {
+        guard privateKey.count % 2 == 0 else { return false }
         let noHexPrefixKey = privateKey.cleanHexPrefix
         if noHexPrefixKey.count != LENGTH_PRIVATE_KEY_STRING || !isHex(privateKey) {
             return false
