@@ -48,9 +48,18 @@ extension StringProtocol {
     public var addHexPrefix: String {
         if !isHexa {
             if isMinus {
-                return "-0x\(self)"
+                let clean = String(dropFirst(1))
+                if clean.count % 2 == 0 { //"-0100"
+                    return "-0x\(clean)"
+                } else { //"-100"
+                    return "-0x0\(clean)"
+                }
             } else {
-                return "0x\(self)"
+                if self.count % 2 == 0 { //"0100"
+                    return "0x\(self)"
+                } else { //"100"
+                    return "0x0\(self)"
+                }
             }
         }
         return "\(self)"
