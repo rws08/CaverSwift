@@ -249,7 +249,7 @@ public class Klay {
         return parseReturn(error, response)
     }
     
-    func estimateGas(_ callObject: CallObject) -> (CaverError?, result: Quantity?) {
+    public func estimateGas(_ callObject: CallObject) -> (CaverError?, result: Quantity?) {
         let(error, response) = RPC.Request("klay_estimateGas", callObject, rpc, Quantity.self)!.send()
         return parseReturn(error, response)
     }
