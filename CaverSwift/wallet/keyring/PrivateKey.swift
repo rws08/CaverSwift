@@ -20,14 +20,12 @@ open class PrivateKey {
     }
     
     public static func generate(_ entropy: String? = "") -> PrivateKey {
-        var entropy: String! = entropy
-        if entropy == nil { entropy = "" }
         let random = Utils.generateRandomBytes(32)
         var entropyArr: Data
-        if entropy.isEmpty {
-            entropyArr = Utils.generateRandomBytes(32)
-        } else {
+        if let entropy = entropy {
             entropyArr = entropy.data(using: .utf8)!
+        } else {
+            entropyArr = Utils.generateRandomBytes(32)
         }
         
         var innerHex = Data(random)

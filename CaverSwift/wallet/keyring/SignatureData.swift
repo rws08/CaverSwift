@@ -30,6 +30,14 @@ open class SignatureData: Equatable, Codable {
         self.r = (try? container.decode(String.self)) ?? ""
         self.s = (try? container.decode(String.self)) ?? ""
     }
+
+    public init(_ hexString: String) {
+        if let value = hexString.bytesFromHex {
+            self.v = value[64..<value.count].string.addHexPrefix
+            self.r = value[0..<32].string.addHexPrefix
+            self.s = value[32..<64].string.addHexPrefix
+        }
+    }
     
     public static func getEmptySignature() -> SignatureData {
         return SignatureData("0x01", "0x", "0x")
@@ -60,15 +68,19 @@ open class SignatureData: Equatable, Codable {
         return [v, r, s]
     }
     
-    public var hash: Int {
-        var result = v.hash
-        result = 31 * result + r.hash
-        result = 31 * result + s.hash
+    public var hash: BigInt {
+        var result = BigInt(v.hash)
+        result = 31 * result + BigInt(r.hash)
+        result = 31 * result + BigInt(s.hash)
         return result
     }
     
     public func toString() -> String {
         return "V : \(v)\nR : \(r)\nS : \(s)"
+    }
+
+    public func toHexString() -> String {
+        return "\(r.cleanHexPrefix)\(s.cleanHexPrefix)\(v.cleanHexPrefix)".addHexPrefix
     }
     
     public static func == (lhs: SignatureData, rhs: SignatureData) -> Bool {

@@ -942,7 +942,7 @@ class KeyringTest_signMessageTest: XCTestCase {
 
 class KeyringTest_recoverTest: XCTestCase {
     let data = "some data"
-    
+
     func checkAddress(_ expect: String, _ actual: String) throws {
         let expect = expect.cleanHexPrefix
         let actual = actual.cleanHexPrefix

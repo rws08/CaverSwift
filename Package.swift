@@ -15,7 +15,7 @@ let package = Package(
         .package(name: "ASN1", url: "https://github.com/leif-ibsen/ASN1", from: "2.0.0"),
         .package(name: "BigInt", url: "https://github.com/leif-ibsen/BigInt", from: "1.2.5"),
         .package(name: "GenericJSON", url: "https://github.com/zoul/generic-json-swift", from: "2.0.1"),
-        .package(name: "secp256k1", url: "https://github.com/Boilertalk/secp256k1.swift", from: "0.1.4"),
+        .package(name: "secp256k1", url: "https://github.com/Boilertalk/secp256k1.swift", from: "0.1.6"),
     ],
     targets: [
         .target(
